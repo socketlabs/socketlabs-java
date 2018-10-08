@@ -1,0 +1,117 @@
+plugins {
+    id 'java'
+    id 'maven'
+    id 'maven-publish'
+    id 'signing'
+}
+
+group 'com.socketlabs'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.2'
+    compile group: 'com.google.guava', name: 'guava', version: '12.0'
+    compile 'com.squareup.okhttp3:okhttp:3.11.0'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'SocketLabs Java',
+                'Implementation-Version': version
+    }
+}
+
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = configurations.compileClasspath
+}
+
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+task packageJavadoc(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives jar
+    archives sourceJar
+    archives packageJavadoc
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+
+            beforeDeployment {
+                MavenDeployment deployment -> signing.signPom(deployment)
+            }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+
+                groupId 'com.socketlabs'
+                artifactId 'injectionApi'
+                version '1.0.0'
+
+                name 'socketlabs-java'
+                packaging 'jar'
+                description 'SocketLabs Email Delivery Java library'
+                url 'https://github.com/socketlabs/socketlabs-java/'
+
+                organization {
+                    name 'com.socketlabs'
+                    url 'https://github.com/socketlabs'
+                }
+                issueManagement {
+                    system 'GitHub'
+                    url 'https://github.com/socketlabs/socketlabs-java/issues'
+                }
+                licenses {
+                    license {
+                        name 'MIT License'
+                        url 'https://github.com/socketlabs/socketlabs-java/blob/master/LICENSE'
+                    }
+                }
+                scm {
+                    url 'https://github.com/socketlabs/socketlabs-java'
+                    connection 'scm:git:git://github.com/socketlabs/socketlabs-java.git'
+                    developerConnection 'scm:git:ssh://git@github.com:socketlabs/socketlabs-java.git'
+                }
+                developers {
+                    developer {
+                        id 'david-schrenker'
+                        name 'David Schrenker'
+                    }
+                    developer {
+                        id 'rbrazuk'
+                        name 'Ross Brazuk'
+                    }
+                }
+            }
+        }
+    }
+}

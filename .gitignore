@@ -1,0 +1,35 @@
+jssecacerts
+out
+repo
+settings.gradle
+target
+*.class
+.DS_Store
+.env
+.log
+.settings
+*.gpg
+
+# Generated Files
+bin/
+gen/
+pom.xml
+
+# IDE
+.vscode
+.idea
+.idea/
+*.iml
+.classpath
+.project
+proguard/
+.settings/
+.recommendors/
+
+# Gradle
+.gradletasknamecache
+.gradle
+.gradle/
+build/
+bin/
+gradle.properties
