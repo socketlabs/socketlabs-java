@@ -35,10 +35,6 @@ public class Attachment implements interfaces.Attachment {
 
     //TODO - Constructor with name, mimeType, and Stream
 
-    private byte[] getContentFromFilePath(String filepath) throws IOException {
-        return Files.readAllBytes(new File(filepath).toPath());
-    }
-
     @Override
     public byte[] getContent() {
         return this.content;
@@ -87,5 +83,9 @@ public class Attachment implements interfaces.Attachment {
     @Override
     public void setCustomHeaders(List<CustomHeader> customHeaders) {
         this.customHeaders = customHeaders;
+    }
+
+    private byte[] getContentFromFilePath(String filepath) throws IOException {
+        return Files.readAllBytes(new File(filepath).toPath());
     }
 }
