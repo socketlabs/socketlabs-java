@@ -1,6 +1,9 @@
 package models;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 public class Attachment implements interfaces.Attachment {
@@ -14,13 +17,14 @@ public class Attachment implements interfaces.Attachment {
     public Attachment() {
     }
 
-    public Attachment(String filePath) {
-        //TODO
+    public Attachment(String filePath) throws IOException {
+        this.content = getContentFromFilePath(filePath);
     }
 
-    public Attachment(String name, String mimeType, String filePath) {
+    public Attachment(String name, String mimeType, String filePath) throws IOException {
         this.name = name;
         this.mimeType = mimeType;
+        this.content = getContentFromFilePath(filePath);
     }
 
     public Attachment(String name, String mimeType, byte[] content) {
@@ -30,6 +34,10 @@ public class Attachment implements interfaces.Attachment {
     }
 
     //TODO - Constructor with name, mimeType, and Stream
+
+    private byte[] getContentFromFilePath(String filepath) throws IOException {
+        return Files.readAllBytes(new File(filepath).toPath());
+    }
 
     @Override
     public byte[] getContent() {
