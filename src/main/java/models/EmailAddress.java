@@ -43,7 +43,7 @@ public class EmailAddress implements interfaces.EmailAddress {
             return false;
         }
 
-        if (!this.email.contains("@")) {
+        if (!this.email.contains("@") || !this.email.contains(".")) {
             return false;
         }
 
