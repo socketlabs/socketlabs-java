@@ -9,10 +9,27 @@ public class Attachment implements interfaces.Attachment {
     private String mimeType;
     private String contentId;
     private byte[] content;
-    private List<CustomHeader> customheadersList;
+    private List<CustomHeader> customHeaders;
 
     public Attachment() {
     }
+
+    public Attachment(String filePath) {
+        //TODO
+    }
+
+    public Attachment(String name, String mimeType, String filePath) {
+        this.name = name;
+        this.mimeType = mimeType;
+    }
+
+    public Attachment(String name, String mimeType, byte[] content) {
+        this.name = name;
+        this.mimeType = mimeType;
+        this.content = content;
+    }
+
+    //TODO - Constructor with name, mimeType, and Stream
 
     @Override
     public byte[] getContent() {
@@ -56,11 +73,11 @@ public class Attachment implements interfaces.Attachment {
 
     @Override
     public List<CustomHeader> getCustomHeaders() {
-        return this.customheadersList;
+        return this.customHeaders;
     }
 
     @Override
     public void setCustomHeaders(List<CustomHeader> customHeaders) {
-        this.customheadersList = customHeaders;
+        this.customHeaders = customHeaders;
     }
 }
