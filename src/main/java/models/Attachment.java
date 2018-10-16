@@ -1,11 +1,14 @@
 package models;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Attachment implements interfaces.Attachment {
 
     private String name;
