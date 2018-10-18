@@ -1,22 +1,52 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class BasicMessage implements interfaces.BasicMessage {
 
+    @JsonProperty("To")
     private List<EmailAddress> to;
+
+    @JsonProperty("CC")
     private List<EmailAddress> cc;
+
+    @JsonProperty("BCC")
     private List<EmailAddress> bcc;
+
+    @JsonProperty("Subject")
     private String subject;
+
+    @JsonProperty("TextBody")
     private String plainTextBody;
+
+    @JsonProperty("HtmlBody")
     private String htmlBody;
-    private int apiTemplate;
+
+    @JsonProperty("ApiTemplate")
+    private String apiTemplate;
+
+    @JsonProperty("MailingId")
     private String mailingId;
+
+    @JsonProperty("MessageId")
     private String messageId;
+
+    @JsonProperty("From")
     private EmailAddress from;
+
+    @JsonProperty("ReplyTo")
     private EmailAddress replyTo;
+
+    @JsonProperty("Attachments")
     private List<Attachment> attachments;
+
+    @JsonProperty("Charset")
     private String charset;
+
+    @JsonProperty("CustomHeaders")
     private List<CustomHeader> customHeaders;
 
 
@@ -84,12 +114,12 @@ public class BasicMessage implements interfaces.BasicMessage {
     }
 
     @Override
-    public int getApiTemplate() {
+    public String getApiTemplate() {
         return this.apiTemplate;
     }
 
     @Override
-    public void setApiTemplate(int apiTemplate) {
+    public void setApiTemplate(String apiTemplate) {
         this.apiTemplate = apiTemplate;
     }
 

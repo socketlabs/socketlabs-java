@@ -6,6 +6,8 @@ import interfaces.BulkMessage;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SocketLabsClient implements client.interfaces.SocketLabsClient {
 
@@ -32,6 +34,10 @@ public class SocketLabsClient implements client.interfaces.SocketLabsClient {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
 
-        return null;
+        AddressResult addressResult = new AddressResult("ross.brazuk@socketlabs.com", false, "234");
+        List<AddressResult> addressResults = new ArrayList<>();
+        addressResults.add(addressResult);
+
+        return new SendResponse(SendResult.EmptySubject, "Transaction Reciept", addressResults);
     }
 }

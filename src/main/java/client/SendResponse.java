@@ -6,7 +6,12 @@ public class SendResponse {
     private SendResult result;
     private String transactionReceipt;
     private List<AddressResult> addressResults;
-    private String responseMessage;
+
+    public SendResponse(SendResult result, String transactionReceipt, List<AddressResult> addressResults) {
+        this.result = result;
+        this.transactionReceipt = transactionReceipt;
+        this.addressResults = addressResults;
+    }
 
     public SendResult getResult() {
         return result;

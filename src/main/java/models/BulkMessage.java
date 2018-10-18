@@ -10,7 +10,7 @@ public class BulkMessage implements interfaces.BulkMessage {
     private String subject;
     private String plainTextBody;
     private String htmlBody;
-    private int apiTemplate;
+    private String apiTemplate;
     private String mailingId;
     private String messageId;
     private EmailAddress from;
@@ -70,12 +70,12 @@ public class BulkMessage implements interfaces.BulkMessage {
     }
 
     @Override
-    public int getApiTemplate() {
+    public String getApiTemplate() {
         return this.apiTemplate;
     }
 
     @Override
-    public void setApiTemplate(int apiTemplate) {
+    public void setApiTemplate(String apiTemplate) {
         this.apiTemplate = apiTemplate;
     }
 
