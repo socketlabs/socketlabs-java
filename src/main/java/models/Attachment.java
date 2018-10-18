@@ -15,6 +15,7 @@ public class Attachment implements interfaces.Attachment {
     @JsonProperty("Name")
     private String name;
 
+    @JsonProperty("ContentType")
     private String mimeType;
 
     @JsonProperty("ContentId")

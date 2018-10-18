@@ -1,11 +1,22 @@
 package client;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class SendResponse {
+
+    @JsonProperty("ErrorCode")
     private SendResult result;
+
+    @JsonProperty("TransactionReceipt")
     private String transactionReceipt;
+
+    @JsonProperty("MessageResults")
     private List<AddressResult> addressResults;
+
+    public SendResponse() {
+    }
 
     public SendResponse(SendResult result, String transactionReceipt, List<AddressResult> addressResults) {
         this.result = result;

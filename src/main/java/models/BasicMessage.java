@@ -1,8 +1,8 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BasicMessage implements interfaces.BasicMessage {
@@ -51,6 +51,7 @@ public class BasicMessage implements interfaces.BasicMessage {
 
 
     public BasicMessage() {
+        this.to = new ArrayList<>();
     }
 
     @Override
@@ -191,5 +192,10 @@ public class BasicMessage implements interfaces.BasicMessage {
     @Override
     public void setCustomHeaders(List<CustomHeader> customHeaders) {
         this.customHeaders = customHeaders;
+    }
+
+    public List<EmailAddress> addToAddress(EmailAddress address) {
+        this.to.add(address);
+        return this.to;
     }
 }
