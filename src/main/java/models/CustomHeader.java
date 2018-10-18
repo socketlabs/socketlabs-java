@@ -1,11 +1,15 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import interfaces.Customheader;
 
 public class CustomHeader implements Customheader {
 
+    @JsonProperty("Name")
     private String name;
+
+    @JsonProperty("Value")
     private String value;
 
     public CustomHeader() {
