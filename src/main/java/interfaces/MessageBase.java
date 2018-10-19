@@ -15,9 +15,8 @@ public interface MessageBase {
 
     String getHtmlBody();
     void setHtmlBody(String htmlBody);
-
-    int getApiTemplate();
-    void setApiTemplate(int apiTemplate);
+    String getApiTemplate();
+    void setApiTemplate(String apiTemplate);
 
     String getMailingId();
     void setMailingId(String mailingId);

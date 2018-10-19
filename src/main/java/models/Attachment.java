@@ -1,6 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,10 +14,19 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Attachment implements interfaces.Attachment {
 
+    @JsonProperty("Name")
     private String name;
+
+    @JsonProperty("ContentType")
     private String mimeType;
+
+    @JsonProperty("ContentId")
     private String contentId;
+
+    @JsonProperty("Content")
     private byte[] content;
+
+    @JsonProperty("CustomHeaders")
     private List<CustomHeader> customHeaders;
 
     /**

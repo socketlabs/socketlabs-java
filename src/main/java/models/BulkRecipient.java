@@ -2,42 +2,32 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class BulkRecipient implements interfaces.BulkRecipient {
-    private String email;
-    private String friendlyName;
-    private Map<String, String> mergeData;
 
-    public BulkRecipient(String email) {
-        this.email = email;
+    private EmailAddress emailAddress;
+
+    @JsonIgnore()
+    private HashMap<String, String> mergeData;
+
+    public BulkRecipient(EmailAddress emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
-    public BulkRecipient(String email, String friendlyName) {
-        this.email = email;
-        this.friendlyName = friendlyName;
-    }
-
-    public BulkRecipient(String email, String friendlyName, Map<String, String> mergeData) {
-        this.email = email;
-        this.friendlyName = friendlyName;
+    public BulkRecipient(EmailAddress emailAddress, HashMap<String, String> mergeData) {
+        this.emailAddress = emailAddress;
         this.mergeData = mergeData;
     }
 
-
     @Override
-    public String getEmail() {
-        return this.email;
+    public EmailAddress getEmailAddress() {
+        return this.emailAddress;
     }
 
     @Override
-    public String getFriendlyName() {
-        return this.friendlyName;
-    }
-
-    @Override
-    public void setFriendlyName(String friendlyName) {
-        this.friendlyName = friendlyName;
+    public void setEmailAddress(EmailAddress emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @JsonIgnore
@@ -47,12 +37,12 @@ public class BulkRecipient implements interfaces.BulkRecipient {
     }
 
     @Override
-    public Map<String, String> getMergeData() {
+    public HashMap<String, String> getMergeData() {
         return this.mergeData;
     }
 
     @Override
-    public void setMergeData(Map<String, String> mergeData) {
+    public void setMergeData(HashMap<String, String> mergeData) {
         this.mergeData = mergeData;
     }
 }

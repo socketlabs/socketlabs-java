@@ -1,22 +1,55 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BulkMessage implements interfaces.BulkMessage {
 
-    private List<interfaces.BulkRecipient> to;
-    private Map<String, String> globalMergeData;
+    @JsonProperty("To")
+
+    @JsonProperty("MergeData")
+    private MergeData mergeData;
+
+    @JsonProperty("Subject")
     private String subject;
+
+    @JsonProperty("TextBody")
     private String plainTextBody;
+
+    @JsonProperty("HtmlBody")
     private String htmlBody;
-    private int apiTemplate;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("ApiTemplate")
+    private String apiTemplate;
+
+    @JsonProperty("MailingId")
     private String mailingId;
+
+    @JsonProperty("MessageId")
     private String messageId;
+
+    @JsonProperty("From")
     private EmailAddress from;
+
+    @JsonProperty("ReplyTo")
     private EmailAddress replyTo;
+
+    @JsonProperty("Attachments")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Attachment> attachments;
+
+    @JsonProperty("Charset")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String charset;
+
+    @JsonProperty("CustomHeaders")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CustomHeader> customHeaders;
 
     @Override
@@ -27,16 +60,6 @@ public class BulkMessage implements interfaces.BulkMessage {
     @Override
     public void setTo(List<interfaces.BulkRecipient> to) {
         this.to = to;
-    }
-
-    @Override
-    public Map<String, String> getGlobalMergeData() {
-        return this.globalMergeData;
-    }
-
-    @Override
-    public void setGlobalMergeData(Map<String, String> globalMergeData) {
-        this.globalMergeData = globalMergeData;
     }
 
     @Override
@@ -70,12 +93,12 @@ public class BulkMessage implements interfaces.BulkMessage {
     }
 
     @Override
-    public int getApiTemplate() {
+    public String getApiTemplate() {
         return this.apiTemplate;
     }
 
     @Override
-    public void setApiTemplate(int apiTemplate) {
+    public void setApiTemplate(String apiTemplate) {
         this.apiTemplate = apiTemplate;
     }
 
@@ -148,4 +171,39 @@ public class BulkMessage implements interfaces.BulkMessage {
     public void setCustomHeaders(List<CustomHeader> customheaders) {
         this.customHeaders = customheaders;
     }
+
+    public BulkMessage() {
+        this.mergeData = new MergeData();
+    }
+
+    @JsonProperty("MergeData")
+    public MergeData getParsedMergeData() {
+        MergeData mergeData = new MergeData();
+
+        // set global merge data
+        mergeData.setGlobal(this.mergeData.getGlobal());
+
+        // set perMessage merge data
+        for (BulkRecipient recipient : this.to) {
+            if (recipient.getMergeData() != null) {
+                this.mergeData.addToPerMessage(recipient.getMergeData());
+            }
+        }
+
+
+        return mergeData;
+    }
+
+    @Override
+    public void setGlobalMergeData(HashMap<String, String> globalMergeData) {
+        this.mergeData.setGlobal(globalMergeData);
+    }
+
+    @JsonIgnore()
+    @Override
+    public HashMap<String, String> getGlobalMergeData() {
+        return this.mergeData.getGlobal();
+    }
+
+
 }

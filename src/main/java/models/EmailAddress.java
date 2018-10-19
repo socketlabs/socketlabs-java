@@ -2,10 +2,13 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EmailAddress implements interfaces.EmailAddress {
 
+    @JsonProperty("emailAddress")
     private String email;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String friendlyName;
 
