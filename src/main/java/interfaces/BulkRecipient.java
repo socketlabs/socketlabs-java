@@ -1,11 +1,12 @@
 package interfaces;
 
+import models.EmailAddress;
+
 import java.util.Map;
 
 public interface BulkRecipient {
-    String getEmail();
-    String getFriendlyName();
-    void setFriendlyName(String friendlyName);
+    EmailAddress getEmailAddress();
+    void setEmailAddress(EmailAddress emailAddress);
     boolean isValid();
     Map<String, String> getMergeData();
     void setMergeData(Map<String, String> mergeData);

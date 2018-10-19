@@ -5,39 +5,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Map;
 
 public class BulkRecipient implements interfaces.BulkRecipient {
-    private String email;
-    private String friendlyName;
+    private models.EmailAddress emailAddress;
     private Map<String, String> mergeData;
 
-    public BulkRecipient(String email) {
-        this.email = email;
+
+    public BulkRecipient(EmailAddress emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
-    public BulkRecipient(String email, String friendlyName) {
-        this.email = email;
-        this.friendlyName = friendlyName;
-    }
-
-    public BulkRecipient(String email, String friendlyName, Map<String, String> mergeData) {
-        this.email = email;
-        this.friendlyName = friendlyName;
+    public BulkRecipient(EmailAddress emailAddress, Map<String, String> mergeData) {
+        this.emailAddress = emailAddress;
         this.mergeData = mergeData;
     }
 
 
     @Override
-    public String getEmail() {
-        return this.email;
+    public EmailAddress getEmailAddress() {
+        return this.emailAddress;
     }
 
     @Override
-    public String getFriendlyName() {
-        return this.friendlyName;
-    }
-
-    @Override
-    public void setFriendlyName(String friendlyName) {
-        this.friendlyName = friendlyName;
+    public void setEmailAddress(EmailAddress emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @JsonIgnore

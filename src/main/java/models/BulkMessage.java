@@ -1,22 +1,49 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 import java.util.Map;
 
 public class BulkMessage implements interfaces.BulkMessage {
 
+    @JsonProperty("To")
     private List<BulkRecipient> to;
-    private Map<String, String> globalMergeData;
+
+    @JsonProperty("MergeData")
+    private MergeData mergeData;
+
+    @JsonProperty("Subject")
     private String subject;
+
+    @JsonProperty("TextBody")
     private String plainTextBody;
+
+    @JsonProperty("HtmlBody")
     private String htmlBody;
+
+    @JsonProperty("ApiTemplate")
     private String apiTemplate;
+
+    @JsonProperty("MailingId")
     private String mailingId;
+
+    @JsonProperty("MessageId")
     private String messageId;
+
+    @JsonProperty("From")
     private EmailAddress from;
+
+    @JsonProperty("ReplyTo")
     private EmailAddress replyTo;
+
+    @JsonProperty("Attachments")
     private List<Attachment> attachments;
+
+    @JsonProperty("Charset")
     private String charset;
+
+    @JsonProperty("CustomHeaders")
     private List<CustomHeader> customHeaders;
 
     @Override
@@ -30,13 +57,13 @@ public class BulkMessage implements interfaces.BulkMessage {
     }
 
     @Override
-    public Map<String, String> getGlobalMergeData() {
-        return this.globalMergeData;
+    public MergeData getMergeData() {
+        return null;
     }
 
     @Override
-    public void setGlobalMergeData(Map<String, String> globalMergeData) {
-        this.globalMergeData = globalMergeData;
+    public void setMergeData(MergeData mergeData) {
+        this.mergeData = mergeData;
     }
 
     @Override

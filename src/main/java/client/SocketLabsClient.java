@@ -15,9 +15,10 @@ import java.util.List;
 
 public class SocketLabsClient implements client.interfaces.SocketLabsClient {
 
+    private static final String ENDPOINT_URL = "https://inject.socketlabs.com/api/v1/email";
+
     private int serverId;
     private String apiKey;
-    private String endpointUrl = "https://inject.socketlabs.com/api/v1/email";
     private ObjectMapper mapper = new ObjectMapper();
 
     public SocketLabsClient(int serverId, String apiKey) {
@@ -32,11 +33,10 @@ public class SocketLabsClient implements client.interfaces.SocketLabsClient {
         InjectionRequest injectionRequest;
         List<MessageBase> messages = new ArrayList<>();
         messages.add(message);
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
         injectionRequest = new InjectionRequest(String.valueOf(this.serverId), this.apiKey, messages);
 
         try {
-            url = new URL(endpointUrl);
+            url = new URL(ENDPOINT_URL);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
@@ -63,7 +63,6 @@ public class SocketLabsClient implements client.interfaces.SocketLabsClient {
                 response.append('\r');
             }
             reader.close();
-            System.out.println(response.toString());
 
             return mapper.readValue(response.toString(), SendResponse.class);
 
@@ -74,7 +73,6 @@ public class SocketLabsClient implements client.interfaces.SocketLabsClient {
                 connection.disconnect();
             }
         }
-
 
         return null;
     }
