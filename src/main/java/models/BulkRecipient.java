@@ -2,22 +2,23 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class BulkRecipient implements interfaces.BulkRecipient {
-    private models.EmailAddress emailAddress;
-    private Map<String, String> mergeData;
 
+    private EmailAddress emailAddress;
+
+    @JsonIgnore()
+    private HashMap<String, String> mergeData;
 
     public BulkRecipient(EmailAddress emailAddress) {
         this.emailAddress = emailAddress;
     }
 
-    public BulkRecipient(EmailAddress emailAddress, Map<String, String> mergeData) {
+    public BulkRecipient(EmailAddress emailAddress, HashMap<String, String> mergeData) {
         this.emailAddress = emailAddress;
         this.mergeData = mergeData;
     }
-
 
     @Override
     public EmailAddress getEmailAddress() {
@@ -36,12 +37,12 @@ public class BulkRecipient implements interfaces.BulkRecipient {
     }
 
     @Override
-    public Map<String, String> getMergeData() {
+    public HashMap<String, String> getMergeData() {
         return this.mergeData;
     }
 
     @Override
-    public void setMergeData(Map<String, String> mergeData) {
+    public void setMergeData(HashMap<String, String> mergeData) {
         this.mergeData = mergeData;
     }
 }

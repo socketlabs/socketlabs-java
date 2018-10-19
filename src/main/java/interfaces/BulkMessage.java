@@ -1,13 +1,13 @@
 package interfaces;
 
 import models.BulkRecipient;
-import models.MergeData;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface BulkMessage extends MessageBase {
     List<models.BulkRecipient> getTo();
     void setTo(List<BulkRecipient> to);
-    MergeData getMergeData();
-    void setMergeData(MergeData mergeData);
+    HashMap<String, String> getGlobalMergeData();
+    void setGlobalMergeData(HashMap<String, String> globalMergeData);
 }

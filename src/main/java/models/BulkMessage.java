@@ -1,7 +1,10 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +25,7 @@ public class BulkMessage implements interfaces.BulkMessage {
     @JsonProperty("HtmlBody")
     private String htmlBody;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("ApiTemplate")
     private String apiTemplate;
 
@@ -38,12 +42,15 @@ public class BulkMessage implements interfaces.BulkMessage {
     private EmailAddress replyTo;
 
     @JsonProperty("Attachments")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Attachment> attachments;
 
     @JsonProperty("Charset")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String charset;
 
     @JsonProperty("CustomHeaders")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CustomHeader> customHeaders;
 
     @Override
@@ -54,16 +61,6 @@ public class BulkMessage implements interfaces.BulkMessage {
     @Override
     public void setTo(List<BulkRecipient> to) {
         this.to = to;
-    }
-
-    @Override
-    public MergeData getMergeData() {
-        return null;
-    }
-
-    @Override
-    public void setMergeData(MergeData mergeData) {
-        this.mergeData = mergeData;
     }
 
     @Override
@@ -175,4 +172,39 @@ public class BulkMessage implements interfaces.BulkMessage {
     public void setCustomHeaders(List<CustomHeader> customheaders) {
         this.customHeaders = customheaders;
     }
+
+    public BulkMessage() {
+        this.mergeData = new MergeData();
+    }
+
+    @JsonProperty("MergeData")
+    public MergeData getParsedMergeData() {
+        MergeData mergeData = new MergeData();
+
+        // set global merge data
+        mergeData.setGlobal(this.mergeData.getGlobal());
+
+        // set perMessage merge data
+        for (BulkRecipient recipient : this.to) {
+            if (recipient.getMergeData() != null) {
+                this.mergeData.addToPerMessage(recipient.getMergeData());
+            }
+        }
+
+
+        return mergeData;
+    }
+
+    @Override
+    public void setGlobalMergeData(HashMap<String, String> globalMergeData) {
+        this.mergeData.setGlobal(globalMergeData);
+    }
+
+    @JsonIgnore()
+    @Override
+    public HashMap<String, String> getGlobalMergeData() {
+        return this.mergeData.getGlobal();
+    }
+
+
 }
