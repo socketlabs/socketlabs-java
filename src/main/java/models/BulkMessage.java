@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class BulkMessage implements interfaces.BulkMessage {
 
-    private List<BulkRecipient> to;
+    private List<interfaces.BulkRecipient> to;
     private Map<String, String> globalMergeData;
     private String subject;
     private String plainTextBody;
@@ -20,12 +20,12 @@ public class BulkMessage implements interfaces.BulkMessage {
     private List<CustomHeader> customHeaders;
 
     @Override
-    public List<BulkRecipient> getTo() {
+    public List<interfaces.BulkRecipient> getTo() {
         return this.to;
     }
 
     @Override
-    public void setTo(List<BulkRecipient> to) {
+    public void setTo(List<interfaces.BulkRecipient> to) {
         this.to = to;
     }
 

@@ -62,8 +62,14 @@ public class EmailAddress implements interfaces.EmailAddress {
         return true;
     }
 
+    /**
+     *
+     */
     @Override
     public String toString() {
+        if (this.friendlyName == null || this.friendlyName.isEmpty()) {
+            return this.email;
+        }
         return String.format("%s <%s>", this.friendlyName, this.email);
     }
 }
