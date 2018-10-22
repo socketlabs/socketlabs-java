@@ -1,6 +1,7 @@
 package com.socketLabs;
 
 public class AddressResult {
+
     private String emailAddress;
     private boolean accepted;
     private String errorCode;
@@ -14,25 +15,22 @@ public class AddressResult {
     public String getEmailAddress() {
         return emailAddress;
     }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmailAddress(String value) {
+        this.emailAddress = value;
     }
 
     public boolean isAccepted() {
         return accepted;
     }
-
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
+    public void setAccepted(boolean value) {
+        this.accepted = value;
     }
 
     public String getErrorCode() {
         return errorCode;
     }
-
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+    public void setErrorCode(String value) {
+        this.errorCode = value;
     }
 
     @Override

@@ -9,6 +9,7 @@ class Address {
     private String email;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("friendlyName")
     private String friendlyName;
 
     public Address(String email, String friendlyName) {
@@ -19,15 +20,15 @@ class Address {
     public String getEmail() {
         return this.email;
     }
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String value) {
+        this.email = value;
     }
 
     public String getFriendlyName() {
         return this.friendlyName;
     }
-    public void setFriendlyName(String friendlyName) {
-        this.friendlyName = friendlyName;
+    public void setFriendlyName(String value) {
+        this.friendlyName = value;
     }
 
 }

@@ -4,13 +4,9 @@ package com.socketLabs.models;
 public class CustomHeader {
 
     private String name;
-
     private String value;
 
-    public CustomHeader() {
-
-    }
-
+    public CustomHeader() { }
     public CustomHeader(String name, String value) {
         this.name = name;
         this.value = value;
@@ -19,8 +15,8 @@ public class CustomHeader {
     public String getName() {
         return this.name;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String value) {
+        this.name = value;
     }
 
     public String getValue() {
@@ -31,10 +27,10 @@ public class CustomHeader {
     }
 
     public boolean isValid() {
+
         if (this.name == null || this.name.isEmpty()) {
             return false;
         }
-
         if (this.value == null || this.value.isEmpty()) {
             return false;
         }
@@ -44,9 +40,6 @@ public class CustomHeader {
 
     @Override
     public String toString() {
-        return "CustomHeader{" +
-                "name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                '}';
+        return String.format("%s: %s", this.name, this.value);
     }
 }

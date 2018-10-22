@@ -17,7 +17,6 @@ public class SendResponse {
 
     public SendResponse() {
     }
-
     public SendResponse(SendResult result, String transactionReceipt, List<AddressResult> addressResults) {
         this.result = result;
         this.transactionReceipt = transactionReceipt;
@@ -27,29 +26,27 @@ public class SendResponse {
     public SendResult getResult() {
         return result;
     }
-
-    public void setResult(SendResult result) {
-        this.result = result;
+    public void setResult(SendResult value) {
+        this.result = value;
     }
 
     public String getTransactionReceipt() {
         return transactionReceipt;
     }
-
-    public void setTransactionReceipt(String transactionReceipt) {
-        this.transactionReceipt = transactionReceipt;
+    public void setTransactionReceipt(String value) {
+        this.transactionReceipt = value;
     }
 
     public List<AddressResult> getAddressResults() {
         return addressResults;
     }
-
-    public void setAddressResults(List<AddressResult> addressResults) {
-        this.addressResults = addressResults;
+    public void setAddressResults(List<AddressResult> value) {
+        this.addressResults = value;
     }
 
     public String getResponseMessage() {
-        switch (result) {
+
+        switch (this.result) {
             case UnknownError:
                 return "An error has occured that was unforeseen";
 
@@ -165,4 +162,5 @@ public class SendResponse {
                 return "";
         }
     }
+
 }

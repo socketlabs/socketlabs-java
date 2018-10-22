@@ -1,7 +1,5 @@
 package com.socketLabs.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,22 +9,16 @@ import java.util.List;
 /**
  * Represents a message attachment in the form of a byte array.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Attachment {
 
-    @JsonProperty("Name")
     private String name;
 
-    @JsonProperty("ContentType")
     private String mimeType;
 
-    @JsonProperty("ContentId")
     private String contentId;
 
-    @JsonProperty("Content")
     private byte[] content;
 
-    @JsonProperty("CustomHeaders")
     private List<CustomHeader> customHeaders;
 
     /**

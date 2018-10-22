@@ -1,10 +1,12 @@
 package com.socketLabs.serialization;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class Attachment {
 
     @JsonProperty("Name")
@@ -14,12 +16,14 @@ class Attachment {
     private String mimeType;
 
     @JsonProperty("ContentId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String contentId;
 
     @JsonProperty("Content")
     private byte[] content;
 
     @JsonProperty("CustomHeaders")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CustomHeader> customHeaders;
 
 /*
@@ -38,36 +42,36 @@ class Attachment {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String value) {
+        this.name = value;
     }
 
     public String getMimeType() {
         return mimeType;
     }
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
+    public void setMimeType(String value) {
+        this.mimeType = value;
     }
 
     public String getContentId() {
         return contentId;
     }
-    public void setContentId(String contentId) {
-        this.contentId = contentId;
+    public void setContentId(String value) {
+        this.contentId = value;
     }
 
     public byte[] getContent() {
         return content;
     }
-    public void setContent(byte[] content) {
-        this.content = content;
+    public void setContent(byte[] value) {
+        this.content = value;
     }
 
     public List<CustomHeader> getCustomHeaders() {
         return customHeaders;
     }
-    public void setCustomHeaders(List<CustomHeader> customHeaders) {
-        this.customHeaders = customHeaders;
+    public void setCustomHeaders(List<CustomHeader> value) {
+        this.customHeaders = value;
     }
 
 }
