@@ -2,6 +2,10 @@ package com.socketLabs.serialization;
 
 import com.socketLabs.models.BasicMessage;
 import com.socketLabs.models.BulkMessage;
+import com.socketLabs.models.MessageBase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InjectionRequestFactory{
 
@@ -35,13 +39,49 @@ public class InjectionRequestFactory{
 
     }
 
-    public InjectionRequest GenerateRequest(BasicMessage message) {
+    public InjectionRequest GenerateRequest(BasicMessage basicMessage) {
 
-        // TODO: Convert Basic to Json
-        return null;
+        List<Message> messages = new ArrayList<>();
+
+        Message message = generateBaseMessage(basicMessage);
+
+        messages.add(message);
+
+
+        return new InjectionRequest(this.serverId, this.apiKey, messages);
     }
 
 
     // TODO: Helper methods
+
+    private Message generateBaseMessage(MessageBase messageBase) {
+        Message message = new Message();
+
+        message.setSubject(messageBase.getSubject());
+        message.setPlainTextBody(messageBase.getPlainTextBody());
+        message.setHtmlBody(messageBase.getHtmlBody());
+        message.setMailingId(messageBase.getMailingId());
+        message.setMessageId(messageBase.getMessageId());
+        message.setCharset(messageBase.getCharset());
+        message.setFrom(new Address(messageBase.getFrom().getEmail(), messageBase.getFrom().getFriendlyName()));
+        message.setCustomHeaders(populateCustomHeaders(messageBase.getCustomHeaders()));
+
+        // set attachments
+
+        return message;
+    }
+
+    // TODO: populateCustomHeaders()
+
+    private List<CustomHeader> populateCustomHeaders(List<com.socketLabs.models.CustomHeader> baseCustomheaders) {
+        List<CustomHeader> customHeaders = new ArrayList<>();
+        for (com.socketLabs.models.CustomHeader baseCustomHeader: baseCustomheaders)
+        {
+            customHeaders.add(new CustomHeader(baseCustomHeader.getName(), baseCustomHeader.getValue()));
+        }
+        return customHeaders;
+    }
+
+    // TODO: populateAttachments()
 }
 

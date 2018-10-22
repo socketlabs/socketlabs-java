@@ -12,6 +12,7 @@ public interface MessageBase {
 
     String getHtmlBody();
     void setHtmlBody(String htmlBody);
+
     String getApiTemplate();
     void setApiTemplate(String value);
 
