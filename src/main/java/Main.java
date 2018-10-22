@@ -27,6 +27,10 @@ public class Main {
         message.setFrom(new EmailAddress("ross.brazuk@socketlabs.com", "Ross Brazuk"));
 
         // attachments
+        List<Attachment> attachments = new ArrayList<>();
+        attachments.add(new Attachment("/Users/ross.brazuk/Desktop/nic.jpg"));
+        attachments.add(new Attachment("/Users/ross.brazuk/Desktop/text.txt"));
+        message.setAttachments(attachments);
 
 
         // custom headers

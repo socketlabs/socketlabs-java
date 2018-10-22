@@ -65,23 +65,40 @@ public class InjectionRequestFactory{
         message.setCharset(messageBase.getCharset());
         message.setFrom(new Address(messageBase.getFrom().getEmail(), messageBase.getFrom().getFriendlyName()));
         message.setCustomHeaders(populateCustomHeaders(messageBase.getCustomHeaders()));
-
-        // set attachments
+        message.setAttachments(populateAttachments(messageBase.getAttachments()));
 
         return message;
     }
 
-    // TODO: populateCustomHeaders()
-
     private List<CustomHeader> populateCustomHeaders(List<com.socketLabs.models.CustomHeader> baseCustomheaders) {
+        if (baseCustomheaders == null) {
+            return null;
+        }
         List<CustomHeader> customHeaders = new ArrayList<>();
-        for (com.socketLabs.models.CustomHeader baseCustomHeader: baseCustomheaders)
-        {
+
+        for (com.socketLabs.models.CustomHeader baseCustomHeader: baseCustomheaders) {
             customHeaders.add(new CustomHeader(baseCustomHeader.getName(), baseCustomHeader.getValue()));
         }
         return customHeaders;
     }
 
-    // TODO: populateAttachments()
+    private List<Attachment> populateAttachments(List<com.socketLabs.models.Attachment> baseAttachments) {
+        if (baseAttachments == null) {
+            return null;
+        }
+        List<Attachment> attachments = new ArrayList<>();
+
+        for (com.socketLabs.models.Attachment baseAttachment: baseAttachments) {
+            Attachment attachment = new Attachment();
+            attachment.setContent(baseAttachment.getContent());
+            attachment.setContentId(baseAttachment.getContentId());
+            attachment.setMimeType(baseAttachment.getMimeType());
+            attachment.setName(baseAttachment.getName());
+            attachment.setCustomHeaders(populateCustomHeaders(baseAttachment.getCustomHeaders()));
+            attachments.add(attachment);
+        }
+
+        return attachments;
+    }
 }
 
