@@ -1,8 +1,8 @@
-package serialization;
+package com.socketLabs.serialization;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MergeData {
+class MergeField {
 
     @JsonProperty("Field")
     private String field;
@@ -10,7 +10,7 @@ public class MergeData {
     @JsonProperty("Value")
     private String value;
 
-    public MergeData(String field, String value) {
+    public MergeField(String field, String value) {
         this.field = field;
         this.value = value;
     }
