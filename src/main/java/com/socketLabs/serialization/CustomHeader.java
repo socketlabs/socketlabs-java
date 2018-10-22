@@ -1,7 +1,9 @@
 package com.socketLabs.serialization;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class CustomHeader {
 
     @JsonProperty("Name")
@@ -22,8 +24,8 @@ class CustomHeader {
     public String getName() {
         return this.name;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String value) {
+        this.name = value;
     }
 
     public String getValue() {

@@ -1,166 +1,159 @@
 package com.socketLabs.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A basic email message similar to one created in a personal email client such as Outlook.
+ * This message can have many recipients of different types, such as To, CC, and BCC.  This
+ * message does not support merge fields.
+ *
+ * Example:
+ * var basicMessage = require('./basicMessage');
+ * var emailAddress = require('./emailAddress');
+ * ...
+ *
+ * var message = new basicMessage();
+ *
+ * message.subject = "Sending A Message";
+ * message.htmlBody = "<html>This is the Html Body of my message.</html>";
+ * message.textBody = "This is the Plain Text Body of my message.";
+ *
+ * message.from = new emailAddress("from@example.com");
+ * message.replyTo = new emailAddress("replyto@example.com");
+ *
+ * message.to.push(new emailAddress("recipient1@example.com"));
+ * message.to.push(new emailAddress("recipient2@example.com", { friendlyName: "Recipient #2" }));
+ *
+ * message.addToEmailAddress("recipient3@example.com");
+ * message.addToEmailAddress("recipient4@example.com", "Recipient #4");
+ *
+ */
 public class BasicMessage implements MessageBase {
 
-    @JsonProperty("To")
-    private List<EmailAddress> to;
-
-    @JsonProperty("CC")
-    private List<EmailAddress> cc;
-
-    @JsonProperty("BCC")
-    private List<EmailAddress> bcc;
-
-    @JsonProperty("Subject")
+    private List<EmailAddress> to = new ArrayList<>();
+    private List<EmailAddress> cc = new ArrayList<>();
+    private List<EmailAddress> bcc = new ArrayList<>();
     private String subject;
-
-    @JsonProperty("TextBody")
     private String plainTextBody;
-
-    @JsonProperty("HtmlBody")
     private String htmlBody;
-
-    @JsonProperty("ApiTemplate")
     private String apiTemplate;
-
-    @JsonProperty("MailingId")
     private String mailingId;
-
-    @JsonProperty("MessageId")
     private String messageId;
-
-    @JsonProperty("From")
     private EmailAddress from;
-
-    @JsonProperty("ReplyTo")
     private EmailAddress replyTo;
-
-    @JsonProperty("Attachments")
-    private List<Attachment> attachments;
-
-    @JsonProperty("Charset")
+    private List<Attachment> attachments = new ArrayList<>();
     private String charset;
-
-    @JsonProperty("CustomHeaders")
-    private List<CustomHeader> customHeaders;
+    private List<CustomHeader> customHeaders = new ArrayList<>();
 
 
     public BasicMessage() {
-        this.to = new ArrayList<>();
     }
 
-    public List<EmailAddress> getTo() {
-        return this.to;
+    public List<EmailAddress> getTo() { return this.to; }
+    public void setTo(List<EmailAddress> value) { this.to = value; }
+    /**
+     * Add an EmailAddress to the array of To recipients
+     * @param emailAddress {String}
+     * @param name {String}
+     */
+    public void addToEmailAddress(String emailAddress, String name) {
+        this.to.add(new EmailAddress(emailAddress, name ));
     }
-
-    public void setTo(List<EmailAddress> to) {
-        this.to = to;
-    }
-
-    public List<EmailAddress> getCc() {
-        return this.cc;
-    }
-
-    public void setCc(List<EmailAddress> cc) {
-        this.cc = cc;
-    }
-
-    public List<EmailAddress> getBcc() {
-        return this.bcc;
-    }
-
-    public void setBcc(List<EmailAddress> bcc) {
-        this.bcc = bcc;
-    }
-
     
-    public String getSubject() {
-        return this.subject;
+    public List<EmailAddress> getCc() { return this.cc; }
+    public void setCc(List<EmailAddress> value) { this.cc = value; }
+    /**
+     * Add an EmailAddress to the array of CC recipients
+     * @param emailAddress {String} 
+     * @param name {String}
+     */
+    public void addCcEmailAddress(String emailAddress, String name) {
+        this.cc.add(new EmailAddress(emailAddress, name ));
     }
-
     
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public List<EmailAddress> getBcc() { return this.bcc; }
+    public void setBcc(List<EmailAddress> value) { this.bcc = value; }
+    /**
+     * Add an EmailAddress to the array of BCC recipients
+     * @param emailAddress {String}
+     * @param name {String}
+     */
+    public void addBccEmailAddress(String emailAddress, String name) {
+        this.bcc.add(new EmailAddress(emailAddress, name ));
     }
 
-        public String getPlainTextBody() {
-        return this.plainTextBody;
-    }
-    public void setPlainTextBody(String plainTextBody) {
-        this.plainTextBody = plainTextBody;
+    @Override
+    public String getSubject() { return this.subject; }
+    @Override
+    public void setSubject(String value) { this.subject = value; }
+
+    @Override
+    public String getPlainTextBody() { return this.plainTextBody; }
+    @Override
+    public void setPlainTextBody(String value) { this.plainTextBody = value; }
+
+    @Override
+    public String getHtmlBody() { return this.htmlBody; }
+    @Override
+    public void setHtmlBody(String value) { this.htmlBody = value; }
+
+    @Override
+    public String getApiTemplate() { return this.apiTemplate; }
+    @Override
+    public void setApiTemplate(String value) { this.apiTemplate = value; }
+
+    @Override
+    public String getMailingId() { return this.mailingId; }
+    @Override
+    public void setMailingId(String value) { this.mailingId = value; }
+
+    @Override
+    public String getMessageId() { return this.messageId; }
+    @Override
+    public void setMessageId(String value) { this.messageId = value; }
+
+    @Override
+    public EmailAddress getFrom() { return this.from; }
+    @Override
+    public void setFrom(EmailAddress value) { this.from = value; }
+
+    @Override
+    public EmailAddress getReplyTo() { return this.replyTo; }
+    @Override
+    public void setReplyTo(EmailAddress value) { this.replyTo = value; }
+
+    @Override
+    public List<Attachment> getAttachments() { return this.attachments; }
+    @Override
+    public void setAttachments(List<Attachment> value) { this.attachments = value; }
+    /**
+     * Add an EmailAddress to the array of Attachment items
+     * @param fileName
+     * @throws IOException
+     */
+    public void addAttachments(String fileName) throws IOException {
+        this.attachments.add(new Attachment(fileName));
     }
 
-    public String getHtmlBody() {
-        return this.htmlBody;
-    }
-    public void setHtmlBody(String htmlBody) {
-        this.htmlBody = htmlBody;
+    @Override
+    public String getCharset() { return this.charset; }
+    @Override
+    public void setCharset(String value) { this.charset = value; }
+
+    @Override
+    public List<CustomHeader> getCustomHeaders() { return this.customHeaders; }
+    @Override
+    public void setCustomHeaders(List<CustomHeader> value) { this.customHeaders = value; }
+    /**
+     * Add a CustomHeader to the message
+     * @param name {String}
+     * @param value {String}
+     */
+    public void addCustomHeader(String name, String value) {
+        this.customHeaders.add(new CustomHeader(name, value ));
     }
 
-    // TODO: change to int
-    public String getApiTemplate() {
-        return this.apiTemplate;
-    }
-    public void setApiTemplate(String apiTemplate) {
-        this.apiTemplate = apiTemplate;
-    }
 
-    public String getMailingId() {
-        return this.mailingId;
-    }
-    public void setMailingId(String mailingId) {
-        this.mailingId = mailingId;
-    }
-
-    public String getMessageId() {
-        return this.messageId;
-    }
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
-
-    public EmailAddress getFrom() {
-        return this.from;
-    }
-    public void setFrom(EmailAddress from) {
-        this.from = from;
-    }
-
-    public EmailAddress getReplyTo() {
-        return this.replyTo;
-    }
-    public void setReplyTo(EmailAddress replyTo) {
-        this.replyTo = replyTo;
-    }
-
-    public List<Attachment> getAttachments() {
-        return this.attachments;
-    }
-    public void setAttachments(List<Attachment> attachments) {
-        this.attachments = attachments;
-    }
-
-    public String getCharset() {
-        return this.charset;
-    }
-    public void setCharset(String charset) {
-        this.charset = charset;
-    }
-
-    public List<CustomHeader> getCustomHeaders() {
-        return this.customHeaders ;
-    }
-    public void setCustomHeaders(List<CustomHeader> customHeaders) {
-        this.customHeaders = customHeaders;
-    }
-
-    public List<EmailAddress> addToAddress(EmailAddress address) {
-        this.to.add(address);
-        return this.to;
-    }
 }
