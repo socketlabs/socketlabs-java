@@ -1,9 +1,14 @@
 package com.socketLabs;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socketLabs.core.SendValidator;
+import com.socketLabs.core.serialization.InjectionRequestFactory;
+import com.socketLabs.core.serialization.InjectionResponseParser;
 import com.socketLabs.models.BasicMessage;
 import com.socketLabs.models.BulkMessage;
+
+import javax.net.ssl.HttpsURLConnection;
+import java.io.*;
+import java.net.URL;
 
 public class SocketLabsClient implements SocketLabsClientAPI {
 
@@ -17,6 +22,9 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     public void setEndPointUrl(String endPointUrl) {
         this.endPointUrl = endPointUrl;
     }
+
+    private final String VERSION = "1.0.0";
+    private final String userAgent  = String.format("socketlabs-sava/$s(%s)", VERSION, Package.getPackage("java.lang.String").getImplementationVersion());
 
     // TODO: Need Proxy - Property and Constructor
 
@@ -39,33 +47,10 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         if (result.getResult() != SendResult.Success)
             return result;
 
+        InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
 
         /*
-        URL url;
 
-        HttpURLConnection connection = null;
-        InjectionRequest injectionRequest;
-        List<MessageBase> messages = new ArrayList<>();
-        messages.add(message);
-        injectionRequest = new InjectionRequest(String.valueOf(this.serverId), this.apiKey, messages);
-
-        try {
-            url = new URL(ENDPOINT_URL);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setUseCaches(false);
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-
-            DataOutputStream request = new DataOutputStream(connection.getOutputStream());
-            request.writeBytes(mapper.writeValueAsString(injectionRequest));
-            request.flush();
-            request.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         try {
             InputStream is = connection.getInputStream();
@@ -93,7 +78,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     }
 
     @Override
-    public SendResponse send(BulkMessage message) {
+    public SendResponse send(BulkMessage message) throws Exception {
 
         SendValidator validator = new SendValidator();
 
@@ -105,9 +90,13 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         if (result.getResult() != SendResult.Success)
             return result;
 
+        InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
+
+        String requestJson = injectionRequest.GenerateRequest(message);
         // Parse and send the message here
 
-        return null;
+        return sendPost(requestJson);
+
     }
 
 /*
@@ -127,5 +116,40 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     return null;
     }
 */
+
+
+
+    // HTTP POST request
+    private SendResponse sendPost(String json) throws Exception {
+
+        URL obj = new URL(this.getEndPointUrl());
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", this.userAgent);
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        // Send post request
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(json);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+
+        System.out.println("\nSending 'POST' request to URL : " + this.getEndPointUrl());
+        System.out.println("Post body : " + json);
+        System.out.println("Response Code : " + responseCode);
+
+        InputStream stream = con.getInputStream();
+
+        InjectionResponseParser parser = new InjectionResponseParser();
+        SendResponse response = parser.Parse(stream);
+
+        return response;
+    }
+
 
 }

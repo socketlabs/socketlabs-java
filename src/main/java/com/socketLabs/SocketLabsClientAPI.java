@@ -15,5 +15,5 @@ public interface SocketLabsClientAPI {
 
     // Sync bulk
 
-    SendResponse send(BulkMessage message);
+    SendResponse send(BulkMessage message) throws Exception;
 }

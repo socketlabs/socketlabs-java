@@ -32,14 +32,14 @@ public class InjectionRequestFactory{
         this.apiKey = apiKey;
     }
 
-    public InjectionRequest GenerateRequest(BulkMessage message) {
+    public String GenerateRequest(BulkMessage message) {
 
         // TODO: Convert Bulk to Json
         return null;
 
     }
 
-    public InjectionRequest GenerateRequest(BasicMessage basicMessage) {
+    public String GenerateRequest(BasicMessage basicMessage) {
 
         List<Message> messages = new ArrayList<>();
 
@@ -47,8 +47,13 @@ public class InjectionRequestFactory{
 
         messages.add(message);
 
+        InjectionRequest request = new InjectionRequest(this.serverId, this.apiKey, messages);
+        return GetAsJson(request);
+    }
 
-        return new InjectionRequest(this.serverId, this.apiKey, messages);
+    private String GetAsJson(InjectionRequest request) {
+        // TODO: return InjectionRequest as JSON String
+        return null;
     }
 
 
