@@ -31,7 +31,7 @@ class Message {
 
     @JsonProperty("ApiTemplate")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer apiTemplate;
+    private String apiTemplate;
 
     @JsonProperty("MailingId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -62,7 +62,7 @@ class Message {
 
     @JsonProperty("MergeData")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<MergeData> mergeData;
+    private MergeData mergeData;
 
     public List<Address> getTo() { return to; }
     public void setTo(List<Address> value) { this.to = value; }
@@ -82,8 +82,8 @@ class Message {
     public String getHtmlBody() { return htmlBody; }
     public void setHtmlBody(String value) { this.htmlBody = value; }
 
-    public Integer getApiTemplate() { return apiTemplate; }
-    public void setApiTemplate(Integer value) { this.apiTemplate = value; }
+    public String getApiTemplate() { return apiTemplate; }
+    public void setApiTemplate(String value) { this.apiTemplate = value; }
 
     public String getMailingId() { return mailingId; }
     public void setMailingId(String value) { this.mailingId = value; }
@@ -106,6 +106,6 @@ class Message {
     public List<CustomHeader> getCustomHeaders() { return customHeaders; }
     public void setCustomHeaders(List<CustomHeader> value) { this.customHeaders = value; }
 
-    public List<MergeData> getMergeData() { return mergeData; }
-    public void setMergeData(List<MergeData> value) { this.mergeData = value; }
+    public MergeData getMergeData() { return mergeData; }
+    public void setMergeData(MergeData value) { this.mergeData = value; }
 }

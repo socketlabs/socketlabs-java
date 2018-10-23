@@ -2,20 +2,20 @@ package com.socketLabs.core.serialization;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.socketLabs.models.BasicMessage;
-import com.socketLabs.models.BulkMessage;
-import com.socketLabs.models.EmailAddress;
-import com.socketLabs.models.MessageBase;
+import com.socketLabs.models.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class InjectionRequestFactory{
 
     private int serverId;
 
     private String apiKey;
+
+    private ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     public InjectionRequestFactory(int serverId, String apiKey) {
         this.serverId = serverId;
@@ -36,10 +36,13 @@ public class InjectionRequestFactory{
         this.apiKey = apiKey;
     }
 
-    public String GenerateRequest(BulkMessage message) {
+    public String GenerateRequest(BulkMessage bulkMessage) throws IOException {
+        List<Message> messages = new ArrayList<>();
+        Message message = generateBaseMessage(bulkMessage);
 
-        // TODO: Convert Bulk to Json
-        return null;
+        message.setMergeData(populateMergeData(bulkMessage.getMergeData(), bulkMessage.getTo()));
+
+        return mapper.writeValueAsString(message);
 
     }
 
@@ -58,9 +61,6 @@ public class InjectionRequestFactory{
     }
 
     private String GetAsJson(InjectionRequest request) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        // pretty print for debugging
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
         return mapper.writeValueAsString(request);
     }
 
@@ -78,13 +78,13 @@ public class InjectionRequestFactory{
         message.setAttachments(populateAttachments(messageBase.getAttachments()));
 
         if (messageBase.getApiTemplate() != null) {
-            message.setApiTemplate(messageBase.getApiTemplate());
+            message.setApiTemplate(String.valueOf(messageBase.getApiTemplate()));
         }
 
         return message;
     }
 
-    // TODO: These methods are really similar so maybe we should look at refactoring
+    // TODO: Some of these methods are really similar so maybe we should look at refactoring
 
     private List<CustomHeader> populateCustomHeaders(List<com.socketLabs.models.CustomHeader> baseCustomHeaders) {
         if (baseCustomHeaders == null) {
@@ -129,6 +129,34 @@ public class InjectionRequestFactory{
         }
 
         return addresses;
+    }
+
+    private MergeData populateMergeData(Map<String, String> global, List<BulkRecipient> recipients) {
+
+        List<List<MergeField>> perMessageMergeFields = new ArrayList<>();
+        List<MergeField> globalMergeFields = new ArrayList<>();
+
+        for(BulkRecipient recipient : recipients) {
+            List<MergeField> mergeFieldList = new ArrayList<>();
+
+            for (Map.Entry<String, String> entry : recipient.getMergeData().entrySet()) {
+                mergeFieldList.add(new MergeField(entry.getKey(), entry.getValue()));
+            }
+
+            mergeFieldList.add(new MergeField("DeliveryAddress",recipient.getEmailAddress()));
+
+            if (recipient.getFriendlyName() != null) {
+                mergeFieldList.add(new MergeField("FriendlyName", recipient.getFriendlyName()));
+            }
+
+            perMessageMergeFields.add(mergeFieldList);
+        }
+
+        for (Map.Entry<String, String> entry : global.entrySet()) {
+            globalMergeFields.add(new MergeField(entry.getKey(), entry.getValue()));
+        }
+
+        return new MergeData(perMessageMergeFields, globalMergeFields);
     }
 }
 
