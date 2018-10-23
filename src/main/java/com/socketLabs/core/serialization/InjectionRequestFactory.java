@@ -15,6 +15,7 @@ public class InjectionRequestFactory{
 
     private String apiKey;
 
+    // TODO: remove .enable(SerializationFeature.INDENT_OUTPUT) (used for debugging)
     private ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     public InjectionRequestFactory(int serverId, String apiKey) {
@@ -48,7 +49,9 @@ public class InjectionRequestFactory{
 
         message.setMergeData(populateMergeData(bulkMessage.getMergeData(), bulkMessage.getTo()));
 
-        return mapper.writeValueAsString(message);
+        messages.add(message);
+
+        return mapper.writeValueAsString(new InjectionRequest(this.serverId, this.apiKey, messages));
     }
 
     public String GenerateRequest(BasicMessage basicMessage) throws IOException {
@@ -61,8 +64,7 @@ public class InjectionRequestFactory{
 
         messages.add(message);
 
-        InjectionRequest request = new InjectionRequest(this.serverId, this.apiKey, messages);
-        return GetAsJson(request);
+        return GetAsJson(new InjectionRequest(this.serverId, this.apiKey, messages));
     }
 
     private String GetAsJson(InjectionRequest request) throws IOException {
@@ -143,7 +145,7 @@ public class InjectionRequestFactory{
         for(BulkRecipient recipient : recipients) {
             List<MergeField> mergeFieldList = generateMergeFieldList(recipient.getMergeData());
 
-            mergeFieldList.add(new MergeField("DeliveryAddress",recipient.getEmailAddress()));
+            mergeFieldList.add(new MergeField("DeliveryAddress", recipient.getEmailAddress()));
 
             if (recipient.getFriendlyName() != null) {
                 mergeFieldList.add(new MergeField("RecipientName", recipient.getFriendlyName()));
@@ -165,4 +167,3 @@ public class InjectionRequestFactory{
         return mergeFieldList;
     }
 }
-
