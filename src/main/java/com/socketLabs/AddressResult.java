@@ -1,9 +1,16 @@
 package com.socketLabs;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AddressResult {
 
+    @JsonProperty("EmailAddress")
     private String emailAddress;
+    @JsonProperty("Accepted")
     private boolean accepted;
+    @JsonProperty("ErrorCode")
     private String errorCode;
 
     public AddressResult(String emailAddress, boolean accepted, String errorCode) {

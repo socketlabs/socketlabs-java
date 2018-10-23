@@ -32,33 +32,43 @@ public class HttpRequest {
      */
     public HttpResponse SendRequest() throws Exception {
 
-        URL obj = new URL(this.endPointUrl);
-        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(this.endPointUrl).openConnection();
 
         //add request method
-        con.setRequestMethod(this.method.toString());
+        connection.setRequestMethod(this.method.toString());
 
         //add request header
         for (Map.Entry<String, String> header : this.headers.entrySet()) {
-            con.setRequestProperty(header.getKey(), header.getValue());
+            connection.setRequestProperty(header.getKey(), header.getValue());
         }
 
         // Send request
-        con.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        connection.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
         wr.writeBytes(this.body);
         wr.flush();
         wr.close();
 
         // get response code.
-        int responseCode = con.getResponseCode();
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+        String requestMethod = connection.getRequestMethod();
 
-        System.out.println(String.format("\nSending '%s' request to URL : %s", this.method.toString(), this.endPointUrl));
+        System.out.println(String.format("\nSending '%s' request to URL : %s", requestMethod, this.endPointUrl));
         System.out.println("Request body : " + this.body);
         System.out.println("Response Code : " + responseCode);
+        System.out.println("Response Message : " + responseMessage);
 
-
-        return new HttpResponse(responseCode, ParseStream(con.getInputStream()));
+        InputStream stream = null;
+        if (responseCode != 200) {
+            stream = connection.getErrorStream();
+        }
+        else {
+            stream = connection.getInputStream();
+        }
+        HttpResponse response = new HttpResponse(responseCode, ParseStream(stream));
+        response.setResponseMessage(responseMessage);
+        return response;
     }
 
     /**

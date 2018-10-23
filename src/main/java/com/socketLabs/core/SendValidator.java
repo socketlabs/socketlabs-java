@@ -103,7 +103,7 @@ public class SendValidator {
         if (message.getFrom() == null)
             return false;
 
-        return (Strings.isNullOrEmpty(message.getFrom().getEmailAddress()));
+        return (!Strings.isNullOrEmpty(message.getFrom().getEmailAddress()));
     }
 
     /**
