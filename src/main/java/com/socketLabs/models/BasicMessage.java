@@ -57,14 +57,35 @@ public class BasicMessage implements MessageBase {
     /**
      * Add an EmailAddress to the array of To recipients
      * @param emailAddress {String}
+     */
+    public void addToEmailAddress(String emailAddress) {
+        this.to.add(new EmailAddress(emailAddress));
+    }
+    /**
+     * Add an EmailAddress to the array of To recipients
+     * @param emailAddress {String}
      * @param name {String}
      */
     public void addToEmailAddress(String emailAddress, String name) {
         this.to.add(new EmailAddress(emailAddress, name ));
     }
+    /**
+     * Add an EmailAddress to the array of To recipients
+     * @param emailAddress {String}
+     */
+    public void addToEmailAddress(EmailAddress emailAddress) {
+        this.to.add(emailAddress);
+    }
     
     public List<EmailAddress> getCc() { return this.cc; }
     public void setCc(List<EmailAddress> value) { this.cc = value; }
+    /**
+     * Add an EmailAddress to the array of CC recipients
+     * @param emailAddress {String}
+     */
+    public void addCcEmailAddress(String emailAddress) {
+        this.cc.add(new EmailAddress(emailAddress));
+    }
     /**
      * Add an EmailAddress to the array of CC recipients
      * @param emailAddress {String} 
@@ -73,9 +94,23 @@ public class BasicMessage implements MessageBase {
     public void addCcEmailAddress(String emailAddress, String name) {
         this.cc.add(new EmailAddress(emailAddress, name ));
     }
+    /**
+     * Add an EmailAddress to the array of CC recipients
+     * @param emailAddress {String}
+     */
+    public void addCcEmailAddress(EmailAddress emailAddress) {
+        this.cc.add(emailAddress);
+    }
     
     public List<EmailAddress> getBcc() { return this.bcc; }
     public void setBcc(List<EmailAddress> value) { this.bcc = value; }
+    /**
+     * Add an EmailAddress to the array of BCC recipients
+     * @param emailAddress {String}
+     */
+    public void addBccEmailAddress(String emailAddress) {
+        this.bcc.add(new EmailAddress(emailAddress));
+    }
     /**
      * Add an EmailAddress to the array of BCC recipients
      * @param emailAddress {String}
@@ -83,6 +118,13 @@ public class BasicMessage implements MessageBase {
      */
     public void addBccEmailAddress(String emailAddress, String name) {
         this.bcc.add(new EmailAddress(emailAddress, name ));
+    }
+    /**
+     * Add an EmailAddress to the array of BCC recipients
+     * @param emailAddress {String}
+     */
+    public void addBccEmailAddress(EmailAddress emailAddress) {
+        this.bcc.add(emailAddress);
     }
 
     @Override

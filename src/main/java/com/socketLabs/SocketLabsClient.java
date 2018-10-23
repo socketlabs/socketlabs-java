@@ -20,7 +20,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     }
 
     private final String VERSION = "1.0.0";
-    private final String userAgent  = String.format("SocketLabs-java/%s(%s)", VERSION, Package.getPackage("java.lang.String").getImplementationVersion());
+    private final String userAgent  = String.format("SocketLabs-java/%s(%s)", VERSION, Package.getPackage("java.util").getImplementationVersion());
 
     // TODO: Need Proxy - Property and Constructor
 
