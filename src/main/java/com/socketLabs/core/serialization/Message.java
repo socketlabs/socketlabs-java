@@ -62,7 +62,7 @@ class Message {
 
     @JsonProperty("MergeData")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<MergeData> mergeData;
+    private MergeData mergeData;
 
     public List<Address> getTo() { return to; }
     public void setTo(List<Address> value) { this.to = value; }
@@ -106,6 +106,6 @@ class Message {
     public List<CustomHeader> getCustomHeaders() { return customHeaders; }
     public void setCustomHeaders(List<CustomHeader> value) { this.customHeaders = value; }
 
-    public List<MergeData> getMergeData() { return mergeData; }
-    public void setMergeData(List<MergeData> value) { this.mergeData = value; }
+    public MergeData getMergeData() { return mergeData; }
+    public void setMergeData(MergeData value) { this.mergeData = value; }
 }

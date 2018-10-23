@@ -1,16 +1,14 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.socketLabs.SocketLabsClient;
-import com.socketLabs.models.Attachment;
-import com.socketLabs.models.BasicMessage;
-import com.socketLabs.models.CustomHeader;
-import com.socketLabs.models.EmailAddress;
+
+import com.socketLabs.models.*;
 import com.socketLabs.core.serialization.InjectionRequestFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -18,33 +16,70 @@ public class Main {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-        InjectionRequestFactory factory = new InjectionRequestFactory(17067, "abcdefghijklmnop");
+        InjectionRequestFactory factory = new InjectionRequestFactory(12345, "abcdefghijklmnop");
 
-        BasicMessage message = new BasicMessage();
+//        BasicMessage message = new BasicMessage();
+//
+//        message.setSubject("Test Subject");
+//        message.setPlainTextBody("This is an email");
+//        message.setFrom(new EmailAddress("ross.brazuk@socketlabs.com", "Ross Brazuk"));
+//
+//        List<EmailAddress> to =  new ArrayList<>();
+//        to.add(new EmailAddress("example@example.com"));
+//        to.add(new EmailAddress("anotherexample@example.com"));
+//        message.setTo(to);
+//
+//        // attachments
+//        List<Attachment> attachments = new ArrayList<>();
+//        attachments.add(new Attachment("/Users/ross.brazuk/Desktop/nic.jpg"));
+//        attachments.add(new Attachment("/Users/ross.brazuk/Desktop/text.txt"));
+//        message.setAttachments(attachments);
+//
+//
+//        // custom headers
+//        List<CustomHeader> customHeaders = new ArrayList<>();
+//
+//        customHeaders.add(new CustomHeader("custom-header-1", "number 1"));
+//        customHeaders.add(new CustomHeader("custom-header-2", "number 2"));
+//        customHeaders.add(new CustomHeader("custom-header-3", "number 3"));
+//        customHeaders.add(new CustomHeader("custom-header-4", "number 4"));
+//
+//        message.setCustomHeaders(customHeaders);
+//
+//        message.setApiTemplate(5);
+//
+//
+//        System.out.println(factory.GenerateRequest(message));
 
-        message.setSubject("Test Subject");
-        message.setPlainTextBody("This is an email");
-        message.setFrom(new EmailAddress("ross.brazuk@socketlabs.com", "Ross Brazuk"));
+        BulkMessage bulkMessage = new BulkMessage();
 
-        // attachments
-        List<Attachment> attachments = new ArrayList<>();
-        attachments.add(new Attachment("/Users/ross.brazuk/Desktop/nic.jpg"));
-        attachments.add(new Attachment("/Users/ross.brazuk/Desktop/text.txt"));
-        message.setAttachments(attachments);
+        BulkRecipient recipient = new BulkRecipient("bulk@example.com", "Bulk Recipient");
+        Map<String, String> merge1 = new HashMap<>();
+        merge1.put("eyeColor", "blue");
+        merge1.put("pet", "dog");
+        recipient.setMergeData(merge1);
 
+        BulkRecipient recipient2 = new BulkRecipient("bulk@example.com", "Bulk Recipient");
+        Map<String, String> merge2 = new HashMap<>();
+        merge2.put("eyeColor", "green");
+        merge2.put("pet", "cat");
+        recipient2.setMergeData(merge2);
 
-        // custom headers
-        List<CustomHeader> customHeaders = new ArrayList<>();
+        bulkMessage.setFrom(new EmailAddress("ross.brazuk@socketlabs.com", "Ross Brazuk"));
+        bulkMessage.setSubject("Bulk Message");
 
-        customHeaders.add(new CustomHeader("custom-header-1", "number 1"));
-        customHeaders.add(new CustomHeader("custom-header-2", "number 2"));
-        customHeaders.add(new CustomHeader("custom-header-3", "number 3"));
-        customHeaders.add(new CustomHeader("custom-header-4", "number 4"));
+        Map<String, String> globalMerge = new HashMap<>();
+        globalMerge.put("greeting", "hello");
+        globalMerge.put("date", "10/31/18");
+        bulkMessage.setMergeData(globalMerge);
 
-        message.setCustomHeaders(customHeaders);
+        List<BulkRecipient> recipients = new ArrayList<>();
+        recipients.add(recipient);
+        recipients.add(recipient2);
 
+        bulkMessage.setTo(recipients);
 
-        System.out.println(mapper.writeValueAsString(factory.GenerateRequest(message)));
+        System.out.println(factory.GenerateRequest(bulkMessage));
 
     }
 }
