@@ -37,5 +37,14 @@ public enum SendResult {
     RecipientValidationInvalidRecipients,
     MessageValidationEmptySubject,
     MessageValidationEmptyMessage,
-    MessageValidationInvalidCustomHeaders,
+    MessageValidationInvalidCustomHeaders;
+
+    public static SendResult fromString(String text) {
+        for (SendResult b : SendResult.values()) {
+            if (b.toString().equalsIgnoreCase(text)) {
+                return b;
+            }
+        }
+        return null;
+    }
 }
