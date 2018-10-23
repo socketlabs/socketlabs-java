@@ -26,6 +26,10 @@ public class Main {
         message.setPlainTextBody("This is an email");
         message.setFrom(new EmailAddress("ross.brazuk@socketlabs.com", "Ross Brazuk"));
 
+        List<EmailAddress> to =  new ArrayList<>();
+        to.add(new EmailAddress("example@example.com", "Mr. Example"));
+        message.setTo(to);
+
         // attachments
         List<Attachment> attachments = new ArrayList<>();
         attachments.add(new Attachment("/Users/ross.brazuk/Desktop/nic.jpg"));
@@ -44,7 +48,7 @@ public class Main {
         message.setCustomHeaders(customHeaders);
 
 
-        System.out.println(mapper.writeValueAsString(factory.GenerateRequest(message)));
+        System.out.println(factory.GenerateRequest(message));
 
     }
 }

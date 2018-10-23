@@ -1,9 +1,13 @@
 package com.socketLabs.core.serialization;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.socketLabs.models.BasicMessage;
 import com.socketLabs.models.BulkMessage;
+import com.socketLabs.models.EmailAddress;
 import com.socketLabs.models.MessageBase;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +43,13 @@ public class InjectionRequestFactory{
 
     }
 
-    public String GenerateRequest(BasicMessage basicMessage) {
+    public String GenerateRequest(BasicMessage basicMessage) throws IOException {
 
         List<Message> messages = new ArrayList<>();
 
         Message message = generateBaseMessage(basicMessage);
+
+        message.setTo(populateTo(basicMessage.getTo()));
 
         messages.add(message);
 
@@ -51,9 +57,11 @@ public class InjectionRequestFactory{
         return GetAsJson(request);
     }
 
-    private String GetAsJson(InjectionRequest request) {
-        // TODO: return InjectionRequest as JSON String
-        return null;
+    private String GetAsJson(InjectionRequest request) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        // pretty print for debugging
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        return mapper.writeValueAsString(request);
     }
 
 
@@ -75,13 +83,13 @@ public class InjectionRequestFactory{
         return message;
     }
 
-    private List<CustomHeader> populateCustomHeaders(List<com.socketLabs.models.CustomHeader> baseCustomheaders) {
-        if (baseCustomheaders == null) {
+    private List<CustomHeader> populateCustomHeaders(List<com.socketLabs.models.CustomHeader> baseCustomHeaders) {
+        if (baseCustomHeaders == null) {
             return null;
         }
         List<CustomHeader> customHeaders = new ArrayList<>();
 
-        for (com.socketLabs.models.CustomHeader baseCustomHeader: baseCustomheaders) {
+        for (com.socketLabs.models.CustomHeader baseCustomHeader: baseCustomHeaders) {
             customHeaders.add(new CustomHeader(baseCustomHeader.getName(), baseCustomHeader.getValue()));
         }
         return customHeaders;
@@ -104,6 +112,20 @@ public class InjectionRequestFactory{
         }
 
         return attachments;
+    }
+
+    private List<Address> populateTo(List<EmailAddress> baseTo) {
+        if (baseTo == null) {
+            return null;
+        }
+        List<Address> addresses = new ArrayList<>();
+
+        for (EmailAddress baseAddress: baseTo) {
+            Address address = new Address(baseAddress.getEmailAddress(), baseAddress.getFriendlyName());
+            addresses.add(address);
+        }
+
+        return addresses;
     }
 }
 
