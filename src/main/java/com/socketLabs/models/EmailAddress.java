@@ -14,10 +14,10 @@ public class EmailAddress {
         this.friendlyName = friendlyName;
     }
 
-    public String getEmail() {
+    public String getEmailAddress() {
         return this.emailAddress;
     }
-    public void setEmail(String value) {
+    public void setEmailAddress(String value) {
         this.emailAddress = value;
     }
 

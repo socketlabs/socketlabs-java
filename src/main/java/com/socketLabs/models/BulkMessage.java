@@ -1,5 +1,6 @@
 package com.socketLabs.models;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ public class BulkMessage implements MessageBase {
     private String subject;
     private String plainTextBody;
     private String htmlBody;
-    private String apiTemplate;
+    private @Nullable Integer apiTemplate;
     private String mailingId;
     private String messageId;
     private EmailAddress from;
@@ -68,11 +69,9 @@ public class BulkMessage implements MessageBase {
     }
 
     @Override
-    public String getApiTemplate() {
-        return this.apiTemplate;
-    }
+    public @Nullable Integer getApiTemplate() { return (this.apiTemplate == null) ? null : this.apiTemplate; }
     @Override
-    public void setApiTemplate(String value) {
+    public void setApiTemplate(@Nullable Integer value) {
         this.apiTemplate = value;
     }
 

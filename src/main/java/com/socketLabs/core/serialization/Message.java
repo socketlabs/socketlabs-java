@@ -1,4 +1,4 @@
-package com.socketLabs.serialization;
+package com.socketLabs.core.serialization;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

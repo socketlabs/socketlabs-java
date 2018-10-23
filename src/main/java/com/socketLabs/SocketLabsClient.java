@@ -1,22 +1,25 @@
 package com.socketLabs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.socketLabs.core.SendValidator;
 import com.socketLabs.models.BasicMessage;
 import com.socketLabs.models.BulkMessage;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 public class SocketLabsClient implements SocketLabsClientAPI {
-
-    private static final String ENDPOINT_URL = "https://inject.socketlabs.com/api/v1/email";
 
     private int serverId;
     private String apiKey;
-    private ObjectMapper mapper = new ObjectMapper();
+    private String endPointUrl = "https://inject.socketlabs.com/api/v1/email";
+
+    public String getEndPointUrl() {
+        return endPointUrl;
+    }
+    public void setEndPointUrl(String endPointUrl) {
+        this.endPointUrl = endPointUrl;
+    }
+
+    // TODO: Need Proxy - Property and Constructor
+
 
     public SocketLabsClient(int serverId, String apiKey) {
         this.serverId = serverId;
@@ -25,6 +28,17 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
     @Override
     public SendResponse send(BasicMessage message) {
+
+        SendValidator validator = new SendValidator();
+
+        SendResponse result = validator.ValidateCredentials(this.serverId, this.apiKey);
+        if (result.getResult() != SendResult.Success)
+            return result;
+
+        result = validator.ValidateMessage(message);
+        if (result.getResult() != SendResult.Success)
+            return result;
+
 
         /*
         URL url;
@@ -80,12 +94,25 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
     @Override
     public SendResponse send(BulkMessage message) {
+
+        SendValidator validator = new SendValidator();
+
+        SendResponse result = validator.ValidateCredentials(this.serverId, this.apiKey);
+        if (result.getResult() != SendResult.Success)
+            return result;
+
+        result = validator.ValidateMessage(message);
+        if (result.getResult() != SendResult.Success)
+            return result;
+
+        // Parse and send the message here
+
         return null;
     }
 
-
+/*
     public static SendResponse QuickSend(int serverId, String apiKey, String toAddress, String fromAddress, String subject, String htmlContent, String textContent)  {
-    /*
+
         SocketLabsClient client = new SocketLabsClient(serverId, apiKey);
 
         models.BasicMessage message = new models.BasicMessage();
@@ -96,7 +123,9 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         message.setPlainTextBody(textContent);
 
         return client.send(message);
-        */
+
     return null;
     }
+*/
+
 }

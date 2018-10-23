@@ -17,6 +17,16 @@ public class SendResponse {
 
     public SendResponse() {
     }
+    public SendResponse(SendResult result) {
+        this.result = result;
+        this.transactionReceipt = null;
+        this.addressResults = null;
+    }
+    public SendResponse(SendResult result, List<AddressResult> addressResults) {
+        this.result = result;
+        this.transactionReceipt = null;
+        this.addressResults = addressResults;
+    }
     public SendResponse(SendResult result, String transactionReceipt, List<AddressResult> addressResults) {
         this.result = result;
         this.transactionReceipt = transactionReceipt;

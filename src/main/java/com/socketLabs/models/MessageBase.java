@@ -1,5 +1,6 @@
 package com.socketLabs.models;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public interface MessageBase {
@@ -12,8 +13,9 @@ public interface MessageBase {
 
     String getHtmlBody();
     void setHtmlBody(String htmlBody);
-    String getApiTemplate();
-    void setApiTemplate(String value);
+
+    @Nullable Integer getApiTemplate();
+    void setApiTemplate(@Nullable Integer value);
 
     String getMailingId();
     void setMailingId(String value);

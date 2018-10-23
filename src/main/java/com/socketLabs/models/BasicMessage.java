@@ -1,5 +1,6 @@
 package com.socketLabs.models;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class BasicMessage implements MessageBase {
     private String subject;
     private String plainTextBody;
     private String htmlBody;
-    private String apiTemplate;
+    private @Nullable Integer apiTemplate;
     private String mailingId;
     private String messageId;
     private EmailAddress from;
@@ -100,9 +101,9 @@ public class BasicMessage implements MessageBase {
     public void setHtmlBody(String value) { this.htmlBody = value; }
 
     @Override
-    public String getApiTemplate() { return this.apiTemplate; }
+    public @Nullable Integer getApiTemplate() { return (this.apiTemplate == null) ? null : this.apiTemplate; }
     @Override
-    public void setApiTemplate(String value) { this.apiTemplate = value; }
+    public void setApiTemplate(@Nullable Integer value) { this.apiTemplate = value; }
 
     @Override
     public String getMailingId() { return this.mailingId; }

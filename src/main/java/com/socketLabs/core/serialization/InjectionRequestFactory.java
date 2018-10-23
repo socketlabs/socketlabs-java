@@ -1,4 +1,4 @@
-package com.socketLabs.serialization;
+package com.socketLabs.core.serialization;
 
 import com.socketLabs.models.BasicMessage;
 import com.socketLabs.models.BulkMessage;
