@@ -63,7 +63,7 @@ public class InjectionRequestFactory{
         message.setMailingId(messageBase.getMailingId());
         message.setMessageId(messageBase.getMessageId());
         message.setCharset(messageBase.getCharset());
-        message.setFrom(new Address(messageBase.getFrom().getEmail(), messageBase.getFrom().getFriendlyName()));
+        message.setFrom(new Address(messageBase.getFrom().getEmailAddress(), messageBase.getFrom().getFriendlyName()));
         message.setCustomHeaders(populateCustomHeaders(messageBase.getCustomHeaders()));
         message.setAttachments(populateAttachments(messageBase.getAttachments()));
 
