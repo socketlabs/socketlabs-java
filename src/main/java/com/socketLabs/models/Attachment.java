@@ -160,6 +160,10 @@ public class Attachment {
             default:
                 return "application/octet-stream";
         }
+    }
 
+    @Override
+    public String toString() {
+        return String.format("%s, %s", this.name, this.mimeType);
     }
 }

@@ -159,4 +159,8 @@ public class BulkMessage implements MessageBase {
         this.globalMergeData.put(field, value);
     }
 
+    @Override
+    public String toString() {
+        return String.format("Recipients: %d, Subject, %s", this.to.size(), this.subject);
+    }
 }

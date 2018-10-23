@@ -156,5 +156,8 @@ public class BasicMessage implements MessageBase {
         this.customHeaders.add(new CustomHeader(name, value ));
     }
 
-
+    @Override
+    public String toString() {
+        return String.format("Recipients: %d, Subject, %s", this.to.size(), this.subject);
+    }
 }
