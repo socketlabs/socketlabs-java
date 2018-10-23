@@ -69,7 +69,8 @@ public class Main {
         bulkMessage.setSubject("Bulk Message");
 
         Map<String, String> globalMerge = new HashMap<>();
-        globalMerge.put("global", "mergeData");
+        globalMerge.put("greeting", "hello");
+        globalMerge.put("date", "10/31/18");
         bulkMessage.setMergeData(globalMerge);
 
         List<BulkRecipient> recipients = new ArrayList<>();

@@ -40,10 +40,15 @@ public class InjectionRequestFactory{
         List<Message> messages = new ArrayList<>();
         Message message = generateBaseMessage(bulkMessage);
 
+        List<Address> to = new ArrayList<>();
+
+        to.add(new Address("%%DeliveryAddress%%", "%%RecipientName%%"));
+
+        message.setTo(to);
+
         message.setMergeData(populateMergeData(bulkMessage.getMergeData(), bulkMessage.getTo()));
 
         return mapper.writeValueAsString(message);
-
     }
 
     public String GenerateRequest(BasicMessage basicMessage) throws IOException {
@@ -134,29 +139,30 @@ public class InjectionRequestFactory{
     private MergeData populateMergeData(Map<String, String> global, List<BulkRecipient> recipients) {
 
         List<List<MergeField>> perMessageMergeFields = new ArrayList<>();
-        List<MergeField> globalMergeFields = new ArrayList<>();
 
         for(BulkRecipient recipient : recipients) {
-            List<MergeField> mergeFieldList = new ArrayList<>();
-
-            for (Map.Entry<String, String> entry : recipient.getMergeData().entrySet()) {
-                mergeFieldList.add(new MergeField(entry.getKey(), entry.getValue()));
-            }
+            List<MergeField> mergeFieldList = generateMergeFieldList(recipient.getMergeData());
 
             mergeFieldList.add(new MergeField("DeliveryAddress",recipient.getEmailAddress()));
 
             if (recipient.getFriendlyName() != null) {
-                mergeFieldList.add(new MergeField("FriendlyName", recipient.getFriendlyName()));
+                mergeFieldList.add(new MergeField("RecipientName", recipient.getFriendlyName()));
             }
 
             perMessageMergeFields.add(mergeFieldList);
         }
 
-        for (Map.Entry<String, String> entry : global.entrySet()) {
-            globalMergeFields.add(new MergeField(entry.getKey(), entry.getValue()));
+        return new MergeData(perMessageMergeFields, generateMergeFieldList(global));
+    }
+
+    private List<MergeField> generateMergeFieldList(Map<String, String> mergeData) {
+        List<MergeField> mergeFieldList = new ArrayList<>();
+
+        for (Map.Entry<String, String> entry : mergeData.entrySet()) {
+            mergeFieldList.add(new MergeField(entry.getKey(), entry.getValue()));
         }
 
-        return new MergeData(perMessageMergeFields, globalMergeFields);
+        return mergeFieldList;
     }
 }
 
