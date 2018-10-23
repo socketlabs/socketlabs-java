@@ -1,6 +1,6 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.socketLabs.SocketLabsClient;
+
 import com.socketLabs.models.Attachment;
 import com.socketLabs.models.BasicMessage;
 import com.socketLabs.models.CustomHeader;
@@ -9,7 +9,6 @@ import com.socketLabs.core.serialization.InjectionRequestFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Main {
@@ -18,7 +17,7 @@ public class Main {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-        InjectionRequestFactory factory = new InjectionRequestFactory(17067, "abcdefghijklmnop");
+        InjectionRequestFactory factory = new InjectionRequestFactory(12345, "abcdefghijklmnop");
 
         BasicMessage message = new BasicMessage();
 
@@ -27,7 +26,8 @@ public class Main {
         message.setFrom(new EmailAddress("ross.brazuk@socketlabs.com", "Ross Brazuk"));
 
         List<EmailAddress> to =  new ArrayList<>();
-        to.add(new EmailAddress("example@example.com", "Mr. Example"));
+        to.add(new EmailAddress("example@example.com"));
+        to.add(new EmailAddress("anotherexample@example.com"));
         message.setTo(to);
 
         // attachments
@@ -46,6 +46,8 @@ public class Main {
         customHeaders.add(new CustomHeader("custom-header-4", "number 4"));
 
         message.setCustomHeaders(customHeaders);
+
+        //message.setApiTemplate(5);
 
 
         System.out.println(factory.GenerateRequest(message));

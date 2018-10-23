@@ -64,9 +64,6 @@ public class InjectionRequestFactory{
         return mapper.writeValueAsString(request);
     }
 
-
-    // TODO: Helper methods
-
     private Message generateBaseMessage(MessageBase messageBase) {
         Message message = new Message();
 
@@ -80,8 +77,14 @@ public class InjectionRequestFactory{
         message.setCustomHeaders(populateCustomHeaders(messageBase.getCustomHeaders()));
         message.setAttachments(populateAttachments(messageBase.getAttachments()));
 
+        if (messageBase.getApiTemplate() != null) {
+            message.setApiTemplate(messageBase.getApiTemplate());
+        }
+
         return message;
     }
+
+    // TODO: These methods are really similar so maybe we should look at refactoring
 
     private List<CustomHeader> populateCustomHeaders(List<com.socketLabs.models.CustomHeader> baseCustomHeaders) {
         if (baseCustomHeaders == null) {

@@ -31,7 +31,7 @@ class Message {
 
     @JsonProperty("ApiTemplate")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String apiTemplate;
+    private Integer apiTemplate;
 
     @JsonProperty("MailingId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -82,8 +82,8 @@ class Message {
     public String getHtmlBody() { return htmlBody; }
     public void setHtmlBody(String value) { this.htmlBody = value; }
 
-    public String getApiTemplate() { return apiTemplate; }
-    public void setApiTemplate(String value) { this.apiTemplate = value; }
+    public Integer getApiTemplate() { return apiTemplate; }
+    public void setApiTemplate(Integer value) { this.apiTemplate = value; }
 
     public String getMailingId() { return mailingId; }
     public void setMailingId(String value) { this.mailingId = value; }
