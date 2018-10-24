@@ -10,7 +10,7 @@ import java.util.Map;
 public class BulkMessage implements MessageBase {
 
     private List<BulkRecipient> to = new ArrayList<>();
-    private Map<String, String> globalMergeData = new HashMap<String, String>();
+    private Map<String, String> globalMergeData = new HashMap<>();
     private String subject;
     private String plainTextBody;
     private String htmlBody;
@@ -114,7 +114,7 @@ public class BulkMessage implements MessageBase {
     @Override
     public void setAttachments(List<Attachment> value) { this.attachments = value; }
     /**
-     * Add an EmailAddress to the array of Attachment items
+     * Add an Attachment to the array of Attachment items
      * @param fileName
      * @throws IOException
      */

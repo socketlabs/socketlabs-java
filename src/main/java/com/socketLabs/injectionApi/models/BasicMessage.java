@@ -10,22 +10,17 @@ import java.util.List;
  * This message can have many recipients of different types, such as To, CC, and BCC.  This
  * message does not support merge fields.
  *
- * Example:
- * var basicMessage = require('./basicMessage');
- * var emailAddress = require('./emailAddress');
- * ...
+ * BasicMessage message = new BasicMessage();
  *
- * var message = new basicMessage();
+ * message.setSubject("Sending A Message");
+ * message.setHtmlBody("<html>This is the Html Body of my message.</html>");
+ * message.setPlainTextBody("This is the Plain Text Body of my message.");
  *
- * message.subject = "Sending A Message";
- * message.htmlBody = "<html>This is the Html Body of my message.</html>";
- * message.textBody = "This is the Plain Text Body of my message.";
+ * message.setFrom(new EmailAddress("from@example.com"));
+ * message.setReplyTo(new EmailAddress("replyto@example.com"));
  *
- * message.from = new emailAddress("from@example.com");
- * message.replyTo = new emailAddress("replyto@example.com");
- *
- * message.to.push(new emailAddress("recipient1@example.com"));
- * message.to.push(new emailAddress("recipient2@example.com", { friendlyName: "Recipient #2" }));
+ * message.getTo().add(new EmailAddress("recipient1@example.com"));
+ * message.getTo().add(new EmailAddress("recipient2@example.com", "Recipient #2"));
  *
  * message.addToEmailAddress("recipient3@example.com");
  * message.addToEmailAddress("recipient4@example.com", "Recipient #4");
@@ -172,7 +167,7 @@ public class BasicMessage implements MessageBase {
     @Override
     public void setAttachments(List<Attachment> value) { this.attachments = value; }
     /**
-     * Add an EmailAddress to the array of Attachment items
+     * Add an Attachment to the array of Attachment items
      * @param fileName
      * @throws IOException
      */
