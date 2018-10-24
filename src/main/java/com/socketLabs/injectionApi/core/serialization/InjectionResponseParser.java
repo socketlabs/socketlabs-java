@@ -21,13 +21,6 @@ public class InjectionResponseParser {
         ObjectMapper mapper = new ObjectMapper();
         InjectionResponseDto injectionResponse = mapper.readValue(response.getContent(), InjectionResponseDto.class);
 
-        // TODO: remove .enable(SerializationFeature.INDENT_OUTPUT) (used for debugging)
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        // TODO: remove System.out.println(..) (used for debugging)
-        System.out.println("Response body : ");
-        System.out.println(mapper.writeValueAsString(injectionResponse));
-
         SendResult resultEnum = DetermineSendResult(injectionResponse, response.getResponseCode());
         SendResponse newResponse = new SendResponse(resultEnum);
         newResponse.setTransactionReceipt(injectionResponse.getTransactionReceipt());

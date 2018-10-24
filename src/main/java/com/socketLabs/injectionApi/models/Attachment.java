@@ -16,13 +16,9 @@ import java.util.Optional;
 public class Attachment {
 
     private String name;
-
     private String mimeType;
-
     private String contentId;
-
     private byte[] content;
-
     private List<CustomHeader> customHeaders = new ArrayList<>();
 
     /**
@@ -40,7 +36,8 @@ public class Attachment {
     public Attachment(String filePath) throws IOException {
         this.content = getContentFromFilePath(filePath);
         this.name = new File(filePath).getName();
-        this.mimeType = getMimeTypeFromExtension(getFileExtension(this.name));
+        String[] splitPath = this.name.split("\\.");
+        this.mimeType = getMimeTypeFromExtension(splitPath[splitPath.length - 1]);
     }
 
     /**
@@ -128,13 +125,6 @@ public class Attachment {
 
     private byte[] getContentFromFilePath(String filepath) throws IOException {
         return Files.readAllBytes(new File(filepath).toPath());
-    }
-
-    private String getFileExtension(String filename) {
-        String fileName = new File(filename).getName();
-        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".")+1);
-        else return "";
     }
 
     private String getMimeTypeFromExtension(String extension) {
