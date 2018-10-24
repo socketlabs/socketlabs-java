@@ -5,7 +5,7 @@ import com.socketLabs.models.Attachment;
 import com.socketLabs.models.BasicMessage;
 import com.socketLabs.models.CustomHeader;
 import com.socketLabs.models.EmailAddress;
-import com.socketLabs.core.serialization.InjectionRequestFactory;
+import com.socketLabs.injectionApi.core.serialization.InjectionRequestFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;

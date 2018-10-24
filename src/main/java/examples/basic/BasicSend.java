@@ -1,15 +1,16 @@
 package examples.basic;
 
-import com.socketLabs.SendResponse;
-import com.socketLabs.SocketLabsClient;
-import com.socketLabs.models.BasicMessage;
-import com.socketLabs.models.EmailAddress;
+import com.socketLabs.injectionApi.SendResponse;
+import com.socketLabs.injectionApi.SocketLabsClient;
+import com.socketLabs.injectionApi.models.BasicMessage;
+import com.socketLabs.injectionApi.models.EmailAddress;
+import examples.Example;
 
-public class BasicSend {
-    public static void main(String[] args) throws Exception {
+public class BasicSend implements Example {
 
+    public SendResponse RunExample ()  throws Exception {
 
-        SocketLabsClient client = new SocketLabsClient(100000, "your-api-key");
+        SocketLabsClient client = new SocketLabsClient(19742, "Ng5x6HEc4f7CFk92Kpn3");
 
         BasicMessage message = new BasicMessage();
 
@@ -20,7 +21,6 @@ public class BasicSend {
         message.setFrom(new EmailAddress("from@example.com"));
         message.setReplyTo(new EmailAddress("replyto@example.com"));
 
-
         message.addToEmailAddress("recipient1@example.com");
         message.addToEmailAddress("recipient2@example.com", "Recipient #1");
         message.addToEmailAddress(new EmailAddress("recipient3@example.com"));
@@ -28,6 +28,7 @@ public class BasicSend {
 
         SendResponse response =  client.send(message);
 
-
+        return response;
     }
+
 }
