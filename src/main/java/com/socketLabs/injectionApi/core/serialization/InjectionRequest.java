@@ -13,12 +13,12 @@ class InjectionRequest {
     private String apiKey;
 
     @JsonProperty("Messages")
-    private List<Message> messages;
+    private List<MessageJson> messageJsons;
 
-    public InjectionRequest(int serverId, String apiKey, List<Message> messages) {
+    public InjectionRequest(int serverId, String apiKey, List<MessageJson> messageJsons) {
         this.serverId = serverId;
         this.apiKey = apiKey;
-        this.messages = messages;
+        this.messageJsons = messageJsons;
     }
 
     public int getServerId() {
@@ -35,11 +35,11 @@ class InjectionRequest {
         this.apiKey = apiKey;
     }
 
-    public List<Message> getMessages() {
-        return messages;
+    public List<MessageJson> getMessageJsons() {
+        return messageJsons;
     }
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
+    public void setMessageJsons(List<MessageJson> messageJsons) {
+        this.messageJsons = messageJsons;
     }
 
 

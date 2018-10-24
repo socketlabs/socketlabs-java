@@ -4,7 +4,7 @@ import com.socketLabs.injectionApi.AddressResult;
 import com.socketLabs.injectionApi.SendResponse;
 import com.google.common.base.Strings;
 import com.socketLabs.injectionApi.SendResult;
-import com.socketLabs.injectionApi.models.*;
+import com.socketLabs.injectionApi.message.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class SendValidator {
     }
 
     /**
-     * Validate a basic email message before sending to the Injection API.
+     * Validate a Basic email message before sending to the Injection API.
      * @param message An BasicMessage object to be sent.
      * @return A SendResponse with the validation results
      */
@@ -47,7 +47,7 @@ public class SendValidator {
     }
 
     /**
-     *Validate a bulk email message before sending to the Injection API.
+     *Validate a Bulk email message before sending to the Injection API.
      * @param message An BulkMessage object to be sent.
      * @return A SendResponse with the validation results
      */
@@ -61,7 +61,7 @@ public class SendValidator {
     }
 
     /**
-     * Validate the required fields of a message. Fields validated are Subject, From Address, Reply To (if set), Message Body, and Custom Headers (if set)
+     * Validate the required fields of a message. Fields validated are Subject, From AddressJson, Reply To (if set), Message Body, and Custom Headers (if set)
      * @param message The base interface, MessageBase, of the message to be sent.
      * @return The validation result as SendResult
      */
@@ -94,7 +94,7 @@ public class SendValidator {
     }
 
     /**
-     * Check if the message has a valid From Email Address
+     * Check if the message has a valid From Email AddressJson
      * @param message The base interface, MessageBase, of the message to be sent.
      * @return boolean result
      */
@@ -147,7 +147,7 @@ public class SendValidator {
 
 
     /**
-    * Validate email recipients for a basic message
+    * Validate email recipients for a Basic message
     * Checks the To, Cc, and the Bcc recipient fields (List of IEmailAddress) for the following:
     *   > At least 1 recipient is in the list.
     *   > Cumulative count of recipients in all 3 lists do not exceed the MaximumRecipientsPerMessage.
@@ -171,7 +171,7 @@ public class SendValidator {
     }
 
     /**
-     * Validate email recipients for a bulk message
+     * Validate email recipients for a Bulk message
      * Checks the To recipient field (List of IBulkRecipient) for the following:
      *   > At least 1 recipient is in the list.
      *   > Cumulative count of recipients in all 3 lists do not exceed the MaximumRecipientsPerMessage.
@@ -288,13 +288,13 @@ public class SendValidator {
 
     /**
      * Check if ICustomHeader in List are valid.
-     * @param customHeaders List<CustomHeader> to validate
+     * @param customHeaders List<CustomHeaderJson> to validate
      * @return boolean result
      */
     private boolean HasValidCustomHeaders(List<CustomHeader> customHeaders)
     {
         for (CustomHeader c : customHeaders) {
-            if (c.isValid()) return false;
+            if (!c.isValid()) return false;
         }
         return true;
     }
