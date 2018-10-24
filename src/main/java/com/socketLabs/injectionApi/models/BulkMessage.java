@@ -33,8 +33,8 @@ public class BulkMessage implements MessageBase {
     }
     /**
      * Add an EmailAddress to the array of To recipients
-     * @param emailAddress {String}
-     * @param name {String}
+     * @param emailAddress String
+     * @param name String
      */
     public void addToEmailAddress(String emailAddress, String name) {
         this.to.add(new BulkRecipient(emailAddress, name));
@@ -141,8 +141,8 @@ public class BulkMessage implements MessageBase {
     }
     /**
      * Add a CustomHeader to the message
-     * @param name {String}
-     * @param value {String}
+     * @param name String
+     * @param value String
      */
     public void addCustomHeader(String name, String value) {
         this.customHeaders.add(new CustomHeader(name, value ));
@@ -152,8 +152,8 @@ public class BulkMessage implements MessageBase {
     public void setMergeData(Map<String, String> value) { this.globalMergeData = value; }
     /**
      * Add a Global Merge Data to the message
-     * @param field {String}
-     * @param value {String}
+     * @param field String
+     * @param value String
      */
     public void addGlobalMergeData(String field, String value) {
         this.globalMergeData.put(field, value);
