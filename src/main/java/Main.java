@@ -1,8 +1,8 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import com.socketLabs.models.*;
-import com.socketLabs.core.serialization.InjectionRequestFactory;
+import com.socketLabs.injectionApi.models.*;
+import com.socketLabs.injectionApi.core.serialization.InjectionRequestFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
