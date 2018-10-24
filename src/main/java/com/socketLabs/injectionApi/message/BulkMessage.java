@@ -1,4 +1,4 @@
-package com.socketLabs.injectionApi.models;
+package com.socketLabs.injectionApi.message;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -140,7 +140,7 @@ public class BulkMessage implements MessageBase {
         this.customHeaders = value;
     }
     /**
-     * Add a CustomHeader to the message
+     * Add a CustomHeaderJson to the message
      * @param name {String}
      * @param value {String}
      */

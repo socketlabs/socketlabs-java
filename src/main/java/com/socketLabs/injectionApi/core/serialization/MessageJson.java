@@ -5,18 +5,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-class Message {
+class MessageJson {
 
     @JsonProperty("To")
-    private List<Address> to;
+    private List<AddressJson> to;
 
     @JsonProperty("CC")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Address> cc;
+    private List<AddressJson> cc;
 
     @JsonProperty("BCC")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Address> bcc;
+    private List<AddressJson> bcc;
 
     @JsonProperty("Subject")
     private String subject;
@@ -42,15 +42,15 @@ class Message {
     private String messageId;
 
     @JsonProperty("From")
-    private Address from;
+    private AddressJson from;
 
     @JsonProperty("ReplyTo")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Address replyTo;
+    private AddressJson replyTo;
 
     @JsonProperty("Attachments")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Attachment> attachments;
+    private List<AttachmentJson> attachments;
 
     @JsonProperty("Charset")
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -58,20 +58,20 @@ class Message {
 
     @JsonProperty("CustomHeaders")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<CustomHeader> customHeaders;
+    private List<CustomHeaderJson> customHeaders;
 
-    @JsonProperty("MergeData")
+    @JsonProperty("MergeDataJson")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private MergeData mergeData;
+    private MergeDataJson mergeDataJson;
 
-    public List<Address> getTo() { return to; }
-    public void setTo(List<Address> value) { this.to = value; }
+    public List<AddressJson> getTo() { return to; }
+    public void setTo(List<AddressJson> value) { this.to = value; }
 
-    public List<Address> getCc() { return cc; }
-    public void setCc(List<Address> value) { this.cc = value; }
+    public List<AddressJson> getCc() { return cc; }
+    public void setCc(List<AddressJson> value) { this.cc = value; }
 
-    public List<Address> getBcc() { return bcc; }
-    public void setBcc(List<Address> value) { this.bcc = value; }
+    public List<AddressJson> getBcc() { return bcc; }
+    public void setBcc(List<AddressJson> value) { this.bcc = value; }
 
     public String getSubject() { return subject; }
     public void setSubject(String value) { this.subject = value; }
@@ -91,21 +91,21 @@ class Message {
     public String getMessageId() { return messageId; }
     public void setMessageId(String value) { this.messageId = value; }
 
-    public Address getFrom() { return from; }
-    public void setFrom(Address value) { this.from = value; }
+    public AddressJson getFrom() { return from; }
+    public void setFrom(AddressJson value) { this.from = value; }
 
-    public Address getReplyTo() { return replyTo; }
-    public void setReplyTo(Address value) { this.replyTo = value; }
+    public AddressJson getReplyTo() { return replyTo; }
+    public void setReplyTo(AddressJson value) { this.replyTo = value; }
 
-    public List<Attachment> getAttachments() { return attachments; }
-    public void setAttachments(List<Attachment> value) { this.attachments = value; }
+    public List<AttachmentJson> getAttachments() { return attachments; }
+    public void setAttachments(List<AttachmentJson> value) { this.attachments = value; }
 
     public String getCharset() { return charset; }
     public void setCharset(String value) { this.charset = value; }
 
-    public List<CustomHeader> getCustomHeaders() { return customHeaders; }
-    public void setCustomHeaders(List<CustomHeader> value) { this.customHeaders = value; }
+    public List<CustomHeaderJson> getCustomHeaders() { return customHeaders; }
+    public void setCustomHeaders(List<CustomHeaderJson> value) { this.customHeaders = value; }
 
-    public MergeData getMergeData() { return mergeData; }
-    public void setMergeData(MergeData value) { this.mergeData = value; }
+    public MergeDataJson getMergeDataJson() { return mergeDataJson; }
+    public void setMergeDataJson(MergeDataJson value) { this.mergeDataJson = value; }
 }

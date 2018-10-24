@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-class MergeField {
+class MergeFieldJson {
 
     @JsonProperty("Field")
     private String field;
@@ -12,7 +12,7 @@ class MergeField {
     @JsonProperty("Value")
     private String value;
 
-    public MergeField(String field, String value) {
+    public MergeFieldJson(String field, String value) {
         this.field = field;
         this.value = value;
     }

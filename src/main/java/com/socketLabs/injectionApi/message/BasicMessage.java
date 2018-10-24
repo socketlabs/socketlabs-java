@@ -1,4 +1,4 @@
-package com.socketLabs.injectionApi.models;
+package com.socketLabs.injectionApi.message;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -198,12 +198,19 @@ public class BasicMessage implements MessageBase {
     @Override
     public void setCustomHeaders(List<CustomHeader> value) { this.customHeaders = value; }
     /**
-     * Add a CustomHeader to the message
+     * Add a CustomHeaderJson to the message
      * @param name {String}
      * @param value {String}
      */
     public void addCustomHeader(String name, String value) {
         this.customHeaders.add(new CustomHeader(name, value ));
+    }
+    /**
+     * Add a CustomHeaderJson to the message
+     * @param header {CustomHeaderJson}
+     */
+    public void addCustomHeader(CustomHeader header) {
+        this.customHeaders.add(header);
     }
 
     @Override

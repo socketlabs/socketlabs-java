@@ -1,14 +1,10 @@
-package com.socketLabs.injectionApi.models;
+package com.socketLabs.injectionApi.message;
 
-
-import sun.misc.IOUtils;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Represents a message attachment in the form of a byte array.
@@ -115,7 +111,7 @@ public class Attachment {
         this.customHeaders = customHeaders;
     }
     /**
-     * Add a CustomHeader to the message
+     * Add a CustomHeaderJson to the message
      * @param name {String}
      * @param value {String}
      */

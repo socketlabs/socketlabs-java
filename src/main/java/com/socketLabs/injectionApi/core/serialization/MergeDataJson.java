@@ -6,32 +6,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-class MergeData {
+class MergeDataJson {
 
     @JsonProperty("PerMessage")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<List<MergeField>> perMessage;
+    private List<List<MergeFieldJson>> perMessage;
 
     @JsonProperty("Global")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<MergeField> global;
+    private List<MergeFieldJson> global;
 
-    public MergeData(List<List<MergeField>> perMessage, List<MergeField> global) {
+    public MergeDataJson(List<List<MergeFieldJson>> perMessage, List<MergeFieldJson> global) {
         this.perMessage = perMessage;
         this.global = global;
     }
 
-    public List<List<MergeField>> getPerMessage() {
+    public List<List<MergeFieldJson>> getPerMessage() {
         return perMessage;
     }
-    public void setPerMessage(List<List<MergeField>> value) {
+    public void setPerMessage(List<List<MergeFieldJson>> value) {
         this.perMessage = value;
     }
 
-    public List<MergeField> getGlobal() {
+    public List<MergeFieldJson> getGlobal() {
         return global;
     }
-    public void setGlobal(List<MergeField> value) {
+    public void setGlobal(List<MergeFieldJson> value) {
         this.global = value;
     }
 

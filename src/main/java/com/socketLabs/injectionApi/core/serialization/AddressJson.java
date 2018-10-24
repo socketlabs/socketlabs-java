@@ -3,7 +3,7 @@ package com.socketLabs.injectionApi.core.serialization;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-class Address {
+class AddressJson {
 
     @JsonProperty("emailAddress")
     private String email;
@@ -12,7 +12,7 @@ class Address {
     @JsonProperty("friendlyName")
     private String friendlyName;
 
-    public Address(String email, String friendlyName) {
+    public AddressJson(String email, String friendlyName) {
         this.email = email;
         this.friendlyName = friendlyName;
     }

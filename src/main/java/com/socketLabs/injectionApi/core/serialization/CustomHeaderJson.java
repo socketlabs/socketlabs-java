@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-class CustomHeader {
+class CustomHeaderJson {
 
     @JsonProperty("Name")
     private String name;
@@ -12,11 +12,11 @@ class CustomHeader {
     @JsonProperty("Value")
     private String value;
 
-    public CustomHeader() {
+    public CustomHeaderJson() {
 
     }
 
-    public CustomHeader(String name, String value) {
+    public CustomHeaderJson(String name, String value) {
         this.name = name;
         this.value = value;
     }

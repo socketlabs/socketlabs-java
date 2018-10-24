@@ -1,17 +1,25 @@
-package com.socketLabs.injectionApi.models;
+package com.socketLabs.injectionApi.message;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public class EmailAddress {
+public class BulkRecipient  {
 
     private String emailAddress;
     private String friendlyName;
+    private Map<String, String> mergeData = new HashMap<String, String>();
 
-    public EmailAddress(String email) {
-        this.emailAddress = email;
+    public BulkRecipient(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
-    public EmailAddress(String email, String friendlyName) {
-        this.emailAddress = email;
-        this.friendlyName = friendlyName;
+    public BulkRecipient(String emailAddress, String name) {
+        this.emailAddress = emailAddress;
+        this.friendlyName = name;
+    }
+    public BulkRecipient(String emailAddress, String name, Map<String, String> mergeData) {
+        this.emailAddress = emailAddress;
+        this.friendlyName = name;
+        this.mergeData = mergeData;
     }
 
     public String getEmailAddress() {
@@ -26,6 +34,16 @@ public class EmailAddress {
     }
     public void setFriendlyName(String value) {
         this.friendlyName = value;
+    }
+
+    public Map<String, String> getMergeData() {
+        return this.mergeData;
+    }
+    public void setMergeData(Map<String, String> mergeData) {
+        this.mergeData = mergeData;
+    }
+    public void addMergeData(String field, String value) {
+        this.mergeData.put(field, value);
     }
 
     public boolean isValid() {
@@ -47,7 +65,7 @@ public class EmailAddress {
 
         char[] badEmailCharacters =  { ',', ' ', ';', (char)191 };
         for (char c: badEmailCharacters) {
-            if (this.emailAddress.indexOf(c) >= 0)
+            if (this.emailAddress.indexOf(c) <= -1)
                 return false;
         }
 
@@ -60,4 +78,5 @@ public class EmailAddress {
         }
         return String.format("%s <%s>", this.friendlyName, this.emailAddress);
     }
+
 }

@@ -1,8 +1,8 @@
 package com.socketLabs.injectionApi;
 
 import com.socketLabs.injectionApi.core.HttpCallback;
-import com.socketLabs.injectionApi.models.BasicMessage;
-import com.socketLabs.injectionApi.models.BulkMessage;
+import com.socketLabs.injectionApi.message.BasicMessage;
+import com.socketLabs.injectionApi.message.BulkMessage;
 
 public interface SocketLabsClientAPI {
 

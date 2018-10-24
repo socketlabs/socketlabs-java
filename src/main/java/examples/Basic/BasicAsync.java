@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socketLabs.injectionApi.SendResponse;
 import com.socketLabs.injectionApi.SocketLabsClient;
 import com.socketLabs.injectionApi.core.HttpCallback;
-import com.socketLabs.injectionApi.models.BasicMessage;
-import com.socketLabs.injectionApi.models.EmailAddress;
+import com.socketLabs.injectionApi.message.BasicMessage;
+import com.socketLabs.injectionApi.message.EmailAddress;
 import examples.Example;
 
 import java.io.IOException;

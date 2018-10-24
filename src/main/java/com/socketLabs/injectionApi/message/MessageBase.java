@@ -1,4 +1,4 @@
-package com.socketLabs.injectionApi.models;
+package com.socketLabs.injectionApi.message;
 
 import javax.annotation.Nullable;
 import java.util.List;

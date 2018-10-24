@@ -3,7 +3,7 @@ package com.socketLabs.injectionApi;
 import com.socketLabs.injectionApi.core.*;
 import com.socketLabs.injectionApi.core.serialization.InjectionRequestFactory;
 import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
-import com.socketLabs.injectionApi.models.*;
+import com.socketLabs.injectionApi.message.*;
 
 
 public class SocketLabsClient implements SocketLabsClientAPI {
@@ -142,7 +142,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         SocketLabsClient client = new SocketLabsClient(serverId, apiKey);
 
-        models.BasicMessage message = new models.BasicMessage();
+        message.BasicMessage message = new message.BasicMessage();
         message.addToAddress(new EmailAddress(toAddress));
         message.setFrom(new EmailAddress(fromAddress));
         message.setSubject(subject);

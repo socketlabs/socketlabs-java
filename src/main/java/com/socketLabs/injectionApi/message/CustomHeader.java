@@ -1,4 +1,4 @@
-package com.socketLabs.injectionApi.models;
+package com.socketLabs.injectionApi.message;
 
 
 public class CustomHeader {

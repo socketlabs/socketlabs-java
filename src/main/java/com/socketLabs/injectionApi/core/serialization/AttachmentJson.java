@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-class Attachment {
+class AttachmentJson {
 
     @JsonProperty("Name")
     private String name;
@@ -24,18 +24,18 @@ class Attachment {
 
     @JsonProperty("CustomHeaders")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<CustomHeader> customHeaders;
+    private List<CustomHeaderJson> customHeaderJsons;
 
 /*
-    public Attachment() {
+    public AttachmentJson() {
     }
 
-    public Attachment(String name, String mimeType, String contentId, byte[] content, List<CustomHeader> customHeaders) {
+    public AttachmentJson(String name, String mimeType, String contentId, byte[] content, List<CustomHeaderJson> customHeaderJsons) {
         this.name = name;
         this.mimeType = mimeType;
         this.contentId = contentId;
         this.content = content;
-        this.customHeaders = customHeaders;
+        this.customHeaderJsons = customHeaderJsons;
     }
 */
 
@@ -67,11 +67,11 @@ class Attachment {
         this.content = value;
     }
 
-    public List<CustomHeader> getCustomHeaders() {
-        return customHeaders;
+    public List<CustomHeaderJson> getCustomHeaderJsons() {
+        return customHeaderJsons;
     }
-    public void setCustomHeaders(List<CustomHeader> value) {
-        this.customHeaders = value;
+    public void setCustomHeaderJsons(List<CustomHeaderJson> value) {
+        this.customHeaderJsons = value;
     }
 
 }
