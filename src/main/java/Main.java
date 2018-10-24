@@ -79,6 +79,20 @@ public class Main {
 
         bulkMessage.setTo(recipients);
 
+        List<CustomHeader> customHeaders = new ArrayList<>();
+
+        customHeaders.add(new CustomHeader("custom-header-1", "number 1"));
+        customHeaders.add(new CustomHeader("custom-header-2", "number 2"));
+        customHeaders.add(new CustomHeader("custom-header-3", "number 3"));
+        customHeaders.add(new CustomHeader("custom-header-4", "number 4"));
+
+        bulkMessage.setCustomHeaders(customHeaders);
+
+        List<Attachment> attachments = new ArrayList<>();
+        attachments.add(new Attachment("/Users/ross.brazuk/Desktop/nic.jpg"));
+        attachments.add(new Attachment("/Users/ross.brazuk/Desktop/text.txt"));
+        bulkMessage.setAttachments(attachments);
+
         System.out.println(factory.GenerateRequest(bulkMessage));
 
     }

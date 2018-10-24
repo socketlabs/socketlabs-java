@@ -1,9 +1,6 @@
 package com.socketLabs.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class BulkRecipient  {
