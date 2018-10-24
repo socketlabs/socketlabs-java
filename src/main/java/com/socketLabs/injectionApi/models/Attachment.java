@@ -1,10 +1,14 @@
 package com.socketLabs.injectionApi.models;
 
 
-import java.io.File;
-import java.io.IOException;
+import sun.misc.IOUtils;
+
+import java.io.*;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Represents a message attachment in the form of a byte array.
@@ -19,7 +23,7 @@ public class Attachment {
 
     private byte[] content;
 
-    private List<CustomHeader> customHeaders;
+    private List<CustomHeader> customHeaders = new ArrayList<>();
 
     /**
      * Initializes a new instance of the Attachment class
@@ -35,8 +39,8 @@ public class Attachment {
      */
     public Attachment(String filePath) throws IOException {
         this.content = getContentFromFilePath(filePath);
-        String[] splitPath = filePath.split("\\.");
-        this.mimeType = getMimeTypeFromExtension(splitPath[splitPath.length - 1]);
+        this.name = new File(filePath).getName();
+        this.mimeType = getMimeTypeFromExtension(getFileExtension(this.name));
     }
 
     /**
@@ -47,9 +51,9 @@ public class Attachment {
      * @throws IOException
      */
     public Attachment(String name, String mimeType, String filePath) throws IOException {
+        this.content = getContentFromFilePath(filePath);
         this.name = name;
         this.mimeType = mimeType;
-        this.content = getContentFromFilePath(filePath);
     }
 
     /**
@@ -62,6 +66,19 @@ public class Attachment {
         this.name = name;
         this.mimeType = mimeType;
         this.content = content;
+    }
+
+    /**
+     * Creates a new instance of the Attachment class.
+     * @param name The name for your attachment.
+     * @param mimeType The MIME type for your attachment.
+     * @param stream A file stream containing the attachment content.
+     * @throws IOException
+     */
+    public Attachment(String name, String mimeType, InputStream stream) throws IOException {
+        this.name = name;
+        this.mimeType = mimeType;
+        this.content = getBase64String(stream);
     }
 
     //TODO - Constructor with name, mimeType, and Stream
@@ -100,9 +117,24 @@ public class Attachment {
     public void setCustomHeaders(List<CustomHeader> customHeaders) {
         this.customHeaders = customHeaders;
     }
+    /**
+     * Add a CustomHeader to the message
+     * @param name {String}
+     * @param value {String}
+     */
+    public void addCustomHeader(String name, String value) {
+        this.customHeaders.add(new CustomHeader(name, value ));
+    }
 
     private byte[] getContentFromFilePath(String filepath) throws IOException {
         return Files.readAllBytes(new File(filepath).toPath());
+    }
+
+    private String getFileExtension(String filename) {
+        String fileName = new File(filename).getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".")+1);
+        else return "";
     }
 
     private String getMimeTypeFromExtension(String extension) {
@@ -137,15 +169,15 @@ public class Attachment {
             case "ppt":
                 return "application/vnd.ms-powerpoint";
             case "pptx":
-                return "";
+                return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
             case "xls":
-                return "";
+                return "application/vnd.ms-excel";
             case "xlsx":
-                return "";
+                return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             case "xml":
                 return "application/xml";
             case "zip":
-                return "";
+                return "application/x-zip-compressed";
             case "wav":
                 return "audio/wav";
             case "eml":
@@ -159,6 +191,26 @@ public class Attachment {
             default:
                 return "application/octet-stream";
         }
+    }
+
+    /**
+     * Get a Base64 String from the InputStream
+     * @param stream The input stream for the attachment
+     * @return Base64 String
+     * @throws IOException in case of a network error.
+     */
+    private byte[] getBase64String(InputStream stream) throws IOException {
+
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int nRead;
+        byte[] data = new byte[1024];
+        while ((nRead = stream.read(data, 0, data.length)) != -1) {
+            buffer.write(data, 0, nRead);
+        }
+
+        buffer.flush();
+        return buffer.toByteArray();
+
     }
 
     @Override

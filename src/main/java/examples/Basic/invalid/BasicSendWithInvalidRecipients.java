@@ -1,6 +1,6 @@
-package examples.basic.invalid;
+package examples.Basic.invalid;
 
-import com.socketLabs.SendResponse;
+import com.socketLabs.injectionApi.SendResponse;
 import examples.Example;
 
 public class BasicSendWithInvalidRecipients implements Example {

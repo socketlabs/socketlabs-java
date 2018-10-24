@@ -1,6 +1,6 @@
-package examples.basic;
+package examples.Basic;
 
-import com.socketLabs.SendResponse;
+import com.socketLabs.injectionApi.SendResponse;
 import examples.Example;
 
 public class BasicSendWithProxy implements Example {

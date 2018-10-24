@@ -1,21 +1,26 @@
 package com.socketLabs.injectionApi.core;
 
+import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class HttpRequest {
 
     private HttpRequestMethod method;
     private String endPointUrl;
     private String body;
-    private final Map<String, String> headers = new HashMap<>();
+    private Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(HttpRequestMethod method, String endPointUrl) {
         this.method = method;
         this.endPointUrl = endPointUrl;
+
     }
 
     public void setBody(String value) {
@@ -30,7 +35,7 @@ public class HttpRequest {
      * @return A SendResponse from the Injection Api response
      * @throws Exception in case of a network error.
      */
-    public HttpResponse SendRequest() throws Exception {
+    public HttpResponse SendRequest()  throws IOException  {
 
         HttpsURLConnection connection = (HttpsURLConnection) new URL(this.endPointUrl).openConnection();
 
@@ -91,6 +96,43 @@ public class HttpRequest {
         in.close();
 
         return response.toString();
+    }
+
+    /**
+     * Attempt an API call. This method executes the API call asynchronously
+     * on an internal thread pool. If the call is rate limited, the thread
+     * will retry up to the maximum configured time. The supplied callback
+     * will be called in the event of an error, or a successful response.
+     * @param callback the callback.
+     */
+    public void SendAsyncRequest(final HttpCallback callback) {
+
+        new Thread(() -> {
+
+            HttpResponse response = new HttpResponse();
+
+            try {
+                response = SendRequest();
+            } catch (IOException ex) {
+                // Stop retrying if there is a network error.
+                callback.onError(ex);
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            InjectionResponseParser parser = new InjectionResponseParser();
+            try {
+                callback.onResponse(parser.Parse(response));
+            } catch (IOException ex) {
+                // Stop retrying if there is a network error.
+                callback.onError(ex);
+                return;
+            }
+            return;
+
+        }).start();
+
     }
 
 }

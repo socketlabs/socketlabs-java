@@ -32,4 +32,6 @@ public class HttpResponse {
         this.setContent(content);
     }
 
+    public HttpResponse() {
+    }
 }

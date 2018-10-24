@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.socketLabs.injectionApi.SendResponse;
 import com.socketLabs.injectionApi.SendResult;
+import com.socketLabs.injectionApi.core.HttpResponse;
 
 import java.io.IOException;
 

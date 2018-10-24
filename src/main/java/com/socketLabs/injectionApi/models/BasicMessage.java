@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A basic email message similar to one created in a personal email client such as Outlook.
+ * A Basic email message similar to one created in a personal email client such as Outlook.
  * This message can have many recipients of different types, such as To, CC, and BCC.  This
  * message does not support merge fields.
  *
@@ -76,7 +76,7 @@ public class BasicMessage implements MessageBase {
     public void addToEmailAddress(EmailAddress emailAddress) {
         this.to.add(emailAddress);
     }
-    
+
     public List<EmailAddress> getCc() { return this.cc; }
     public void setCc(List<EmailAddress> value) { this.cc = value; }
     /**
@@ -172,12 +172,20 @@ public class BasicMessage implements MessageBase {
     @Override
     public void setAttachments(List<Attachment> value) { this.attachments = value; }
     /**
-     * Add an EmailAddress to the array of Attachment items
-     * @param fileName
+     * Add an attachment to the array of Attachment items using the filePath
+     * @param filePath The path to your attachment on your local system.
      * @throws IOException
      */
-    public void addAttachments(String fileName) throws IOException {
-        this.attachments.add(new Attachment(fileName));
+    public void addAttachments(String filePath) throws IOException {
+        this.attachments.add(new Attachment(filePath));
+    }
+    /**
+     * Add an Attachment to the array of Attachment items
+     * @param attachment
+     * @throws IOException
+     */
+    public void addAttachments(Attachment attachment) throws IOException {
+        this.attachments.add(attachment);
     }
 
     @Override

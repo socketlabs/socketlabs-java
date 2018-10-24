@@ -1,4 +1,4 @@
-package examples.basic;
+package examples.Basic;
 
 public class BasicSendFromHtmlFile {
 }

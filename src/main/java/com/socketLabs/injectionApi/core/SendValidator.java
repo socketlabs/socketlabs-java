@@ -32,7 +32,7 @@ public class SendValidator {
     }
 
     /**
-     * Validate a basic email message before sending to the Injection API.
+     * Validate a Basic email message before sending to the Injection API.
      * @param message An BasicMessage object to be sent.
      * @return A SendResponse with the validation results
      */
@@ -47,7 +47,7 @@ public class SendValidator {
     }
 
     /**
-     *Validate a bulk email message before sending to the Injection API.
+     *Validate a Bulk email message before sending to the Injection API.
      * @param message An BulkMessage object to be sent.
      * @return A SendResponse with the validation results
      */
@@ -147,7 +147,7 @@ public class SendValidator {
 
 
     /**
-    * Validate email recipients for a basic message
+    * Validate email recipients for a Basic message
     * Checks the To, Cc, and the Bcc recipient fields (List of IEmailAddress) for the following:
     *   > At least 1 recipient is in the list.
     *   > Cumulative count of recipients in all 3 lists do not exceed the MaximumRecipientsPerMessage.
@@ -171,7 +171,7 @@ public class SendValidator {
     }
 
     /**
-     * Validate email recipients for a bulk message
+     * Validate email recipients for a Bulk message
      * Checks the To recipient field (List of IBulkRecipient) for the following:
      *   > At least 1 recipient is in the list.
      *   > Cumulative count of recipients in all 3 lists do not exceed the MaximumRecipientsPerMessage.
