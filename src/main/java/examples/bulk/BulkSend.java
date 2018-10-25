@@ -1,17 +1,17 @@
-package examples.basic;
+package examples.bulk;
 
 import com.socketLabs.injectionApi.SendResponse;
 import com.socketLabs.injectionApi.SocketLabsClient;
-import com.socketLabs.injectionApi.message.BasicMessage;
+import com.socketLabs.injectionApi.message.BulkMessage;
+import com.socketLabs.injectionApi.message.BulkRecipient;
 import com.socketLabs.injectionApi.message.EmailAddress;
 import examples.Example;
 
-public class BasicSend implements Example {
+public class BulkSend implements Example {
+    @Override
+    public SendResponse RunExample() throws Exception {
 
-    public SendResponse RunExample ()  throws Exception {
-
-
-        BasicMessage message = new BasicMessage();
+        BulkMessage message = new BulkMessage();
 
         message.setSubject("Sending A Test Message");
         message.setHtmlBody("<html>This is the Html Body of my message.</html>");
@@ -20,15 +20,14 @@ public class BasicSend implements Example {
         message.setFrom(new EmailAddress("from@example.com"));
         message.setReplyTo(new EmailAddress("replyto@example.com"));
 
-        message.addToEmailAddress("recipient1@example.com");
-        message.addToEmailAddress("recipient2@example.com", "Recipient #1");
-        message.addToEmailAddress(new EmailAddress("recipient3@example.com"));
-        message.addToEmailAddress(new EmailAddress("recipient4@example.com", "Recipient #4"));
+        message.getTo().add(new BulkRecipient("recipient1@example.com"));
+        message.getTo().add(new BulkRecipient("recipient2@example.com", "Recipient #2"));
+        message.getTo().add(new BulkRecipient("recipient3@example.com"));
+        message.getTo().add(new BulkRecipient("recipient4@example.com", "Recipient #4"));
 
         SocketLabsClient client = new SocketLabsClient(19742, "Ng5x6HEc4f7CFk92Kpn3");
         SendResponse response =  client.send(message);
 
         return response;
     }
-
 }
