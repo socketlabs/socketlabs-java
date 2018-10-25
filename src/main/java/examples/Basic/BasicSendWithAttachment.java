@@ -2,9 +2,9 @@ package examples.Basic;
 
 import com.socketLabs.injectionApi.SendResponse;
 import com.socketLabs.injectionApi.SocketLabsClient;
-import com.socketLabs.injectionApi.models.Attachment;
-import com.socketLabs.injectionApi.models.BasicMessage;
-import com.socketLabs.injectionApi.models.EmailAddress;
+import com.socketLabs.injectionApi.message.Attachment;
+import com.socketLabs.injectionApi.message.BasicMessage;
+import com.socketLabs.injectionApi.message.EmailAddress;
 import examples.Example;
 
 import java.io.File;
