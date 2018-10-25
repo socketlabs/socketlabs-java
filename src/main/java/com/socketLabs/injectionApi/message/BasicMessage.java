@@ -40,7 +40,7 @@ public class BasicMessage implements MessageBase {
     private EmailAddress from;
     private EmailAddress replyTo;
     private List<Attachment> attachments = new ArrayList<>();
-    private String charset;
+    private String charSet;
     private List<CustomHeader> customHeaders = new ArrayList<>();
 
 
@@ -285,14 +285,14 @@ public class BasicMessage implements MessageBase {
      * @return String
      */
     @Override
-    public String getCharset() { return this.charset; }
+    public String getCharset() { return this.charSet; }
 
     /**
      * Sets the optional character set for your message.
      * @param value String
      */
     @Override
-    public void setCharset(String value) { this.charset = value; }
+    public void setCharSet(String value) { this.charSet = value; }
 
     /**
      * Gets the list of custom message headers added to the message.

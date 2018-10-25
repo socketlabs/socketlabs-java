@@ -6,9 +6,7 @@ import com.socketLabs.injectionApi.SendResponse;
 import examples.basic.*;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.InputStreamReader;
-import java.lang.reflect.Constructor;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -92,7 +90,7 @@ public class Main {
             case 1: return "examples.basic.BasicSend";
             case 2: return "examples.basic.BasicSendFromHtmlFile";
             case 3: return "examples.basic.BasicSendWithApiTemplate";
-            case 4: return "examples.basic.BasicSendWithAsciiCharset";
+            case 4: return "examples.basic.BasicSendWithCharset";
             case 5: return "examples.basic.BasicSendWithAttachment";
             case 6: return "examples.basic.BasicSendWithCustomHeaders";
             case 7: return "examples.basic.BasicSendWithEmbeddedImage";
@@ -104,7 +102,7 @@ public class Main {
             case 13: return "examples.basic.Invalid.BasicSendWithInvalidRecipients";
             case 14: return "examples.bulk.BulkSend";
             case 15: return "examples.bulk.BulkSendWithMergeData";
-            case 16: return "examples.bulk.BulkSendWithAsciiCharsetMergeData";
+            case 16: return "examples.bulk.BulkSendWithCharsetMergeData";
             case 17: return "examples.bulk.BulkSendFromDataSourceWithMerge";
             case 18: return "examples.bulk.BulkSendComplexExample";
             default:

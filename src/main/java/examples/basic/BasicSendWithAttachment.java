@@ -6,6 +6,7 @@ import com.socketLabs.injectionApi.message.Attachment;
 import com.socketLabs.injectionApi.message.BasicMessage;
 import com.socketLabs.injectionApi.message.EmailAddress;
 import examples.Example;
+import examples.ExampleConfig;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,13 +16,10 @@ public class BasicSendWithAttachment implements Example {
 
     public SendResponse RunExample ()  throws Exception {
 
-
-        SocketLabsClient client = new SocketLabsClient(19742, "Ng5x6HEc4f7CFk92Kpn3");
-
         BasicMessage message = new BasicMessage();
 
         message.setSubject("Sending A Test Message");
-        message.setHtmlBody("<html>This is the Html Body of my message.</html>");
+        message.setHtmlBody("<html>This is the html Body of my message.</html>");
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));
@@ -33,7 +31,7 @@ public class BasicSendWithAttachment implements Example {
         message.addToEmailAddress(new EmailAddress("recipient4@example.com", "Recipient #4"));
 
         // using file stream
-        File initialFile = new File("src/main/java/examples/Img/bus.png");
+        File initialFile = new File("src/main/java/examples/img/bus.png");
         InputStream stream = new FileInputStream(initialFile);
 
         Attachment attachment = new Attachment("bus.png", "image/png", stream);
@@ -45,11 +43,14 @@ public class BasicSendWithAttachment implements Example {
         message.addAttachments(attachment);
 
         // using file path
-        Attachment attachment2 = new Attachment("src/main/java/examples/Html/SimpleEmail.html");
+        Attachment attachment2 = new Attachment("src/main/java/examples/html/SimpleEmail.html");
 
         message.addAttachments(attachment2);
 
+        SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
         SendResponse response =  client.send(message);
+
         return response;
+
     }
 }

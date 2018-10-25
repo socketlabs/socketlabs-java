@@ -1,4 +1,4 @@
-package examples.Datasource;
+package examples.datasource;
 
 import java.util.ArrayList;
 import java.util.List;

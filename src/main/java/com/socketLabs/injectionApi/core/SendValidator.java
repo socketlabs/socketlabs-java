@@ -141,6 +141,7 @@ public class SendValidator {
      */
     private boolean HasValidReplyTo(MessageBase message)
     {
+        if (message.getReplyTo() == null) return true;
         if (Strings.isNullOrEmpty(message.getReplyTo().getEmailAddress()) && Strings.isNullOrEmpty(message.getReplyTo().getFriendlyName())) return true;
         return message.getReplyTo().isValid();
     }

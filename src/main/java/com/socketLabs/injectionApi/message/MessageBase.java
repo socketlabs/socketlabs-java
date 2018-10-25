@@ -32,8 +32,8 @@ public interface MessageBase {
     List<Attachment> getAttachments();
     void setAttachments(List<Attachment> value);
 
-    String getCharset();
-    void setCharset(String value);
+    String getCharSet();
+    void setCharSet(String value);
 
     List<CustomHeader> getCustomHeaders();
     void setCustomHeaders(List<CustomHeader> value);

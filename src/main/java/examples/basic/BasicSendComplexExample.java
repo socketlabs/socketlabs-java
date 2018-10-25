@@ -1,4 +1,4 @@
-package examples.Basic;
+package examples.basic;
 
 import com.socketLabs.injectionApi.SendResponse;
 import com.socketLabs.injectionApi.SocketLabsClient;
@@ -7,6 +7,7 @@ import com.socketLabs.injectionApi.message.BasicMessage;
 import com.socketLabs.injectionApi.message.CustomHeader;
 import com.socketLabs.injectionApi.message.EmailAddress;
 import examples.Example;
+import examples.ExampleConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,10 @@ public class BasicSendComplexExample implements Example {
         message.setMessageId("ComplexExample");
         message.setMailingId("BasicSend");
 
-        message.setCharset("ASCII");
-        message.setSubject("Sending A Complex Test Message (Basic Send)");
+        message.setCharSet("ASCII");
+        message.setSubject("Sending A Complex Test Message (basic Send)");
 
-        message.setHtmlBody("<html><body><h1>Sending A Complex Test Message</h1><p>This is the Html Body of my message.</p><h2>Unicode Characters:</h2><p>✔ - Check</p><h2>Embedded Image:</h2><p><img src=\"cid:bus\" /></p></body></html>");
+        message.setHtmlBody("<html><body><h1>Sending A Complex Test Message</h1><p>This is the html Body of my message.</p><h2>Unicode Characters:</h2><p>✔ - Check</p><h2>Embedded Image:</h2><p><img src=\"cid:bus\" /></p></body></html>");
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));
@@ -37,11 +38,11 @@ public class BasicSendComplexExample implements Example {
         // Add Email Addresses using an Array
         List<EmailAddress> to_recipients = new ArrayList<>();
         to_recipients.add(new EmailAddress("david.schrenker@socketlabs.com"));
-        to_recipients.add(new EmailAddress("developers@socketlabs.com", "Recipient #2"));
+        to_recipients.add(new EmailAddress("recipient2@example.com", "Recipient #2"));
         message.setTo(to_recipients);
 
         // Add Email Addresses using new EmailAddress
-        message.addToEmailAddress(new EmailAddress("sl@socketlabs.com",  "Recipient #3"));
+        message.addToEmailAddress(new EmailAddress("recipient3@example.com",  "Recipient #3"));
 
         // Add Email Addresses using the addToEmailAddress function
         message.addToEmailAddress("recipient4@example.com");
@@ -81,16 +82,16 @@ public class BasicSendComplexExample implements Example {
         // =========================
         // Add Attachment directly to the Array
         List<Attachment>  attachments = new ArrayList<>();
-        attachments.add(new Attachment("bus.png", "image/png", "src/main/java/examples/Img/bus.png"));
+        attachments.add(new Attachment("bus.png", "image/png", "src/main/java/examples/img/bus.png"));
         message.setAttachments(attachments);
 
         // Add Attachment using the addAttachments function
-        Attachment attachment2 = new Attachment("bus2", "image/png", "src/main/java/examples/Img/bus.png");
+        Attachment attachment2 = new Attachment("bus2", "image/png", "src/main/java/examples/img/bus.png");
         attachment2.setContentId("bus");
         message.addAttachments(attachment2);
 
         // Add Attachment a filePath {string} to the array
-        message.addAttachments(new Attachment("src/main/java/examples/Html/SimpleEmail.html"));
+        message.addAttachments(new Attachment("src/main/java/examples/html/SimpleEmail.html"));
 
 
         // Adding Custom Headers
@@ -107,8 +108,9 @@ public class BasicSendComplexExample implements Example {
         // Add Custom Headers using the addCustomHeaders function
         message.addCustomHeader("testMessageHeader", "I am a message header");
 
-        SocketLabsClient client = new SocketLabsClient(19742, "Ng5x6HEc4f7CFk92Kpn3");
+        SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
         SendResponse response =  client.send(message);
+
         return response;
 
 
