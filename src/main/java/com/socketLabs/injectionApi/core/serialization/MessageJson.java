@@ -11,11 +11,11 @@ class MessageJson {
     private List<AddressJson> to;
 
     @JsonProperty("CC")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<AddressJson> cc;
 
     @JsonProperty("BCC")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<AddressJson> bcc;
 
     @JsonProperty("Subject")
@@ -49,7 +49,7 @@ class MessageJson {
     private AddressJson replyTo;
 
     @JsonProperty("Attachments")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<AttachmentJson> attachments;
 
     @JsonProperty("CharSet")
@@ -57,11 +57,11 @@ class MessageJson {
     private String charSet;
 
     @JsonProperty("CustomHeaders")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<CustomHeaderJson> customHeaders;
 
     @JsonProperty("MergeDataJson")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private MergeDataJson mergeDataJson;
 
     public List<AddressJson> getTo() { return to; }

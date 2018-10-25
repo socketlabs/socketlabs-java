@@ -18,34 +18,19 @@ public class BasicSendWithAttachment implements Example {
 
         BasicMessage message = new BasicMessage();
 
-        message.setSubject("Sending A Test Message");
-        message.setHtmlBody("<html>This is the html Body of my message.</html>");
+        message.setSubject("Sending An Email With An Attachment");
+        message.setHtmlBody("<html><body><h1>Sending An Email With An Attachment</h1><p>This is the Html Body of my message.</p></body></html>");
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));
-        message.setReplyTo(new EmailAddress("replyto@example.com"));
-
         message.addToEmailAddress("recipient1@example.com");
-        message.addToEmailAddress("recipient2@example.com", "Recipient #1");
-        message.addToEmailAddress(new EmailAddress("recipient3@example.com"));
-        message.addToEmailAddress(new EmailAddress("recipient4@example.com", "Recipient #4"));
 
-        // using file stream
-        File initialFile = new File("src/main/java/examples/img/bus.png");
-        InputStream stream = new FileInputStream(initialFile);
-
-        Attachment attachment = new Attachment("bus.png", "image/png", stream);
-
-        // add custom headers to attachment
-        attachment.addCustomHeader("Color", "Orange");
-        attachment.addCustomHeader("Place", "Beach");
-
+        Attachment attachment = new Attachment(
+                "bus.png",
+                "image/png",
+                "src/main/java/examples/img/bus.png"
+        );
         message.addAttachments(attachment);
-
-        // using file path
-        Attachment attachment2 = new Attachment("src/main/java/examples/html/SimpleEmail.html");
-
-        message.addAttachments(attachment2);
 
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
         SendResponse response =  client.send(message);

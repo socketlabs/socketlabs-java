@@ -9,6 +9,9 @@ import com.socketLabs.injectionApi.message.EmailAddress;
 import examples.Example;
 import examples.ExampleConfig;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +27,10 @@ public class BasicSendComplexExample implements Example {
         message.setMessageId("ComplexExample");
         message.setMailingId("BasicSend");
 
-        message.setCharSet("ASCII");
+        message.setCharSet("UTF16");
         message.setSubject("Sending A Complex Test Message (basic Send)");
 
-        message.setHtmlBody("<html><body><h1>Sending A Complex Test Message</h1><p>This is the html Body of my message.</p><h2>Unicode Characters:</h2><p>✔ - Check</p><h2>Embedded Image:</h2><p><img src=\"cid:bus\" /></p></body></html>");
+        message.setHtmlBody("<html><body><h1>Sending A Complex Test Message</h1><p>This is the html Body of my message.</p><h2>UTF16 Characters:</h2><p>例 (example)</p><h2>Embedded Image:</h2><p><img src=\"cid:bus\" /></p></body></html>");
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));
@@ -36,10 +39,10 @@ public class BasicSendComplexExample implements Example {
         // Adding To Recipients
         // =========================
         // Add Email Addresses using an Array
-        List<EmailAddress> to_recipients = new ArrayList<>();
-        to_recipients.add(new EmailAddress("david.schrenker@socketlabs.com"));
-        to_recipients.add(new EmailAddress("recipient2@example.com", "Recipient #2"));
-        message.setTo(to_recipients);
+        List<EmailAddress> toRecipients = new ArrayList<>();
+        toRecipients.add(new EmailAddress("david.schrenker@socketlabs.com"));
+        toRecipients.add(new EmailAddress("recipient2@example.com", "Recipient #2"));
+        message.setTo(toRecipients);
 
         // Add Email Addresses using new EmailAddress
         message.addToEmailAddress(new EmailAddress("recipient3@example.com",  "Recipient #3"));
@@ -51,32 +54,32 @@ public class BasicSendComplexExample implements Example {
         // Adding CC Recipients
         // =========================
         // Add Email Addresses using an Array
-        List<EmailAddress>  cc_recipients = new ArrayList<>();
-        cc_recipients.add(new EmailAddress("cc_recipients1@example.com"));
-        cc_recipients.add(new EmailAddress("cc_recipients2@example.com", "Recipient #2"));
-        message.setCc(cc_recipients);
+        List<EmailAddress>  ccRecipients = new ArrayList<>();
+        ccRecipients.add(new EmailAddress("ccRecipients1@example.com"));
+        ccRecipients.add(new EmailAddress("ccRecipients2@example.com", "Recipient #2"));
+        message.setCc(ccRecipients);
 
         // Add Email Addresses using new EmailAddress
-        message.addCcEmailAddress(new EmailAddress("cc_recipients3@example.com",  "Recipient #3" ));
+        message.addCcEmailAddress(new EmailAddress("ccRecipients3@example.com",  "Recipient #3" ));
 
         // Add Email Addresses using the addCcEmailAddress function
-        message.addCcEmailAddress("cc_recipients4@example.com");
-        message.addCcEmailAddress("cc_recipients5@example.com", "Recipient #5");
+        message.addCcEmailAddress("ccRecipients4@example.com");
+        message.addCcEmailAddress("ccRecipients5@example.com", "Recipient #5");
 
          // Adding Bcc Recipients
         // =========================
         // Add Email Addresses using an Array
-        List<EmailAddress>  bcc_recipients = new ArrayList<>();
-        bcc_recipients.add(new EmailAddress("bcc_recipients1@example.com"));
-        bcc_recipients.add(new EmailAddress("bcc_recipients2@example.com", "Recipient #2"));
-        message.setBcc(bcc_recipients);
+        List<EmailAddress>  bccRecipients = new ArrayList<>();
+        bccRecipients.add(new EmailAddress("bccRecipients1@example.com"));
+        bccRecipients.add(new EmailAddress("bccRecipients2@example.com", "Recipient #2"));
+        message.setBcc(bccRecipients);
 
         // Add Email Addresses using new EmailAddress
-        message.addBccEmailAddress(new EmailAddress( "bcc_recipients3@example.com",  "Recipient #3" ));
+        message.addBccEmailAddress(new EmailAddress( "bccRecipients3@example.com",  "Recipient #3" ));
 
         // Add Email Addresses using the addBccEmailAddress function
-        message.addBccEmailAddress("bcc_recipients4@example.com");
-        message.addBccEmailAddress("bcc_recipients5@example.com", "Recipient #5");
+        message.addBccEmailAddress("bccRecipients4@example.com");
+        message.addBccEmailAddress("bccRecipients5@example.com", "Recipient #5");
 
         // Adding Attachments
         // =========================
@@ -93,6 +96,16 @@ public class BasicSendComplexExample implements Example {
         // Add Attachment a filePath {string} to the array
         message.addAttachments(new Attachment("src/main/java/examples/html/SimpleEmail.html"));
 
+        // using file stream
+        File initialFile = new File("src/main/java/examples/img/bus.png");
+        InputStream stream = new FileInputStream(initialFile);
+        Attachment attachment4 = new Attachment("yellow-bus.png", "image/png", stream);
+
+        // add custom headers to attachment
+        attachment4.addCustomHeader("Color", "Yellow");
+        attachment4.addCustomHeader("Place", "Beach");
+
+        message.addAttachments(attachment4);
 
         // Adding Custom Headers
         // =========================
@@ -108,7 +121,10 @@ public class BasicSendComplexExample implements Example {
         // Add Custom Headers using the addCustomHeaders function
         message.addCustomHeader("testMessageHeader", "I am a message header");
 
+        // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
+
+        // send the message
         SendResponse response =  client.send(message);
 
         return response;

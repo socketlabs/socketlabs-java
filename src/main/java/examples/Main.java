@@ -96,9 +96,9 @@ public class Main {
             case 8: return "examples.basic.BasicSendWithProxy";
             case 9: return "examples.basic.BasicAsync";
             case 10: return "examples.basic.BasicSendComplexExample";
-            case 11: return "examples.basic.Invalid.BasicSendWithInvalidAttachment";
-            case 12: return "examples.basic.Invalid.BasicSendWithInvalidFrom";
-            case 13: return "examples.basic.Invalid.BasicSendWithInvalidRecipients";
+            case 11: return "examples.basic.invalid.BasicSendWithInvalidAttachment";
+            case 12: return "examples.basic.invalid.BasicSendWithInvalidFrom";
+            case 13: return "examples.basic.invalid.BasicSendWithInvalidRecipients";
             case 14: return "examples.bulk.BulkSend";
             case 15: return "examples.bulk.BulkSendWithMergeData";
             case 16: return "examples.bulk.BulkSendWithCharsetMergeData";
