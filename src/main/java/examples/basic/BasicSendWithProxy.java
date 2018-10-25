@@ -1,11 +1,8 @@
 package examples.basic;
 
-import com.socketLabs.injectionApi.SendResponse;
-import com.socketLabs.injectionApi.SocketLabsClient;
-import com.socketLabs.injectionApi.message.BasicMessage;
-import com.socketLabs.injectionApi.message.EmailAddress;
-import examples.Example;
-import examples.ExampleConfig;
+import com.socketLabs.injectionApi.*;
+import com.socketLabs.injectionApi.message.*;
+import examples.*;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -24,7 +21,7 @@ public class BasicSendWithProxy implements Example {
         message.addToEmailAddress("david.schrenker@socketlabs.com");
 
         // create the proxy
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("http://localhost.", 8888));
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost.", 8888));
 
         // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey, proxy);

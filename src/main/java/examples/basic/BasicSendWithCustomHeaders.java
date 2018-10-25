@@ -1,12 +1,8 @@
 package examples.basic;
 
-import com.socketLabs.injectionApi.SendResponse;
-import com.socketLabs.injectionApi.SocketLabsClient;
-import com.socketLabs.injectionApi.message.BasicMessage;
-import com.socketLabs.injectionApi.message.CustomHeader;
-import com.socketLabs.injectionApi.message.EmailAddress;
-import examples.Example;
-import examples.ExampleConfig;
+import com.socketLabs.injectionApi.*;
+import com.socketLabs.injectionApi.message.*;
+import examples.*;
 
 public class BasicSendWithCustomHeaders implements Example {
 

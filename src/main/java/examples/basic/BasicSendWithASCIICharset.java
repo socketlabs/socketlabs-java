@@ -1,13 +1,10 @@
 package examples.basic;
 
-import com.socketLabs.injectionApi.SendResponse;
-import com.socketLabs.injectionApi.SocketLabsClient;
-import com.socketLabs.injectionApi.message.BasicMessage;
-import com.socketLabs.injectionApi.message.EmailAddress;
-import examples.Example;
-import examples.ExampleConfig;
+import com.socketLabs.injectionApi.*;
+import com.socketLabs.injectionApi.message.*;
+import examples.*;
 
-public class BasicSendWithUTF16Charset implements Example {
+public class BasicSendWithASCIICharset implements Example {
 
     public SendResponse RunExample ()  throws Exception {
 
@@ -19,7 +16,7 @@ public class BasicSendWithUTF16Charset implements Example {
 
 
         // Set the HTML body, which includes placeholders for Merge Field data
-        message.setHtmlBody("<html><body><h1>Sending A ASCII Charset Email</h1><p>This is the html Body of my message.</p></body></html>");
+        message.setHtmlBody("<html><body><h1>Sending A ASCII Charset Email</h1><p>This is the html Body of my message.</p><h2>UTF-8 Characters:</h2><p>✔ - Check</p></body></html>");
 
         // Set the charset
         message.setCharSet("ASCII");

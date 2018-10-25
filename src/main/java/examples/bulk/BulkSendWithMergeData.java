@@ -1,9 +1,8 @@
 package examples.bulk;
 
-import com.socketLabs.injectionApi.SendResponse;
-import com.socketLabs.injectionApi.SocketLabsClient;
+import com.socketLabs.injectionApi.*;
 import com.socketLabs.injectionApi.message.*;
-import examples.Example;
+import examples.*;
 
 public class BulkSendWithMergeData implements Example {
     @Override

@@ -1,14 +1,10 @@
 package examples.bulk;
 
-import com.socketLabs.injectionApi.SendResponse;
-import com.socketLabs.injectionApi.SocketLabsClient;
-import com.socketLabs.injectionApi.message.BulkMessage;
-import com.socketLabs.injectionApi.message.BulkRecipient;
-import com.socketLabs.injectionApi.message.EmailAddress;
-import examples.Example;
-import examples.ExampleConfig;
+import com.socketLabs.injectionApi.*;
+import com.socketLabs.injectionApi.message.*;
+import examples.*;
 
-public class BulkSendWithCharsetMergeData implements Example {
+public class BulkSendWithASCIICharsetMergeData implements Example {
     @Override
     public SendResponse RunExample() throws Exception {
 
