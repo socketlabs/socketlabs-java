@@ -18,7 +18,7 @@ public class BasicSendWithInvalidFrom implements Example {
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("!@#$!@#$!@#$@#!$"));
-        message.addToEmailAddress("recipient1@example.com");
+        message.addToEmailAddress("recipient@example.com");
 
         // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);

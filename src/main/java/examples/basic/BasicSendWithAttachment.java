@@ -23,7 +23,7 @@ public class BasicSendWithAttachment implements Example {
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));
-        message.addToEmailAddress("recipient1@example.com");
+        message.addToEmailAddress("david.schrenker@socketlabs.com");
 
         Attachment attachment = new Attachment(
                 "bus.png",
