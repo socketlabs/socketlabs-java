@@ -10,7 +10,7 @@ import java.util.Map;
 public class BulkMessage implements MessageBase {
 
     private List<BulkRecipient> to = new ArrayList<>();
-    private Map<String, String> globalMergeData = new HashMap<String, String>();
+    private Map<String, String> globalMergeData = new HashMap<>();
     private String subject;
     private String plainTextBody;
     private String htmlBody;
@@ -33,8 +33,8 @@ public class BulkMessage implements MessageBase {
     }
     /**
      * Add an EmailAddress to the array of To recipients
-     * @param emailAddress {String}
-     * @param name {String}
+     * @param emailAddress String
+     * @param name String
      */
     public void addToEmailAddress(String emailAddress, String name) {
         this.to.add(new BulkRecipient(emailAddress, name));
@@ -114,7 +114,7 @@ public class BulkMessage implements MessageBase {
     @Override
     public void setAttachments(List<Attachment> value) { this.attachments = value; }
     /**
-     * Add an EmailAddress to the array of Attachment items
+     * Add an Attachment to the array of Attachment items
      * @param fileName
      * @throws IOException
      */
@@ -140,9 +140,9 @@ public class BulkMessage implements MessageBase {
         this.customHeaders = value;
     }
     /**
-     * Add a CustomHeaderJson to the message
-     * @param name {String}
-     * @param value {String}
+     * Add a CustomHeader to the message
+     * @param name String
+     * @param value String
      */
     public void addCustomHeader(String name, String value) {
         this.customHeaders.add(new CustomHeader(name, value ));
@@ -152,8 +152,8 @@ public class BulkMessage implements MessageBase {
     public void setMergeData(Map<String, String> value) { this.globalMergeData = value; }
     /**
      * Add a Global Merge Data to the message
-     * @param field {String}
-     * @param value {String}
+     * @param field String
+     * @param value String
      */
     public void addGlobalMergeData(String field, String value) {
         this.globalMergeData.put(field, value);

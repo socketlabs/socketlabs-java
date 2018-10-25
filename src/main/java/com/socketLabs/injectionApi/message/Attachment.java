@@ -11,10 +11,30 @@ import java.util.List;
  */
 public class Attachment {
 
+    /**
+     * Name of attachment (displayed in email clients)
+     */
     private String name;
+
+    /**
+     * The MIME type of the attachment.
+     * Ex: text/plain, image/jpeg
+     */
     private String mimeType;
+
+    /**
+     * When set, used to embed an image within the body of an email message.
+     */
     private String contentId;
+
+    /**
+     * The BASE64 encoded string containing the contents of an attachment.
+     */
     private byte[] content;
+
+    /**
+     * A list of custom headers added to the attachment.
+     */
     private List<CustomHeader> customHeaders = new ArrayList<>();
 
     /**
@@ -76,37 +96,82 @@ public class Attachment {
 
     //TODO - Constructor with name, mimeType, and Stream
 
+    /**
+     * Gets the BASE64 encoded content of the Attachment.
+     * @return byte[]
+     */
     public byte[] getContent() {
         return this.content;
     }
+
+    /**
+     * Sets the BASE64 encoded content of the Attachment
+     * @param content byte[]
+     */
     public void setContent(byte[] content) {
         this.content = content;
     }
 
+    /**
+     * Gets the ContentId of the Attachment.
+     * @return String
+     */
     public String getContentId() {
         return this.contentId;
     }
+
+    /**
+     * Sets the ContentId of the Attachment.
+     * @param contentId String
+     */
     public void setContentId(String contentId) {
         this.contentId = contentId;
     }
 
+    /**
+     * Gets the MimeType of the Attachment.
+     * @return String
+     */
     public String getMimeType() {
         return this.mimeType;
     }
+
+    /**
+     * Sets the MimeType of the Attachment.
+     * @param mimeType String
+     */
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
     }
 
+    /**
+     * Gets the name of the Attachment.
+     * @return String
+     */
     public String getName() {
         return this.name;
     }
+
+    /**
+     * Sets the name of the Attachment.
+     * @param name String
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the list of custom headers for the Attachment.
+     * @return List<CustomHeader>
+     */
     public List<CustomHeader> getCustomHeaders() {
         return this.customHeaders;
     }
+
+    /**
+     * Sets the list of custom headers for the Attachment.
+     * @param customHeaders List<CustomHeader>
+     */
     public void setCustomHeaders(List<CustomHeader> customHeaders) {
         this.customHeaders = customHeaders;
     }
@@ -119,10 +184,21 @@ public class Attachment {
         this.customHeaders.add(new CustomHeader(name, value ));
     }
 
+    /**
+     * Takes a system filepath and returns the BASE64 encoded byte[].
+     * @param filepath String
+     * @return byte[]
+     * @throws IOException
+     */
     private byte[] getContentFromFilePath(String filepath) throws IOException {
         return Files.readAllBytes(new File(filepath).toPath());
     }
 
+    /**
+     * Takes a file extension, minus the '.', and returns the corresponding MimeType for the given extension.
+     * @param extension String
+     * @return String The corresponding MimeType for the given extension.
+     */
     private String getMimeTypeFromExtension(String extension) {
         switch (extension.toLowerCase()) {
             case "txt":
@@ -199,6 +275,10 @@ public class Attachment {
 
     }
 
+    /**
+     * Represents the attachment by name and mime type, useful for debugging.
+     * @return String
+     */
     @Override
     public String toString() {
         return String.format("%s, %s", this.name, this.mimeType);

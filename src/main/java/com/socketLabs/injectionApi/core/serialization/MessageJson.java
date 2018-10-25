@@ -60,8 +60,8 @@ class MessageJson {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<CustomHeaderJson> customHeaders;
 
-    @JsonProperty("MergeDataJson")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonProperty("MergeData")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private MergeDataJson mergeDataJson;
 
     public List<AddressJson> getTo() { return to; }

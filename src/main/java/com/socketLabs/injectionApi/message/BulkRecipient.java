@@ -65,7 +65,7 @@ public class BulkRecipient  {
 
         char[] badEmailCharacters =  { ',', ' ', ';', (char)191 };
         for (char c: badEmailCharacters) {
-            if (this.emailAddress.indexOf(c) <= -1)
+            if (this.emailAddress.indexOf(c) >= 0)
                 return false;
         }
 
