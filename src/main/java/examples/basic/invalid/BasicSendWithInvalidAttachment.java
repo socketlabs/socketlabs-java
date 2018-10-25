@@ -20,7 +20,7 @@ public class BasicSendWithInvalidAttachment implements Example {
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));
-        message.addToEmailAddress("recipient1@example.com");
+        message.addToEmailAddress("recipient@example.com");
 
         message.addAttachments( new Attachment("invalid.png", "image/png", new byte[] {}));
 

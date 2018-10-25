@@ -29,7 +29,7 @@ public class BasicSendFromHtmlFile implements Example {
         message.setHtmlBody(body);
 
         message.setFrom(new EmailAddress("from@example.com"));
-        message.addToEmailAddress("recipient@example.com");
+        message.addToEmailAddress("david.schrenker@socketlabs.com");
 
         // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
