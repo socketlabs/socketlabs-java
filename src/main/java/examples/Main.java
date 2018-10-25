@@ -52,7 +52,7 @@ public class Main {
         System.out.println("    1:  basic Send ");
         System.out.println("    2:  basic Send From html File ");
         System.out.println("    3:  basic Send With Api Template ");
-        System.out.println("    4:  basic Send With Charset ");
+        System.out.println("    4:  basic Send With UTF16 Charset ");
         System.out.println("    5:  basic Send With Attachment ");
         System.out.println("    6:  basic Send With Custom-Headers ");
         System.out.println("    7:  basic Send With Embedded Image ");
@@ -68,7 +68,7 @@ public class Main {
         System.out.println(" bulk Send Examples: ");
         System.out.println("   14:  bulk Send ");
         System.out.println("   15:  bulk Send With MergeDataJson ");
-        System.out.println("   16:  bulk Send With Charset And MergeDataJson ");
+        System.out.println("   16:  bulk Send With UTF16 Charset And MergeDataJson ");
         System.out.println("   17:  bulk Send From DataSource With MergeDataJson ");
         System.out.println("   18:  bulk Send Complex Example (Everything including the Kitchen Sink) ");
         System.out.println();
@@ -89,7 +89,7 @@ public class Main {
             case 1: return "examples.basic.BasicSend";
             case 2: return "examples.basic.BasicSendFromHtmlFile";
             case 3: return "examples.basic.BasicSendWithApiTemplate";
-            case 4: return "examples.basic.BasicSendWithCharset";
+            case 4: return "examples.basic.BasicSendWithUTF16Charset";
             case 5: return "examples.basic.BasicSendWithAttachment";
             case 6: return "examples.basic.BasicSendWithCustomHeaders";
             case 7: return "examples.basic.BasicSendWithEmbeddedImage";
@@ -101,7 +101,7 @@ public class Main {
             case 13: return "examples.basic.invalid.BasicSendWithInvalidRecipients";
             case 14: return "examples.bulk.BulkSend";
             case 15: return "examples.bulk.BulkSendWithMergeData";
-            case 16: return "examples.bulk.BulkSendWithCharsetMergeData";
+            case 16: return "examples.bulk.BulkSendWithUTF16CharsetMergeData";
             case 17: return "examples.bulk.BulkSendFromDataSourceWithMerge";
             case 18: return "examples.bulk.BulkSendComplexExample";
             default:
