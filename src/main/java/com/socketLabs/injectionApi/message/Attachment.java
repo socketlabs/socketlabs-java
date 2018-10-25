@@ -35,7 +35,7 @@ public class Attachment {
     /**
      * A list of custom headers added to the attachment.
      */
-    private List<CustomHeader> customHeaders;
+    private List<CustomHeader> customHeaders = new ArrayList<>();
 
     /**
      * Initializes a new instance of the Attachment class

@@ -5,7 +5,7 @@ import com.socketLabs.injectionApi.SocketLabsClient;
 import com.socketLabs.injectionApi.message.*;
 import examples.Example;
 
-public class BulkSendComplex implements Example {
+public class BulkSendWithMergeData implements Example {
     @Override
     public SendResponse RunExample() throws Exception {
 
@@ -67,6 +67,7 @@ public class BulkSendComplex implements Example {
 
         message.setHtmlBody(html);
 
+        // TODO -  RCB - Improve this
         message.setPlainTextBody(html.replaceAll("<.*?>", ""));
 
         // Add an Attachment with a custom header

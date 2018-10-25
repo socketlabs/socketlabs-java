@@ -3,7 +3,7 @@ package examples;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.socketLabs.injectionApi.SendResponse;
-import examples.Basic.*;
+import examples.basic.*;
 
 import java.io.BufferedReader;
 import java.io.Console;
@@ -89,24 +89,24 @@ public class Main {
 
         switch (menuItem)
         {
-            case 1: return "examples.Basic.BasicSend";
-            case 2: return "examples.Basic.BasicSendFromHtmlFile";
-            case 3: return "examples.Basic.BasicSendWithApiTemplate";
-            case 4: return "examples.Basic.BasicSendWithAsciiCharset";
-            case 5: return "examples.Basic.BasicSendWithAttachment";
-            case 6: return "examples.Basic.BasicSendWithCustomHeaders";
-            case 7: return "examples.Basic.BasicSendWithEmbeddedImage";
-            case 8: return "examples.Basic.BasicSendWithProxy";
-            case 9: return "examples.Basic.BasicAsync";
-            case 10: return "examples.Basic.BasicSendComplexExample";
-            case 11: return "examples.Basic.Invalid.BasicSendWithInvalidAttachment";
-            case 12: return "examples.Basic.Invalid.BasicSendWithInvalidFrom";
-            case 13: return "examples.Basic.Invalid.BasicSendWithInvalidRecipients";
-            case 14: return "examples.Bulk.BulkSend";
-            case 15: return "examples.Bulk.BulkSendWithMergeData";
-            case 16: return "examples.Bulk.BulkSendWithAsciiCharsetMergeData";
-            case 17: return "examples.Bulk.BulkSendFromDataSourceWithMerge";
-            case 18: return "examples.Bulk.BulkSendComplexExample";
+            case 1: return "examples.basic.BasicSend";
+            case 2: return "examples.basic.BasicSendFromHtmlFile";
+            case 3: return "examples.basic.BasicSendWithApiTemplate";
+            case 4: return "examples.basic.BasicSendWithAsciiCharset";
+            case 5: return "examples.basic.BasicSendWithAttachment";
+            case 6: return "examples.basic.BasicSendWithCustomHeaders";
+            case 7: return "examples.basic.BasicSendWithEmbeddedImage";
+            case 8: return "examples.basic.BasicSendWithProxy";
+            case 9: return "examples.basic.BasicAsync";
+            case 10: return "examples.basic.BasicSendComplexExample";
+            case 11: return "examples.basic.Invalid.BasicSendWithInvalidAttachment";
+            case 12: return "examples.basic.Invalid.BasicSendWithInvalidFrom";
+            case 13: return "examples.basic.Invalid.BasicSendWithInvalidRecipients";
+            case 14: return "examples.bulk.BulkSend";
+            case 15: return "examples.bulk.BulkSendWithMergeData";
+            case 16: return "examples.bulk.BulkSendWithAsciiCharsetMergeData";
+            case 17: return "examples.bulk.BulkSendFromDataSourceWithMerge";
+            case 18: return "examples.bulk.BulkSendComplexExample";
             default:
                 System.out.println("Invalid Input (Out of Range)");
                 return null;

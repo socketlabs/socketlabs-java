@@ -1,4 +1,4 @@
-package examples.Basic;
+package examples.basic;
 
 import com.socketLabs.injectionApi.SendResponse;
 import com.socketLabs.injectionApi.SocketLabsClient;

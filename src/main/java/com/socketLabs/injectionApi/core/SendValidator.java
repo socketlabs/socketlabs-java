@@ -172,7 +172,7 @@ public class SendValidator {
 
     /**
      * Validate email recipients for a Bulk message
-     * Checks the To recipient field (List of IBulkRecipient) for the following:
+     * Checks the To recipient field (List of BulkRecipient) for the following:
      *   > At least 1 recipient is in the list.
      *   > Cumulative count of recipients in all 3 lists do not exceed the MaximumRecipientsPerMessage.
      *   > Recipients in lists are valid.
