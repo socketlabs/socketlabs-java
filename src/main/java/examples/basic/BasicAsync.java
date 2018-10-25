@@ -22,7 +22,10 @@ public class BasicAsync implements Example {
         message.setFrom(new EmailAddress("from@example.com"));
         message.addToEmailAddress("recipient1@example.com");
 
+        // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
+
+        // send the message
         client.sendAsync(message, new HttpCallback() {
 
             @Override

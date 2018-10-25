@@ -27,8 +27,10 @@ public class BasicSendWithUTF16Charset implements Example {
         message.setFrom(new EmailAddress("from@example.com"));
         message.addToEmailAddress("david.schrenker@socketlabs.com");
 
-        // Instantiate the client and send
+        // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
+
+        // send the message
         SendResponse response =  client.send(message);
 
         return response;

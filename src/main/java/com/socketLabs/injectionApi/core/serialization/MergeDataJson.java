@@ -5,15 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 class MergeDataJson {
 
     @JsonProperty("PerMessage")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<List<MergeFieldJson>> perMessage;
 
     @JsonProperty("Global")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<MergeFieldJson> global;
 
     public MergeDataJson(List<List<MergeFieldJson>> perMessage, List<MergeFieldJson> global) {

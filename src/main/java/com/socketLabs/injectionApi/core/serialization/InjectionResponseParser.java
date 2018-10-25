@@ -25,14 +25,14 @@ public class InjectionResponseParser {
         SendResponse newResponse = new SendResponse(resultEnum);
         newResponse.setTransactionReceipt(injectionResponse.getTransactionReceipt());
 
-        if (resultEnum == SendResult.Warning && (injectionResponse.getMessageResults() != null && injectionResponse.getMessageResults().length > 0))
+        if (resultEnum == SendResult.Warning && (injectionResponse.getMessageResults() != null && injectionResponse.getMessageResults().size() > 0))
         {
-            SendResult r = SendResult.fromString(injectionResponse.getMessageResults()[0].getErrorCode());
+            SendResult r = SendResult.fromString(injectionResponse.getMessageResults().get(0).getErrorCode());
             newResponse.setResult(r);
         }
 
-        if (injectionResponse.getMessageResults() != null && injectionResponse.getMessageResults().length > 0)
-            newResponse.setAddressResults(injectionResponse.getMessageResults()[0].getAddressResults());
+        if (injectionResponse.getMessageResults() != null && injectionResponse.getMessageResults().size() > 0)
+            newResponse.setAddressResults(injectionResponse.getMessageResults().get(0).getAddressResults());
 
         return newResponse;
 

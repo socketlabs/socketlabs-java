@@ -1,20 +1,20 @@
 package com.socketLabs.injectionApi.core;
 
 import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
+import okhttp3.*;
+import okhttp3.Request.Builder;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
-import java.net.URL;
+import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class HttpRequest {
 
     private HttpRequestMethod method;
     private String endPointUrl;
     private String body;
+    private Proxy proxy;
     private Map<String, String> headers = new HashMap<>();
 
     public HttpRequest(HttpRequestMethod method, String endPointUrl) {
@@ -29,6 +29,9 @@ public class HttpRequest {
     public void setHeader(String key, String value) {
         this.headers.put(key, value);
     }
+    public void setProxy(Proxy value) { this.proxy = value; }
+
+    public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
     /**
      * Send the HTTP Request
@@ -37,65 +40,56 @@ public class HttpRequest {
      */
     public HttpResponse SendRequest()  throws IOException  {
 
-        HttpsURLConnection connection = (HttpsURLConnection) new URL(this.endPointUrl).openConnection();
+        OkHttpClient client = new OkHttpClient();
+
+        if (this.proxy != null)
+            client = new OkHttpClient.Builder()
+                .proxy(this.proxy)
+                .build();
+
+        Builder builder = new Builder().url("https://inject.socketlabs.com/api/v1/email");
 
         //add request method
-        connection.setRequestMethod(this.method.toString());
+        RequestBody reqBody = RequestBody.create(JSON, this.body);
+        switch (this.method) {
+            case POST:
+                builder.post(reqBody);
+                break;
+            case GET:
+                builder.get();
+                break;
+            case PUT:
+                builder.put(reqBody);
+                break;
+            case DELETE:
+                builder.delete(reqBody);
+                break;
+        }
 
         //add request header
         for (Map.Entry<String, String> header : this.headers.entrySet()) {
-            connection.setRequestProperty(header.getKey(), header.getValue());
+            builder.addHeader(header.getKey(), header.getValue());
         }
 
-        // Send request
-        connection.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-        wr.writeBytes(this.body);
-        wr.flush();
-        wr.close();
+        // make the call
+        Response response = client.newCall(builder.build()).execute();
 
-        // get response code.
-        int responseCode = connection.getResponseCode();
-        String responseMessage = connection.getResponseMessage();
-        String requestMethod = connection.getRequestMethod();
-
-        // TODO: remove System.out.println(..) (used for debugging)
+        // TODO: remove (used for debugging)
+        int responseCode = response.networkResponse().code();
+        String responseMessage = response.networkResponse().message();
+        String requestMethod = response.request().method();
         System.out.println(String.format("\nSending '%s' request to URL : %s", requestMethod, this.endPointUrl));
         System.out.println("Request body : ");
         System.out.println(this.body);
+        System.out.println();
         System.out.println("Response Code : " + responseCode);
         System.out.println("Response Message : " + responseMessage);
+        // TODO: end remove
 
-        InputStream stream = null;
-        if (responseCode != 200) {
-            stream = connection.getErrorStream();
-        }
-        else {
-            stream = connection.getInputStream();
-        }
-        HttpResponse response = new HttpResponse(responseCode, ParseStream(stream));
-        response.setResponseMessage(responseMessage);
-        return response;
-    }
-
-    /**
-     * Parse the Input stream from the HTTP Request
-     * @param stream The input stream from the HTTP Request
-     * @return Parsed JSON String
-     * @throws IOException in case of a network error.
-     */
-    private String ParseStream(InputStream stream) throws IOException {
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-        String inputLine;
-        StringBuilder response = new StringBuilder();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-        return response.toString();
+        //HttpResponse response = new HttpResponse(responseCode, ParseStream(stream));
+        HttpResponse resp = new HttpResponse(response.networkResponse().code(), response.body().string());
+        resp.setResponseMessage(response.networkResponse().message());
+        return resp;
     }
 
     /**

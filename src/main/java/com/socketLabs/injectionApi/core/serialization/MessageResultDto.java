@@ -18,7 +18,7 @@ public class MessageResultDto {
     private String errorCode;
 
     /** An array of AddressResult objects that contain the status of each address that failed. If no messages failed this array is empty. */
-    @JsonProperty("AddressResult")
+    @JsonProperty("AddressResults")
     private List<AddressResult> addressResults;
 
     public int getIndex() {

@@ -24,7 +24,10 @@ public class BasicSend implements Example {
         message.addToEmailAddress(new EmailAddress("recipient3@example.com"));
         message.addToEmailAddress(new EmailAddress("recipient4@example.com", "Recipient #4"));
 
+        // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
+
+        // send the message
         SendResponse response =  client.send(message);
 
         return response;

@@ -1,5 +1,6 @@
 package com.socketLabs.injectionApi.core.serialization;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.socketLabs.injectionApi.message.*;
@@ -16,7 +17,9 @@ public class InjectionRequestFactory{
     private String apiKey;
 
     // TODO: remove .enable(SerializationFeature.INDENT_OUTPUT) (used for debugging)
-    private ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private ObjectMapper mapper = new ObjectMapper()
+            .enable(SerializationFeature.INDENT_OUTPUT)
+            .setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 
     public InjectionRequestFactory(int serverId, String apiKey) {
         this.serverId = serverId;

@@ -2,6 +2,8 @@ package com.socketLabs.injectionApi.core.serialization;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class InjectionResponseDto {
 
     /** The resulting response ErrorCode of the Injection Api send request */
@@ -17,7 +19,7 @@ public class InjectionResponseDto {
 
     /** An array of MessageResultDto objects that contain the status of each message sent. */
     @JsonProperty("MessageResults")
-    private MessageResultDto[] messageResults;
+    private List<MessageResultDto> messageResults;
 
     public String getErrorCode() {
         return errorCode;
@@ -33,10 +35,10 @@ public class InjectionResponseDto {
         this.transactionReceipt = transactionReceipt;
     }
 
-    public MessageResultDto[] getMessageResults() {
+    public List<MessageResultDto> getMessageResults() {
         return messageResults;
     }
-    public void setMessageResults(MessageResultDto[] messageResults) {
+    public void setMessageResults(List<MessageResultDto> messageResults) {
         this.messageResults = messageResults;
     }
 }

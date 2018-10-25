@@ -7,7 +7,7 @@ import java.util.List;
 class InjectionRequest {
 
     @JsonProperty("ServerId")
-    private int serverId;
+    private String serverId;
 
     @JsonProperty("ApiKey")
     private String apiKey;
@@ -16,15 +16,15 @@ class InjectionRequest {
     private List<MessageJson> messageJsons;
 
     public InjectionRequest(int serverId, String apiKey, List<MessageJson> messageJsons) {
-        this.serverId = serverId;
+        this.serverId = Integer.toString(serverId);
         this.apiKey = apiKey;
         this.messageJsons = messageJsons;
     }
 
-    public int getServerId() {
+    public String getServerId() {
         return serverId;
     }
-    public void setServerId(int serverId) {
+    public void setServerId(String serverId) {
         this.serverId = serverId;
     }
 

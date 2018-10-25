@@ -5,12 +5,16 @@ import com.socketLabs.injectionApi.core.serialization.InjectionRequestFactory;
 import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
 import com.socketLabs.injectionApi.message.*;
 
+import java.net.Proxy;
+import java.net.InetSocketAddress;
+
 
 public class SocketLabsClient implements SocketLabsClientAPI {
 
     private int serverId;
     private String apiKey;
     private String endPointUrl = "https://inject.socketlabs.com/api/v1/email";
+    private Proxy proxy;
 
     public void setEndPointUrl(String endPointUrl) {
         this.endPointUrl = endPointUrl;
@@ -26,6 +30,13 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         this.serverId = serverId;
         this.apiKey = apiKey;
     }
+
+    public SocketLabsClient(int serverId, String apiKey, Proxy optionalProxy) {
+        this.serverId = serverId;
+        this.apiKey = apiKey;
+        this.proxy = optionalProxy;
+    }
+
 
     @Override
     public SendResponse send(BasicMessage message) throws Exception {
@@ -43,9 +54,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
         String requestJson = injectionRequest.GenerateRequest(message);
 
-        HttpRequest request = new HttpRequest(HttpRequestMethod.POST, this.endPointUrl);
-        request.setHeader("User-Agent", this.userAgent);
-        request.setHeader("content-type", "application/json");
+        HttpRequest request = buildHttpRequest(this.proxy);
         request.setBody(requestJson);
 
         InjectionResponseParser parser = new InjectionResponseParser();
@@ -69,8 +78,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
         String requestJson = injectionRequest.GenerateRequest(message);
 
-        HttpRequest request = new HttpRequest(HttpRequestMethod.POST, this.endPointUrl);
-        request.setHeader("User-Agent", this.userAgent);
+        HttpRequest request = buildHttpRequest(this.proxy);
         request.setBody(requestJson);
 
         InjectionResponseParser parser = new InjectionResponseParser();
@@ -98,9 +106,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
         String requestJson = injectionRequest.GenerateRequest(message);
 
-        HttpRequest request = new HttpRequest(HttpRequestMethod.POST, this.endPointUrl);
-        request.setHeader("User-Agent", this.userAgent);
-        request.setHeader("content-type", "application/json");
+        HttpRequest request = buildHttpRequest(this.proxy);
         request.setBody(requestJson);
 
         request.SendAsyncRequest(callback);
@@ -128,8 +134,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
         String requestJson = injectionRequest.GenerateRequest(message);
 
-        HttpRequest request = new HttpRequest(HttpRequestMethod.POST, this.endPointUrl);
-        request.setHeader("User-Agent", this.userAgent);
+        HttpRequest request = buildHttpRequest(this.proxy);
         request.setBody(requestJson);
 
         request.SendAsyncRequest(callback);
@@ -137,24 +142,21 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         return;
 
     }
-/*
-    public static SendResponse QuickSend(int serverId, String apiKey, String toAddress, String fromAddress, String subject, String htmlContent, String textContent)  {
 
-        SocketLabsClient client = new SocketLabsClient(serverId, apiKey);
+    private HttpRequest buildHttpRequest(Proxy optionalProxy) {
 
-        message.BasicMessage message = new message.BasicMessage();
-        message.addToAddress(new EmailAddress(toAddress));
-        message.setFrom(new EmailAddress(fromAddress));
-        message.setSubject(subject);
-        message.setHtmlBody(htmlContent);
-        message.setPlainTextBody(textContent);
+        HttpRequest request = new HttpRequest(HttpRequestMethod.POST, this.endPointUrl);
 
-        return client.send(message);
+        request.setHeader("User-Agent", this.userAgent);
+        request.setHeader("content-type", "application/json");
+        request.setHeader("Accept", "application/json");
 
-    return null;
+        if(optionalProxy != null) {
+            request.setProxy(optionalProxy);
+        }
+
+        return request;
     }
-*/
-
 
 
 
