@@ -32,7 +32,7 @@ public class SendValidator {
     }
 
     /**
-     * Validate a Basic email message before sending to the Injection API.
+     * Validate a basic email message before sending to the Injection API.
      * @param message An BasicMessage object to be sent.
      * @return A SendResponse with the validation results
      */
@@ -47,7 +47,7 @@ public class SendValidator {
     }
 
     /**
-     *Validate a Bulk email message before sending to the Injection API.
+     *Validate a bulk email message before sending to the Injection API.
      * @param message An BulkMessage object to be sent.
      * @return A SendResponse with the validation results
      */
@@ -141,13 +141,14 @@ public class SendValidator {
      */
     private boolean HasValidReplyTo(MessageBase message)
     {
+        if (message.getReplyTo() == null) return true;
         if (Strings.isNullOrEmpty(message.getReplyTo().getEmailAddress()) && Strings.isNullOrEmpty(message.getReplyTo().getFriendlyName())) return true;
         return message.getReplyTo().isValid();
     }
 
 
     /**
-    * Validate email recipients for a Basic message
+    * Validate email recipients for a basic message
     * Checks the To, Cc, and the Bcc recipient fields (List of IEmailAddress) for the following:
     *   > At least 1 recipient is in the list.
     *   > Cumulative count of recipients in all 3 lists do not exceed the MaximumRecipientsPerMessage.
@@ -171,7 +172,7 @@ public class SendValidator {
     }
 
     /**
-     * Validate email recipients for a Bulk message
+     * Validate email recipients for a bulk message
      * Checks the To recipient field (List of IBulkRecipient) for the following:
      *   > At least 1 recipient is in the list.
      *   > Cumulative count of recipients in all 3 lists do not exceed the MaximumRecipientsPerMessage.

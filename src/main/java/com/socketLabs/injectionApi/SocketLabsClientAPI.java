@@ -6,15 +6,15 @@ import com.socketLabs.injectionApi.message.BulkMessage;
 
 public interface SocketLabsClientAPI {
 
-    // Async Basic
+    // Async basic
     SendResponse sendAsync(BasicMessage message, final HttpCallback callback) throws Exception;
 
-    // Async Bulk
+    // Async bulk
     void sendAsync(BulkMessage message, final HttpCallback callback) throws Exception;
 
-    // Sync Basic
+    // Sync basic
     SendResponse send(BasicMessage message) throws Exception;
 
-    // Sync Bulk
+    // Sync bulk
     SendResponse send(BulkMessage message) throws Exception;
 }

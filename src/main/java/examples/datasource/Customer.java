@@ -1,4 +1,4 @@
-package examples.Datasource;
+package examples.datasource;
 
 public class Customer {
 

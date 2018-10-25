@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A Basic email message similar to one created in a personal email client such as Outlook.
+ * A basic email message similar to one created in a personal email client such as Outlook.
  * This message can have many recipients of different types, such as To, CC, and BCC.  This
  * message does not support merge fields.
  *
@@ -18,7 +18,7 @@ import java.util.List;
  * var message = new basicMessage();
  *
  * message.subject = "Sending A Message";
- * message.htmlBody = "<html>This is the Html Body of my message.</html>";
+ * message.htmlBody = "<html>This is the html Body of my message.</html>";
  * message.textBody = "This is the Plain Text Body of my message.";
  *
  * message.from = new emailAddress("from@example.com");
@@ -45,7 +45,7 @@ public class BasicMessage implements MessageBase {
     private EmailAddress from;
     private EmailAddress replyTo;
     private List<Attachment> attachments = new ArrayList<>();
-    private String charset;
+    private String charSet;
     private List<CustomHeader> customHeaders = new ArrayList<>();
 
 
@@ -189,9 +189,9 @@ public class BasicMessage implements MessageBase {
     }
 
     @Override
-    public String getCharset() { return this.charset; }
+    public String getCharSet() { return this.charSet; }
     @Override
-    public void setCharset(String value) { this.charset = value; }
+    public void setCharSet(String value) { this.charSet = value; }
 
     @Override
     public List<CustomHeader> getCustomHeaders() { return this.customHeaders; }

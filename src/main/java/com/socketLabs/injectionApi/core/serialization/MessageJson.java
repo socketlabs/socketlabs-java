@@ -52,9 +52,9 @@ class MessageJson {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<AttachmentJson> attachments;
 
-    @JsonProperty("Charset")
+    @JsonProperty("CharSet")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String charset;
+    private String charSet;
 
     @JsonProperty("CustomHeaders")
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -100,8 +100,8 @@ class MessageJson {
     public List<AttachmentJson> getAttachments() { return attachments; }
     public void setAttachments(List<AttachmentJson> value) { this.attachments = value; }
 
-    public String getCharset() { return charset; }
-    public void setCharset(String value) { this.charset = value; }
+    public String getCharSet() { return charSet; }
+    public void setCharSet(String value) { this.charSet = value; }
 
     public List<CustomHeaderJson> getCustomHeaders() { return customHeaders; }
     public void setCustomHeaders(List<CustomHeaderJson> value) { this.customHeaders = value; }
