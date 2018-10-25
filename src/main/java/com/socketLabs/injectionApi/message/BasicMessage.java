@@ -285,7 +285,7 @@ public class BasicMessage implements MessageBase {
      * @return String
      */
     @Override
-    public String getCharset() { return this.charSet; }
+    public String getCharSet() { return this.charSet; }
 
     /**
      * Sets the optional character set for your message.

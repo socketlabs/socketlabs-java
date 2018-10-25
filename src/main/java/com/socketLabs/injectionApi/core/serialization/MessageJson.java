@@ -60,7 +60,7 @@ class MessageJson {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CustomHeaderJson> customHeaders;
 
-    @JsonProperty("MergeDataJson")
+    @JsonProperty("MergeData")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private MergeDataJson mergeDataJson;
 
