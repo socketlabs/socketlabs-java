@@ -20,7 +20,7 @@ import java.util.*;
  *     message.setFrom(new EmailAddress("from@example.com"));
  *     message.setReplyTo(new EmailAddress("replyto@example.com"));;
  *
- *     message.addToBulkRecipient("recipient1@example.com");
+ *     message.addToRecipient("recipient1@example.com");
  *     message.getTo().add(new BulkRecipient("recipient2@example.com", "Recipient #2"));
  *
  *     message.addMergeData("name1", "value1");
@@ -139,7 +139,7 @@ public class BulkMessage implements MessageBase {
      * Add an BulkRecipient to the array of To recipients
      * @param emailAddress String
      */
-    public void addToBulkRecipient(String emailAddress) {
+    public void addToRecipient(String emailAddress) {
         this.to.add(new BulkRecipient(emailAddress));
     }
     /**
@@ -147,14 +147,14 @@ public class BulkMessage implements MessageBase {
      * @param emailAddress String
      * @param name String
      */
-    public void addToBulkRecipient(String emailAddress, String name) {
+    public void addToRecipient(String emailAddress, String name) {
         this.to.add(new BulkRecipient(emailAddress, name ));
     }
     /**
      * Add an BulkRecipient to the array of To recipients
      * @param bulkRecipient String
      */
-    public void addToBulkRecipient(BulkRecipient bulkRecipient) {
+    public void addToRecipient(BulkRecipient bulkRecipient) {
         this.to.add(bulkRecipient);
     }
 
@@ -372,12 +372,12 @@ public class BulkMessage implements MessageBase {
      * Get the map containing Merge Data items that will be global across the whole message.
      * @return TreeMap<String, String>
      */
-    public TreeMap<String, String> getMergeData() { return globalMergeData; }
+    public TreeMap<String, String> getGlobalMergeData() { return globalMergeData; }
     /**
      * Set the map containing Merge Data items that will be global across the whole message.
      * @param value TreeMap<String, String>
      */
-    public void setMergeData(TreeMap<String, String> value) { this.globalMergeData = value; }
+    public void setGlobalMergeData(TreeMap<String, String> value) { this.globalMergeData = value; }
     /**
      * Add a Global Merge Data entry to the message
      * @param field String

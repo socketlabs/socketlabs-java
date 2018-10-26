@@ -10,8 +10,8 @@ public class BulkSend implements Example {
 
         BulkMessage message = new BulkMessage();
 
-        message.setSubject("Sending A Test Message");
-        message.setHtmlBody("<html>This is the Html Body of my message.</html>");
+        message.setSubject("Sending A Test Message (Bulk Send)");
+        message.setHtmlBody("<html><body><h1>Sending A Test Message</h1><p>This is the Html Body of my message.</p></body></html>");
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));
@@ -22,7 +22,10 @@ public class BulkSend implements Example {
         message.getTo().add(new BulkRecipient("recipient3@example.com"));
         message.getTo().add(new BulkRecipient("recipient4@example.com", "Recipient #4"));
 
-        SocketLabsClient client = new SocketLabsClient(19742, "Ng5x6HEc4f7CFk92Kpn3");
+        // create the client
+        SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
+
+        // send the message
         SendResponse response =  client.send(message);
 
         return response;

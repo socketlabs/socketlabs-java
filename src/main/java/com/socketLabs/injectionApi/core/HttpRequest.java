@@ -163,18 +163,6 @@ public class HttpRequest {
      */
     private SendResponse ParseResponse(Response response) throws IOException {
 
-        // TODO: remove (used for debugging)
-        int responseCode = response.networkResponse().code();
-        String responseMessage = response.networkResponse().message();
-        String requestMethod = response.request().method();
-        System.out.println(String.format("\nSending '%s' request to URL : %s", requestMethod, this.endPointUrl));
-        System.out.println("Request body : ");
-        System.out.println(this.body);
-        System.out.println();
-        System.out.println("Response Code : " + responseCode);
-        System.out.println("Response Message : " + responseMessage);
-        // TODO: end remove
-
         InjectionResponseParser parser = new InjectionResponseParser();
         return parser.Parse(response);
 

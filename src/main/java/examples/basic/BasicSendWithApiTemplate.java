@@ -14,7 +14,7 @@ public class BasicSendWithApiTemplate implements Example {
         message.setApiTemplate(1);
 
         message.setFrom(new EmailAddress("from@example.com"));
-        message.addToEmailAddress("david.schrenker@socketlabs.com");
+        message.addToEmailAddress("recipient1@example.com");
 
         // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);

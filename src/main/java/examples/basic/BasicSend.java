@@ -16,7 +16,7 @@ public class BasicSend implements Example {
 
         message.setFrom(new EmailAddress("from@example.com"));
 
-        message.addToEmailAddress("david.schrenker@socketlabs.com");
+        message.addToEmailAddress("recipient1@example.com");
         message.addToEmailAddress("recipient2@example.com", "Recipient #1");
         message.addToEmailAddress(new EmailAddress("recipient3@example.com"));
         message.addToEmailAddress(new EmailAddress("recipient4@example.com", "Recipient #4"));

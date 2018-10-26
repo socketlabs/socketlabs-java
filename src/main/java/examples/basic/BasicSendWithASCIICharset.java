@@ -23,7 +23,7 @@ public class BasicSendWithASCIICharset implements Example {
 
         // Set a recipient
         message.setFrom(new EmailAddress("from@example.com"));
-        message.addToEmailAddress("david.schrenker@socketlabs.com");
+        message.addToEmailAddress("recipient1@example.com");
 
         // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);

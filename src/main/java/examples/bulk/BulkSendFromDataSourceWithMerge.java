@@ -12,23 +12,35 @@ public class BulkSendFromDataSourceWithMerge implements Example {
     @Override
     public SendResponse RunExample() throws Exception {
 
-        SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
+        // Build the message
+        BulkMessage message = new BulkMessage();
+
+        message.setSubject("Hello %%FirstName%%");
+
+        // Build the Content (Note the %% symbols used to denote the data to be merged)
+        String html = "<html>"
+                + "   <body>"
+                + "       <h1>Sending A Test Message With Merge Data From Datasource</h1>"
+                + "       <h2>Hello %%FirstName%% %%LastName%%.</h2>"
+                + "       <p>Is your favorite color still %%FavoriteColor%%?</p>"
+                + "   </body>"
+                + "</html>";
+        message.setHtmlBody(html);
+
+        String text = "Sending A Test Message With Merge Data From Datasource"
+                + "       Hello %%FirstName%% %%LastName%%. Is your favorite color still %%FavoriteColor%%?";
+        message.setPlainTextBody(text);
+
+        message.setFrom(new EmailAddress("from@example.com"));
+
+        // Merge in the customers from the datasource
+        List<BulkRecipient> recipients = new ArrayList<>();
 
         // Retrieve data from the datasource
         CustomerRepository repository = new CustomerRepository();
         List<Customer> customers = repository.getCustomers();
 
-        // Build the message
-        BulkMessage message = new BulkMessage();
-
-        message.setSubject("Hello %%FirstName%%");
-        message.setPlainTextBody("Hello %%FirstName%% %%LastName%%. Is your favorite color still %%FavoriteColor%%?");
-        message.setFrom(new EmailAddress("from@example.com"));
-        message.setReplyTo(new EmailAddress("replyto@example.com"));
-
         // Merge in the customers from the datasource
-        List<BulkRecipient> recipients = new ArrayList<>();
-
         for (Customer customer : customers) {
             BulkRecipient recipient = new BulkRecipient(customer.getEmailAddress(), customer.getFirstName());
             TreeMap<String, String> mergeData = new TreeMap<>();
@@ -42,6 +54,12 @@ public class BulkSendFromDataSourceWithMerge implements Example {
 
         message.setTo(recipients);
 
-        return client.send(message);
+        // create the client
+        SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
+
+        // send the message
+        SendResponse response =  client.send(message);
+
+        return response;
     }
 }

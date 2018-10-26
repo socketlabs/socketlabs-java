@@ -2,7 +2,6 @@ package com.socketLabs.injectionApi.core.serialization;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.socketLabs.injectionApi.message.*;
 
 import java.io.IOException;
@@ -47,7 +46,6 @@ public class InjectionRequestFactory{
     public int getServerId() {
         return serverId;
     }
-
     /**
      * Sets the server ID for the Injection Request Factory.
      * @param serverId String
@@ -56,7 +54,6 @@ public class InjectionRequestFactory{
         this.serverId = serverId;
     }
 
-
     /**
      * Gets the SocketLabs Injection API key for the Injection Request Factory.
      * @return String
@@ -64,7 +61,6 @@ public class InjectionRequestFactory{
     public String getApiKey() {
         return apiKey;
     }
-
     /**
      * Sets the SocketLabs Injection API key for the Injection Request Factory.
      * @param apiKey String
@@ -77,7 +73,7 @@ public class InjectionRequestFactory{
      * Generate the InjectionRequest for sending to the Injection Api.
      * @param bulkMessage A BulkMessage object to be sent
      * @return String
-     * @throws IOException
+     * @throws IOException IOException
      */
     public String GenerateRequest(BulkMessage bulkMessage) throws IOException {
         List<MessageJson> messageJsons = new ArrayList<>();
@@ -100,7 +96,7 @@ public class InjectionRequestFactory{
      * Generate the InjectionRequest for sending to the Injection Api.
      * @param basicMessage A BasicMessage object to be sent.
      * @return String
-     * @throws IOException
+     * @throws IOException IOException
      */
     public String GenerateRequest(BasicMessage basicMessage) throws IOException {
 
@@ -119,7 +115,7 @@ public class InjectionRequestFactory{
      * Returns an InjectionRequest as JSON to be sent to the Injection API.
      * @param request InjectionRequest
      * @return String
-     * @throws IOException
+     * @throws IOException IOException
      */
     private String GetAsJson(InjectionRequest request) throws IOException {
         return mapper.writeValueAsString(request);
@@ -127,7 +123,7 @@ public class InjectionRequestFactory{
 
     /**
      * Converts MessageBase object to a MessageJson object
-     * @param messageBase
+     * @param messageBase The base message to convert
      * @return MessageJson - JSON serializable representation of MessageBase
      */
     private MessageJson generateBaseMessage(MessageBase messageBase) {
@@ -170,7 +166,7 @@ public class InjectionRequestFactory{
     /**
      * Converts a list of Attachment objects to a List of AttachmentJson objects.
      * @param baseAttachments list of Attachment objects
-     * @return
+     * @return List<AttachmentJson>
      */
     private List<AttachmentJson> populateAttachments(List<Attachment> baseAttachments) {
         if (baseAttachments == null) {
@@ -215,7 +211,7 @@ public class InjectionRequestFactory{
      * then populates and returns a MergeDataJson object with their merge data.
      * @param global Map<String, String> of global merge data
      * @param recipients List of BulkRecipients
-     * @return
+     * @return MergeDataJson
      */
     private MergeDataJson populateMergeData(Map<String, String> global, List<BulkRecipient> recipients) {
 
