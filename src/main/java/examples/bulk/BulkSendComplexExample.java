@@ -9,6 +9,9 @@ import com.socketLabs.injectionApi.message.EmailAddress;
 import examples.Example;
 import examples.ExampleConfig;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BulkSendComplexExample implements Example {
 
     @Override
@@ -24,17 +27,24 @@ public class BulkSendComplexExample implements Example {
         message.addGlobalMergeData("UpSell", "BTW:  You are eligible for discount pricing when you upgrade your service!");
 
         // Add recipients with merge data
+        List<BulkRecipient> recipients = new ArrayList<>();
+
         BulkRecipient recipient1 = new BulkRecipient("recipient1@example.com");
         recipient1.addMergeData("Birthday", "08/05/1991");
         recipient1.addMergeData("Age", "27");
+        recipients.add(recipient1);
 
         BulkRecipient recipient2 = new BulkRecipient("recipient2@example.com");
         recipient2.addMergeData("Birthday", "04/12/1984");
         recipient2.addMergeData("Age", "34");
         recipient2.addMergeData("UpSell", "");  // This will override the Global Merge-Data for this specific Recipient
+        recipients.add(recipient2);
 
         BulkRecipient recipient3 = new BulkRecipient("recipient3@example.com");
         recipient3.setFriendlyName("Recipient 3");
+        recipients.add(recipient3);
+
+        message.setTo(recipients);
 
         // Set other properties as needed
         message.setSubject("Complex BulkSend Example");
@@ -75,7 +85,7 @@ public class BulkSendComplexExample implements Example {
 
         // Send the message
 
-        return null;
+        return client.send(message);
     }
 
     // Add some global merge-data (These will be applied to all Recipients unless specifically overridden by Recipient level merge-data)
