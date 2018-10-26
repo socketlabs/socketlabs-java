@@ -9,15 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 class AddressJson {
 
-    /**
-     * A valid email address
-     */
+    /** A valid email address */
     @JsonProperty("emailAddress")
     private String email;
-
-    /**
-     * The friendly or display name for the recipient.
-     */
+    /** The friendly or display name for the recipient. */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("friendlyName")
     private String friendlyName;

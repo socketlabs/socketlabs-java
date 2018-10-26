@@ -13,35 +13,21 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class AttachmentJson {
 
-    /**
-     * Name of attachment (displayed in email clients)
-     */
+    /** Name of attachment (displayed in email clients) */
     @JsonProperty("Name")
     private String name;
-
-    /**
-     * The ContentType (MIME type) of the attachment.
-     * Example - text/plain, image/jpeg
-     */
+    /** The ContentType (MIME type) of the attachment.
+     * Example - text/plain, image/jpeg */
     @JsonProperty("ContentType")
     private String mimeType;
-
-    /**
-     * When set, used to embed an image within the body of an email message.
-     */
+    /** When set, used to embed an image within the body of an email message. */
     @JsonProperty("ContentId")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String contentId;
-
-    /**
-     * The BASE64 encoded string containing the contents of an attachment.
-     */
+    /** The BASE64 encoded string containing the contents of an attachment. */
     @JsonProperty("Content")
     private byte[] content;
-
-    /**
-     * A list of custom headers added to the attachment.
-     */
+    /** A list of custom headers added to the attachment. */
     @JsonProperty("CustomHeaders")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CustomHeaderJson> customHeaderJsons;

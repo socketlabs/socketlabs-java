@@ -9,24 +9,15 @@ import java.util.List;
  */
 class InjectionRequest {
 
-    /**
-     * Your SocketLabs ServerId number
-     */
+    /** Your SocketLabs ServerId number */
     @JsonProperty("ServerId")
     private String serverId;
-
-    /**
-     * Your SocketLabs Injection API key
-     */
+    /** Your SocketLabs Injection API key */
     @JsonProperty("ApiKey")
     private String apiKey;
-
-    /**
-     * The list of messages to be sent
-     */
+    /** The list of messages to be sent */
     @JsonProperty("Messages")
     private List<MessageJson> messageJsons;
-
 
     /**
      * Creates a new instance of the InjectionRequest class
