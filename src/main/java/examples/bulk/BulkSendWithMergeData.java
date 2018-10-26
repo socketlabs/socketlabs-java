@@ -16,6 +16,7 @@ public class BulkSendWithMergeData implements Example {
         // Add some global merge-data (These will be applied to all Recipients unless specifically overridden by Recipient level merge-data)
         message.addGlobalMergeData("Motto", "When hitting the Inbox matters!");
         message.addGlobalMergeData("Birthday", "Unknown");
+        message.addGlobalMergeData("birthday", "empty");
         message.addGlobalMergeData("Age", "an unknown number of");
         message.addGlobalMergeData("UpSell", "BTW:  You are eligible for discount pricing when you upgrade your service!");
 

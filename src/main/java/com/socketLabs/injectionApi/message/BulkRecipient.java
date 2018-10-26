@@ -1,13 +1,15 @@
 package com.socketLabs.injectionApi.message;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class BulkRecipient  {
 
     private String emailAddress;
     private String friendlyName;
-    private Map<String, String> mergeData = new HashMap<String, String>();
+    private TreeMap<String, String> mergeData  = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
     public BulkRecipient(String emailAddress) {
         this.emailAddress = emailAddress;
@@ -16,7 +18,7 @@ public class BulkRecipient  {
         this.emailAddress = emailAddress;
         this.friendlyName = name;
     }
-    public BulkRecipient(String emailAddress, String name, Map<String, String> mergeData) {
+    public BulkRecipient(String emailAddress, String name, TreeMap<String, String> mergeData) {
         this.emailAddress = emailAddress;
         this.friendlyName = name;
         this.mergeData = mergeData;
@@ -36,10 +38,10 @@ public class BulkRecipient  {
         this.friendlyName = value;
     }
 
-    public Map<String, String> getMergeData() {
+    public TreeMap<String, String> getMergeData() {
         return this.mergeData;
     }
-    public void setMergeData(Map<String, String> mergeData) {
+    public void setMergeData(TreeMap<String, String> mergeData) {
         this.mergeData = mergeData;
     }
     public void addMergeData(String field, String value) {

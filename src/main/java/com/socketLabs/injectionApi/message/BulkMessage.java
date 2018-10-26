@@ -2,15 +2,12 @@ package com.socketLabs.injectionApi.message;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BulkMessage implements MessageBase {
 
     private List<BulkRecipient> to = new ArrayList<>();
-    private Map<String, String> globalMergeData = new HashMap<>();
+    private TreeMap<String, String> globalMergeData = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     private String subject;
     private String plainTextBody;
     private String htmlBody;
@@ -148,8 +145,8 @@ public class BulkMessage implements MessageBase {
         this.customHeaders.add(new CustomHeader(name, value ));
     }
 
-    public Map<String, String> getMergeData() { return globalMergeData; }
-    public void setMergeData(Map<String, String> value) { this.globalMergeData = value; }
+    public TreeMap<String, String> getMergeData() { return globalMergeData; }
+    public void setMergeData(TreeMap<String, String> value) { this.globalMergeData = value; }
     /**
      * Add a Global Merge Data to the message
      * @param field String
@@ -157,6 +154,9 @@ public class BulkMessage implements MessageBase {
      */
     public void addGlobalMergeData(String field, String value) {
         this.globalMergeData.put(field, value);
+        //if (!this.globalMergeData.containsKey(field)) {
+        //    this.globalMergeData.put(field, value);
+        //}
     }
 
     @Override

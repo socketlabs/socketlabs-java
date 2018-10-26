@@ -20,7 +20,6 @@ public class HttpRequest {
     public HttpRequest(HttpRequestMethod method, String endPointUrl) {
         this.method = method;
         this.endPointUrl = endPointUrl;
-
     }
 
     public void setBody(String value) {
