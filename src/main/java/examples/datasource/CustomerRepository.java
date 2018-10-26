@@ -7,7 +7,7 @@ public class CustomerRepository {
 
     //For our example we are using a mock repository class that returns hard-coded data.
     //Normally this class would access a database to retrieve this data.
-    public List<Customer> GetCustomers()
+    public List<examples.datasource.Customer> getCustomers()
     {
         List<Customer> customers = new ArrayList<>();
 
