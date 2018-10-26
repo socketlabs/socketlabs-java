@@ -1,13 +1,14 @@
 package com.socketLabs.injectionApi.core.serialization;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.socketLabs.injectionApi.SendResponse;
-import com.socketLabs.injectionApi.SendResult;
-import com.socketLabs.injectionApi.core.HttpResponse;
+import com.socketLabs.injectionApi.*;
+import okhttp3.Response;
 
 import java.io.IOException;
 
+/**
+ * Used by the HttpClient to convert the response form the Injection API.
+ */
 public class InjectionResponseParser {
 
     /**
@@ -16,12 +17,12 @@ public class InjectionResponseParser {
      * @return A SendResponse from the Injection Api response
      * @throws IOException in case of a network error.
      */
-    public SendResponse Parse(HttpResponse response) throws IOException {
+    public SendResponse Parse(Response response) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        InjectionResponseDto injectionResponse = mapper.readValue(response.getContent(), InjectionResponseDto.class);
+        InjectionResponseDto injectionResponse = mapper.readValue(response.body().string(), InjectionResponseDto.class);
 
-        SendResult resultEnum = DetermineSendResult(injectionResponse, response.getResponseCode());
+        SendResult resultEnum = DetermineSendResult(injectionResponse, response.networkResponse().code());
         SendResponse newResponse = new SendResponse(resultEnum);
         newResponse.setTransactionReceipt(injectionResponse.getTransactionReceipt());
 
@@ -37,7 +38,6 @@ public class InjectionResponseParser {
         return newResponse;
 
     }
-
 
     /**
      * Enumerated SendResult of the payload response from the Injection Api
