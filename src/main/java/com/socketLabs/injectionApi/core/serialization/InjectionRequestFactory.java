@@ -10,36 +10,75 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Used by the Send function of the SocketLabsClient to generate an InjectionRequest for the Injection Api.
+ */
 public class InjectionRequestFactory{
 
+    /**
+     * Your SocketLabs server ID
+     */
     private int serverId;
 
+    /**
+     * Your SocketLabs Injection API key
+     */
     private String apiKey;
 
-    // TODO: remove .enable(SerializationFeature.INDENT_OUTPUT) (used for debugging)
-    private ObjectMapper mapper = new ObjectMapper()
-            .enable(SerializationFeature.INDENT_OUTPUT)
-            .setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+    /**
+     * Jackson 2 class used for writing message to JSON
+     */
+    private ObjectMapper mapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 
+    /**
+     * Creates a new instance of the InjectionRequestFactory.
+     * @param serverId Your SocketLabs server ID
+     * @param apiKey Your SocketLabs Injection API key
+     */
     public InjectionRequestFactory(int serverId, String apiKey) {
         this.serverId = serverId;
         this.apiKey = apiKey;
     }
 
+    /**
+     * Gets the server ID for the Injection Request Factory.
+     * @return String
+     */
     public int getServerId() {
         return serverId;
     }
+
+    /**
+     * Sets the server ID for the Injection Request Factory.
+     * @param serverId String
+     */
     public void setServerId(int serverId) {
         this.serverId = serverId;
     }
 
+
+    /**
+     * Gets the SocketLabs Injection API key for the Injection Request Factory.
+     * @return String
+     */
     public String getApiKey() {
         return apiKey;
     }
+
+    /**
+     * Sets the SocketLabs Injection API key for the Injection Request Factory.
+     * @param apiKey String
+     */
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
     }
 
+    /**
+     * Generate the InjectionRequest for sending to the Injection Api.
+     * @param bulkMessage A BulkMessage object to be sent
+     * @return String
+     * @throws IOException
+     */
     public String GenerateRequest(BulkMessage bulkMessage) throws IOException {
         List<MessageJson> messageJsons = new ArrayList<>();
         MessageJson messageJson = generateBaseMessage(bulkMessage);
@@ -57,6 +96,12 @@ public class InjectionRequestFactory{
         return mapper.writeValueAsString(new InjectionRequest(this.serverId, this.apiKey, messageJsons));
     }
 
+    /**
+     * Generate the InjectionRequest for sending to the Injection Api.
+     * @param basicMessage A BasicMessage object to be sent.
+     * @return String
+     * @throws IOException
+     */
     public String GenerateRequest(BasicMessage basicMessage) throws IOException {
 
         List<MessageJson> messageJsons = new ArrayList<>();
@@ -70,10 +115,21 @@ public class InjectionRequestFactory{
         return GetAsJson(new InjectionRequest(this.serverId, this.apiKey, messageJsons));
     }
 
+    /**
+     * Returns an InjectionRequest as JSON to be sent to the Injection API.
+     * @param request InjectionRequest
+     * @return String
+     * @throws IOException
+     */
     private String GetAsJson(InjectionRequest request) throws IOException {
         return mapper.writeValueAsString(request);
     }
 
+    /**
+     * Converts MessageBase object to a MessageJson object
+     * @param messageBase
+     * @return MessageJson - JSON serializable representation of MessageBase
+     */
     private MessageJson generateBaseMessage(MessageBase messageBase) {
         MessageJson messageJson = new MessageJson();
 
@@ -94,9 +150,12 @@ public class InjectionRequestFactory{
         return messageJson;
     }
 
-    // TODO: Some of these methods are really similar so maybe we should look at refactoring
-
-    private List<CustomHeaderJson> populateCustomHeaders(List<com.socketLabs.injectionApi.message.CustomHeader> baseCustomHeaders) {
+    /**
+     * Converts a List of CustomHeader objects to a List of CustomHeaderJson objects.
+     * @param baseCustomHeaders List of CustomHeader objects
+     * @return List<CustomHeaderJson>
+     */
+    private List<CustomHeaderJson> populateCustomHeaders(List<CustomHeader> baseCustomHeaders) {
         if (baseCustomHeaders == null) {
             return null;
         }
@@ -108,7 +167,12 @@ public class InjectionRequestFactory{
         return customHeaderJsons;
     }
 
-    private List<AttachmentJson> populateAttachments(List<com.socketLabs.injectionApi.message.Attachment> baseAttachments) {
+    /**
+     * Converts a list of Attachment objects to a List of AttachmentJson objects.
+     * @param baseAttachments list of Attachment objects
+     * @return
+     */
+    private List<AttachmentJson> populateAttachments(List<Attachment> baseAttachments) {
         if (baseAttachments == null) {
             return null;
         }
@@ -127,6 +191,11 @@ public class InjectionRequestFactory{
         return attachments;
     }
 
+    /**
+     * Converts a List of EmailAddress objects to a List of AddressJson objects.
+     * @param baseTo List of EmailAddress objects
+     * @return List<AddressJson>
+     */
     private List<AddressJson> populateTo(List<EmailAddress> baseTo) {
         if (baseTo == null) {
             return null;
@@ -141,6 +210,13 @@ public class InjectionRequestFactory{
         return addresses;
     }
 
+    /**
+     * Loops through a List of BulkRecipient objects,
+     * then populates and returns a MergeDataJson object with their merge data.
+     * @param global Map<String, String> of global merge data
+     * @param recipients List of BulkRecipients
+     * @return
+     */
     private MergeDataJson populateMergeData(Map<String, String> global, List<BulkRecipient> recipients) {
 
         List<List<MergeFieldJson>> perMessageMergeFields = new ArrayList<>();
@@ -160,6 +236,11 @@ public class InjectionRequestFactory{
         return new MergeDataJson(perMessageMergeFields, generateMergeFieldList(global));
     }
 
+    /**
+     * Converts a HashMap of merge field data into a List of MergeFieldJson objects.
+     * @param mergeData Map<String, String> of merge data
+     * @return List of MergeFieldJson objects
+     */
     private List<MergeFieldJson> generateMergeFieldList(Map<String, String> mergeData) {
         List<MergeFieldJson> mergeFieldJsonList = new ArrayList<>();
 
