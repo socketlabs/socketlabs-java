@@ -10,27 +10,78 @@ import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
 public class HttpRequest {
 
+    /**
+     * Enumeration of HTTP Request Methods
+     */
+    public enum HttpRequestMethod {
+        GET,
+        POST,
+        PUT,
+        DELETE;
+    }
+
+    /**
+     * The HTTP Request Method to use
+     */
     private HttpRequestMethod method;
+    /**
+     * The URL to use for the HTTP request
+     */
     private String endPointUrl;
+    /**
+     * The HTTP request body to send
+     */
     private String body;
+    /**
+     * The Proxy to use when making the HTTP request
+     */
     private Proxy proxy;
+    /**
+     * The headers to add to the HTTP Request
+     */
     private Map<String, String> headers = new HashMap<>();
 
+    /**
+     * Creates a new instance of the HTTP Request class
+     * @param method HTTpRequestMethod
+     * @param endPointUrl String
+     */
     public HttpRequest(HttpRequestMethod method, String endPointUrl) {
         this.method = method;
         this.endPointUrl = endPointUrl;
     }
 
+    /**
+     * Sets the HTTP request body
+     * @param value
+     */
     public void setBody(String value) {
         this.body = value;
     }
+
+    /**
+     * Sets the headers for the HTTP Request
+     * @param key String
+     * @param value String
+     */
     public void setHeader(String key, String value) {
         this.headers.put(key, value);
     }
+
+    /**
+     * Sets the Proxy to use when making the HTTP request
+     * @param value
+     */
     public void setProxy(Proxy value) { this.proxy = value; }
 
+    /**
+     * Media Type to use to force JSON
+     */
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
     /**
@@ -47,7 +98,6 @@ public class HttpRequest {
         return ParseResponse(response);
 
     }
-
 
     /**
      * Send an HTTP Request asynchronously
@@ -74,8 +124,10 @@ public class HttpRequest {
 
     }
 
-
-
+    /**
+     * Build the HTTP Client call
+     * @return Call
+     */
     private Call BuildClientCall() {
 
         OkHttpClient client = new OkHttpClient();
@@ -113,6 +165,12 @@ public class HttpRequest {
 
     }
 
+    /**
+     * Parse the Response into a SendResponse
+     * @param response the response from the HTTP request
+     * @return SendResponse
+     * @throws IOException
+     */
     private SendResponse ParseResponse(Response response) throws IOException {
 
         // TODO: remove (used for debugging)
@@ -127,12 +185,8 @@ public class HttpRequest {
         System.out.println("Response Message : " + responseMessage);
         // TODO: end remove
 
-        //HttpResponse response = new HttpResponse(responseCode, ParseStream(stream));
-        HttpResponse resp = new HttpResponse(response.networkResponse().code(), response.body().string());
-        resp.setResponseMessage(response.networkResponse().message());
-
         InjectionResponseParser parser = new InjectionResponseParser();
-        return parser.Parse(resp);
+        return parser.Parse(response);
 
     }
 }
