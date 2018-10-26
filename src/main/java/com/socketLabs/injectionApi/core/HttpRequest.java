@@ -1,5 +1,6 @@
 package com.socketLabs.injectionApi.core;
 
+import com.socketLabs.injectionApi.SendResponse;
 import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
 import okhttp3.*;
 import okhttp3.Request.Builder;
@@ -20,7 +21,6 @@ public class HttpRequest {
     public HttpRequest(HttpRequestMethod method, String endPointUrl) {
         this.method = method;
         this.endPointUrl = endPointUrl;
-
     }
 
     public void setBody(String value) {
@@ -38,16 +38,54 @@ public class HttpRequest {
      * @return A SendResponse from the Injection Api response
      * @throws Exception in case of a network error.
      */
-    public HttpResponse SendRequest()  throws IOException  {
+    public SendResponse SendRequest()  throws IOException  {
+
+        Call call = BuildClientCall();
+
+        Response response = call.execute();
+
+        return ParseResponse(response);
+
+    }
+
+
+    /**
+     * Send an HTTP Request asynchronously
+     * @param callback the SendAsyncCallback.
+     */
+    public void SendAsyncRequest(final SendAsyncCallback callback) {
+
+        Call call = BuildClientCall();
+
+        final SendResponse[] sendResp = {new SendResponse()};
+
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+
+                sendResp[0] = ParseResponse(response);
+                callback.onResponse(sendResp[0]);
+                // ...
+            }
+
+            public void onFailure(Call call, IOException ex) {
+                callback.onError(ex);
+            }
+        });
+
+    }
+
+
+
+    private Call BuildClientCall() {
 
         OkHttpClient client = new OkHttpClient();
 
         if (this.proxy != null)
             client = new OkHttpClient.Builder()
-                .proxy(this.proxy)
-                .build();
+                    .proxy(this.proxy)
+                    .build();
 
-        Builder builder = new Builder().url("https://inject.socketlabs.com/api/v1/email");
+        Builder builder = new Builder().url(this.endPointUrl);
 
         //add request method
         RequestBody reqBody = RequestBody.create(JSON, this.body);
@@ -71,8 +109,11 @@ public class HttpRequest {
             builder.addHeader(header.getKey(), header.getValue());
         }
 
-        // make the call
-        Response response = client.newCall(builder.build()).execute();
+        return client.newCall(builder.build());
+
+    }
+
+    private SendResponse ParseResponse(Response response) throws IOException {
 
         // TODO: remove (used for debugging)
         int responseCode = response.networkResponse().code();
@@ -89,44 +130,9 @@ public class HttpRequest {
         //HttpResponse response = new HttpResponse(responseCode, ParseStream(stream));
         HttpResponse resp = new HttpResponse(response.networkResponse().code(), response.body().string());
         resp.setResponseMessage(response.networkResponse().message());
-        return resp;
-    }
 
-    /**
-     * Attempt an API call. This method executes the API call asynchronously
-     * on an internal thread pool. If the call is rate limited, the thread
-     * will retry up to the maximum configured time. The supplied callback
-     * will be called in the event of an error, or a successful response.
-     * @param callback the callback.
-     */
-    public void SendAsyncRequest(final HttpCallback callback) {
-
-        new Thread(() -> {
-
-            HttpResponse response = new HttpResponse();
-
-            try {
-                response = SendRequest();
-            } catch (IOException ex) {
-                // Stop retrying if there is a network error.
-                callback.onError(ex);
-                return;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            InjectionResponseParser parser = new InjectionResponseParser();
-            try {
-                callback.onResponse(parser.Parse(response));
-            } catch (IOException ex) {
-                // Stop retrying if there is a network error.
-                callback.onError(ex);
-                return;
-            }
-            return;
-
-        }).start();
+        InjectionResponseParser parser = new InjectionResponseParser();
+        return parser.Parse(resp);
 
     }
-
 }

@@ -1,13 +1,8 @@
 package examples.basic;
 
-import com.socketLabs.injectionApi.SendResponse;
-import com.socketLabs.injectionApi.SocketLabsClient;
-import com.socketLabs.injectionApi.message.Attachment;
-import com.socketLabs.injectionApi.message.BasicMessage;
-import com.socketLabs.injectionApi.message.CustomHeader;
-import com.socketLabs.injectionApi.message.EmailAddress;
-import examples.Example;
-import examples.ExampleConfig;
+import com.socketLabs.injectionApi.*;
+import com.socketLabs.injectionApi.message.*;
+import examples.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,10 +22,9 @@ public class BasicSendComplexExample implements Example {
         message.setMessageId("ComplexExample");
         message.setMailingId("BasicSend");
 
-        message.setCharSet("UTF16");
         message.setSubject("Sending A Complex Test Message (basic Send)");
 
-        message.setHtmlBody("<html><body><h1>Sending A Complex Test Message</h1><p>This is the html Body of my message.</p><h2>UTF16 Characters:</h2><p>例 (example)</p><h2>Embedded Image:</h2><p><img src=\"cid:bus\" /></p></body></html>");
+        message.setHtmlBody("<html><body><h1>Sending A Complex Test Message</h1><p>This is the html Body of my message.</p><h2>Embedded Image:</h2><p><img src=\"cid:bus\" /></p></body></html>");
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));

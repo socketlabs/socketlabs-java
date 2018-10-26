@@ -1,14 +1,10 @@
 package examples.bulk;
 
-import com.socketLabs.injectionApi.SendResponse;
-import com.socketLabs.injectionApi.SocketLabsClient;
-import com.socketLabs.injectionApi.message.BulkMessage;
-import com.socketLabs.injectionApi.message.BulkRecipient;
-import com.socketLabs.injectionApi.message.EmailAddress;
-import examples.Example;
-import examples.ExampleConfig;
+import com.socketLabs.injectionApi.*;
+import com.socketLabs.injectionApi.message.*;
+import examples.*;
 
-public class BulkSendWithCharsetMergeData implements Example {
+public class BulkSendWithASCIICharsetMergeData implements Example {
     @Override
     public SendResponse RunExample() throws Exception {
 
@@ -19,19 +15,19 @@ public class BulkSendWithCharsetMergeData implements Example {
         message.setFrom(new EmailAddress("from@example.com"));
 
         // Set HTML and plain text body, both of which use UTF16 characters
-        message.setHtmlBody("<html><body><h1>Sending A UTF16 Charset Email</h1><h2>UTF16 Characters:</h2><p>This is the html Body of my message.</p><p>Complete? - %%Complete%%</p></body></html>");
+        message.setHtmlBody("<html><body><h1>Sending A ASCII Charset Email</h1><p>This is the html Body of my message.</p><p>Complete? - %%Complete%%</p></body></html>");
         message.setPlainTextBody("Merge Data" + "   Complete - %%Complete%%");
 
         // Set the charset
-        message.setCharSet("UTF16");
+        message.setCharSet("ASCII");
 
         // Add recipients with merge data that contains UTF16 characters
         BulkRecipient recipient1 = new BulkRecipient("ross.brazuk@socketlabs.com");
-        recipient1.addMergeData("Complete", "はい");
+        recipient1.addMergeData("Complete", "✘");
         message.getTo().add(recipient1);
 
         BulkRecipient recipient2 = new BulkRecipient("ross.brazuk@gekodesign.net");
-        recipient2.addMergeData("Complete", "いいえ");
+        recipient2.addMergeData("Complete", "✔");
         message.getTo().add(recipient2);
 
         // Instantiate the client and send

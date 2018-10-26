@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class InjectionResponseDto {
+class InjectionResponseDto {
 
     /** The resulting response ErrorCode of the Injection Api send request */
     @JsonProperty("ErrorCode")

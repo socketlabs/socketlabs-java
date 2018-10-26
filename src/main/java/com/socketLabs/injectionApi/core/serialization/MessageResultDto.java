@@ -7,7 +7,7 @@ import com.socketLabs.injectionApi.AddressResult;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MessageResultDto {
+class MessageResultDto {
 
     /** Index of message being sent. */
     @JsonProperty("Index")
