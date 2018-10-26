@@ -10,7 +10,7 @@ import java.util.*;
  * optionally customizing the message via the use of Merge Data.
  *
  * Example:
- * @<code>
+ * <code>
  *     BulkMessage message = new BulkMessage();
  *
  *     message.setPlainTextBody("This is the body of my message sent to ##Name##");

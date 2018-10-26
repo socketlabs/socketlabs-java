@@ -4,7 +4,7 @@ package com.socketLabs.injectionApi.message;
  * Represents a custom header as a name and value pair.
  *
  * Example:
- *@<code>
+ * <code>
  *     CustomHeader header1 = new CustomHeader();
  *     header1.setName("name1");
  *     header1.setValue("value1");

@@ -11,7 +11,7 @@ import java.util.List;
  * message does not support merge fields.
  *
  * Example:
- * @<code>
+ * <code>
  *     BasicMessage message = new BasicMessage();
  *
  *     message.setSubject("Sending A Message");

@@ -6,6 +6,9 @@ import com.socketLabs.injectionApi.message.*;
 
 import java.net.Proxy;
 
+/**
+ * SocketLabsClient is a wrapper for the SocketLabs Injection API that makes it easy to send messages and parse responses.
+ */
 public class SocketLabsClient implements SocketLabsClientAPI {
 
     private int serverId;
@@ -50,7 +53,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
      * Synchronously sends a basic email message and returns the response from the Injection API.
      * @param message A BasicMessage object to be sent.
      * @return A SendResponse of an SocketLabsClient send request.
-     * @throws Exception
+     * @throws Exception exception
      */
     @Override
     public SendResponse send(BasicMessage message) throws Exception {
@@ -70,7 +73,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
      * Synchronously sends a bulk email message and returns the response from the Injection API.
      * @param message A BulkMessage object to be sent.
      * @return A SendResponse of an SocketLabsClient send request.
-     * @throws Exception
+     * @throws Exception exception
      */
     @Override
     public SendResponse send(BulkMessage message) throws Exception {
@@ -90,7 +93,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
      * Asynchronously sends a basic email message and returns the response from the Injection API.
      * @param message A BasicMessage object to be sent.
      * @param callback A SendAsyncCallback to handle error and response from the Injection API.
-     * @throws Exception
+     * @throws Exception exception
      */
     @Override
     public void sendAsync(BasicMessage message, final SendAsyncCallback callback) throws Exception {
@@ -112,7 +115,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
      * Asynchronously sends a bulk email message and returns the response from the Injection API.
      * @param message A BulkMessage object to be sent.
      * @param callback A SendAsyncCallback to handle error and response from the Injection API.
-     * @throws Exception
+     * @throws Exception exception
      */
     @Override
     public void sendAsync(BulkMessage message, final SendAsyncCallback callback) throws Exception {

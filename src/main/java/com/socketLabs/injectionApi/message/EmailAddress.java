@@ -4,7 +4,7 @@ package com.socketLabs.injectionApi.message;
  * Represents an individual email address for a message
  * 
  * Example:
- * @<code>
+ * <code>
  *     EmailAddress emailAddress = new EmailAddress("recipient@example.com", "Recipient 1");
  * </code>
  */

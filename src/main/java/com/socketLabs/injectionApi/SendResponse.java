@@ -47,7 +47,7 @@ public class SendResponse {
     /**
      * Initializes a new instance of the SendResponse class
      * @param result The result of the SocketLabsClient send request.
-     * @param addressResults
+     * @param addressResults An array of AddressResult of the SocketLabsClient send request.
      */
     public SendResponse(SendResult result, List<AddressResult> addressResults) {
         this.result = result;
@@ -115,7 +115,7 @@ public class SendResponse {
 
     /**
      * A message detailing why the SocketLabsClient send request failed.
-     * @return
+     * @return String
      */
     public String getResponseMessage() {
 

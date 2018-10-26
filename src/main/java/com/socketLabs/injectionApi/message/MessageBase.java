@@ -10,62 +10,62 @@ public interface MessageBase {
 
     /**
      * Get the instance of the message Subject.
-     * @return
+     * @return String
      */
     String getSubject();
     /**
      * Set the instance of the message Subject.
-     * @param value
+     * @param value String
      */
     void setSubject(String value);
 
     /**
      * Get the plain text portion of the message body.
-     * @return
+     * @return String
      */
     String getPlainTextBody();
     /**
      * Set the plain text portion of the message body.
-     * @param value
+     * @param value String
      */
     void setPlainTextBody(String value);
 
     /**
      * Get the HTML portion of the message body.
-     * @return
+     * @return String
      */
     String getHtmlBody();
     /**
      * Set the HTML portion of the message body.
-     * @param htmlBody
+     * @param value String
      */
-    void setHtmlBody(String htmlBody);
+    void setHtmlBody(String value);
 
     /**
      * Get the Api Template for the message.
-     * @return
+     * @return String
      */
     @Nullable Integer getApiTemplate();
     /**
      * Set the Api Template for the message.
-     * @param value
+     * @param value String
      */
     void setApiTemplate(@Nullable Integer value);
 
     /**
      * Get the custom MailingId for the message.     *
-     * @return String
+     * @return String String
      */
     String getMailingId();
     /**
      * Set the custom MailingId for the message.
-     * @param value String
+     * @param value String String
      */
     void setMailingId(String value);
 
     /**
      * Get the custom MessageId for the message.
-     * @return String
+     * @return String String
      */
     String getMessageId();
     /**

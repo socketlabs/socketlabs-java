@@ -13,7 +13,7 @@ public interface SocketLabsClientAPI {
      * Asynchronously sends a basic email message and returns the response from the Injection API.
      * @param message A BasicMessage object to be sent.
      * @param callback A SendAsyncCallback to handle error and response from the Injection API.
-     * @throws Exception
+     * @throws Exception exception
      */
     void sendAsync(BasicMessage message, final SendAsyncCallback callback) throws Exception;
 
@@ -21,7 +21,7 @@ public interface SocketLabsClientAPI {
      * Asynchronously sends a bulk email message and returns the response from the Injection API.
      * @param message A BulkMessage object to be sent.
      * @param callback A SendAsyncCallback to handle error and response from the Injection API.
-     * @throws Exception
+     * @throws Exception exception
      */
     void sendAsync(BulkMessage message, final SendAsyncCallback callback) throws Exception;
 
@@ -29,7 +29,7 @@ public interface SocketLabsClientAPI {
      * Synchronously sends a basic email message and returns the response from the Injection API.
      * @param message A BasicMessage object to be sent.
      * @return A SendResponse of an SocketLabsClient send request.
-     * @throws Exception
+     * @throws Exception exception
      */
     SendResponse send(BasicMessage message) throws Exception;
 
@@ -37,7 +37,7 @@ public interface SocketLabsClientAPI {
      * Synchronously sends a bulk email message and returns the response from the Injection API.
      * @param message A BulkMessage object to be sent.
      * @return A SendResponse of an SocketLabsClient send request.
-     * @throws Exception
+     * @throws Exception exception
      */
     SendResponse send(BulkMessage message) throws Exception;
 }
