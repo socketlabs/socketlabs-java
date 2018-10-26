@@ -10,37 +10,112 @@ import java.util.List;
  * This message can have many recipients of different types, such as To, CC, and BCC.  This
  * message does not support merge fields.
  *
- * BasicMessage message = new BasicMessage();
+ * Example:
+ *     BasicMessage message = new BasicMessage();
  *
- * message.setSubject("Sending A Message");
- * message.setHtmlBody("<html>This is the Html Body of my message.</html>");
- * message.setPlainTextBody("This is the Plain Text Body of my message.");
+ *     message.setSubject("Sending A Message");
+ *     message.setHtmlBody("<html>This is the Html Body of my message.</html>");
+ *     message.setPlainTextBody("This is the Plain Text Body of my message.");
  *
- * message.setFrom(new EmailAddress("from@example.com"));
- * message.setReplyTo(new EmailAddress("replyto@example.com"));
+ *     message.setFrom(new EmailAddress("from@example.com"));
+ *     message.setReplyTo(new EmailAddress("replyto@example.com"));
  *
- * message.getTo().add(new EmailAddress("recipient1@example.com"));
- * message.getTo().add(new EmailAddress("recipient2@example.com", "Recipient #2"));
+ *     message.getTo().add(new EmailAddress("recipient1@example.com"));
+ *     message.getTo().add(new EmailAddress("recipient2@example.com", "Recipient #2"));
  *
- * message.addToEmailAddress("recipient3@example.com");
- * message.addToEmailAddress("recipient4@example.com", "Recipient #4");
+ *     message.addToEmailAddress("recipient3@example.com");
+ *     message.addToEmailAddress("recipient4@example.com", "Recipient #4");
  *
  */
 public class BasicMessage implements MessageBase {
 
+    /**
+     * The list of To recipients.
+     */
     private List<EmailAddress> to = new ArrayList<>();
+    /**
+     * The list of CC recipients.
+     */
     private List<EmailAddress> cc = new ArrayList<>();
+    /**
+     * The list of BCC recipients.
+     */
     private List<EmailAddress> bcc = new ArrayList<>();
+    /**
+     * The message Subject.
+     */
     private String subject;
+    /**
+     * The plain text portion of the message body.
+     * <p>
+     *     (Optional)
+     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate
+     * </p>
+     */
     private String plainTextBody;
+    /**
+     * The HTML portion of the message body.
+     * <p>
+     *     (Optional)
+     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate
+     * </p>
+     */
     private String htmlBody;
+    /**
+     * The Api Template for the message.
+     * <p>
+     *     (Optional)
+     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate
+     * </p>
+     */
     private @Nullable Integer apiTemplate;
+    /**
+     * The custom MailingId for the message.
+     * <p>
+     *     (Optional)
+     *     See https://www.socketlabs.com/blog/best-practices-for-using-custom-mailingids-and-messageids/ for more information.
+     * </p>
+     */
     private String mailingId;
+    /**
+     * The custom MessageId for the message.
+     * <p>
+     *     (Optional)
+     * </p>
+     */
     private String messageId;
+    /**
+     * The From address.
+     */
     private EmailAddress from;
+    /**
+     * The ReplyTo address for the message.
+     * <p>
+     *     (Optional)
+     * </p>
+     */
     private EmailAddress replyTo;
+    /**
+     * The list of attachments.
+     * <p>
+     *     (Optional)
+     * </p>
+     */
     private List<Attachment> attachments = new ArrayList<>();
+    /**
+     * The optional character set for your message.
+     * <p>
+     *     (Optional)
+     *     Default is UTF8
+     * </p>
+     */
     private String charSet;
+    /**
+     * A list of custom message headers added to the message.
+     * <p>
+     *     (Optional)
+     * </p>
+     */
     private List<CustomHeader> customHeaders = new ArrayList<>();
 
 
@@ -56,7 +131,6 @@ public class BasicMessage implements MessageBase {
      * @return List<EmailAddress>
      */
     public List<EmailAddress> getTo() { return this.to; }
-
     /**
      * Sets the list of To recipients.
      * @param value List<EmailAddress>
@@ -309,7 +383,7 @@ public class BasicMessage implements MessageBase {
     public void setCustomHeaders(List<CustomHeader> value) { this.customHeaders = value; }
 
     /**
-     * Add a CustomHeaderJson to the message
+     * Add a CustomHeader to the message
      * @param name {String}
      * @param value {String}
      */
@@ -317,7 +391,7 @@ public class BasicMessage implements MessageBase {
         this.customHeaders.add(new CustomHeader(name, value ));
     }
     /**
-     * Add a CustomHeaderJson to the message
+     * Add a CustomHeader to the message
      * @param header {CustomHeaderJson}
      */
     public void addCustomHeader(CustomHeader header) {

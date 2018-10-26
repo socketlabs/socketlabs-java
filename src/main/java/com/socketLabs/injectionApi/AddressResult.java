@@ -9,10 +9,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AddressResult {
 
+    /**
+     * The recipient's email address.
+     */
     @JsonProperty("EmailAddress")
     private String emailAddress;
+
+    /**
+     * Whether the recipient was accepted for delivery.
+     */
     @JsonProperty("Accepted")
     private boolean accepted;
+
+    /**
+     * An error code detailing why the recipient was not accepted.
+     */
     @JsonProperty("ErrorCode")
     private String errorCode;
 
