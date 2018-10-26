@@ -10,6 +10,7 @@ import java.util.*;
  * optionally customizing the message via the use of Merge Data.
  *
  * Example:
+ * @<code>
  *     BulkMessage message = new BulkMessage();
  *
  *     message.setPlainTextBody("This is the body of my message sent to ##Name##");
@@ -24,6 +25,7 @@ import java.util.*;
  *
  *     message.addMergeData("name1", "value1");
  *     message.addMergeData("name2", "value2");
+ * </code>
  */
 public class BulkMessage implements MessageBase {
 

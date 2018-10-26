@@ -25,25 +25,15 @@ public class HttpRequest {
         DELETE;
     }
 
-    /**
-     * The HTTP Request Method to use
-     */
+    /** The HTTP Request Method to use */
     private HttpRequestMethod method;
-    /**
-     * The URL to use for the HTTP request
-     */
+    /** The URL to use for the HTTP request */
     private String endPointUrl;
-    /**
-     * The HTTP request body to send
-     */
+    /** The HTTP request body to send */
     private String body;
-    /**
-     * The Proxy to use when making the HTTP request
-     */
+    /** The Proxy to use when making the HTTP request */
     private Proxy proxy;
-    /**
-     * The headers to add to the HTTP Request
-     */
+    /** The headers to add to the HTTP Request */
     private Map<String, String> headers = new HashMap<>();
 
     /**

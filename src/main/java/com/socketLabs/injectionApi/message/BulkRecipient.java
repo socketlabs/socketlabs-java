@@ -2,6 +2,16 @@ package com.socketLabs.injectionApi.message;
 
 import java.util.TreeMap;
 
+/**
+ * Represents an individual email address for a bulk message
+ *
+ * Example:
+ * @<code>
+ *     BulkRecipient recipient = new BulkRecipient("recipient@example.com", "Recipient 1");
+ *     recipient.addMergeData("key1", "value1");
+ *     recipient.addMergeData("key2", "value2");
+ * </code>
+ */
 public class BulkRecipient  {
 
     /**

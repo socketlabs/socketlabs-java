@@ -11,6 +11,7 @@ import java.util.List;
  * message does not support merge fields.
  *
  * Example:
+ * @<code>
  *     BasicMessage message = new BasicMessage();
  *
  *     message.setSubject("Sending A Message");
@@ -25,7 +26,7 @@ import java.util.List;
  *
  *     message.addToEmailAddress("recipient3@example.com");
  *     message.addToEmailAddress("recipient4@example.com", "Recipient #4");
- *
+ * </code>
  */
 public class BasicMessage implements MessageBase {
 

@@ -10,15 +10,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class CustomHeaderJson {
 
-    /**
-     * The name of your custom header
-     */
+    /** The name of your custom header */
     @JsonProperty("Name")
     private String name;
-
-    /**
-     * The value for your custom header
-     */
+    /** The value for your custom header */
     @JsonProperty("Value")
     private String value;
 
@@ -26,7 +21,6 @@ class CustomHeaderJson {
      * Creates a new instance of the CustomHeaderJson class and sets the name and value pair.
      */
     public CustomHeaderJson() {
-
     }
 
     /**
