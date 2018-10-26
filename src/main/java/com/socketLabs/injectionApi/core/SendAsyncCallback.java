@@ -17,9 +17,8 @@ public interface SendAsyncCallback {
 
     /**
      * Callback method in case of a valid SendResponse.
-     * @return A SendResponse from the Injection Api response
      * @param response the valid SendResponse.
      */
-    public SendResponse onResponse(SendResponse response) throws IOException;
+    public void onResponse(SendResponse response) throws IOException;
 
 }

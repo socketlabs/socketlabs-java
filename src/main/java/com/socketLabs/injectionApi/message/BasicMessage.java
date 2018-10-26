@@ -53,7 +53,7 @@ public class BasicMessage implements MessageBase {
 
     /**
      * Gets the list of To recipients.
-     * @return {List<EmailAddress>}
+     * @return List<EmailAddress>
      */
     public List<EmailAddress> getTo() { return this.to; }
 
@@ -96,7 +96,7 @@ public class BasicMessage implements MessageBase {
     }
     /**
      * Add an EmailAddress to the array of CC recipients
-     * @param emailAddress String}
+     * @param emailAddress String
      * @param name String
      */
     public void addCcEmailAddress(String emailAddress, String name) {

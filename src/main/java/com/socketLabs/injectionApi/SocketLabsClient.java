@@ -13,28 +13,45 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     private String endPointUrl = "https://inject.socketlabs.com/api/v1/email";
     private Proxy proxy;
 
-    public void setEndPointUrl(String endPointUrl) {
-        this.endPointUrl = endPointUrl;
+    /**
+     * Set the SocketLabs Injection API endpoint Url
+     * @param value String
+     */
+    public void setEndPointUrl(String value) {
+        this.endPointUrl = value;
     }
 
     private final String VERSION = "1.0.0";
     private final String userAgent  = String.format("SocketLabs-java/%s(%s)", VERSION, Package.getPackage("java.util").getImplementationVersion());
 
-    // TODO: Need Proxy - Property and Constructor
-
-
+    /**
+     * Creates a new instance of the SocketLabsClient.
+     * @param serverId Your SocketLabs ServerId number.
+     * @param apiKey Your SocketLabs Injection API key.
+     */
     public SocketLabsClient(int serverId, String apiKey) {
         this.serverId = serverId;
         this.apiKey = apiKey;
     }
-
+    /**
+     *
+     * Creates a new instance of the SocketLabsClient.
+     * @param serverId Your SocketLabs ServerId number.
+     * @param apiKey Your SocketLabs Injection API key.
+     * @param optionalProxy The Proxy you would like to use.
+     */
     public SocketLabsClient(int serverId, String apiKey, Proxy optionalProxy) {
         this.serverId = serverId;
         this.apiKey = apiKey;
         this.proxy = optionalProxy;
     }
 
-
+    /**
+     * Synchronously sends a basic email message and returns the response from the Injection API.
+     * @param message A BasicMessage object to be sent.
+     * @return A SendResponse of an SocketLabsClient send request.
+     * @throws Exception
+     */
     @Override
     public SendResponse send(BasicMessage message) throws Exception {
 
@@ -49,6 +66,12 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
     }
 
+    /**
+     * Synchronously sends a bulk email message and returns the response from the Injection API.
+     * @param message A BulkMessage object to be sent.
+     * @return A SendResponse of an SocketLabsClient send request.
+     * @throws Exception
+     */
     @Override
     public SendResponse send(BulkMessage message) throws Exception {
 
@@ -63,13 +86,19 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
     }
 
+    /**
+     * Asynchronously sends a basic email message and returns the response from the Injection API.
+     * @param message A BasicMessage object to be sent.
+     * @param callback A SendAsyncCallback to handle error and response from the Injection API.
+     * @throws Exception
+     */
     @Override
-    public SendResponse sendAsync(BasicMessage message, final SendAsyncCallback callback) throws Exception {
+    public void sendAsync(BasicMessage message, final SendAsyncCallback callback) throws Exception {
 
         SendResponse result = Validate(message);
         if (result.getResult() != SendResult.Success) {
             callback.onResponse(result);
-            return result;
+            return;
         }
 
         HttpRequest request = buildHttpRequest(this.proxy);
@@ -77,9 +106,14 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         request.SendAsyncRequest(callback);
 
-        return result;
     }
 
+    /**
+     * Asynchronously sends a bulk email message and returns the response from the Injection API.
+     * @param message A BulkMessage object to be sent.
+     * @param callback A SendAsyncCallback to handle error and response from the Injection API.
+     * @throws Exception
+     */
     @Override
     public void sendAsync(BulkMessage message, final SendAsyncCallback callback) throws Exception {
 
@@ -108,7 +142,6 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         return validator.ValidateMessage(message);
 
     }
-
     private SendResponse Validate(BulkMessage message) {
 
         SendValidator validator = new SendValidator();
@@ -135,7 +168,5 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         return request;
     }
-
-
 
 }

@@ -37,7 +37,7 @@ public class BasicAsync implements Example {
             }
 
             @Override
-            public SendResponse onResponse(SendResponse response) throws IOException {
+            public void onResponse(SendResponse response) throws IOException {
                 // Handle SendResponse here
 
                 ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
@@ -48,7 +48,7 @@ public class BasicAsync implements Example {
                 System.out.println();
                 System.out.println("Enter a number (or QUIT to exit):");
 
-                return response;
+                return;
 
             }
         });
