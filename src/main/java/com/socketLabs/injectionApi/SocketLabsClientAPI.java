@@ -1,16 +1,16 @@
 package com.socketLabs.injectionApi;
 
-import com.socketLabs.injectionApi.core.HttpCallback;
+import com.socketLabs.injectionApi.core.SendAsyncCallback;
 import com.socketLabs.injectionApi.message.BasicMessage;
 import com.socketLabs.injectionApi.message.BulkMessage;
 
 public interface SocketLabsClientAPI {
 
     // Async basic
-    SendResponse sendAsync(BasicMessage message, final HttpCallback callback) throws Exception;
+    SendResponse sendAsync(BasicMessage message, final SendAsyncCallback callback) throws Exception;
 
     // Async bulk
-    void sendAsync(BulkMessage message, final HttpCallback callback) throws Exception;
+    void sendAsync(BulkMessage message, final SendAsyncCallback callback) throws Exception;
 
     // Sync basic
     SendResponse send(BasicMessage message) throws Exception;

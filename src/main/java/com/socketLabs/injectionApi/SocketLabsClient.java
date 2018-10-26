@@ -2,12 +2,9 @@ package com.socketLabs.injectionApi;
 
 import com.socketLabs.injectionApi.core.*;
 import com.socketLabs.injectionApi.core.serialization.InjectionRequestFactory;
-import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
 import com.socketLabs.injectionApi.message.*;
 
 import java.net.Proxy;
-import java.net.InetSocketAddress;
-
 
 public class SocketLabsClient implements SocketLabsClientAPI {
 
@@ -41,73 +38,42 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     @Override
     public SendResponse send(BasicMessage message) throws Exception {
 
-        SendValidator validator = new SendValidator();
-
-        SendResponse result = validator.ValidateCredentials(this.serverId, this.apiKey);
+        SendResponse result = Validate(message);
         if (result.getResult() != SendResult.Success)
             return result;
-
-        result = validator.ValidateMessage(message);
-        if (result.getResult() != SendResult.Success)
-            return result;
-
-        InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
-        String requestJson = injectionRequest.GenerateRequest(message);
 
         HttpRequest request = buildHttpRequest(this.proxy);
-        request.setBody(requestJson);
+        request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
 
-        InjectionResponseParser parser = new InjectionResponseParser();
-        return parser.Parse(request.SendRequest());
+        return request.SendRequest();
 
     }
 
     @Override
     public SendResponse send(BulkMessage message) throws Exception {
 
-        SendValidator validator = new SendValidator();
-
-        SendResponse result = validator.ValidateCredentials(this.serverId, this.apiKey);
+        SendResponse result = Validate(message);
         if (result.getResult() != SendResult.Success)
             return result;
-
-        result = validator.ValidateMessage(message);
-        if (result.getResult() != SendResult.Success)
-            return result;
-
-        InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
-        String requestJson = injectionRequest.GenerateRequest(message);
 
         HttpRequest request = buildHttpRequest(this.proxy);
-        request.setBody(requestJson);
+        request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
 
-        InjectionResponseParser parser = new InjectionResponseParser();
-        return parser.Parse(request.SendRequest());
+        return request.SendRequest();
 
     }
 
     @Override
-    public SendResponse sendAsync(BasicMessage message, final HttpCallback callback) throws Exception {
+    public SendResponse sendAsync(BasicMessage message, final SendAsyncCallback callback) throws Exception {
 
-        SendValidator validator = new SendValidator();
-
-        SendResponse result = validator.ValidateCredentials(this.serverId, this.apiKey);
-        if (result.getResult() != SendResult.Success){
-            callback.onResponse(result);
-            return result;
-        }
-
-        result = validator.ValidateMessage(message);
+        SendResponse result = Validate(message);
         if (result.getResult() != SendResult.Success) {
             callback.onResponse(result);
             return result;
         }
 
-        InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
-        String requestJson = injectionRequest.GenerateRequest(message);
-
         HttpRequest request = buildHttpRequest(this.proxy);
-        request.setBody(requestJson);
+        request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
 
         request.SendAsyncRequest(callback);
 
@@ -115,31 +81,43 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     }
 
     @Override
-    public void sendAsync(BulkMessage message, final HttpCallback callback) throws Exception {
+    public void sendAsync(BulkMessage message, final SendAsyncCallback callback) throws Exception {
+
+        SendResponse result = Validate(message);
+        if (result.getResult() != SendResult.Success) {
+            callback.onResponse(result);
+            return;
+        }
+
+        HttpRequest request = buildHttpRequest(this.proxy);
+        request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
+
+        request.SendAsyncRequest(callback);
+
+    }
+
+
+    private SendResponse Validate(BasicMessage message) {
 
         SendValidator validator = new SendValidator();
 
         SendResponse result = validator.ValidateCredentials(this.serverId, this.apiKey);
-        if (result.getResult() != SendResult.Success){
-            callback.onResponse(result);
-            return;
-        }
+        if (result.getResult() != SendResult.Success)
+            return result;
 
-        result = validator.ValidateMessage(message);
-        if (result.getResult() != SendResult.Success){
-            callback.onResponse(result);
-            return;
-        }
+        return validator.ValidateMessage(message);
 
-        InjectionRequestFactory injectionRequest = new InjectionRequestFactory(this.serverId, this.apiKey);
-        String requestJson = injectionRequest.GenerateRequest(message);
+    }
 
-        HttpRequest request = buildHttpRequest(this.proxy);
-        request.setBody(requestJson);
+    private SendResponse Validate(BulkMessage message) {
 
-        request.SendAsyncRequest(callback);
+        SendValidator validator = new SendValidator();
 
-        return;
+        SendResponse result = validator.ValidateCredentials(this.serverId, this.apiKey);
+        if (result.getResult() != SendResult.Success)
+            return result;
+
+        return validator.ValidateMessage(message);
 
     }
 

@@ -1,9 +1,13 @@
 package examples.basic;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.socketLabs.injectionApi.*;
 import com.socketLabs.injectionApi.core.*;
 import com.socketLabs.injectionApi.message.*;
 import examples.*;
+
+import java.io.IOException;
 
 public class BasicAsync implements Example {
 
@@ -23,22 +27,33 @@ public class BasicAsync implements Example {
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
 
         // send the message
-        client.sendAsync(message, new HttpCallback() {
+        client.sendAsync(message, new SendAsyncCallback() {
 
             @Override
             public void onError(Exception ex)  {
                 // Handle Exception here
+                ex.printStackTrace();
                 return;
             }
 
             @Override
-            public void onResponse(SendResponse response)  {
+            public SendResponse onResponse(SendResponse response) throws IOException {
                 // Handle SendResponse here
-                return;
+
+                ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+
+                System.out.println("Response body : ");
+                System.out.println(mapper.writeValueAsString(response));
+                System.out.println();
+                System.out.println();
+                System.out.println("Enter a number (or QUIT to exit):");
+
+                return response;
+
             }
         });
 
+        System.out.println("Waiting for response...");
         return null;
-
     }
 }
