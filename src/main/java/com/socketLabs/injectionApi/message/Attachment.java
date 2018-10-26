@@ -4,7 +4,9 @@ package com.socketLabs.injectionApi.message;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a message attachment in the form of a byte array.
@@ -42,7 +44,6 @@ public class Attachment {
      */
     public Attachment() {
     }
-
 
     /**
      * Initializes a new instance of the Attachment class
@@ -272,7 +273,6 @@ public class Attachment {
 
         buffer.flush();
         return buffer.toByteArray();
-
     }
 
     /**
