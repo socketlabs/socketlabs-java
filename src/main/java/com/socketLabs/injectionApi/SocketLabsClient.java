@@ -156,7 +156,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
     private HttpRequest buildHttpRequest(Proxy optionalProxy) {
 
-        HttpRequest request = new HttpRequest(HttpRequestMethod.POST, this.endPointUrl);
+        HttpRequest request = new HttpRequest(HttpRequest.HttpRequestMethod.POST, this.endPointUrl);
 
         request.setHeader("User-Agent", this.userAgent);
         request.setHeader("content-type", "application/json");

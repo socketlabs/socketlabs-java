@@ -16,6 +16,16 @@ import java.util.Map;
 public class HttpRequest {
 
     /**
+     * Enumeration of HTTP Request Methods
+     */
+    public enum HttpRequestMethod {
+        GET,
+        POST,
+        PUT,
+        DELETE;
+    }
+
+    /**
      * The HTTP Request Method to use
      */
     private HttpRequestMethod method;
