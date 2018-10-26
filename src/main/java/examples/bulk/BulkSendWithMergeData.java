@@ -67,9 +67,6 @@ public class BulkSendWithMergeData implements Example {
 
         message.setHtmlBody(html);
 
-        // TODO -  RCB - Improve this
-        message.setPlainTextBody(html.replaceAll("<.*?>", ""));
-
         // Add an Attachment with a custom header
         Attachment attachment = new Attachment("bus.png", "image/png", "src/main/java/examples/Img/bus.png");
         attachment.getCustomHeaders().add(new CustomHeader("Attachment-Header", "I Am A Bus"));

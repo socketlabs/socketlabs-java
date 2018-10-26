@@ -1,19 +1,12 @@
 package examples.bulk;
 
-import com.socketLabs.injectionApi.SendResponse;
-import com.socketLabs.injectionApi.SocketLabsClient;
-import com.socketLabs.injectionApi.message.BulkMessage;
-import com.socketLabs.injectionApi.message.BulkRecipient;
-import com.socketLabs.injectionApi.message.EmailAddress;
-import examples.Example;
-import examples.ExampleConfig;
-import examples.datasource.Customer;
-import examples.datasource.CustomerRepository;
+import com.socketLabs.injectionApi.*;
+import com.socketLabs.injectionApi.message.*;
+import examples.*;
+import examples.datasource.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 public class BulkSendFromDataSourceWithMerge implements Example {
     @Override
@@ -38,7 +31,7 @@ public class BulkSendFromDataSourceWithMerge implements Example {
 
         for (Customer customer : customers) {
             BulkRecipient recipient = new BulkRecipient(customer.getEmailAddress(), customer.getFirstName());
-            Map<String, String> mergeData = new HashMap<>();
+            TreeMap<String, String> mergeData = new TreeMap<>();
             mergeData.put("FirstName", customer.getFirstName());
             mergeData.put("LastName", customer.getLastName());
             mergeData.put("FavoriteColor", customer.getFavoriteColor());
