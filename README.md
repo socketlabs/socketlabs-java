@@ -191,4 +191,4 @@ set and special characters.
 
 <a name="license"></a>
 # License
-The SocketLabs.EmailDelivery library and all associated code, including any code samples, are [MIT Licensed](https://github.com/socketlabs/socketlabs-csharp/blob/master/LICENSE.MD).
+The SocketLabs.EmailDelivery library and all associated code, including any code samples, are [MIT Licensed](https://github.com/socketlabs/socketlabs-java/blob/master/LICENSE.MD).
