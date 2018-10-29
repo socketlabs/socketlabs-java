@@ -100,15 +100,15 @@ public class InjectionRequestFactory{
      */
     public String GenerateRequest(BasicMessage basicMessage) throws IOException {
 
-        List<MessageJson> messageJsons = new ArrayList<>();
+        List<MessageJson> messageJsonList = new ArrayList<>();
 
         MessageJson messageJson = generateBaseMessage(basicMessage);
 
         messageJson.setTo(populateTo(basicMessage.getTo()));
 
-        messageJsons.add(messageJson);
+        messageJsonList.add(messageJson);
 
-        return GetAsJson(new InjectionRequest(this.serverId, this.apiKey, messageJsons));
+        return GetAsJson(new InjectionRequest(this.serverId, this.apiKey, messageJsonList));
     }
 
     /**
@@ -155,12 +155,12 @@ public class InjectionRequestFactory{
         if (baseCustomHeaders == null) {
             return null;
         }
-        List<CustomHeaderJson> customHeaderJsons = new ArrayList<>();
+        List<CustomHeaderJson> customHeaderJson = new ArrayList<>();
 
         for (com.socketLabs.injectionApi.message.CustomHeader baseCustomHeader: baseCustomHeaders) {
-            customHeaderJsons.add(new CustomHeaderJson(baseCustomHeader.getName(), baseCustomHeader.getValue()));
+            customHeaderJson.add(new CustomHeaderJson(baseCustomHeader.getName(), baseCustomHeader.getValue()));
         }
-        return customHeaderJsons;
+        return customHeaderJson;
     }
 
     /**
