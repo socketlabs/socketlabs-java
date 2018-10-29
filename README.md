@@ -70,8 +70,6 @@ dropdown. Enabling the feature will also generate your API key, which you'll
 need (along with your ServerId) to start using the API. Be sure to click the
 "Update" button to save your changes once you are finished.
 
-## Setup Environment Variables
-Update the development environment with your [SOCKETLABS_SERVER_ID] and [SOCKETLABS_INJECTION_API_KEY]. 
 
 
 ## Basic Message
@@ -140,13 +138,11 @@ SendResponse response =  client.send(message);
 
 <a name="managing-api-keys"></a>
 ## Managing API Keys
-For ease of demonstration, many of our examples include the ServerId and API
-key directly in our code sample. Generally it is not considered a good practice
+For ease of demonstration, many of our examples include the ServerId (SOCKETLABS_SERVER_ID) and API
+key (SOCKETLABS_INJECTION_API_KEY) directly in our code sample. Generally it is not considered a good practice
 to store sensitive information like this directly in your code. Depending on
-your project type, we recommend either storing your credentials in an `app.config` or a `web.config` file, or using Environment Variables. For more
-information please see:
-* [Using web.config](https://docs.microsoft.com/en-us/aspnet/identity/overview/features-api/best-practices-for-deploying-passwords-and-other-sensitive-data-to-aspnet-and-azure)
-* [Using Environment Variables](https://docs.microsoft.com/en-us/dotnet/api/system.environment.getenvironmentvariable)
+your project type, we recommend either storing your credentials using Environment Variables. For more
+information please see: [Using Environment Variables](https://docs.oracle.com/javase/tutorial/essential/environment/env.html)
 
 
 <a name="examples-and-use-cases"></a>
