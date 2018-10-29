@@ -17,32 +17,44 @@ The SocketLabs Email Delivery Java library allows you to easily send email messa
 <a name="prerequisites-and-installation"></a>
 # Prerequisites and Installation
 ## Prerequisites
-* A supported .NET version
-  * .NET version 4.5 or higher
-  * .NET Core 1.0 or higher
-  * .NET Standard 1.3 or higher
+* A supported Java version
+  * Oracle JDK 7 
+  * Oracle JDK  8
+  * OpenJDK 7
 * A SocketLabs account. If you don't have one yet, you can [sign up for a free account](https://signup.socketlabs.com/step-1?plan=free) to get started.
 
 ## Installation
-For most uses we recommend installing the SocketLabs.EmailDelivery package via Nuget. If you have the [Nuget Package Manager](https://www.nuget.org/) installed already, you can add the latest version of the package with the following command:
+Choose your installation method - Maven w/ Gradle (recommended), Maven or Jar file.
+
+### via Maven w/ Gradle
+Add the following to your build.gradle file in the root of your project.
 
 ```
-PM> Install-Package SocketLabs.EmailDelivery
+...
+dependencies {
+  ...
+  implementation 'com.socketLabs.injectionApi:socketlabs-java:1.0.0'
+}
+
+repositories {
+  mavenCentral()
+}
+...
 ```
 
-.NET CLI users can also use the following command:
+### via Maven
 
 ```
-> dotnet add package SocketLabs.EmailDelivery
+mvn install
 ```
+
+### via jar file
+
+You can just drop the jar file in. It's a fat jar - it has all the dependencies built in.
+
+[sendgrid-java.jar](https://github.com/socketlabs/socketlabs-java/releases/download/v1.1.0/socketlabs-java.jar)
 
 Alternately, you can simply [clone this repository](https://github.com/socketlabs/socketlabs-java.git) directly to include the source code in your project.
-
-**Note for Visual Studio 2012 and earlier users**: Due to an issue with dependency requirements, the package manager in VS2012
-and earlier does not support installation of the current nuget package. In order to install the package directly, all you need to do
-is download the latest release binaries located at [https://github.com/socketlabs/socketlabs-java/releases](https://github.com/socketlabs/socketlabs-java/releases).
-Once you download the zip file, extract the files, and add the dll's from ```the lib\net45``` directory as references.
-You can do this from the project menu by clicking "Add Reference" then going to the browse option and picking the dll's from there.
 
 <a name="getting-started"></a>
 # Getting Started
@@ -57,6 +69,9 @@ Once here, you can enable the feature by choosing the "Enabled" option in the
 dropdown. Enabling the feature will also generate your API key, which you'll
 need (along with your ServerId) to start using the API. Be sure to click the
 "Update" button to save your changes once you are finished.
+
+## Setup Environment Variables
+Update the development environment with your [SOCKETLABS_SERVER_ID] and [SOCKETLABS_INJECTION_API_KEY]. 
 
 
 ## Basic Message
