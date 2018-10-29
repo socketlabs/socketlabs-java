@@ -68,7 +68,7 @@ public class Main {
         System.out.println();
         System.out.println(" Bulk Send Examples: ");
         System.out.println("   14:  Bulk Send ");
-        System.out.println("   15:  Bulk Send With MergeDataJson ");
+        System.out.println("   15:  Bulk Send With MergeData ");
         System.out.println("   16:  Bulk Send With ASCII Charset And Merge Data ");
         System.out.println("   17:  Bulk Send From DataSource With Merge Data ");
         System.out.println("   18:  Bulk Send Complex Example ");

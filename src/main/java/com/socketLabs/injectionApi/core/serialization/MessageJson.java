@@ -92,7 +92,6 @@ class MessageJson {
         this.to = new ArrayList<>();
         this.cc = new ArrayList<>();
         this.bcc = new ArrayList<>();
-        this.mergeData = new MergeDataJson();
         this.attachments = new ArrayList<>();
     }
 
@@ -252,13 +251,13 @@ class MessageJson {
 
     /**
      * Get the list of merge data.
-     * @return MergeDataJson
+     * @return MergeData
      */
-    public MergeDataJson getMergeDataJson() { return mergeData; }
+    public MergeDataJson getMergeData() { return mergeData; }
     /**
      * Set the list of merge data.
-     * @param value MergeDataJson
+     * @param value MergeData
      */
-    public void setMergeDataJson(MergeDataJson value) { this.mergeData = value; }
+    public void setMergeData(MergeDataJson value) { this.mergeData = value; }
 
 }

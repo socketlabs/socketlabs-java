@@ -21,7 +21,7 @@ public class BasicSendWithProxy implements Example {
         message.addToEmailAddress("recipient1@example.com");
 
         // create the proxy
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("localhost.", 8888));
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888));
 
         // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey, proxy);

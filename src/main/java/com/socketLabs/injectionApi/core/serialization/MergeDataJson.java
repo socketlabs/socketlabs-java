@@ -2,6 +2,7 @@ package com.socketLabs.injectionApi.core.serialization;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import java.util.List;
 
@@ -9,7 +10,8 @@ import java.util.List;
  * Represents MergeData for a single message.
  * To be serialized into JSON string before sending to the Injection Api.
  */
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonRootName("MergeData")
 class MergeDataJson {
 
     /** Defines merge field data for each message. */

@@ -85,7 +85,7 @@ public class InjectionRequestFactory{
 
         messageJson.setTo(to);
 
-        messageJson.setMergeDataJson(populateMergeData(bulkMessage.getMergeData(), bulkMessage.getTo()));
+        messageJson.setMergeData(populateMergeData(bulkMessage.getGlobalMergeData(), bulkMessage.getTo()));
 
         messageJsons.add(messageJson);
 

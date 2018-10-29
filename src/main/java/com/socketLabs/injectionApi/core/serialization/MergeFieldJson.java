@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * Represents a merge field as a field and value pair.
  * To be serialized into JSON string before sending to the Injection Api.
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 class MergeFieldJson {
 
     /** The field of your merge field. */

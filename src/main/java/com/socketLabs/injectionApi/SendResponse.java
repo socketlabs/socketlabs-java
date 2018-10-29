@@ -196,7 +196,7 @@ public class SendResponse {
                 return "A conflict occurred on the message body of the message";
 
             case InvalidMergeData:
-                return "Invalid MergeDataJson was found on the message";
+                return "Invalid MergeData was found on the message";
 
             case AuthenticationValidationFailed:
                 return "SDK Validation Error : Authentication Validation Failed, Missing or invalid ServerId or ApiKey";
@@ -226,7 +226,7 @@ public class SendResponse {
                 return "SDK Validation Error : Invalid Custom Headers were found in the message";
 
             case RecipientValidationInvalidReplyTo:
-                return "SDK Validation Error : Invalid ReplyTo AddressJson was found in the message";
+                return "SDK Validation Error : Invalid ReplyTo Address was found in the message";
 
             case RecipientValidationInvalidRecipients:
                 return "SDK Validation Error : Invalid recipients were found in the message";
