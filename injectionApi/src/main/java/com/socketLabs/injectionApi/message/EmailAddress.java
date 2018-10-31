@@ -2,12 +2,14 @@ package com.socketLabs.injectionApi.message;
 
 /**
  * Represents an individual email address for a message
+ * {@code
  *<p>
  * Example:
  * <pre>
  *     EmailAddress emailAddress = new EmailAddress("recipient@example.com", "Recipient 1");
  * </pre>
  * </p>
+ * }
  */
 public class EmailAddress {
 
