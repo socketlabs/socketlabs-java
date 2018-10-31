@@ -344,15 +344,15 @@ public class BasicMessage implements MessageBase {
      * @param filePath String
      * Add an attachment to the array of Attachment items using the filePath
      * @param filePath The path to your attachment on your local system.
-     * @throws IOException
+     * @throws IOException IOException
      */
     public void addAttachments(String filePath) throws IOException {
         this.attachments.add(new Attachment(filePath));
     }
     /**
      * Add an Attachment to the array of Attachment items
-     * @param attachment
-     * @throws IOException
+     * @param attachment Attachment
+     * @throws IOException IOException
      */
     public void addAttachments(Attachment attachment) throws IOException {
         this.attachments.add(attachment);

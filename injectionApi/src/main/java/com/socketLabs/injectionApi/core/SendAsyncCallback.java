@@ -18,6 +18,7 @@ public interface SendAsyncCallback {
     /**
      * Callback method in case of a valid SendResponse.
      * @param response the valid SendResponse.
+     * @throws IOException IOException
      */
     public void onResponse(SendResponse response) throws IOException;
 

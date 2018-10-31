@@ -48,7 +48,7 @@ public class HttpRequest {
 
     /**
      * Sets the HTTP request body
-     * @param value
+     * @param value String
      */
     public void setBody(String value) {
         this.body = value;
@@ -65,7 +65,7 @@ public class HttpRequest {
 
     /**
      * Sets the Proxy to use when making the HTTP request
-     * @param value
+     * @param value String
      */
     public void setProxy(Proxy value) { this.proxy = value; }
 
