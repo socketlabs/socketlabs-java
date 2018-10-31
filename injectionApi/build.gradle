@@ -1,6 +1,9 @@
 plugins {
     id 'java'
+    id 'maven'
 }
+
+apply plugin: 'maven'
 
 group 'com.socketlabs'
 version '1.0.0'
@@ -23,3 +26,15 @@ javadoc {
     source = sourceSets.main.allJava
     classpath = configurations.compile
 }
+
+task writeNewPom {
+    doLast {
+        pom {
+            project {
+                inceptionYear '2018'
+
+            }
+        }.writeTo("pom.xml")
+    }
+}
+
