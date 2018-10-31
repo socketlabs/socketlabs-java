@@ -8,10 +8,10 @@ import java.util.*;
  * A bulk message usually contains a single recipient per message
  * and is generally used to send the same content to many recipients,
  * optionally customizing the message via the use of Merge Data.
- * {@code
- *<p>
+
  * Example:
  * <pre>
+ * {@code
  *     BulkMessage message = new BulkMessage();
  *
  *     message.setPlainTextBody("This is the body of my message sent to ##Name##");
@@ -26,9 +26,8 @@ import java.util.*;
  *
  *     message.addMergeData("name1", "value1");
  *     message.addMergeData("name2", "value2");
- * </pre>
- * </p>
  * }
+ * </pre>
  */
 public class BulkMessage implements MessageBase {
 
