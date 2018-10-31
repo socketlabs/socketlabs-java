@@ -188,13 +188,13 @@ This example demonstrates how to embed an image in your message.
 This example demonstrates how to use a proxy with your HTTP client.
 
 
-### [Basic send with invalid file attachment](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasicSendWithAttachment.java)
+### [Basic send with invalid file attachment](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasicSendWithInvalidAttachment.java)
 This example demonstrates the results of attempting to do a send with an invalid attachment.
 
 ### [Basic send with invalid from address](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasicSendWithInvalidFrom.java)
 This example demonstrates the results of attempting to do a send with an invalid from address.
 
-### [Basic send with invalid recipients](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasBasicSendWithInvalidRecipientsicSend.java)
+### [Basic send with invalid recipients](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasicSendWithInvalidRecipients.java)
 This example demonstrates the results of attempting to do a send with invalid recipients.
 
 
