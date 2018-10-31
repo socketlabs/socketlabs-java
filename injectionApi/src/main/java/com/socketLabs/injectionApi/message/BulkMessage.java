@@ -8,13 +8,13 @@ import java.util.*;
  * A bulk message usually contains a single recipient per message
  * and is generally used to send the same content to many recipients,
  * optionally customizing the message via the use of Merge Data.
- *
+ *<p>
  * Example:
- * <code>
+ * <pre>
  *     BulkMessage message = new BulkMessage();
  *
  *     message.setPlainTextBody("This is the body of my message sent to ##Name##");
- *     message.setHtmlBody("<html>This is the HtmlBody of my message sent to ##Name##</html>");
+ *     message.setHtmlBody("&#60;html&#62;This is the HtmlBody of my message sent to ##Name##&#60;/html&#62;");
  *     message.setSubject("Sending a test message");
  *
  *     message.setFrom(new EmailAddress("from@example.com"));
@@ -25,7 +25,8 @@ import java.util.*;
  *
  *     message.addMergeData("name1", "value1");
  *     message.addMergeData("name2", "value2");
- * </code>
+ * </pre>
+ * </p>
  */
 public class BulkMessage implements MessageBase {
 
@@ -307,61 +308,59 @@ public class BulkMessage implements MessageBase {
     public void setAttachments(List<Attachment> value) { this.attachments = value; }
     /**
      * Add an Attachment to the array of Attachment items
-     * @param fileName
-     * @throws IOException
+     * @param fileName String
+     * @throws IOException IOException
      */
     public void addAttachments(String fileName) throws IOException {
         this.attachments.add(new Attachment(fileName));
     }
     /**
      * Add an Attachment to the array of Attachment items
-     * @param attachment
-     * @throws IOException
+     * @param attachment Attachment
      */
-    public void addAttachments(Attachment attachment) throws IOException {
+    public void addAttachments(Attachment attachment) {
         this.attachments.add(attachment);
     }
 
     /**
-     * Get
-     * @return
+     * Gets the optional character set for your message.
+     * @return String
      */
     @Override
-    public String getCharSet() {
-        return this.charSet;
-    }
-    /**
-     * Set
-     * @param value
-     */
-    @Override
-    public void setCharSet(String value) {
-        this.charSet = value;
-    }
+    public String getCharSet() { return this.charSet; }
 
-    @Override
-    public List<CustomHeader> getCustomHeaders() {
-        return this.customHeaders;
-    }
     /**
-     * Set the list of custom message headers added to the message.
-     * @param value
+     * Sets the optional character set for your message.
+     * @param value String
      */
     @Override
-    public void setCustomHeaders(List<CustomHeader> value) {
-        this.customHeaders = value;
-    }
+    public void setCharSet(String value) { this.charSet = value; }
+
+    /**
+     * Gets the list of custom message headers added to the message.
+     * @return List<CustomHeader>
+     */
+    @Override
+    public List<CustomHeader> getCustomHeaders() { return this.customHeaders; }
+
+    /**
+     * Sets the list of custom message headers added to the message.
+     * @param value List<CustomHeader>
+     */
+    @Override
+    public void setCustomHeaders(List<CustomHeader> value) { this.customHeaders = value; }
+
     /**
      * Add a CustomHeader to the message
-     * @param name String
-     * @param value String
+     * @param name {String}
+     * @param value {String}
      */
     public void addCustomHeader(String name, String value) {
         this.customHeaders.add(new CustomHeader(name, value ));
     }
     /**
      * Add a CustomHeader to the message
-     * @param header {CustomHeader}
+     * @param header {CustomHeaderJson}
      */
     public void addCustomHeader(CustomHeader header) {
         this.customHeaders.add(header);

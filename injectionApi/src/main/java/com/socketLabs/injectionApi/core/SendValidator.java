@@ -3,7 +3,6 @@ package com.socketLabs.injectionApi.core;
 import com.socketLabs.injectionApi.*;
 import com.socketLabs.injectionApi.message.*;
 
-import com.google.common.base.Strings;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class SendValidator {
      */
     public SendResponse ValidateCredentials(int serverId, String apiKey) {
 
-        if (Strings.isNullOrEmpty(apiKey))
+        if (isNullOrEmpty(apiKey))
             return new SendResponse(SendResult.AuthenticationValidationFailed);
 
         if (serverId <= 0)
@@ -88,7 +87,7 @@ public class SendValidator {
      */
     private boolean HasSubject(MessageBase message)
     {
-        return !Strings.isNullOrEmpty(message.getSubject());
+        return !isNullOrEmpty(message.getSubject());
     }
 
     /**
@@ -101,7 +100,7 @@ public class SendValidator {
         if (message.getFrom() == null)
             return false;
 
-        return (!Strings.isNullOrEmpty(message.getFrom().getEmailAddress()));
+        return (!isNullOrEmpty(message.getFrom().getEmailAddress()));
     }
 
     /**
@@ -116,8 +115,8 @@ public class SendValidator {
         boolean hasApiTemplate = HasApiTemplate(message);
         if (hasApiTemplate) return true;
 
-        boolean hasHtmlBody = !Strings.isNullOrEmpty(message.getHtmlBody());
-        boolean hasPlainTextBody = !Strings.isNullOrEmpty(message.getPlainTextBody());
+        boolean hasHtmlBody = !isNullOrEmpty(message.getHtmlBody());
+        boolean hasPlainTextBody = !isNullOrEmpty(message.getPlainTextBody());
 
         return (hasHtmlBody || hasPlainTextBody);
     }
@@ -140,7 +139,7 @@ public class SendValidator {
     private boolean HasValidReplyTo(MessageBase message)
     {
         if (message.getReplyTo() == null) return true;
-        if (Strings.isNullOrEmpty(message.getReplyTo().getEmailAddress()) && Strings.isNullOrEmpty(message.getReplyTo().getFriendlyName())) return true;
+        if (isNullOrEmpty(message.getReplyTo().getEmailAddress()) && isNullOrEmpty(message.getReplyTo().getFriendlyName())) return true;
         return message.getReplyTo().isValid();
     }
 
@@ -296,6 +295,17 @@ public class SendValidator {
             if (!c.isValid()) return false;
         }
         return true;
+    }
+
+    /**
+     * Check if string is null or empyt
+     * @param string String to check
+     * @return boolean
+     */
+    private boolean isNullOrEmpty(String string) {
+        if (string == null) return true;
+        if (string.isEmpty()) return true;
+        return string.trim().equals("");
     }
 
 }

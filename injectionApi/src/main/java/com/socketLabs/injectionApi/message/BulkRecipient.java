@@ -4,13 +4,14 @@ import java.util.TreeMap;
 
 /**
  * Represents an individual email address for a bulk message
- *
+ *<p>
  * Example:
- * <code>
+ * <pre>
  *     BulkRecipient recipient = new BulkRecipient("recipient@example.com", "Recipient 1");
  *     recipient.addMergeData("key1", "value1");
  *     recipient.addMergeData("key2", "value2");
- * </code>
+ * </pre>
+ * </p>
  */
 public class BulkRecipient  {
 

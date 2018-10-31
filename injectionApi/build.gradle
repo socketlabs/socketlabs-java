@@ -1,9 +1,8 @@
 plugins {
     id 'java'
     id 'maven'
+    id 'signing'
 }
-
-apply plugin: 'maven'
 
 group 'com.socketlabs'
 version '1.0.0'
@@ -21,11 +20,75 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '12.0'
     compile 'com.squareup.okhttp3:okhttp:3.11.0'
 }
+/*
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'SocketLabs Java',
+                'Implementation-Version': version
+    }
+}
+*/
+
 
 javadoc {
     source = sourceSets.main.allJava
     classpath = configurations.compile
 }
 
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file:///out/artifacts/")
 
+            //beforeDeployment {
+            //    MavenDeployment deployment -> signing.signPom(deployment)
+            //}
 
+            //repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            //    authentication(userName: sonatypeUsername, password: sonatypePassword)
+            //}
+
+            pom.project {
+
+                groupId 'com.socketlabs'
+                artifactId 'injectionApi'
+                version '1.0.0'
+
+                name 'socketlabs-javaa'
+                packaging 'jar'
+                description 'SocketLabs Email Delivery Java library'
+                url 'https://github.com/socketlabs/socketlabs-java/'
+
+                organization {
+                    name 'com.socketlabs'
+                    url 'https://github.com/socketlabs'
+                }
+                issueManagement {
+                    system 'GitHub'
+                    url 'https://github.com/socketlabs/socketlabs-java/issues'
+                }
+                licenses {
+                    license {
+                        name 'MIT License'
+                        url 'https://github.com/socketlabs/socketlabs-java/blob/master/LICENSE'
+                    }
+                }
+                scm {
+                    url 'https://github.com/socketlabs/socketlabs-java'
+                    connection 'scm:git:git://github.com/socketlabs/socketlabs-java.git'
+                    developerConnection 'scm:git:ssh://git@github.com:socketlabs/socketlabs-java.git'
+                }
+                developers {
+                    developer {
+                        id 'david-schrenker'
+                        name 'David Schrenker'
+                    }
+                    developer {
+                        id 'rbrazuk'
+                        name 'Ross Brazuk'
+                    }
+                }
+            }
+        }
+    }
+}

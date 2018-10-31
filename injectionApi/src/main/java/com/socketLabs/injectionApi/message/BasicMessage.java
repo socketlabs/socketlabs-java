@@ -9,13 +9,13 @@ import java.util.List;
  * A Basic email message similar to one created in a personal email client such as Outlook.
  * This message can have many recipients of different types, such as To, CC, and BCC.  This
  * message does not support merge fields.
- *
+ <p>
  * Example:
- * <code>
+ * <pre>
  *     BasicMessage message = new BasicMessage();
  *
  *     message.setSubject("Sending A Message");
- *     message.setHtmlBody("<html>This is the Html Body of my message.</html>");
+ *     message.setHtmlBody("&#60;html&#62;This is the Html Body of my message.&#60;/html&#62;");
  *     message.setPlainTextBody("This is the Plain Text Body of my message.");
  *
  *     message.setFrom(new EmailAddress("from@example.com"));
@@ -26,7 +26,8 @@ import java.util.List;
  *
  *     message.addToEmailAddress("recipient3@example.com");
  *     message.addToEmailAddress("recipient4@example.com", "Recipient #4");
- * </code>
+ * </pre>
+ * </p>
  */
 public class BasicMessage implements MessageBase {
 
