@@ -99,7 +99,7 @@ public class SendResponse {
 
     /**
      * Get the array of AddressResult objects that contain the status of each address that failed. If no messages failed this array is empty.
-     * @return List<AddressResult>
+     * @return List of AddressResult objects
      */
     public List<AddressResult> getAddressResults() {
         return addressResults;

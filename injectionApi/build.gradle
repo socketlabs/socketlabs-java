@@ -27,14 +27,5 @@ javadoc {
     classpath = configurations.compile
 }
 
-task writeNewPom {
-    doLast {
-        pom {
-            project {
-                inceptionYear '2018'
 
-            }
-        }.writeTo("pom.xml")
-    }
-}
 
