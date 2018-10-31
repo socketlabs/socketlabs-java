@@ -154,50 +154,68 @@ created in the [SocketLabs Email Designer](https://www.socketlabs.com/blog/intro
 attachments, sending content that is stored in an HTML file, advanced bulk
 merging, and even pulling recipients from a datasource.
 
-### [Basic send from SocketLabs Template](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/basic/BasicSendWithApiTemplate.java)
-This example demonstrates the sending of a piece of content that was created in the
-SocketLabs Email Designer. This is also known as the [API Templates](https://www.socketlabs.com/blog/introducing-api-templates/) feature.
 
-### [Basic send from HTML file](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/basic/BasicSendFromHtmlFile.java)
+### [Basic send async example](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicAsync.java)
+This example demonstrates a Basic Send done asynchronously.
+
+### [Basic send example](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSend.java)
+This example demonstrates a Basic Send done synchronously.
+
+### [Basic send complex example](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendComplexExample.java)
+This example demonstrates many features of the Basic Send, including adding multiple recipients, adding message and mailing id's, and adding an embedded image.
+
+### [Basic send from HTML file](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendFromHtmlFile.java)
 This example demonstrates how to read in your HTML content from an HTML file
 rather than passing in a string directly.
 
-### [Basic send with file attachment](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/basic/BasicSendWithAttachment.java)
-This example demonstrates how to add a file attachment to your message.
+### [Basic send from SocketLabs API Template](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendWithApiTemplate.java)
+This example demonstrates the sending of a piece of content that was created in the
+SocketLabs Email Designer. This is also known as the [API Templates](https://www.socketlabs.com/blog/introducing-api-templates/) feature.
 
-### [Basic send with embedded image](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/basic/BasicSendWithEmbeddedImage.java)
-This example demonstrates how to embed an image in your message.
-
-### [Basic send with specified character set](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/basic/BasicSendWithASCIICharset.java)
+### [Basic send with specified character set](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendWithASCIICharset.java)
 This example demonstrates sending with a specific character set.
 
-### [Basic send with custom email headers](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/basic/BasicSendWithCustomHeaders.java)
+### [Basic send with file attachment](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendWithAttachment.java)
+This example demonstrates how to add a file attachment to your message.
+
+### [Basic send with custom email headers](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendWithCustomHeaders.java)
 This example demonstrates how to add custom headers to your email message.
 
-### [Basic send with a web proxy](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/basic/BasicSendWithProxy.java)
+### [Basic send with embedded image](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendWithEmbeddedImage.java)
+This example demonstrates how to embed an image in your message.
+
+### [Basic send with a web proxy](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendWithProxy.java)
 This example demonstrates how to use a proxy with your HTTP client.
 
-### [Basic send complex example](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/basic/BasicSendComplexExample.java)
-This example demonstrates many features of the Basic Send, including adding multiple recipients, adding message and mailing id's, and adding an embedded image.
 
-### [Bulk send with multiple recipients](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/bulk/BulkSend.java)
+### [Basic send with invalid file attachment](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasicSendWithAttachment.java)
+This example demonstrates the results of attempting to do a send with an invalid attachment.
+
+### [Basic send with invalid from address](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasicSendWithInvalidFrom.java)
+This example demonstrates the results of attempting to do a send with an invalid from address.
+
+### [Basic send with invalid recipients](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasBasicSendWithInvalidRecipientsicSend.java)
+This example demonstrates the results of attempting to do a send with invalid recipients.
+
+
+### [Bulk send with multiple recipients](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/bulk/BulkSend.java)
 This example demonstrates how to send a bulk message to multiple recipients.
 
-### [Bulk send with merge data](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/bulk/BulkSendWithMergeData.java)
-This example demonstrates how to send a bulk message to multiple recipients with
-unique merge data per recipient.
-
-### [Bulk send with complex merge including attachments](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/bulk/BulkSendComplexExample.java)
+### [Bulk send with complex merge including attachments](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/bulk/BulkSendComplexExample.java)
 This example demonstrates many features of the `BulkMessage()`, including
 adding multiple recipients, merge data, and adding an attachment.
 
-### [Bulk send with recipients pulled from a datasource](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/bulk/BulkSendFromDataSourceWithMerge.java)
+### [Bulk send with recipients pulled from a datasource](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/bulk/BulkSendFromDataSourceWithMerge.java)
 This example uses a mock repository class to demonstrate how you would pull
 your recipients from a database and create a bulk mailing with merge data.
 
-### [Bulk send with Ascii charset and special characters](https://github.com/socketlabs/socketlabs-java/blob/master/src/main/java/examples/bulk/BulkSendWithASCIICharsetMergeData.java)
+### [Bulk send with Ascii charset and special characters](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/bulk/BulkSendWithASCIICharsetMergeData.java)
 This example demonstrates how to send a bulk message with a specified character
 set and special characters.
+
+### [Bulk send with merge data](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/bulk/BulkSendWithMergeData.java)
+This example demonstrates how to send a bulk message to multiple recipients with
+unique merge data per recipient.
 
 
 <a name="license"></a>
