@@ -2,6 +2,7 @@ package com.socketLabs.injectionApi.message;
 
 /**
  * Represents a custom header as a name and value pair.
+ * {@code
  *<p>
  * Example:
  * <pre>
@@ -12,6 +13,7 @@ package com.socketLabs.injectionApi.message;
  *     CustomHeader header2 = new CustomHeader("name1", "value1");
  * </pre>
  * </p>
+ * }
  */
 public class CustomHeader {
 

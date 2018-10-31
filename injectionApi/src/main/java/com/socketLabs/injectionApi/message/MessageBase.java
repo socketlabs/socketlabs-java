@@ -98,12 +98,12 @@ public interface MessageBase {
 
     /**
      * Get the list of attachments.
-     * @return List<Attachment>
+     * @return {@code List<Attachment>}
      */
     List<Attachment> getAttachments();
     /**
      * Set the list of attachments.
-     * @param value List<Attachment>
+     * @param value {@code List<Attachment>}
      */
     void setAttachments(List<Attachment> value);
 
@@ -120,12 +120,12 @@ public interface MessageBase {
 
     /**
      * Get the list of custom message headers added to the message.
-     * @return List<CustomHeader>
+     * @return {@code List<CustomHeader>}
      */
     List<CustomHeader> getCustomHeaders();
     /**
      * Set the list of custom message headers added to the message.
-     * @param value List<CustomHeader>
+     * @param value {@code List<CustomHeader>}
      */
     void setCustomHeaders(List<CustomHeader> value);
     

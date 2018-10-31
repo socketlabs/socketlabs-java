@@ -77,7 +77,7 @@ public class HttpRequest {
     /**
      * Send the HTTP Request
      * @return A SendResponse from the Injection Api response
-     * @throws Exception in case of a network error.
+     * @throws IOException in case of a network error.
      */
     public SendResponse SendRequest()  throws IOException  {
 

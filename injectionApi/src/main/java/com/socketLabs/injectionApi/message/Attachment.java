@@ -10,15 +10,18 @@ import java.util.Map;
 
 /**
  * Represents a message attachment in the form of a byte array.
- *<p>
  * Example:
- * <pre>
- *     Attachment var attachment1 = new Attachment(@"c:\bus.png");
- *     Attachment var attachment2 = new Attachment("bus", "image/png", @"c:\bus.png");
- *     Attachment var attachment3 = new Attachment("bus", "image/png", new byte[] { });
- *     Attachment var attachment4 = new Attachment("bus", "image/png", File.OpenRead(@"c:\bus.png"));
- * </pre>
- * </p>
+ * {@code
+ * * <pre>
+ *  *     Attachment var attachment1 = new Attachment(@"c:\bus.png");
+ *  *     Attachment var attachment2 = new Attachment("bus", "image/png", @"c:\bus.png");
+ *  *     Attachment var attachment3 = new Attachment("bus", "image/png", new byte[] { });
+ *  *     Attachment var attachment4 = new Attachment("bus", "image/png", File.OpenRead(@"c:\bus.png"));
+ *  * </pre>
+ *  *
+ *
+ * }
+ *
  */
 public class Attachment {
 
@@ -170,7 +173,7 @@ public class Attachment {
 
     /**
      * Gets the list of custom headers for the Attachment.
-     * @return List<CustomHeader>
+     * @return {@code List<CustomHeader>}
      */
     public List<CustomHeader> getCustomHeaders() {
         return this.customHeaders;
@@ -178,15 +181,15 @@ public class Attachment {
 
     /**
      * Sets the list of custom headers for the Attachment.
-     * @param customHeaders List<CustomHeader>
+     * @param customHeaders {@code List<CustomHeader>}
      */
     public void setCustomHeaders(List<CustomHeader> customHeaders) {
         this.customHeaders = customHeaders;
     }
     /**
      * Add a CustomHeaderJson to the message
-     * @param name {String}
-     * @param value {String}
+     * @param name String
+     * @param value String
      */
     public void addCustomHeader(String name, String value) {
         this.customHeaders.add(new CustomHeader(name, value ));

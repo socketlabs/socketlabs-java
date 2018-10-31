@@ -4,6 +4,7 @@ import java.util.TreeMap;
 
 /**
  * Represents an individual email address for a bulk message
+ * {@code
  *<p>
  * Example:
  * <pre>
@@ -12,6 +13,7 @@ import java.util.TreeMap;
  *     recipient.addMergeData("key2", "value2");
  * </pre>
  * </p>
+ * }
  */
 public class BulkRecipient  {
 
@@ -99,14 +101,14 @@ public class BulkRecipient  {
 
     /**
      * Get the map containing Merge Data items unique to the recipient.
-     * @return TreeMap<String, String>
+     * @return {@code TreeMap<String, String>}
      */
     public TreeMap<String, String> getMergeData() {
         return this.mergeData;
     }
     /**
      * Set the map containing Merge Data items unique to the recipient.
-     * @param value TreeMap<String, String>
+     * @param value {@code TreeMap<String, String>}
      */
     public void setMergeData(TreeMap<String, String> value) {
         this.mergeData = value;

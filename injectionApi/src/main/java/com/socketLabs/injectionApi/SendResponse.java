@@ -107,7 +107,7 @@ public class SendResponse {
 
     /**
      * Set the array of AddressResult objects that contain the status of each address that failed. If no messages failed this array is empty.
-     * @param value List<AddressResult>
+     * @param value {@code List<AddressResult>}
      */
     public void setAddressResults(List<AddressResult> value) {
         this.addressResults = value;

@@ -9,7 +9,8 @@ import java.util.List;
  * A Basic email message similar to one created in a personal email client such as Outlook.
  * This message can have many recipients of different types, such as To, CC, and BCC.  This
  * message does not support merge fields.
- <p>
+ * {@code
+ *<p>
  * Example:
  * <pre>
  *     BasicMessage message = new BasicMessage();
@@ -28,6 +29,8 @@ import java.util.List;
  *     message.addToEmailAddress("recipient4@example.com", "Recipient #4");
  * </pre>
  * </p>
+ * }
+
  */
 public class BasicMessage implements MessageBase {
 
@@ -123,19 +126,19 @@ public class BasicMessage implements MessageBase {
 
     /**
      * Initializes a new instance of the BasicMessage class
-     * @code BasicMessage messsage = new BasicMessage();
+     * {@code BasicMessage messsage = new BasicMessage();}
      */
     public BasicMessage() {
     }
 
     /**
      * Gets the list of To recipients.
-     * @return List<EmailAddress>
+     * @return {@code List<EmailAddress>}
      */
     public List<EmailAddress> getTo() { return this.to; }
     /**
      * Sets the list of To recipients.
-     * @param value List<EmailAddress>
+     * @param value {@code List<EmailAddress>}
      */
     public void setTo(List<EmailAddress> value) { this.to = value; }
     /**
@@ -325,14 +328,14 @@ public class BasicMessage implements MessageBase {
 
     /**
      * Gets the list of attachments.
-     * @return List<Attachment>
+     * @return {@code List<Attachment>}
      */
     @Override
     public List<Attachment> getAttachments() { return this.attachments; }
 
     /**
      * Sets the list of attachments.
-     * @param value List<Attachment>
+     * @param value {@code List<Attachment>}
      */
     @Override
     public void setAttachments(List<Attachment> value) { this.attachments = value; }
@@ -372,29 +375,29 @@ public class BasicMessage implements MessageBase {
 
     /**
      * Gets the list of custom message headers added to the message.
-     * @return List<CustomHeader>
+     * @return {@code List<CustomHeader>}
      */
     @Override
     public List<CustomHeader> getCustomHeaders() { return this.customHeaders; }
 
     /**
      * Sets the list of custom message headers added to the message.
-     * @param value List<CustomHeader>
+     * @param value {@code List<CustomHeader>}
      */
     @Override
     public void setCustomHeaders(List<CustomHeader> value) { this.customHeaders = value; }
 
     /**
      * Add a CustomHeader to the message
-     * @param name {String}
-     * @param value {String}
+     * @param name String
+     * @param value String
      */
     public void addCustomHeader(String name, String value) {
         this.customHeaders.add(new CustomHeader(name, value ));
     }
     /**
      * Add a CustomHeader to the message
-     * @param header {CustomHeaderJson}
+     * @param header CustomHeaderJson
      */
     public void addCustomHeader(CustomHeader header) {
         this.customHeaders.add(header);

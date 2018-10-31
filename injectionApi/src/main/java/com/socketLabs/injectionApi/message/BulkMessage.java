@@ -8,6 +8,7 @@ import java.util.*;
  * A bulk message usually contains a single recipient per message
  * and is generally used to send the same content to many recipients,
  * optionally customizing the message via the use of Merge Data.
+ * {@code
  *<p>
  * Example:
  * <pre>
@@ -27,6 +28,7 @@ import java.util.*;
  *     message.addMergeData("name2", "value2");
  * </pre>
  * </p>
+ * }
  */
 public class BulkMessage implements MessageBase {
 
@@ -121,19 +123,19 @@ public class BulkMessage implements MessageBase {
 
     /**
      * Initializes a new instance of the BasicMessage class
-     * @code BasicMessage messsage = new BasicMessage();
+     * {@code BasicMessage messsage = new BasicMessage();}
      */
     public BulkMessage() {
     }
 
     /**
      * Gets the list of To recipients.
-     * @return List<BulkRecipient>
+     * @return {@code List<BulkRecipient>}
      */
     public List<BulkRecipient> getTo() { return this.to; }
     /**
      * Sets the list of To recipients.
-     * @param value List<BulkRecipient>
+     * @param value {@code List<BulkRecipient>}
      */
     public void setTo(List<BulkRecipient> value) { this.to = value; }
     /**
@@ -213,7 +215,7 @@ public class BulkMessage implements MessageBase {
 
     /**
      * Get the Api Template for the message.
-     * @return @Nullable Integer
+     * @return {@code @Nullable Integer}
      */
     @Override
     public @Nullable Integer getApiTemplate() {
@@ -221,7 +223,7 @@ public class BulkMessage implements MessageBase {
     }
     /**
      * Set the Api Template for the message.
-     * @param value @Nullable Integer
+     * @param value {@code @Nullable Integer}
      */
     @Override
     public void setApiTemplate(@Nullable Integer value) {
@@ -294,7 +296,7 @@ public class BulkMessage implements MessageBase {
 
     /**
      * Get the list of attachments.
-     * @return List<Attachment>
+     * @return {@code List<Attachment>}
      */
     @Override
     public List<Attachment> getAttachments() {
@@ -302,7 +304,7 @@ public class BulkMessage implements MessageBase {
     }
     /**
      * Set the list of attachments.
-     * @param value List<Attachment>
+     * @param value {@code List<Attachment>}
      */
     @Override
     public void setAttachments(List<Attachment> value) { this.attachments = value; }
@@ -338,29 +340,29 @@ public class BulkMessage implements MessageBase {
 
     /**
      * Gets the list of custom message headers added to the message.
-     * @return List<CustomHeader>
+     * @return {@code List<CustomHeader>}
      */
     @Override
     public List<CustomHeader> getCustomHeaders() { return this.customHeaders; }
 
     /**
      * Sets the list of custom message headers added to the message.
-     * @param value List<CustomHeader>
+     * @param value {@code List<CustomHeader>}
      */
     @Override
     public void setCustomHeaders(List<CustomHeader> value) { this.customHeaders = value; }
 
     /**
      * Add a CustomHeader to the message
-     * @param name {String}
-     * @param value {String}
+     * @param name String
+     * @param value String
      */
     public void addCustomHeader(String name, String value) {
         this.customHeaders.add(new CustomHeader(name, value ));
     }
     /**
      * Add a CustomHeader to the message
-     * @param header {CustomHeaderJson}
+     * @param header CustomHeaderJson
      */
     public void addCustomHeader(CustomHeader header) {
         this.customHeaders.add(header);
@@ -369,12 +371,12 @@ public class BulkMessage implements MessageBase {
 
     /**
      * Get the map containing Merge Data items that will be global across the whole message.
-     * @return TreeMap<String, String>
+     * @return {@code TreeMap<String, String>}
      */
     public TreeMap<String, String> getGlobalMergeData() { return globalMergeData; }
     /**
      * Set the map containing Merge Data items that will be global across the whole message.
-     * @param value TreeMap<String, String>
+     * @param value {@code TreeMap<String, String>}
      */
     public void setGlobalMergeData(TreeMap<String, String> value) { this.globalMergeData = value; }
     /**
