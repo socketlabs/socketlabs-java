@@ -10,14 +10,15 @@ import java.util.Map;
 
 /**
  * Represents a message attachment in the form of a byte array.
- *
+ *<p>
  * Example:
- * <code>
+ * <pre>
  *     Attachment var attachment1 = new Attachment(@"c:\bus.png");
  *     Attachment var attachment2 = new Attachment("bus", "image/png", @"c:\bus.png");
  *     Attachment var attachment3 = new Attachment("bus", "image/png", new byte[] { });
  *     Attachment var attachment4 = new Attachment("bus", "image/png", File.OpenRead(@"c:\bus.png"));
- * </code>
+ * </pre>
+ * </p>
  */
 public class Attachment {
 
