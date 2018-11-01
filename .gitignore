@@ -1,20 +1,34 @@
-build
-gradle.properties
 jssecacerts
 out
 repo
 settings.gradle
 target
 *.class
-.classpath
 .DS_Store
 .env
-.gradle
-.idea
-.idea/workspace.xml
-*.iml
 .log
-.project
 .settings
-.vscode
 *.gpg
+
+# Generated Files
+bin/
+gen/
+
+# IDE
+.vscode
+.idea
+.idea/
+*.iml
+.classpath
+.project
+proguard/
+.settings/
+.recommendors/
+
+# Gradle
+.gradletasknamecache
+.gradle
+.gradle/
+build/
+bin/
+gradle.properties
