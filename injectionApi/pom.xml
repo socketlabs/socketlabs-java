@@ -12,6 +12,12 @@
     <version>1.0.0</version>
     <description>The SocketLabs Email Delivery Java library allows you to easily send email messages via the SocketLabs Injection API.</description>
     <url>https://github.com/socketlabs/socketlabs-java</url>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/socketlabs/socketlabs-java/issues</url>
+
+    </issueManagement>
     <licenses>
         <license>
             <name>The MIT License (MIT)</name>
@@ -19,15 +25,18 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
     <properties>
         <jackson.version>2.9.2</jackson.version>
     </properties>
+
     <scm>
         <url>https://github.com/socketlabs/socketlabs-java</url>
         <connection>scm:git:git@github.com:socketlabs/socketlabs-java.git</connection>
         <developerConnection>scm:git:git@github.com:socketlabs/socketlabs-java.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
+
     <build>
         <resources>
             <resource>
@@ -87,13 +96,20 @@
             </plugin>
         </plugins>
     </build>
+
     <developers>
         <developer>
             <id>david-schrenker</id>
             <name>David Schrenker</name>
         </developer>
+        <developer>
+            <id>rbrazuk</id>
+            <name>Ross Brazuk</name>
+        </developer>
     </developers>
+
     <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -110,6 +126,12 @@
             <artifactId>okhttp</artifactId>
             <version>3.11.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>12.0</version>
+        </dependency>
     </dependencies>
+
 </project>
 

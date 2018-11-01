@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven'
+    id 'maven-publish'
     id 'signing'
 }
 
@@ -28,14 +29,30 @@ jar {
     }
 }
 
-javadoc {
-    source = sourceSets.main.allJava
-    classpath = configurations.compile
-}
-
 signing {
     required { gradle.taskGraph.hasTask("uploadArchives") }
     sign configurations.archives
+}
+
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = configurations.compileClasspath
+}
+
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+task packageJavadoc(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives jar
+    archives sourceJar
+    archives packageJavadoc
 }
 
 uploadArchives {
@@ -46,12 +63,12 @@ uploadArchives {
                 MavenDeployment deployment -> signing.signPom(deployment)
             }
 
-            repository(url: "${nexusUrl}/repository/maven-releases/") {
-                authentication(userName: nexusUsername, password: nexusPassword)
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
 
-            snapshotRepository(url: "${nexusUrl}/repository/maven-snapshots") {
-                authentication(userName: nexusUsername, password: nexusPassword)
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
 
             pom.project {
@@ -60,7 +77,7 @@ uploadArchives {
                 artifactId 'injectionApi'
                 version '1.0.0'
 
-                name 'socketlabs-javaa'
+                name 'socketlabs-java'
                 packaging 'jar'
                 description 'SocketLabs Email Delivery Java library'
                 url 'https://github.com/socketlabs/socketlabs-java/'
