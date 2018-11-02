@@ -18,9 +18,7 @@ The SocketLabs Email Delivery Java library allows you to easily send email messa
 # Prerequisites and Installation
 ## Prerequisites
 * A supported Java version
-  * Oracle JDK 7 
-  * Oracle JDK  8
-  * OpenJDK 7
+   * Oracle JDK  8
 * A SocketLabs account. If you don't have one yet, you can [sign up for a free account](https://signup.socketlabs.com/step-1?plan=free) to get started.
 
 ## Installation
@@ -45,7 +43,11 @@ repositories {
 ### via Maven
 
 ```
-mvn install
+<dependency>
+  <groupId>com.socketlabs</groupId>
+  <artifactId>injectionApi</artifactId>
+  <version>1.0.0</version>
+</dependency>
 ```
 
 ### via jar file
