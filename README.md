@@ -87,7 +87,7 @@ You can also send a file attachment in a basic message.
 import com.socketLabs.injectionApi.*;
 import com.socketLabs.injectionApi.message.*;
 
-var client = new SocketLabsClient(000001, "YOUR-API-KEY"); //Your SocketLabs ServerId and Injection API key
+SocketLabsClient client = new SocketLabsClient(000001, "YOUR-API-KEY"); //Your SocketLabs ServerId and Injection API key
 
 BasicMessage message = new BasicMessage();
 
