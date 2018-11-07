@@ -13,7 +13,6 @@ target
 # Generated Files
 bin/
 gen/
-pom.xml
 
 # IDE
 .vscode

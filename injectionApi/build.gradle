@@ -5,8 +5,25 @@ plugins {
     id 'signing'
 }
 
-group 'com.socketlabs'
-version '1.0.1'
+def baseGroupId = "com.socketlabs"
+def baseArtifactId = 'injectionApi'
+
+def computeVersion() {
+    def baseVersion = "1.0.0"
+    def release = false
+    if (release) {
+        return "${baseVersion}"
+    }
+    else {
+        return "${baseVersion}-SNAPSHOT-${(new Date().format('yyyyMMddHHmmss'))}"
+    }
+
+}
+
+group "${baseGroupId}"
+version = computeVersion()
+
+
 
 sourceCompatibility = 1.8
 
@@ -63,19 +80,13 @@ uploadArchives {
                 MavenDeployment deployment -> signing.signPom(deployment)
             }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
+            repository(url: localRepoUrl)
 
             pom.project {
 
-                groupId 'com.socketlabs'
-                artifactId 'injectionApi'
-                version '1.0.1'
+                groupId "${baseGroupId}"
+                artifactId "${baseArtifactId}"
+                version "${version}"
 
                 name 'socketlabs-java'
                 packaging 'jar'
@@ -111,7 +122,7 @@ uploadArchives {
                         name 'Ross Brazuk'
                     }
                 }
-            }
+            }.writeTo("$projectDir/pom.xml")
         }
     }
 }
