@@ -105,9 +105,13 @@ public class InjectionRequestFactory{
 
         MessageJson messageJson = generateBaseMessage(basicMessage);
 
-        messageJson.setTo(populateTo(basicMessage.getTo()));
+        messageJson.setTo(populateEmailList(basicMessage.getTo()));
 
         messageJsonList.add(messageJson);
+
+        messageJson.setCc(populateEmailList(basicMessage.getCc()));
+
+        messageJson.setBcc(populateEmailList(basicMessage.getBcc()));
 
         return GetAsJson(new InjectionRequest(this.serverId, this.apiKey, messageJsonList));
     }
@@ -133,11 +137,11 @@ public class InjectionRequestFactory{
         messageJson.setSubject(messageBase.getSubject());
         messageJson.setPlainTextBody(messageBase.getPlainTextBody());
         messageJson.setHtmlBody(messageBase.getHtmlBody());
+        messageJson.setReplyTo(new AddressJson(messageBase.getReplyTo().getEmailAddress(), messageBase.getReplyTo().getFriendlyName()));
         messageJson.setMailingId(messageBase.getMailingId());
         messageJson.setMessageId(messageBase.getMessageId());
         messageJson.setCharSet(messageBase.getCharSet());
         messageJson.setFrom(new AddressJson(messageBase.getFrom().getEmailAddress(), messageBase.getFrom().getFriendlyName()));
-        // todo: set cc and bcc here
         messageJson.setCustomHeaders(populateCustomHeaders(messageBase.getCustomHeaders()));
         messageJson.setAttachments(populateAttachments(messageBase.getAttachments()));
 
@@ -145,11 +149,6 @@ public class InjectionRequestFactory{
             messageJson.setApiTemplate(String.valueOf(messageBase.getApiTemplate()));
         }
 
-        try {
-            System.out.println(mapper.writeValueAsString(messageJson));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
         return messageJson;
     }
 
@@ -199,7 +198,7 @@ public class InjectionRequestFactory{
      * @param baseTo List of EmailAddress objects
      * @return List<AddressJson>
      */
-    private List<AddressJson> populateTo(List<EmailAddress> baseTo) {
+    private List<AddressJson> populateEmailList(List<EmailAddress> baseTo) {
         if (baseTo == null) {
             return null;
         }

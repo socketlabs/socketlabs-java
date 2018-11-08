@@ -32,7 +32,7 @@ public class Main {
         // =========================
         // Add Email Addresses using an Array
         List<EmailAddress> toRecipients = new ArrayList<>();
-        toRecipients.add(new EmailAddress("recipient1@example.com"));
+        toRecipients.add(new EmailAddress("ross.brazuk@socketlabs.com"));
         toRecipients.add(new EmailAddress("recipient2@example.com", "Recipient #2"));
         message.setTo(toRecipients);
 
