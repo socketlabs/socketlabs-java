@@ -367,7 +367,6 @@ public class BulkMessage implements MessageBase {
         this.customHeaders.add(header);
     }
 
-
     /**
      * Get the map containing Merge Data items that will be global across the whole message.
      * @return {@code TreeMap<String, String>}
