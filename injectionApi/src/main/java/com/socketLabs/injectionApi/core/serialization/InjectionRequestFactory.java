@@ -137,13 +137,17 @@ public class InjectionRequestFactory{
         messageJson.setSubject(messageBase.getSubject());
         messageJson.setPlainTextBody(messageBase.getPlainTextBody());
         messageJson.setHtmlBody(messageBase.getHtmlBody());
-        messageJson.setReplyTo(new AddressJson(messageBase.getReplyTo().getEmailAddress(), messageBase.getReplyTo().getFriendlyName()));
+
         messageJson.setMailingId(messageBase.getMailingId());
         messageJson.setMessageId(messageBase.getMessageId());
         messageJson.setCharSet(messageBase.getCharSet());
         messageJson.setFrom(new AddressJson(messageBase.getFrom().getEmailAddress(), messageBase.getFrom().getFriendlyName()));
         messageJson.setCustomHeaders(populateCustomHeaders(messageBase.getCustomHeaders()));
         messageJson.setAttachments(populateAttachments(messageBase.getAttachments()));
+
+        if (messageBase.getReplyTo() != null) {
+            messageJson.setReplyTo(new AddressJson(messageBase.getReplyTo().getEmailAddress(), messageBase.getReplyTo().getFriendlyName()));
+        }
 
         if (messageBase.getApiTemplate() != null) {
             messageJson.setApiTemplate(String.valueOf(messageBase.getApiTemplate()));
