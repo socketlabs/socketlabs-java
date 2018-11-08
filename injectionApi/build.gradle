@@ -9,21 +9,16 @@ def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
 
 def computeVersion() {
-    def baseVersion = "1.0.1"
+    def baseVersion = "1.0.2"
     def release = true
-    if (release) {
-        return "${baseVersion}"
-    }
-    else {
-        return "${baseVersion}-SNAPSHOT-${(new Date().format('yyyyMMddHHmmss'))}"
-    }
-
+    if (release) 
+        return "${baseVersion}"    
+    else 
+        return "${baseVersion}-SNAPSHOT"
 }
 
 group "${baseGroupId}"
 version = computeVersion()
-
-
 
 sourceCompatibility = 1.8
 
