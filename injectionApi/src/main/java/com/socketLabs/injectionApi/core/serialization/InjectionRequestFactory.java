@@ -1,6 +1,7 @@
 package com.socketLabs.injectionApi.core.serialization;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socketLabs.injectionApi.message.*;
 
@@ -136,6 +137,7 @@ public class InjectionRequestFactory{
         messageJson.setMessageId(messageBase.getMessageId());
         messageJson.setCharSet(messageBase.getCharSet());
         messageJson.setFrom(new AddressJson(messageBase.getFrom().getEmailAddress(), messageBase.getFrom().getFriendlyName()));
+        // todo: set cc and bcc here
         messageJson.setCustomHeaders(populateCustomHeaders(messageBase.getCustomHeaders()));
         messageJson.setAttachments(populateAttachments(messageBase.getAttachments()));
 
@@ -143,6 +145,11 @@ public class InjectionRequestFactory{
             messageJson.setApiTemplate(String.valueOf(messageBase.getApiTemplate()));
         }
 
+        try {
+            System.out.println(mapper.writeValueAsString(messageJson));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return messageJson;
     }
 

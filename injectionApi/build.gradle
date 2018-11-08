@@ -31,6 +31,11 @@ repositories {
     mavenCentral()
 }
 
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'com.fasterxml.jackson.core:jackson-core:2.9.5'
@@ -72,62 +77,4 @@ artifacts {
     archives packageJavadoc
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
 
-            beforeDeployment {
-                MavenDeployment deployment -> signing.signPom(deployment)
-            }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
-            pom.project {
-
-                groupId "${baseGroupId}"
-                artifactId "${baseArtifactId}"
-                version "${version}"
-
-                name 'socketlabs-java'
-                packaging 'jar'
-                description 'SocketLabs Email Delivery Java library'
-                url 'https://github.com/socketlabs/socketlabs-java/'
-
-                organization {
-                    name 'com.socketlabs'
-                    url 'https://github.com/socketlabs'
-                }
-                issueManagement {
-                    system 'GitHub'
-                    url 'https://github.com/socketlabs/socketlabs-java/issues'
-                }
-                licenses {
-                    license {
-                        name 'MIT License'
-                        url 'https://github.com/socketlabs/socketlabs-java/blob/master/LICENSE'
-                    }
-                }
-                scm {
-                    url 'https://github.com/socketlabs/socketlabs-java'
-                    connection 'scm:git:git://github.com/socketlabs/socketlabs-java.git'
-                    developerConnection 'scm:git:ssh://git@github.com:socketlabs/socketlabs-java.git'
-                }
-                developers {
-                    developer {
-                        id 'david-schrenker'
-                        name 'David Schrenker'
-                    }
-                    developer {
-                        id 'rbrazuk'
-                        name 'Ross Brazuk'
-                    }
-                }
-            }.writeTo("$projectDir/pom.xml")
-        }
-    }
-}

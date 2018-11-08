@@ -86,6 +86,30 @@ public interface MessageBase {
     void setFrom(EmailAddress value);
 
     /**
+     * Get the list of CC addresses.
+     * @return {@code List<EmailAddress>}
+     */
+    List<EmailAddress> getCc();
+
+    /**
+     * Set the list of CC addresses.
+     * @param value {@code List<EmailAddress>}
+     */
+    void setCc(List<EmailAddress> value);
+
+    /**
+     * Get the list of BCC addresses.
+     * @return {@code List<EmailAddress>}
+     */
+    List<EmailAddress> getBcc();
+
+    /**
+     * Set the list of BCC addresses.
+     * @param value {@code List<EmailAddress>}
+     */
+    void setBcc(List<EmailAddress> value);
+
+    /**
      * Get the optional ReplyTo address for the message.
      * @return EmailAddress
      */
