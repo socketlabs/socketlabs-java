@@ -20,7 +20,7 @@ public class BasicSendWithProxy implements Example {
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));
-        message.addToEmailAddress("ross.brazuk@socketlabs.com");
+        message.addToEmailAddress("recipient1@example.com");
 
         // create the proxy
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888));

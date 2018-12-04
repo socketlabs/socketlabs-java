@@ -25,14 +25,14 @@ public class Main {
         message.setHtmlBody("<html><body><h1>Sending A Complex Test Message</h1><p>This is the html Body of my message.</p><h2>Embedded Image:</h2><p><img src=\"cid:bus\" /></p></body></html>");
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
-        message.setFrom(new EmailAddress("ross.brazuk@socketlabs.com"));
+        message.setFrom(new EmailAddress("from@example.com"));
         message.setReplyTo(new EmailAddress("replyto@example.com"));
 
         // Adding To Recipients
         // =========================
         // Add Email Addresses using an Array
         List<EmailAddress> toRecipients = new ArrayList<>();
-        toRecipients.add(new EmailAddress("ross.brazuk@socketlabs.com"));
+        toRecipients.add(new EmailAddress("recipient1@example.com"));
         toRecipients.add(new EmailAddress("recipient2@example.com", "Recipient #2"));
         message.setTo(toRecipients);
 
