@@ -31,7 +31,7 @@ Add the following to your build.gradle file in the root of your project.
 ...
 dependencies {
   ...
-  compile group: 'com.socketlabs', name: 'injectionApi', version: '1.0.2'
+  compile group: 'com.socketlabs', name: 'injectionApi', version: '1.0.3'
 }
 
 repositories {
@@ -46,7 +46,7 @@ repositories {
 <dependency>
   <groupId>com.socketlabs</groupId>
   <artifactId>injectionApi</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 
@@ -54,11 +54,11 @@ repositories {
 
 You can just drop the jar file in. 
 
-[socketlabs-java-1.0.2.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.2/socketlabs-java-1.0.2.jar)
+[socketlabs-java-1.0.3.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.3/socketlabs-java-1.0.3.jar)
 
-[socketlabs-java-1.0.2-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.2/socketlabs-java-1.0.2-sources.jar)
+[socketlabs-java-1.0.3-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.3/socketlabs-java-1.0.3-sources.jar)
 
-[socketlabs-java-1.0.2-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.2/socketlabs-java-1.0.2-javadoc.jar)
+[socketlabs-java-1.0.3-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.3/socketlabs-java-1.0.3-javadoc.jar)
 
 Alternately, you can simply [clone this repository](https://github.com/socketlabs/socketlabs-java.git) directly to include the source code in your project.
 

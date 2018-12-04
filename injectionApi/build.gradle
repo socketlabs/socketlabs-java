@@ -9,7 +9,7 @@ def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
 
 def computeVersion() {
-    def baseVersion = "1.0.2"
+    def baseVersion = "1.0.3"
     def release = true
     if (release) 
         return "${baseVersion}"    
