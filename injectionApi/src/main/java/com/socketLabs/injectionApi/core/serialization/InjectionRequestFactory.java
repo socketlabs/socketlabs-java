@@ -107,11 +107,11 @@ public class InjectionRequestFactory{
 
         messageJson.setTo(populateEmailList(basicMessage.getTo()));
 
-        messageJsonList.add(messageJson);
-
         messageJson.setCc(populateEmailList(basicMessage.getCc()));
 
         messageJson.setBcc(populateEmailList(basicMessage.getBcc()));
+
+        messageJsonList.add(messageJson);
 
         return GetAsJson(new InjectionRequest(this.serverId, this.apiKey, messageJsonList));
     }
