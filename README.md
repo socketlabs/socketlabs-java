@@ -54,11 +54,11 @@ repositories {
 
 You can just drop the jar file in. 
 
-[socketlabs-java-1.0.4.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.4/injectionApi-1.0.4.jar)
+[injectionApi-1.0.4.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.4/injectionApi-1.0.4.jar)
 
-[socketlabs-java-1.0.4-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.4/injectionApi-1.0.4-sources.jar)
+[injectionApi-1.0.4-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.4/injectionApi-1.0.4-sources.jar)
 
-[socketlabs-java-1.0.4-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.4/injectionApi-1.0.4-javadoc.jar)
+[injectionApi-1.0.4-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.4/injectionApi-1.0.4-javadoc.jar)
 
 Alternately, you can simply [clone this repository](https://github.com/socketlabs/socketlabs-java.git) directly to include the source code in your project.
 
