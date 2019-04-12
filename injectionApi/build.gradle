@@ -9,7 +9,7 @@ def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
 
 def computeVersion() {
-    def baseVersion = "1.0.3"
+    def baseVersion = "1.0.4"
     def release = true
     if (release) 
         return "${baseVersion}"    
@@ -33,8 +33,8 @@ compileJava {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.5'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.6'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
     compile group: 'com.google.guava', name: 'guava', version: '12.0'
     compile 'com.squareup.okhttp3:okhttp:3.11.0'
 }
