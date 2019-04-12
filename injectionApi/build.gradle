@@ -33,7 +33,7 @@ compileJava {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.6'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.8'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
     compile group: 'com.google.guava', name: 'guava', version: '12.0'
     compile 'com.squareup.okhttp3:okhttp:3.11.0'
@@ -87,6 +87,7 @@ uploadArchives {
             snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
                 authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
+            
             pom.project {
 
                 groupId "${baseGroupId}"
