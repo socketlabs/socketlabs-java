@@ -17,6 +17,7 @@ import java.util.List;
  *     message.setSubject("Sending A Message");
  *     message.setHtmlBody("&#60;html&#62;This is the Html Body of my message.&#60;/html&#62;");
  *     message.setPlainTextBody("This is the Plain Text Body of my message.");
+ *     message.setAmpBody("This is the Amp Body of my message.");
  *
  *     message.setFrom(new EmailAddress("from@example.com"));
  *     message.setReplyTo(new EmailAddress("replyto@example.com"));
@@ -53,7 +54,7 @@ public class BasicMessage implements MessageBase {
      * The plain text portion of the message body.
      * <p>
      *     (Optional)
-     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate
+     *     Either PlainTextBody, HtmlBody, or AmpBody must be used or use a ApiTemplate
      * </p>
      */
     private String plainTextBody;
@@ -61,15 +62,23 @@ public class BasicMessage implements MessageBase {
      * The HTML portion of the message body.
      * <p>
      *     (Optional)
-     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate
+     *     Either PlainTextBody, HtmlBody, or AmpBody must be used or use a ApiTemplate
      * </p>
      */
     private String htmlBody;
     /**
+     * The AMP portion of the message body.
+     * <p>
+     *     (Optional)
+     *     Either PlainTextBody, HtmlBody, or AmpBody must be used or use a ApiTemplate
+     * </p>
+     */
+    private String ampBody;
+    /**
      * The Api Template for the message.
      * <p>
      *     (Optional)
-     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate
+     *     Either PlainTextBody, HtmlBody, or AmpBody must be used or use a ApiTemplate
      * </p>
      */
     private @Nullable Integer apiTemplate;
@@ -254,6 +263,20 @@ public class BasicMessage implements MessageBase {
      */
     @Override
     public void setHtmlBody(String value) { this.htmlBody = value; }
+
+    /**
+     * Gets the AMP portion of the message body.
+     * @return String
+     */
+    @Override
+    public String getAmpBody() { return this.ampBody; }
+
+    /**
+     * Sets the AMP portion of the message body.
+     * @param value String
+     */
+    @Override
+    public void setAmpBody(String value) { this.ampBody = value; }
 
     /**
      * Gets the Api Template for the message.

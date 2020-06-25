@@ -42,6 +42,17 @@ public interface MessageBase {
     void setHtmlBody(String value);
 
     /**
+     * Get the AMP portion of the message body.
+     * @return String
+     */
+    String getAmpBody();
+    /**
+     * Set the AMP portion of the message body.
+     * @param value String
+     */
+    void setAmpBody(String value);
+
+    /**
      * Get the Api Template for the message.
      * @return String
      */

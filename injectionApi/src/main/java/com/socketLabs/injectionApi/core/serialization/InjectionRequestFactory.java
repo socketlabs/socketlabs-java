@@ -137,6 +137,7 @@ public class InjectionRequestFactory{
         messageJson.setSubject(messageBase.getSubject());
         messageJson.setPlainTextBody(messageBase.getPlainTextBody());
         messageJson.setHtmlBody(messageBase.getHtmlBody());
+        messageJson.setAmpBody(messageBase.getAmpBody());
 
         messageJson.setMailingId(messageBase.getMailingId());
         messageJson.setMessageId(messageBase.getMessageId());
