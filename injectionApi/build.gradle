@@ -4,105 +4,84 @@ plugins {
     id 'maven-publish'
     id 'signing'
 }
-
 def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
-
 def computeVersion() {
-    def baseVersion = "1.0.5"
+    def baseVersion = "1.1.0"
     def release = false
-    if (release) 
-        return "${baseVersion}"    
-    else 
+    if (release)
+        return "${baseVersion}"
+    else
         return "${baseVersion}-SNAPSHOT"
 }
-
 group "${baseGroupId}"
 version = computeVersion()
-
 sourceCompatibility = 1.8
-
 repositories {
     mavenCentral()
 }
-
 compileJava {
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
 }
-
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'junit', name: 'junit', version: '5.6.2'
     compile 'com.fasterxml.jackson.core:jackson-core:2.11.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.11.0'
     compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
-    compile 'com.squareup.okhttp3:okhttp:3.11.0'
+    compile 'com.squareup.okhttp3:okhttp:4.7.2'
 }
-
 jar {
     manifest {
         attributes 'Implementation-Title': 'SocketLabs Java',
                 'Implementation-Version': version
     }
 }
-
 signing {
     required { gradle.taskGraph.hasTask("uploadArchives") }
     sign configurations.archives
 }
-
 javadoc {
     source = sourceSets.main.allJava
     classpath = configurations.compileClasspath
 }
-
 task sourceJar(type: Jar) {
     classifier = 'sources'
     from sourceSets.main.allJava
 }
-
 task packageJavadoc(type: Jar) {
     from javadoc
     classifier = 'javadoc'
 }
-
 artifacts {
     archives jar
     archives sourceJar
     archives packageJavadoc
 }
-
 uploadArchives {
     repositories {
         mavenDeployer {
-
-            /*beforeDeployment {
+            beforeDeployment {
                 MavenDeployment deployment -> signing.signPom(deployment)
             }
-            */
-
-            publishToMavenLocal
-
-
-         /*   repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+            repository(url: localRepoUrl)
+            /*
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
                 authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
-
             snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
                 authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
-         */
-            pom.project {
+            */
 
+            pom.project {
                 groupId "${baseGroupId}"
                 artifactId "${baseArtifactId}"
                 version "${version}"
-
                 name 'socketlabs-java'
                 packaging 'jar'
                 description 'SocketLabs Email Delivery Java library'
                 url 'https://github.com/socketlabs/socketlabs-java/'
-
                 organization {
                     name 'com.socketlabs'
                     url 'https://github.com/socketlabs'
@@ -126,16 +105,40 @@ uploadArchives {
                     developer {
                         id 'david-schrenker'
                         name 'David Schrenker'
+                        email 'david.schrenker@socketlabs.com'
+                        organization {
+                            name 'socketlabs'
+                            url 'https://github.com/socketlabs'
+                        }
+                        roles {
+                            role 'Developer'
+                        }
                     }
                     developer {
                         id 'rbrazuk'
                         name 'Ross Brazuk'
+                        organization {
+                            name 'socketlabs'
+                            url 'https://github.com/socketlabs'
+                        }
+                        roles {
+                            role 'Developer'
+                        }
+                    }
+                }
+                contributors {
+                    contributor {
+                        name 'Ryan Lydzinski'
+                        organization {
+                            name 'socketlabs'
+                            url 'https://github.com/socketlabs'
+                        }
+                        roles {
+                            role 'Intern'
+                        }
                     }
                 }
             }.writeTo("$projectDir/pom.xml")
         }
     }
 }
-
-
-

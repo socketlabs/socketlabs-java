@@ -363,8 +363,6 @@ public class BasicMessage implements MessageBase {
     public void setAttachments(List<Attachment> value) { this.attachments = value; }
 
     /**
-     * Add an Attachment to the array of Attachment items
-     * @param filePath String
      * Add an attachment to the array of Attachment items using the filePath
      * @param filePath The path to your attachment on your local system.
      * @throws IOException IOException

@@ -117,9 +117,8 @@ public class SendValidator {
 
         boolean hasHtmlBody = !isNullOrEmpty(message.getHtmlBody());
         boolean hasPlainTextBody = !isNullOrEmpty(message.getPlainTextBody());
-        boolean hasAmpBody = !isNullOrEmpty(message.getAmpBody());
 
-        return (hasHtmlBody || hasPlainTextBody || hasAmpBody);
+        return (hasHtmlBody || hasPlainTextBody);
     }
 
     /**

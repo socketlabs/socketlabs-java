@@ -70,6 +70,10 @@ public class Main {
         System.out.println("   17:  Bulk Send From DataSource With Merge Data ");
         System.out.println("   18:  Bulk Send Complex Example ");
         System.out.println();
+        System.out.println(" AMP Html Examples: ");
+        System.out.println("   19:  Basic Send With Amp Body Example ");
+        System.out.println("   20:  Bulk Send With Amp Body Example ");
+        System.out.println();
         System.out.println("-------------------------------------------------------------------------");
     }
 
@@ -102,6 +106,8 @@ public class Main {
             case 16: return "examples.bulk.BulkSendWithASCIICharsetMergeData";
             case 17: return "examples.bulk.BulkSendFromDataSourceWithMerge";
             case 18: return "examples.bulk.BulkSendComplexExample";
+            case 19: return "examples.basic.BasicSendWithAmpBodyExample";
+            case 20: return "examples.bulk.BulkSendWithAmpBodyExample";
             default:
                 System.out.println("Invalid Input (Out of Range)");
                 return null;
