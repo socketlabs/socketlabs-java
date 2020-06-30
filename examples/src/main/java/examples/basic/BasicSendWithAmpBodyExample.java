@@ -37,7 +37,7 @@ public class BasicSendWithAmpBodyExample implements Example {
 
         message.setFrom(new EmailAddress("from@example.com"));
         message.addToEmailAddress("recipient1@example.com");
-        message.addToEmailAddress("recipient2@example.com", "Recipient #1");
+        message.addToEmailAddress("recipient2@example.com", "Recipient #2");
         message.addToEmailAddress(new EmailAddress("recipient3@example.com"));
         message.addToEmailAddress(new EmailAddress("recipient4@example.com", "Recipient #4"));
 

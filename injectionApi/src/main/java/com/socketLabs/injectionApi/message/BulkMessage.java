@@ -52,7 +52,7 @@ public class BulkMessage implements MessageBase {
      * The plain text portion of the message body.
      * <p>
      *     (Optional)
-     *     Either PlainTextBody, HtmlBody, or AmpBody must be used or use a ApiTemplate
+     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate with the AmpBody
      * </p>
      */
     private String plainTextBody;
@@ -60,7 +60,7 @@ public class BulkMessage implements MessageBase {
      * The HTML portion of the message body.
      * <p>
      *     (Optional)
-     *     Either PlainTextBody, HtmlBody, or AmpBody must be used or use a ApiTemplate
+     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate with the AmpBody
      * </p>
      */
     private String htmlBody;
@@ -68,7 +68,7 @@ public class BulkMessage implements MessageBase {
      * The AMP portion of the message body.
      * <p>
      *     (Optional)
-     *     Either PlainTextBody, HtmlBody, or AmpBody must be used or use a ApiTemplate
+     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate with the AmpBody
      * </p>
      */
     private String ampBody;
@@ -76,7 +76,7 @@ public class BulkMessage implements MessageBase {
      * The Api Template for the message.
      * <p>
      *     (Optional)
-     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate
+     *     Either PlainTextBody or HtmlBody must be used or use a ApiTemplate with the AmpBody
      * </p>
      */
     private @Nullable Integer apiTemplate;
