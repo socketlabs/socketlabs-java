@@ -31,7 +31,7 @@ Add the following to your build.gradle file in the root of your project.
 ...
 dependencies {
   ...
-  compile group: 'com.socketlabs', name: 'injectionApi', version: '1.0.4'
+  compile group: 'com.socketlabs', name: 'injectionApi', version: '1.0.5'
 }
 
 repositories {
@@ -46,19 +46,19 @@ repositories {
 <dependency>
   <groupId>com.socketlabs</groupId>
   <artifactId>injectionApi</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
 </dependency>
 ```
 
 ### via jar file
 
-You can just drop the jar file in. 
+You can just drop the jar file in.
 
-[injectionApi-1.0.4.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.4/injectionApi-1.0.4.jar)
+[injectionApi-1.0.5.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.5/injectionApi-1.0.5.jar)
 
-[injectionApi-1.0.4-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.4/injectionApi-1.0.4-sources.jar)
+[injectionApi-1.0.5-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.5/injectionApi-1.0.5-sources.jar)
 
-[injectionApi-1.0.4-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.4/injectionApi-1.0.4-javadoc.jar)
+[injectionApi-1.0.5-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.5/injectionApi-1.0.5-javadoc.jar)
 
 Alternately, you can simply [clone this repository](https://github.com/socketlabs/socketlabs-java.git) directly to include the source code in your project.
 

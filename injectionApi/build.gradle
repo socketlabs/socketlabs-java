@@ -8,7 +8,7 @@ def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
 def computeVersion() {
     def baseVersion = "1.1.0"
-    def release = false
+    def release = true
     if (release)
         return "${baseVersion}"
     else
