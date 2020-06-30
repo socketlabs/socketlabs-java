@@ -1,10 +1,10 @@
-[![SocketLabs](https://www.socketlabs.com/assets/socketlabs-logo1.png)](https://www.socketlabs.com)
+[![SocketLabs](https://static.socketlabs.com/logos/logo-light-326x64.png | width=240)](https://www.socketlabs.com)
 # [![Twitter Follow](https://img.shields.io/twitter/follow/socketlabs.svg?style=social&label=Follow)](https://twitter.com/socketlabs) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/socketlabs/socketlabs-java/blob/master/CONTRIBUTING.md)
 <!--
 [![GitHub contributors](https://img.shields.io/github/contributors/socketlabs/socketlabs-java.svg)](https://github.com/socketlabs/socketlabs-java/graphs/contributors)
 -->
 
-The SocketLabs Email Delivery Java library allows you to easily send email messages via the [SocketLabs Injection API](https://www.socketlabs.com/api-reference/injection-api/).  The library makes it easy to build and send any type of message supported by the API, from a simple message to a single recipient all the way to a complex bulk message sent to a group of recipients with unique merge data per recipient.
+The SocketLabs Email Delivery Java library allows you to easily send email messages via the [SocketLabs Injection API](https://www.socketlabs.com/docs/inject/).  The library makes it easy to build and send any type of message supported by the API, from a simple message to a single recipient all the way to a complex bulk message sent to a group of recipients with unique merge data per recipient.
 
 # Table of Contents
 * [Prerequisites and Installation](#prerequisites-and-installation)
@@ -31,7 +31,7 @@ Add the following to your build.gradle file in the root of your project.
 ...
 dependencies {
   ...
-  compile group: 'com.socketlabs', name: 'injectionApi', version: '1.0.5'
+  compile group: 'com.socketlabs', name: 'injectionApi', version: '1.1.0'
 }
 
 repositories {
@@ -46,7 +46,7 @@ repositories {
 <dependency>
   <groupId>com.socketlabs</groupId>
   <artifactId>injectionApi</artifactId>
-  <version>1.0.5</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
@@ -54,11 +54,11 @@ repositories {
 
 You can just drop the jar file in.
 
-[injectionApi-1.0.5.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.5/injectionApi-1.0.5.jar)
+[injectionApi-1.1.0.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.1.0/injectionApi-1.1.0.jar)
 
-[injectionApi-1.0.5-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.5/injectionApi-1.0.5-sources.jar)
+[injectionApi-1.1.0-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.1.0/injectionApi-1.1.0-sources.jar)
 
-[injectionApi-1.0.5-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.0.5/injectionApi-1.0.5-javadoc.jar)
+[injectionApi-1.1.0-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.1.0/injectionApi-1.1.0-javadoc.jar)
 
 Alternately, you can simply [clone this repository](https://github.com/socketlabs/socketlabs-java.git) directly to include the source code in your project.
 
@@ -200,6 +200,10 @@ This example demonstrates the results of attempting to do a send with an invalid
 ### [Basic send with invalid recipients](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasicSendWithInvalidRecipients.java)
 This example demonstrates the results of attempting to do a send with invalid recipients.
 
+### [Basic send with Amp ](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendWithAmpBodyExample.java)
+This example demonstrates how to send a basic message with an AMP Html body.
+For more information about AMP please see [AMP Project](https://amp.dev/documentation/)
+
 ### [Bulk send with multiple recipients](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/bulk/BulkSend.java)
 This example demonstrates how to send a bulk message to multiple recipients.
 
@@ -219,6 +223,9 @@ set and special characters.
 This example demonstrates how to send a bulk message to multiple recipients with
 unique merge data per recipient.
 
+### [Bulk send with Amp ](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/bulk/BulkSendWithAmpBodyExample.java)
+This example demonstrates how to send a bulk message with an AMP Html body.
+For more information about AMP please see [AMP Project](https://amp.dev/documentation/)
 
 <a name="license"></a>
 # License
