@@ -27,10 +27,17 @@ public class BasicSendComplexExample implements Example {
 
         message.setSubject("Sending A Complex Test Message (Basic Send)");
 
-        message.setHtmlBody("<html><body><h1>Sending A Complex Test Message</h1><p>This is the html Body of my message.</p><h2>Embedded Image:</h2><p><img src=\"cid:bus\" /></p></body></html>");
+        message.setHtmlBody("<html>" +
+                "<body>" +
+                "  <h1>Sending A Complex Test Message</h1>" +
+                "  <p>This is the html Body of my message.</p>" +
+                "  <h2>Embedded Image:</h2>" +
+                "  <p><img src=\"cid:bus\" /></p>" +
+                "</body>" +
+                "</html>");
+
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
-        //Setting Amp Body
         message.setAmpBody("<!doctype html>" +
                 "<html amp4email>" +
                 "<head>" +
