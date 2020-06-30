@@ -6,6 +6,8 @@ import com.socketLabs.injectionApi.message.BasicMessage;
 import com.socketLabs.injectionApi.message.EmailAddress;
 import examples.*;
 
+import javax.swing.*;
+
 public class BasicSend implements Example {
 
     public SendResponse RunExample ()  throws Exception {
@@ -17,9 +19,8 @@ public class BasicSend implements Example {
         message.setPlainTextBody("This is the Plain Text Body of my message.");
 
         message.setFrom(new EmailAddress("from@example.com"));
-
         message.addToEmailAddress("recipient1@example.com");
-        message.addToEmailAddress("recipient2@example.com", "Recipient #1");
+        message.addToEmailAddress("recipient2@example.com", "Recipient #2");
         message.addToEmailAddress(new EmailAddress("recipient3@example.com"));
         message.addToEmailAddress(new EmailAddress("recipient4@example.com", "Recipient #4"));
 

@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.socketlabs</groupId>
   <artifactId>injectionApi</artifactId>
-  <version>1.0.5</version>
+  <version>1.1.0-SNAPSHOT</version>
   <name>socketlabs-java</name>
   <description>SocketLabs Email Delivery Java library</description>
   <url>https://github.com/socketlabs/socketlabs-java/</url>
@@ -22,12 +22,30 @@
     <developer>
       <id>david-schrenker</id>
       <name>David Schrenker</name>
+      <email>david.schrenker@socketlabs.com</email>
+      <organization>org.apache.maven.model.Organization@749a2ed</organization>
+      <roles>
+        <role>Developer</role>
+      </roles>
     </developer>
     <developer>
       <id>rbrazuk</id>
       <name>Ross Brazuk</name>
+      <organization>org.apache.maven.model.Organization@47f054e3</organization>
+      <roles>
+        <role>Developer</role>
+      </roles>
     </developer>
   </developers>
+  <contributors>
+    <contributor>
+      <name>Ryan Lydzinski</name>
+      <organization>org.apache.maven.model.Organization@1b7c127f</organization>
+      <roles>
+        <role>Intern</role>
+      </roles>
+    </contributor>
+  </contributors>
   <scm>
     <connection>scm:git:git://github.com/socketlabs/socketlabs-java.git</connection>
     <developerConnection>scm:git:ssh://git@github.com:socketlabs/socketlabs-java.git</developerConnection>
@@ -59,13 +77,13 @@
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
-      <version>3.11.0</version>
+      <version>4.7.2</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>5.6.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

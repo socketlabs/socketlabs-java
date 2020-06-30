@@ -41,6 +41,11 @@ class MessageJson {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String htmlBody;
 
+    /** The AMP portion of the message body. */
+    @JsonProperty("AmpBody")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String ampBody;
+
     /** The Api Template for the messaget. */
     @JsonProperty("ApiTemplate")
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -160,6 +165,17 @@ class MessageJson {
      * @param value String
      */
     public void setHtmlBody(String value) { this.htmlBody = value; }
+
+    /**
+     * Gets the AMP portion of the message body.
+     * @return String
+     */
+    public String getAmpBody() { return this.ampBody; }
+    /**
+     * Sets the AMP portion of the message body.
+     * @param value String
+     */
+    public void setAmpBody(String value) { this.ampBody = value; }
 
     /**
      * Get the Api Template for the message.

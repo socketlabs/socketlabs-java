@@ -105,8 +105,8 @@ public class SendValidator {
 
     /**
      * Check if the message has a Message Body.
-     * If an Api Template is specified it will override the HtmlBody and/or the PlainTextBody.
-     * If no Api Template is specified the HtmlBody and/or the PlainTextBody must me set
+     * If an Api Template is specified it will override the HtmlBody, AmpBody, and/or the PlainTextBody.
+     * If no Api Template is specified the HtmlBody and/or the PlainTextBody must be set
      * @param message The base interface, MessageBase, of the message to be sent.
      * @return boolean result
      */

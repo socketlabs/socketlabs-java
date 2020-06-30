@@ -29,7 +29,7 @@ public class BulkSendComplexExample implements Example {
 
         message.setCharSet("UTF-8");
 
-        message.setSubject("Complex BulkSend Example");
+        message.setSubject("Sending A Complex Test Message (Bulk Send)");
 
         // Build the Content (Note the %% symbols used to denote the data to be merged)
         String html =  "<html>"
@@ -50,8 +50,6 @@ public class BulkSendComplexExample implements Example {
                 + "       </p>"
                 + "       <h2>UTF-8 Characters:</h2>"
                 + "       <p>✔ - Check</p>"
-                + "       <h2>Embedded Image:</h2>"
-                + "       <p><img src=\"cid:bus\" /></p>"
                 + "   </body>"
                 + "</html>";
         message.setHtmlBody(html);
@@ -66,7 +64,41 @@ public class BulkSendComplexExample implements Example {
                 + "       Example of Merge Usage"
                 + "           Our company motto is '%%Motto%%'."
                 + "           Your birthday is %%Birthday%% and you are %%Age%% years old.";
-        message.setPlainTextBody(text);
+         message.setPlainTextBody(text);
+
+        String amp = "<!doctype html>"
+                + "<html amp4email>"
+                + "<head>"
+                + "<title>Sending an AMP Test Message</title>"
+                + "  <meta charset=\"utf-8\">"
+                + "  <script async src=\"https://cdn.ampproject.org/v0.js\"></script>"
+                + "  <style amp4email-boilerplate>body{visibility:hidden}</style>"
+                + "  <style amp-custom>"
+                + "    h1 {"
+                + "      margin: 1rem;"
+                + "    }"
+                + "  </style>"
+                + "</head>"
+                + "<body>"
+                + "       <h1>Sending An AMP Complex Test Message</h1>"
+                + "       <h2>Merge Data</h2>"
+                + "       <p>"
+                + "           Motto = <b>%%Motto%%</b> </br>"
+                + "           Birthday = <b>%%Birthday%%</b> </br>"
+                + "           Age = <b>%%Age%%</b> </br>"
+                + "           UpSell = <b>%%UpSell%%</b>"
+                + "       </p>"
+                + "       <h2>Example of Merge Usage</h2>"
+                + "       <p>"
+                + "           Our company motto is '<b>%%Motto%%</b>'. </br>"
+                + "           Your birthday is <b>%%Birthday%%</b> and you are <b>%%Age%%</b> years old."
+                + "       </p>"
+                + "       <h2>UTF-8 Characters:</h2>"
+                + "       <p>✔ - Check</p>"
+                + "       </body>"
+                + "       </html>";
+
+        message.setAmpBody(amp);
 
         message.setFrom(new EmailAddress("from@example.com", "FromMe"));
         message.setReplyTo(new EmailAddress("replyto@example.com"));
@@ -77,7 +109,7 @@ public class BulkSendComplexExample implements Example {
         // Add global merge data using a map
         TreeMap<String, String> globalMergeData = new TreeMap<>();
         globalMergeData.put("Motto", "When hitting the inbox matters!");
-        globalMergeData.put("Birthday", "unkown");
+        globalMergeData.put("Birthday", "unknown");
         message.setGlobalMergeData(globalMergeData);
 
         // Add global merge data directly to the Global Merge Data Map on he message
@@ -124,14 +156,6 @@ public class BulkSendComplexExample implements Example {
         attachment1.addCustomHeader("Attachment-Header", "I Am A Bus");
         message.getAttachments().add(attachment1);
 
-        // Add Attachment using the addAttachments function
-        Attachment attachment2 = new Attachment(
-                "bus2.png",
-                "image/png",
-                "src/main/java/examples/img/bus.png"
-        );
-        attachment2.setContentId("bus");
-        message.addAttachments(attachment2);
 
         // Add Attachment a filePath {string} to the array
         message.addAttachments(new Attachment("src/main/java/examples/html/SimpleEmail.html"));

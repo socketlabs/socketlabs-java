@@ -20,16 +20,33 @@ public class BasicSendComplexExample implements Example {
 
         // Build the message
         // =========================
-
         BasicMessage message = new BasicMessage();
 
         message.setMessageId("ComplexExample");
         message.setMailingId("BasicSend");
 
-        message.setSubject("Sending A Complex Test Message (basic Send)");
+        message.setSubject("Sending A Complex Test Message (Basic Send)");
 
         message.setHtmlBody("<html><body><h1>Sending A Complex Test Message</h1><p>This is the html Body of my message.</p><h2>Embedded Image:</h2><p><img src=\"cid:bus\" /></p></body></html>");
         message.setPlainTextBody("This is the Plain Text Body of my message.");
+
+        //Setting Amp Body
+        message.setAmpBody("<!doctype html>" +
+                "<html amp4email>" +
+                "<head>" +
+                "  <meta charset=\"utf-8\">" +
+                "  <script async src=\"https://cdn.ampproject.org/v0.js\"></script>" +
+                "  <style amp4email-boilerplate>body{visibility:hidden}</style>" +
+                "  <style amp-custom>" +
+                "    h1 {" +
+                "      margin: 1rem;" +
+                "    }" +
+                "  </style>" +
+                "</head>" +
+                "<body>" +
+                "  <h1>This is the AMP Html Body of my message</h1>" +
+                "</body>" +
+                "</html>");
 
         message.setFrom(new EmailAddress("from@example.com"));
         message.setReplyTo(new EmailAddress("replyto@example.com"));
