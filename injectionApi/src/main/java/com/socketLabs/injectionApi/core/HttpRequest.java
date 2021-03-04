@@ -127,6 +127,9 @@ public class HttpRequest {
 
         if (this.proxy != null)
             client = new OkHttpClient.Builder()
+                    .connectTimeout(this.timeout, TimeUnit.SECONDS)
+                    .writeTimeout(this.timeout, TimeUnit.SECONDS)
+                    .readTimeout(this.timeout, TimeUnit.SECONDS)
                     .callTimeout(this.timeout, TimeUnit.SECONDS)
                     .proxy(this.proxy)
                     .build();
