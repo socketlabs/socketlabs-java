@@ -15,6 +15,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     private String apiKey;
     private String endPointUrl = "https://inject.socketlabs.com/api/v1/email";
     private Proxy proxy;
+    private int requestTimeout = 100;
 
     /**
      * Set the SocketLabs Injection API endpoint Url
@@ -23,6 +24,12 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     public void setEndPointUrl(String value) {
         this.endPointUrl = value;
     }
+
+    /**
+     * Set the Timeout period used by the HttpClient (in seconds)
+     * @param value int
+     */
+    public void setRequestTimeout(int value) { this.requestTimeout = value; }
 
     private final String VERSION = "1.0.0";
     private final String userAgent  = String.format("SocketLabs-java/%s(%s)", VERSION, Package.getPackage("java.util").getImplementationVersion());
@@ -36,6 +43,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         this.serverId = serverId;
         this.apiKey = apiKey;
     }
+
     /**
      *
      * Creates a new instance of the SocketLabsClient.
@@ -159,7 +167,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
     private HttpRequest buildHttpRequest(Proxy optionalProxy) {
 
-        HttpRequest request = new HttpRequest(HttpRequest.HttpRequestMethod.POST, this.endPointUrl);
+        HttpRequest request = new HttpRequest(HttpRequest.HttpRequestMethod.POST, this.endPointUrl, this.requestTimeout);
 
         request.setHeader("User-Agent", this.userAgent);
         request.setHeader("content-type", "application/json");

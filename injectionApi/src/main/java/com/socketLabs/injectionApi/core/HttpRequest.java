@@ -5,8 +5,10 @@ import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
 import okhttp3.*;
 import okhttp3.Request.Builder;
 
+
 import java.io.*;
 import java.net.Proxy;
+import java.util.concurrent.TimeUnit;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,15 +37,18 @@ public class HttpRequest {
     private Proxy proxy;
     /** The headers to add to the HTTP Request */
     private Map<String, String> headers = new HashMap<>();
+    private int timeout;
+
 
     /**
      * Creates a new instance of the HTTP Request class
      * @param method HTTpRequestMethod
      * @param endPointUrl String
      */
-    public HttpRequest(HttpRequestMethod method, String endPointUrl) {
+    public HttpRequest(HttpRequestMethod method, String endPointUrl, int timeout) {
         this.method = method;
         this.endPointUrl = endPointUrl;
+        this.timeout = timeout;
     }
 
     /**
@@ -114,16 +119,23 @@ public class HttpRequest {
 
     }
 
+
     /**
      * Build the HTTP Client call
      * @return Call
      */
     private Call BuildClientCall() {
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
+                .connectTimeout(this.timeout, TimeUnit.SECONDS)
+                .writeTimeout(this.timeout, TimeUnit.SECONDS)
+                .readTimeout(this.timeout, TimeUnit.SECONDS)
+                .callTimeout(this.timeout, TimeUnit.SECONDS);
+
+        OkHttpClient client = clientBuilder.build();
 
         if (this.proxy != null)
-            client = new OkHttpClient.Builder()
+            client = clientBuilder
                     .proxy(this.proxy)
                     .build();
 
