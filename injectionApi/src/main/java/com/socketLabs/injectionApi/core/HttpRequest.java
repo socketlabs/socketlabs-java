@@ -119,20 +119,23 @@ public class HttpRequest {
 
     }
 
+
     /**
      * Build the HTTP Client call
      * @return Call
      */
     private Call BuildClientCall() {
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
+                .connectTimeout(this.timeout, TimeUnit.SECONDS)
+                .writeTimeout(this.timeout, TimeUnit.SECONDS)
+                .readTimeout(this.timeout, TimeUnit.SECONDS)
+                .callTimeout(this.timeout, TimeUnit.SECONDS);
+
+        OkHttpClient client = clientBuilder.build();
 
         if (this.proxy != null)
-            client = new OkHttpClient.Builder()
-                    .connectTimeout(this.timeout, TimeUnit.SECONDS)
-                    .writeTimeout(this.timeout, TimeUnit.SECONDS)
-                    .readTimeout(this.timeout, TimeUnit.SECONDS)
-                    .callTimeout(this.timeout, TimeUnit.SECONDS)
+            client = clientBuilder
                     .proxy(this.proxy)
                     .build();
 
