@@ -1,2 +1,4 @@
-package com.socketLabs.injectionApi.core;public class RetryHandler {
+package com.socketLabs.injectionApi.core;
+
+public class RetryHandler {
 }

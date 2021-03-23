@@ -1,2 +1,4 @@
-package com.socketLabs.injectionApi;public class RetrySettings {
+package com.socketLabs.injectionApi;
+
+public class RetrySettings {
 }
