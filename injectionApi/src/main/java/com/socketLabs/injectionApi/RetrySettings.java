@@ -1,6 +1,10 @@
 package com.socketLabs.injectionApi;
 
+import jdk.jfr.Timespan;
+
 import java.time.Duration;
+import java.time.Instant;
+import java.util.Random;
 
 public class RetrySettings {
     private final int defaultNumberOfRetries = 0;
@@ -28,6 +32,30 @@ public class RetrySettings {
         return maximumNumberOfRetries;
     }
 
-    
+    /// <summary>
+    /// Get the time period to wait before next call
+    /// </summary>
+    /// <param name="numberOfAttempts"></param>
+    /// <returns></returns>
+    public Duration getNextWaitInterval(int numberOfAttempts){
+
+        long interval = Math.min(
+                minimumRetryTIme.toMillis() + getRetryDelta(numberOfAttempts),
+                maximumRetryTime.toMillis());
+        return Duration.ofMillis(interval);
+
+    }
+
+    public int getRetryDelta(int numberOfAttempts){
+
+        Random random = new Random();
+
+        int min = (int) (Duration.ofSeconds(1).toMillis() * 0.8);
+        int max = (int) (Duration.ofSeconds(1).toMillis() * 1.2);
+        int randomNumber = random.nextInt(max - min) + min;
+
+        return (int) ((Math.pow(2.0, numberOfAttempts) - 1.0) * randomNumber);
+        
+    }
 
 }
