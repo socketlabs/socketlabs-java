@@ -55,7 +55,7 @@ public class RetrySettings {
         int randomNumber = random.nextInt(max - min) + min;
 
         return (int) ((Math.pow(2.0, numberOfAttempts) - 1.0) * randomNumber);
-        
+
     }
 
 }

@@ -16,6 +16,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     private String endPointUrl = "https://inject.socketlabs.com/api/v1/email";
     private Proxy proxy;
     private int requestTimeout = 100;
+    private int numberOfRetries = 0;
 
     /**
      * Set the SocketLabs Injection API endpoint Url
@@ -30,6 +31,12 @@ public class SocketLabsClient implements SocketLabsClientAPI {
      * @param value int
      */
     public void setRequestTimeout(int value) { this.requestTimeout = value; }
+
+    /**
+     * Set the Number of Retries used by the HttpClient
+     * @param value int
+     */
+    public void  setNumberOfRetries(int value) { this.numberOfRetries = value; }
 
     private final String VERSION = "1.0.0";
     private final String userAgent  = String.format("SocketLabs-java/%s(%s)", VERSION, Package.getPackage("java.util").getImplementationVersion());
