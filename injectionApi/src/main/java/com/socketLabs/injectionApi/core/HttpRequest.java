@@ -84,13 +84,14 @@ public class HttpRequest {
      * @return A SendResponse from the Injection Api response
      * @throws IOException in case of a network error.
      */
-    public SendResponse SendRequest()  throws IOException  {
+    public Response SendRequest()  throws IOException  {
 
         Call call = BuildClientCall();
 
         Response response = call.execute();
 
-        return ParseResponse(response);
+        return response;
+//        return ParseResponse(response);
 
     }
 

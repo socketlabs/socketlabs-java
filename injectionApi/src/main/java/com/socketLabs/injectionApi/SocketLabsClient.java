@@ -79,8 +79,9 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         HttpRequest request = buildHttpRequest(this.proxy);
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
+        RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
 
-        return request.SendRequest();
+        return retryHandler.send();
 
     }
 
@@ -99,8 +100,9 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         HttpRequest request = buildHttpRequest(this.proxy);
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
+        RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
 
-        return request.SendRequest();
+        return retryHandler.send();
 
     }
 
