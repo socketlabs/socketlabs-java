@@ -91,7 +91,6 @@ public class HttpRequest {
         Response response = call.execute();
 
         return response;
-//        return ParseResponse(response);
 
     }
 
@@ -99,7 +98,7 @@ public class HttpRequest {
      * Send an HTTP Request asynchronously
      * @param callback the SendAsyncCallback.
      */
-    public void SendAsyncRequest(final SendAsyncCallback callback) {
+    public void SendAsyncRequest(final Callback callback) {
 
         Call call = BuildClientCall();
 
@@ -108,13 +107,13 @@ public class HttpRequest {
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
 
-                sendResp[0] = ParseResponse(response);
-                callback.onResponse(sendResp[0]);
+//                sendResp[0] = ParseResponse(response);
+                callback.onResponse(call, response);
                 // ...
             }
 
             public void onFailure(Call call, IOException ex) {
-                callback.onError(ex);
+                callback.onFailure(call, ex);
             }
         });
 

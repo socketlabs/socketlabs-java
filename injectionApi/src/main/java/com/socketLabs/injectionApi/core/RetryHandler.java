@@ -4,11 +4,14 @@ import com.socketLabs.injectionApi.RetrySettings;
 import com.socketLabs.injectionApi.SendResponse;
 
 import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.Response;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.SocketTimeoutException;
+//import javax.ws.rs.ServerErrorException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -22,6 +25,10 @@ public class RetryHandler {
     private RetrySettings retrySettings;
 
     private Set<Integer> ErrorStatusCodes = new HashSet<>(Arrays.asList(500, 502, 503, 504));
+    private Set<Class< ? extends Exception>> Exceptions = new HashSet<Class< ? extends Exception>>(Arrays.asList(
+            SocketTimeoutException.class,
+            InterruptedIOException.class
+            ));
 
     /// <summary>
     /// Creates a new instance of the <c>RetryHandler</c>.
@@ -51,8 +58,10 @@ public class RetryHandler {
 
             try{
                 Response response = httpRequest.SendRequest();
+                System.out.println("RESPONSE : " + response.networkResponse().code());
                 if (ErrorStatusCodes.contains(response.networkResponse().code()))
                     throw new IOException();
+//                javax.ws.rs.ServerErrorException
                 return parser.Parse(response);
             }
 
@@ -82,9 +91,33 @@ public class RetryHandler {
                 TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
             }
 
-//            catch ()
         } while (true);
 
+    }
+
+    public void sendAsync (final SendAsyncCallback callback) throws IOException, InterruptedException{
+        InjectionResponseParser parser = new InjectionResponseParser();
+        if (retrySettings.getMaximumNumberOfRetries() == 0){
+            System.out.println("Without retries");
+            final SendResponse[] sendResp = {new SendResponse()};
+            httpRequest.SendAsyncRequest(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    System.out.println("onFailure Call : " + call);
+                    if(Exceptions.contains(e.getClass()))
+                        System.out.println("onFailure Exception : " + e.getClass());
+                    callback.onError(e);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    sendResp[0] = parser.Parse(response);
+                    callback.onResponse(sendResp[0]);
+
+
+                }
+            });
+        }
     }
 
 }

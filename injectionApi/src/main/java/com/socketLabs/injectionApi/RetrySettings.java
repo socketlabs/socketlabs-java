@@ -1,9 +1,7 @@
 package com.socketLabs.injectionApi;
 
-import jdk.jfr.Timespan;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.util.Random;
 
 public class RetrySettings {
@@ -31,6 +29,7 @@ public class RetrySettings {
     public int getMaximumNumberOfRetries(){
         return maximumNumberOfRetries;
     }
+
 
     /// <summary>
     /// Get the time period to wait before next call
