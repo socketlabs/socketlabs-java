@@ -11,7 +11,6 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.SocketTimeoutException;
-//import javax.ws.rs.ServerErrorException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -52,16 +51,15 @@ public class RetryHandler {
             return parser.Parse(response);
         }
 
-//        int attempts = 0;
-
         do {
+
             Duration waitInterval = retrySettings.getNextWaitInterval(attempts);
 
             try{
                 Response response = httpRequest.SendRequest();
                 System.out.println("RESPONSE : " + response.networkResponse().code());
                 if (ErrorStatusCodes.contains(response.networkResponse().code()))
-                    throw new IOException();
+                    throw new IOException("Received Http Status Code : " + response.networkResponse().code());
                 return parser.Parse(response);
             }
 
@@ -87,7 +85,7 @@ public class RetryHandler {
             {
                 attempts++;
                 System.out.println("Exception Occured in IOException : " + exception + " Attempt : " + attempts);
-                if (attempts > retrySettings.getMaximumNumberOfRetries()) throw new IOException();
+                if (attempts > retrySettings.getMaximumNumberOfRetries()) throw new IOException(exception.getMessage());
                 TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
             }
 
@@ -96,56 +94,74 @@ public class RetryHandler {
     }
 
     public void sendAsync (final SendAsyncCallback callback) throws IOException, InterruptedException{
+
         InjectionResponseParser parser = new InjectionResponseParser();
-        do {
-            if(attempts <= retrySettings.getMaximumNumberOfRetries()){
-                final SendResponse[] sendResp = {new SendResponse()};
-                httpRequest.SendAsyncRequest(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        if(Exceptions.contains(e.getClass())){
-                            attempts++;
-                            System.out.println("onFailure Exception : " + e.getClass());
-                            try {
-                                sendAsync(callback);
-                            } catch (IOException exception) {
-                                exception.printStackTrace();
-                            } catch (InterruptedException interruptedException) {
-                                interruptedException.printStackTrace();
-                            }
-                        }
-                        else{
-                            attempts = retrySettings.getMaximumNumberOfRetries() + 1;
-                            System.out.println("Different Exception with attempt : " + attempts);
-                            callback.onError(e);
-                        }
+        Duration waitInterval = retrySettings.getNextWaitInterval(attempts);
+        final SendResponse[] sendResp = {new SendResponse()};
+
+        httpRequest.SendAsyncRequest(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if(Exceptions.contains(e.getClass()) && attempts <= retrySettings.getMaximumNumberOfRetries()) {
+
+                    System.out.println("Attempt : " + attempts);
+                    attempts++;
+                    System.out.println("onFailure Exception : " + e.getClass());
+
+                    try {
+
+                        TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
+                        sendAsync(callback);
 
                     }
 
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        System.out.println("Response code : " + response.networkResponse().code());
-                        if (ErrorStatusCodes.contains(response.networkResponse().code())){
-                            attempts++;
-                            try {
-                                sendAsync(callback);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        else {
-                            sendResp[0] = parser.Parse(response);
-                            System.out.println("Response : " + sendResp[0]);
-                            callback.onResponse(sendResp[0]);
-                        }
-
-
+                    catch (IOException exception) {
+                        exception.printStackTrace();
                     }
-                });
-                System.out.println("Attempt : " + attempts);
+
+                    catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+
+                }
+
+                else {
+
+                    attempts = retrySettings.getMaximumNumberOfRetries() + 1;
+                    System.out.println("Different Exception with attempt : " + attempts);
+                    callback.onError(e);
+
+                }
+
             }
 
-        } while (false);
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                if (ErrorStatusCodes.contains(response.networkResponse().code()) && attempts <= retrySettings.getMaximumNumberOfRetries()){
+
+                    System.out.println("Attempt : " + attempts);
+                    attempts++;
+                    System.out.println("Response code : " + response.networkResponse().code());
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
+                        sendAsync(callback);
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                else {
+                    sendResp[0] = parser.Parse(response);
+                    System.out.println("Response : " + sendResp[0]);
+                    callback.onResponse(sendResp[0]);
+                }
+
+            }
+        });
+
     }
 
 }
