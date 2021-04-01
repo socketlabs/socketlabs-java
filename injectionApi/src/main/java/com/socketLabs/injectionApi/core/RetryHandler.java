@@ -46,7 +46,8 @@ public class RetryHandler {
 
         InjectionResponseParser parser = new InjectionResponseParser();
 
-        if (retrySettings.getMaximumNumberOfRetries() == 0){
+        if (retrySettings.getMaximumNumberOfRetries() == 0) {
+
             Response response =  httpRequest.SendRequest();
             return parser.Parse(response);
         }
@@ -56,37 +57,47 @@ public class RetryHandler {
             Duration waitInterval = retrySettings.getNextWaitInterval(attempts);
 
             try{
+
                 Response response = httpRequest.SendRequest();
-                System.out.println("RESPONSE : " + response.networkResponse().code());
+
                 if (ErrorStatusCodes.contains(response.networkResponse().code()))
                     throw new IOException("Received Http Status Code : " + response.networkResponse().code());
+
                 return parser.Parse(response);
+
             }
 
             catch (SocketTimeoutException exception)
             {
+
                 attempts++;
-                System.out.println("Exception Occured in SocketTimeOutException : " + exception + " Attempt : " + attempts);
+
                 if (attempts > retrySettings.getMaximumNumberOfRetries()) throw new SocketTimeoutException();
+
                 TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
 
             }
 
             catch (InterruptedIOException exception)
             {
+
                 attempts++;
-                System.out.println("Exception Occured in InterruptedIOException : " + exception + " Attempt : " + attempts);
+
                 if (attempts > retrySettings.getMaximumNumberOfRetries()) throw new InterruptedIOException();
+
                 TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
 
             }
 
             catch (IOException exception)
             {
+
                 attempts++;
-                System.out.println("Exception Occured in IOException : " + exception + " Attempt : " + attempts);
+
                 if (attempts > retrySettings.getMaximumNumberOfRetries()) throw new IOException(exception.getMessage());
+
                 TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
+
             }
 
         } while (true);
@@ -97,16 +108,44 @@ public class RetryHandler {
 
         InjectionResponseParser parser = new InjectionResponseParser();
         Duration waitInterval = retrySettings.getNextWaitInterval(attempts);
-        final SendResponse[] sendResp = {new SendResponse()};
 
         httpRequest.SendAsyncRequest(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                if(Exceptions.contains(e.getClass()) && attempts <= retrySettings.getMaximumNumberOfRetries()) {
 
-                    System.out.println("Attempt : " + attempts);
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                if (ErrorStatusCodes.contains(response.networkResponse().code()) && attempts <= retrySettings.getMaximumNumberOfRetries()){
+
                     attempts++;
-                    System.out.println("onFailure Exception : " + e.getClass());
+
+                    try {
+
+                        TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
+                        sendAsync(callback);
+
+                    }
+                    catch (InterruptedException interruptedException) {
+
+                        interruptedException.printStackTrace();
+
+                    }
+
+                }
+
+                else {
+
+                    callback.onResponse(parser.Parse(response));
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call call, IOException exception) {
+
+                if(Exceptions.contains(exception.getClass()) && attempts <= retrySettings.getMaximumNumberOfRetries()) {
+
+                    attempts++;
 
                     try {
 
@@ -115,12 +154,16 @@ public class RetryHandler {
 
                     }
 
-                    catch (IOException exception) {
-                        exception.printStackTrace();
+                    catch (IOException ioException) {
+
+                        ioException.printStackTrace();
+
                     }
 
                     catch (InterruptedException interruptedException) {
+
                         interruptedException.printStackTrace();
+
                     }
 
                 }
@@ -128,38 +171,12 @@ public class RetryHandler {
                 else {
 
                     attempts = retrySettings.getMaximumNumberOfRetries() + 1;
-                    System.out.println("Different Exception with attempt : " + attempts);
-                    callback.onError(e);
+                    callback.onError(exception);
 
                 }
 
             }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                if (ErrorStatusCodes.contains(response.networkResponse().code()) && attempts <= retrySettings.getMaximumNumberOfRetries()){
-
-                    System.out.println("Attempt : " + attempts);
-                    attempts++;
-                    System.out.println("Response code : " + response.networkResponse().code());
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
-                        sendAsync(callback);
-                    }
-                    catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                else {
-                    sendResp[0] = parser.Parse(response);
-                    System.out.println("Response : " + sendResp[0]);
-                    callback.onResponse(sendResp[0]);
-                }
-
-            }
         });
 
     }

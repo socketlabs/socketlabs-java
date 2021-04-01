@@ -126,7 +126,6 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
         retryHandler.sendAsync(callback);
-//        request.SendAsyncRequest(callback);
 
     }
 
@@ -150,7 +149,6 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
         retryHandler.sendAsync(callback);
-//        request.SendAsyncRequest(callback);
 
     }
 

@@ -102,12 +102,9 @@ public class HttpRequest {
 
         Call call = BuildClientCall();
 
-        final SendResponse[] sendResp = {new SendResponse()};
-
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
 
-//                sendResp[0] = ParseResponse(response);
                 callback.onResponse(call, response);
                 // ...
             }
