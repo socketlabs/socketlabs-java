@@ -27,9 +27,7 @@ public class BasicSendWithRetry implements Example {
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 4433));
 
         // create the client
-//        SocketLabsClient client = new SocketLabsClient(37371, "q2QFw9b3KAr6e4S7DsWo");
-        SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
-        client.setEndPointUrl("http://127.0.0.1:5000/");
+        SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey, proxy);
         client.setRequestTimeout(5);
         client.setNumberOfRetries(2);
 
