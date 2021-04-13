@@ -54,11 +54,11 @@ repositories {
 
 You can just drop the jar file in.
 
-[injectionApi-1.1.1.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.1.1/injectionApi-1.1.1.jar)
+[injectionApi-1.2.1.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.2.1/injectionApi-1.2.1.jar)
 
-[injectionApi-1.1.1-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.1.1/injectionApi-1.1.1-sources.jar)
+[injectionApi-1.2.1-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.2.1/injectionApi-1.2.1-sources.jar)
 
-[injectionApi-1.1.1-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.1.1/injectionApi-1.1.1-javadoc.jar)
+[injectionApi-1.2.1-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.2.1/injectionApi-1.2.1-javadoc.jar)
 
 Alternately, you can simply [clone this repository](https://github.com/socketlabs/socketlabs-java.git) directly to include the source code in your project.
 
@@ -191,6 +191,9 @@ This example demonstrates how to embed an image in your message.
 ### [Basic send with a web proxy](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendWithProxy.java)
 This example demonstrates how to use a proxy with your HTTP client.
 
+### [Basic send with retry enabled](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/BasicSendWithRetry.java)
+This example demonstrates how to use the retry logic with your HTTP client.
+
 ### [Basic send with invalid file attachment](https://github.com/socketlabs/socketlabs-java/tree/master/examples/src/main/java/examples/basic/invalid/BasicSendWithInvalidAttachment.java)
 This example demonstrates the results of attempting to do a send with an invalid attachment.
 
@@ -229,6 +232,7 @@ For more information about AMP please see [AMP Project](https://amp.dev/document
 
 <a name="version"></a>
 # Version
+* 1.2.1 - Adding optional retry logic for Http requests. If configured, the request will retry when certain 500 errors occur (500, 502, 503, 504)
 * 1.1.1 - Adding request timeout value on the client for Http requests
 * 1.1.0 - Adds Amp Html Support
 * 1.0.0 - Initial Release
