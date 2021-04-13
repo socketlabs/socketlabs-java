@@ -31,7 +31,7 @@ Add the following to your build.gradle file in the root of your project.
 ...
 dependencies {
   ...
-  compile group: 'com.socketlabs', name: 'injectionApi', version: '1.1.1'
+  compile group: 'com.socketlabs', name: 'injectionApi', version: '1.2.1'
 }
 
 repositories {
@@ -46,7 +46,7 @@ repositories {
 <dependency>
   <groupId>com.socketlabs</groupId>
   <artifactId>injectionApi</artifactId>
-  <version>1.1.1</version>
+  <version>1.2.1</version>
 </dependency>
 ```
 
