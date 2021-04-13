@@ -44,12 +44,9 @@ public class RetryHandler {
 
     public SendResponse send() throws IOException, InterruptedException {
 
-        InjectionResponseParser parser = new InjectionResponseParser();
-
         if (retrySettings.getMaximumNumberOfRetries() == 0) {
-
             Response response =  httpRequest.SendRequest();
-            return parser.Parse(response);
+            return response;
         }
 
         do {
@@ -59,45 +56,28 @@ public class RetryHandler {
             try{
 
                 Response response = httpRequest.SendRequest();
-
                 if (ErrorStatusCodes.contains(response.networkResponse().code()))
                     throw new IOException("Received Http Status Code : " + response.networkResponse().code());
-
-                return parser.Parse(response);
+                return response;
 
             }
-
             catch (SocketTimeoutException exception)
             {
-
                 attempts++;
-
                 if (attempts > retrySettings.getMaximumNumberOfRetries()) throw new SocketTimeoutException();
-
                 TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
-
             }
-
             catch (InterruptedIOException exception)
             {
-
                 attempts++;
-
                 if (attempts > retrySettings.getMaximumNumberOfRetries()) throw new InterruptedIOException();
-
                 TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
-
             }
-
             catch (IOException exception)
             {
-
                 attempts++;
-
                 if (attempts > retrySettings.getMaximumNumberOfRetries()) throw new IOException(exception.getMessage());
-
                 TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
-
             }
 
         } while (true);
@@ -119,23 +99,17 @@ public class RetryHandler {
                     attempts++;
 
                     try {
-
                         TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
                         sendAsync(callback);
-
                     }
                     catch (InterruptedException interruptedException) {
-
                         interruptedException.printStackTrace();
-
                     }
 
                 }
 
                 else {
-
-                    callback.onResponse(parser.Parse(response));
-
+                    callback.onResponse(response);
                 }
 
             }
@@ -148,31 +122,22 @@ public class RetryHandler {
                     attempts++;
 
                     try {
-
                         TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
                         sendAsync(callback);
-
                     }
 
                     catch (IOException ioException) {
-
                         ioException.printStackTrace();
-
                     }
 
                     catch (InterruptedException interruptedException) {
-
                         interruptedException.printStackTrace();
-
                     }
 
                 }
-
                 else {
-
                     attempts = retrySettings.getMaximumNumberOfRetries() + 1;
                     callback.onError(exception);
-
                 }
 
             }

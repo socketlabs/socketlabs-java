@@ -80,9 +80,10 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         HttpRequest request = buildHttpRequest(this.proxy);
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
         RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
+        Response response = retryHandler.send();
 
-        return retryHandler.send();
-
+        InjectionResponseParser parser = new InjectionResponseParser();
+        return parser.Parse(response);
     }
 
     /**
@@ -100,9 +101,12 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         HttpRequest request = buildHttpRequest(this.proxy);
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
-        RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
 
-        return retryHandler.send();
+        RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
+        Response response = retryHandler.send();
+
+        InjectionResponseParser parser = new InjectionResponseParser();
+        return parser.Parse(response);
 
     }
 
@@ -125,7 +129,17 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
 
         RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
-        retryHandler.sendAsync(callback);
+        InjectionResponseParser parser = new InjectionResponseParser();
+
+        retryHandler.sendAsync(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                callback.onResponse(call, parser.Parse(response));
+            }
+
+            public void onFailure(Call call, IOException ex) {
+                callback.onFailure(call, ex);
+            }
+        });
 
     }
 
@@ -148,7 +162,18 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
 
         RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
-        retryHandler.sendAsync(callback);
+        InjectionResponseParser parser = new InjectionResponseParser();
+
+        retryHandler.sendAsync(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                callback.onResponse(call, parser.Parse(response));
+            }
+
+            public void onFailure(Call call, IOException ex) {
+                callback.onFailure(call, ex);
+            }
+        });
+
 
     }
 
