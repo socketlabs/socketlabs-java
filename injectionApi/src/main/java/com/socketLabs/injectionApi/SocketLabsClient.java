@@ -2,9 +2,14 @@ package com.socketLabs.injectionApi;
 
 import com.socketLabs.injectionApi.core.*;
 import com.socketLabs.injectionApi.core.serialization.InjectionRequestFactory;
+import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
 import com.socketLabs.injectionApi.message.*;
 
+import java.io.IOException;
 import java.net.Proxy;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * SocketLabsClient is a wrapper for the SocketLabs Injection API that makes it easy to send messages and parse responses.
@@ -133,11 +138,11 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         retryHandler.sendAsync(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
-                callback.onResponse(call, parser.Parse(response));
+                callback.onResponse(parser.Parse(response));
             }
 
             public void onFailure(Call call, IOException ex) {
-                callback.onFailure(call, ex);
+                callback.onError(ex);
             }
         });
 
@@ -166,11 +171,11 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         retryHandler.sendAsync(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
-                callback.onResponse(call, parser.Parse(response));
+                callback.onResponse(parser.Parse(response));
             }
 
             public void onFailure(Call call, IOException ex) {
-                callback.onFailure(call, ex);
+                callback.onError(ex);
             }
         });
 

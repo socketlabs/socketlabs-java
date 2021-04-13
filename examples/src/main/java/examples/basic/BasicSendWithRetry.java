@@ -1,12 +1,16 @@
 package examples.basic;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.socketLabs.injectionApi.SendResponse;
 import com.socketLabs.injectionApi.SocketLabsClient;
+import com.socketLabs.injectionApi.core.SendAsyncCallback;
 import com.socketLabs.injectionApi.message.BasicMessage;
 import com.socketLabs.injectionApi.message.EmailAddress;
 import examples.Example;
 import examples.ExampleConfig;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 

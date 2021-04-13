@@ -1,7 +1,6 @@
 package com.socketLabs.injectionApi.core;
 
 import com.socketLabs.injectionApi.RetrySettings;
-import com.socketLabs.injectionApi.SendResponse;
 
 import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
 import okhttp3.Call;
@@ -42,7 +41,7 @@ public class RetryHandler {
         retrySettings = settings;
     }
 
-    public SendResponse send() throws IOException, InterruptedException {
+    public Response send() throws IOException, InterruptedException {
 
         if (retrySettings.getMaximumNumberOfRetries() == 0) {
             Response response =  httpRequest.SendRequest();
@@ -84,7 +83,7 @@ public class RetryHandler {
 
     }
 
-    public void sendAsync (final SendAsyncCallback callback) throws IOException, InterruptedException{
+    public void sendAsync (final Callback callback) throws IOException, InterruptedException{
 
         InjectionResponseParser parser = new InjectionResponseParser();
         Duration waitInterval = retrySettings.getNextWaitInterval(attempts);
@@ -109,7 +108,7 @@ public class RetryHandler {
                 }
 
                 else {
-                    callback.onResponse(response);
+                    callback.onResponse(call, response);
                 }
 
             }
@@ -137,7 +136,7 @@ public class RetryHandler {
                 }
                 else {
                     attempts = retrySettings.getMaximumNumberOfRetries() + 1;
-                    callback.onError(exception);
+                    callback.onFailure(call, exception);
                 }
 
             }

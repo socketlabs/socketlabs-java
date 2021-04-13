@@ -1,6 +1,7 @@
 package com.socketLabs.injectionApi.core;
 
 import com.socketLabs.injectionApi.SendResponse;
+import okhttp3.Call;
 
 import java.io.IOException;
 
