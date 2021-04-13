@@ -56,23 +56,27 @@ public class Main {
         System.out.println("    7:  Basic Send With Embedded Image ");
         System.out.println("    8:  Basic Send With Proxy ");
         System.out.println("    9:  Basic Async Send ");
-        System.out.println("   10:  Basic Send Complex Example ");
+        System.out.println("   10:  Basic Async With Retry");
+        System.out.println("   11:  Basic Send With Retry ");
+        System.out.println("   12:  Basic Send Complex Example ");
         System.out.println();
         System.out.println(" Validation Error Handling Examples: ");
-        System.out.println("   11:  Basic Send With Invalid Attachment");
-        System.out.println("   12:  Basic Send With Invalid From ");
-        System.out.println("   13:  Basic Send With Invalid Recipients ");
+        System.out.println("   13:  Basic Send With Invalid Attachment");
+        System.out.println("   14:  Basic Send With Invalid From ");
+        System.out.println("   15:  Basic Send With Invalid Recipients ");
         System.out.println();
         System.out.println(" Bulk Send Examples: ");
-        System.out.println("   14:  Bulk Send ");
-        System.out.println("   15:  Bulk Send With MergeData ");
-        System.out.println("   16:  Bulk Send With ASCII Charset And Merge Data ");
-        System.out.println("   17:  Bulk Send From DataSource With Merge Data ");
-        System.out.println("   18:  Bulk Send Complex Example ");
+        System.out.println("   16:  Bulk Send ");
+        System.out.println("   17:  Bulk Send With MergeData ");
+        System.out.println("   18:  Bulk Send With ASCII Charset And Merge Data ");
+        System.out.println("   19:  Bulk Send From DataSource With Merge Data ");
+        System.out.println("   20:  Bulk Send Complex Example ");
         System.out.println();
         System.out.println(" AMP Html Examples: ");
-        System.out.println("   19:  Basic Send With Amp Body Example ");
-        System.out.println("   20:  Bulk Send With Amp Body Example ");
+        System.out.println("   21:  Basic Send With Amp Body Example ");
+        System.out.println("   22:  Bulk Send With Amp Body Example ");
+
+
         System.out.println();
         System.out.println("-------------------------------------------------------------------------");
     }
@@ -97,17 +101,20 @@ public class Main {
             case 7: return "examples.basic.BasicSendWithEmbeddedImage";
             case 8: return "examples.basic.BasicSendWithProxy";
             case 9: return "examples.basic.BasicAsync";
-            case 10: return "examples.basic.BasicSendComplexExample";
-            case 11: return "examples.basic.invalid.BasicSendWithInvalidAttachment";
-            case 12: return "examples.basic.invalid.BasicSendWithInvalidFrom";
-            case 13: return "examples.basic.invalid.BasicSendWithInvalidRecipients";
-            case 14: return "examples.bulk.BulkSend";
-            case 15: return "examples.bulk.BulkSendWithMergeData";
-            case 16: return "examples.bulk.BulkSendWithASCIICharsetMergeData";
-            case 17: return "examples.bulk.BulkSendFromDataSourceWithMerge";
-            case 18: return "examples.bulk.BulkSendComplexExample";
-            case 19: return "examples.basic.BasicSendWithAmpBodyExample";
-            case 20: return "examples.bulk.BulkSendWithAmpBodyExample";
+            case 10: return "examples.basic.BasicAsyncWithRetry";
+            case 11: return "examples.basic.BasicSendWithRetry";
+            case 12: return "examples.basic.BasicSendComplexExample";
+            case 13: return "examples.basic.invalid.BasicSendWithInvalidAttachment";
+            case 14: return "examples.basic.invalid.BasicSendWithInvalidFrom";
+            case 15: return "examples.basic.invalid.BasicSendWithInvalidRecipients";
+
+            case 16: return "examples.bulk.BulkSend";
+            case 17: return "examples.bulk.BulkSendWithMergeData";
+            case 18: return "examples.bulk.BulkSendWithASCIICharsetMergeData";
+            case 19: return "examples.bulk.BulkSendFromDataSourceWithMerge";
+            case 20: return "examples.bulk.BulkSendComplexExample";
+            case 21: return "examples.basic.BasicSendWithAmpBodyExample";
+            case 22: return "examples.bulk.BulkSendWithAmpBodyExample";
             default:
                 System.out.println("Invalid Input (Out of Range)");
                 return null;

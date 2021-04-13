@@ -7,12 +7,14 @@ import com.socketLabs.injectionApi.SocketLabsClient;
 import com.socketLabs.injectionApi.core.SendAsyncCallback;
 import com.socketLabs.injectionApi.message.BasicMessage;
 import com.socketLabs.injectionApi.message.EmailAddress;
-import examples.*;
-import okhttp3.Call;
+import examples.Example;
+import examples.ExampleConfig;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 
-public class BasicAsync implements Example {
+public class BasicAsyncWithRetry implements Example {
 
     @Override
     public SendResponse RunExample() throws Exception {
@@ -26,8 +28,14 @@ public class BasicAsync implements Example {
         message.setFrom(new EmailAddress("from@example.com"));
         message.addToEmailAddress("recipient1@example.com");
 
+        // create the proxy
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 4433));
+
         // create the client
-        SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);
+        SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey, proxy);
+
+        client.setRequestTimeout(5);
+        client.setNumberOfRetries(2);
 
         // send the message
         client.sendAsync(message, new SendAsyncCallback() {
