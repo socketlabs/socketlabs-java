@@ -32,7 +32,6 @@ public class BasicSendWithRetry implements Example {
 
         // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey, proxy);
-        client.setRequestTimeout(5);
         client.setNumberOfRetries(2);
 
         // send the message
