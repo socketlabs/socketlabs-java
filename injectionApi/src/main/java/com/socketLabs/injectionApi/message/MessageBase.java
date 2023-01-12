@@ -139,5 +139,26 @@ public interface MessageBase {
      * @param value {@code List<CustomHeader>}
      */
     void setCustomHeaders(List<CustomHeader> value);
-    
+
+    /**
+     * Get the list of metadata items added to the message.
+     * @return {@code List<Metadata>}
+     */
+    List<Metadata> getMetadata();
+    /**
+     * Set the list of metadata items added to the message.
+     * @param value {@code List<Metadata>}
+     */
+    void setMetadata(List<Metadata> value);
+
+    /**
+     * Get the list of tags added to the message.
+     * @return {@code List<String>}
+     */
+    List<String> getTags();
+    /**
+     * Set the list of tags added to the message.
+     * @param value {@code List<string>}
+     */
+    void setTags(List<String> value);
 }

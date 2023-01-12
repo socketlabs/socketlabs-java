@@ -123,6 +123,7 @@ public class BasicMessage implements MessageBase {
      * </p>
      */
     private String charSet;
+
     /**
      * A list of custom message headers added to the message.
      * <p>
@@ -131,6 +132,22 @@ public class BasicMessage implements MessageBase {
      */
     private List<CustomHeader> customHeaders = new ArrayList<>();
 
+    /**
+     * A list of metadata items added to the message.
+     * <p>
+     *     (Optional)
+     * </p>
+     */
+    private List<Metadata> metadata = new ArrayList<>();
+
+
+    /**
+     * A list of tags added to the message.
+     * <p>
+     *     (Optional)
+     * </p>
+     */
+    private List<string> tags = new ArrayList<>();
 
     /**
      * Initializes a new instance of the BasicMessage class
@@ -422,6 +439,61 @@ public class BasicMessage implements MessageBase {
     public void addCustomHeader(CustomHeader header) {
         this.customHeaders.add(header);
     }
+
+
+    /**
+     * Gets the list of metadata items added to the message.
+     * @return {@code List<Metadata>}
+     */
+    @Override
+    public List<Metadata> getMetadata() { return this.metadata; }
+
+    /**
+     * Sets the list of metadata items added to the message.
+     * @param value {@code List<Metadata>}
+     */
+    @Override
+    public void setMetadata(List<Metadata> value) { this.metadata = value; }
+
+    /**
+     * Add a Metadata to the message
+     * @param name String
+     * @param value String
+     */
+    public void addMetadata(String name, String value) {
+        this.metadata.add(new Metadata(name, value ));
+    }
+    /**
+     * Add a Metadata to the message
+     * @param header Metadata
+     */
+    public void addMetadata(Metadata header) {
+        this.metadata.add(header);
+    }
+
+
+    /**
+     * Gets the list of metadata items added to the message.
+     * @return {@code List<Metadata>}
+     */
+    @Override
+    public List<string> getTags() { return this.metadata; }
+
+    /**
+     * Sets the list of metadata items added to the message.
+     * @param value {@code List<Metadata>}
+     */
+    @Override
+    public void setTags(List<String> value) { this.metadata = value; }
+
+    /**
+     * Add a Tag to the message
+     * @param tag String
+     */
+    public void addTags(String value) {
+        this.tag.add(value);
+    }
+
 
     /**
      * Returns the number of recipients and subject for the message, useful for debugging.
