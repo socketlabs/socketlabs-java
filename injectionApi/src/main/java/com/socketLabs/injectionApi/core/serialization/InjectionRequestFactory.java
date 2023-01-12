@@ -145,6 +145,8 @@ public class InjectionRequestFactory{
         messageJson.setFrom(new AddressJson(messageBase.getFrom().getEmailAddress(), messageBase.getFrom().getFriendlyName()));
         messageJson.setCustomHeaders(populateCustomHeaders(messageBase.getCustomHeaders()));
         messageJson.setAttachments(populateAttachments(messageBase.getAttachments()));
+        messageJson.setMetadata(populateMetadata(messageBase.getMetadata()));
+        messageJson.setTags(messageBase.getTags());
 
         if (messageBase.getReplyTo() != null) {
             messageJson.setReplyTo(new AddressJson(messageBase.getReplyTo().getEmailAddress(), messageBase.getReplyTo().getFriendlyName()));
@@ -196,6 +198,23 @@ public class InjectionRequestFactory{
         }
 
         return attachments;
+    }
+
+    /**
+     * Converts a list of Attachment objects to a List of AttachmentJson objects.
+     * @param baseAttachments list of Attachment objects
+     * @return List<AttachmentJson>
+     */
+    private List<MetadataJson> populateMetadata(List<Metadata> baseMetadata) {
+        if (baseMetadata == null) {
+            return null;
+        }
+        List<MetadataJson> metadataJson = new ArrayList<>();
+
+        for (com.socketLabs.injectionApi.message.Metadata baseMetadataItem: baseMetadata) {
+            metadataJson.add(new MetadataJson(baseMetadataItem.getName(), baseMetadataItem.getValue()));
+        }
+        return metadataJson;
     }
 
     /**
