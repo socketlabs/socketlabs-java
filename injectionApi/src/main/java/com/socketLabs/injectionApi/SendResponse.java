@@ -231,6 +231,9 @@ public class SendResponse {
             case RecipientValidationInvalidRecipients:
                 return "SDK Validation Error : Invalid recipients were found in the message";
 
+            case MessageValidationInvalidMetadata:
+                return "SDK Validation Error: Message contains invalid metadata";
+
             default:
                 return "";
         }

@@ -77,7 +77,9 @@ public enum SendResult {
     /** SDK Validation Error: Message contains invalid recipients */
     MessageValidationEmptyMessage,
     /** SDK Validation Error: Expected messageType of basic or bulk */
-    MessageValidationInvalidCustomHeaders;
+    MessageValidationInvalidCustomHeaders,
+    /** SDK Validation Error: Message contains invalid metadata */
+    MessageValidationInvalidMetadata;
 
     /**
      * Convert a String into a SendResult enum
