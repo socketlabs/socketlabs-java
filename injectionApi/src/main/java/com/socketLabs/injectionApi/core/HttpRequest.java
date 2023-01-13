@@ -44,6 +44,7 @@ public class HttpRequest {
      * Creates a new instance of the HTTP Request class
      * @param method HTTpRequestMethod
      * @param endPointUrl String
+     * @param timeout int
      */
     public HttpRequest(HttpRequestMethod method, String endPointUrl, int timeout) {
         this.method = method;
