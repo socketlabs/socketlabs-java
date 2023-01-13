@@ -77,20 +77,18 @@ public class InjectionRequestFactory{
      * @throws IOException IOException
      */
     public String GenerateRequest(BulkMessage bulkMessage) throws IOException {
-        List<MessageJson> messageJsons = new ArrayList<>();
+
+        List<MessageJson> messageJsonList = new ArrayList<>();
+
         MessageJson messageJson = generateBaseMessage(bulkMessage);
-
         List<AddressJson> to = new ArrayList<>();
-
         to.add(new AddressJson("%%DeliveryAddress%%", "%%RecipientName%%"));
-
         messageJson.setTo(to);
-
         messageJson.setMergeData(populateMergeData(bulkMessage.getGlobalMergeData(), bulkMessage.getTo()));
 
-        messageJsons.add(messageJson);
+        messageJsonList.add(messageJson);
 
-        return mapper.writeValueAsString(new InjectionRequest(this.serverId, this.apiKey, messageJsons));
+        return GetAsJson(new InjectionRequest(this.serverId, this.apiKey, messageJsonList));
     }
 
     /**
@@ -104,11 +102,8 @@ public class InjectionRequestFactory{
         List<MessageJson> messageJsonList = new ArrayList<>();
 
         MessageJson messageJson = generateBaseMessage(basicMessage);
-
         messageJson.setTo(populateEmailList(basicMessage.getTo()));
-
         messageJson.setCc(populateEmailList(basicMessage.getCc()));
-
         messageJson.setBcc(populateEmailList(basicMessage.getBcc()));
 
         messageJsonList.add(messageJson);
