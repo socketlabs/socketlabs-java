@@ -7,6 +7,7 @@ import com.socketLabs.injectionApi.message.BulkMessage;
 import com.socketLabs.injectionApi.message.BulkRecipient;
 import com.socketLabs.injectionApi.message.CustomHeader;
 import com.socketLabs.injectionApi.message.EmailAddress;
+import com.socketLabs.injectionApi.message.Metadata;
 import examples.*;
 
 import java.io.File;
@@ -204,10 +205,10 @@ public class BulkSendComplexExample implements Example {
         // Add Tags using an Array
         List<String>  tags = new ArrayList<>();
         tags.add("example-type:bulk-send-complex");
-        message.setTags(metadata);
+        message.setTags(tags);
 
         // Add Tags directly to the Array
-        message.addMetadata("message-has-attachments:true");
+        message.addTags("message-has-attachments:true");
 
         // Add Tags using the addTags function
         message.addTags("I am a test message");
