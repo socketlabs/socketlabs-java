@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * To be serialized into JSON string before sending to the Injection Api.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-class Metadata {
+class MetadataJson {
 
     /** The name of your metadata */
     @JsonProperty("Name")

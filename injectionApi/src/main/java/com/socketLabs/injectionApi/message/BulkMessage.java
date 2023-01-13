@@ -144,7 +144,7 @@ public class BulkMessage implements MessageBase {
      *     (Optional)
      * </p>
      */
-    private List<string> tags = new ArrayList<>();
+    private List<String> tags = new ArrayList<>();
 
 
     /**
@@ -463,21 +463,21 @@ public class BulkMessage implements MessageBase {
      * @return {@code List<Metadata>}
      */
     @Override
-    public List<string> getTags() { return this.metadata; }
+    public List<String> getTags() { return this.tags; }
 
     /**
      * Sets the list of metadata items added to the message.
      * @param value {@code List<Metadata>}
      */
     @Override
-    public void setTags(List<String> value) { this.metadata = value; }
+    public void setTags(List<String> value) { this.tags = value; }
 
     /**
      * Add a Tag to the message
-     * @param tag String
+     * @param value String
      */
     public void addTags(String value) {
-        this.tag.add(value);
+        this.tags.add(value);
     }
 
 
