@@ -212,6 +212,7 @@ public class BulkSendComplexExample implements Example {
 
         // Add Tags using the addTags function
         message.addTags("I am a test message");
+        message.addTags("java-Example");
 
 
         // create the client

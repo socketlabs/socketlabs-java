@@ -1,16 +1,16 @@
 package com.socketLabs.injectionApi.message;
 
 /**
- * Represents a metadata entry as a name and value pair.
+ * Represents a metadata entry as a key and value pair.
  * {@code
  *<p>
  * Example:
  * <pre>
  *     Metadata metadata1 = new Metadata();
- *     metadata1.setName("name1");
+ *     metadata1.setKey("key1");
  *     metadata1.setValue("value1");
  *
- *     Metadata metadata2 = new Metadata("name1", "value1");
+ *     Metadata metadata2 = new Metadata("key1", "value1");
  * </pre>
  * </p>
  * }
@@ -18,9 +18,9 @@ package com.socketLabs.injectionApi.message;
 public class Metadata {
 
     /**
-     * The metadata name.
+     * The metadata key.
      */
-    private String name;
+    private String key;
     /**
      * The metadata value.
      */
@@ -33,28 +33,28 @@ public class Metadata {
     }
 
     /**
-     * Creates a new instance of the Metadata class and sets the name and value pair.
-     * @param name String
+     * Creates a new instance of the Metadata class and sets the key and value pair.
+     * @param key String
      * @param value String
      */
-    public Metadata(String name, String value) {
-        this.name = name;
+    public Metadata(String key, String value) {
+        this.key = key;
         this.value = value;
     }
 
     /**
-     * Get the metadata name.
+     * Get the metadata key.
      * @return String
      */
-    public String getName() {
-        return this.name;
+    public String getKey() {
+        return this.key;
     }
     /**
-     * Set the metadata name.
+     * Set the metadata key.
      * @param value String
      */
-    public void setName(String value) {
-        this.name = value;
+    public void setKey(String value) {
+        this.key = value;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Metadata {
      */
     public boolean isValid() {
 
-        if (this.name == null || this.name.isEmpty()) {
+        if (this.key == null || this.key.isEmpty()) {
             return false;
         }
         if (this.value == null || this.value.isEmpty()) {
@@ -89,11 +89,11 @@ public class Metadata {
     }
 
     /**
-     * Returns the metadata as a name-value pair, useful for debugging.
+     * Returns the metadata as a key-value pair, useful for debugging.
      * @return String
      */
     @Override
     public String toString() {
-        return String.format("%s: %s", this.name, this.value);
+        return String.format("%s: %s", this.key, this.value);
     }
 }
