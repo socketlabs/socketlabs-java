@@ -77,20 +77,18 @@ public class InjectionRequestFactory{
      * @throws IOException IOException
      */
     public String GenerateRequest(BulkMessage bulkMessage) throws IOException {
-        List<MessageJson> messageJsons = new ArrayList<>();
+
+        List<MessageJson> messageJsonList = new ArrayList<>();
+
         MessageJson messageJson = generateBaseMessage(bulkMessage);
-
         List<AddressJson> to = new ArrayList<>();
-
         to.add(new AddressJson("%%DeliveryAddress%%", "%%RecipientName%%"));
-
         messageJson.setTo(to);
-
         messageJson.setMergeData(populateMergeData(bulkMessage.getGlobalMergeData(), bulkMessage.getTo()));
 
-        messageJsons.add(messageJson);
+        messageJsonList.add(messageJson);
 
-        return mapper.writeValueAsString(new InjectionRequest(this.serverId, this.apiKey, messageJsons));
+        return GetAsJson(new InjectionRequest(this.serverId, this.apiKey, messageJsonList));
     }
 
     /**
@@ -104,11 +102,8 @@ public class InjectionRequestFactory{
         List<MessageJson> messageJsonList = new ArrayList<>();
 
         MessageJson messageJson = generateBaseMessage(basicMessage);
-
         messageJson.setTo(populateEmailList(basicMessage.getTo()));
-
         messageJson.setCc(populateEmailList(basicMessage.getCc()));
-
         messageJson.setBcc(populateEmailList(basicMessage.getBcc()));
 
         messageJsonList.add(messageJson);
@@ -145,6 +140,8 @@ public class InjectionRequestFactory{
         messageJson.setFrom(new AddressJson(messageBase.getFrom().getEmailAddress(), messageBase.getFrom().getFriendlyName()));
         messageJson.setCustomHeaders(populateCustomHeaders(messageBase.getCustomHeaders()));
         messageJson.setAttachments(populateAttachments(messageBase.getAttachments()));
+        messageJson.setMetadata(populateMetadata(messageBase.getMetadata()));
+        messageJson.setTags(messageBase.getTags());
 
         if (messageBase.getReplyTo() != null) {
             messageJson.setReplyTo(new AddressJson(messageBase.getReplyTo().getEmailAddress(), messageBase.getReplyTo().getFriendlyName()));
@@ -196,6 +193,23 @@ public class InjectionRequestFactory{
         }
 
         return attachments;
+    }
+
+    /**
+     * Converts a list of Metadata objects to a List of MetadataJson objects.
+     * @param baseMetadata list of Metadata objects
+     * @return List<MetadataJson>
+     */
+    private List<MetadataJson> populateMetadata(List<Metadata> baseMetadata) {
+        if (baseMetadata == null) {
+            return null;
+        }
+        List<MetadataJson> metadataJson = new ArrayList<>();
+
+        for (com.socketLabs.injectionApi.message.Metadata baseMetadataItem: baseMetadata) {
+            metadataJson.add(new MetadataJson(baseMetadataItem.getKey(), baseMetadataItem.getValue()));
+        }
+        return metadataJson;
     }
 
     /**

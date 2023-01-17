@@ -6,6 +6,7 @@ import com.socketLabs.injectionApi.message.Attachment;
 import com.socketLabs.injectionApi.message.BasicMessage;
 import com.socketLabs.injectionApi.message.CustomHeader;
 import com.socketLabs.injectionApi.message.EmailAddress;
+import com.socketLabs.injectionApi.message.Metadata;
 import examples.*;
 
 import java.io.File;
@@ -142,6 +143,34 @@ public class BasicSendComplexExample implements Example {
 
         // Add Custom Headers using the addCustomHeaders function
         message.addCustomHeader("testMessageHeader", "I am a message header");
+
+        // Adding Metadata
+        // =========================
+        // Add Metadata using an Array
+        List<Metadata>  metadata = new ArrayList<>();
+        metadata.add(new Metadata("example-type", "basic-send-complex"));
+        metadata.add(new Metadata("message-contains", "attachments, headers"));
+        message.setMetadata(metadata);
+
+        // Add Metadata directly to the Array
+        message.addMetadata(new Metadata("message-has-attachments", "true"));
+
+        // Add Metadata using the addMetadata function
+        message.addMetadata("testMessageHeader", "I am a message header");
+
+        // Adding Tags
+        // =========================
+        // Add Tags using an Array
+        List<String>  tags = new ArrayList<>();
+        tags.add("example-type:basic-send-complex");
+        message.setTags(tags);
+
+        // Add Tags directly to the Array
+        message.addTags("message-has-attachments:true");
+
+        // Add Tags using the addTags function
+        message.addTags("I am a test message");
+        message.addTags("java-Example");
 
         // create the client
         SocketLabsClient client = new SocketLabsClient(ExampleConfig.ServerId, ExampleConfig.ApiKey);

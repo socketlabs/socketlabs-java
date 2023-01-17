@@ -90,6 +90,18 @@ class MessageJson {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private MergeDataJson mergeData;
 
+    /** The list of metadata items for the message. */
+    @JsonProperty("Metadata")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<MetadataJson> metadata;
+
+    /** The list of tags for the message. */
+    @JsonProperty("Tags")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<String> tags;
+
+
+
     /**
      * Create a new instance of the MessageJson class
      */
@@ -276,4 +288,25 @@ class MessageJson {
      */
     public void setMergeData(MergeDataJson value) { this.mergeData = value; }
 
+    /**
+     * Get the list of Metadata Json items for the message.
+     * @return List<MetadataJson>
+     */
+    public List<MetadataJson> getMetadata() { return metadata; }
+    /**
+     * Set the list of custom message headers for the message.
+     * @param value List<MetadataJson>
+     */
+    public void setMetadata(List<MetadataJson> value) { this.metadata = value; }
+
+    /**
+     * Get the list of custom message headers for the message.
+     * @return List<String>
+     */
+    public List<String> getTags() { return tags; }
+    /**
+     * Set the list of custom message headers for the message.
+     * @param value List<String>
+     */
+    public void setTags(List<String> value) { this.tags = value; }
 }

@@ -129,6 +129,23 @@ public class BulkMessage implements MessageBase {
      */
     private List<CustomHeader> customHeaders = new ArrayList<>();
 
+    /**
+     * A list of metadata items added to the message.
+     * <p>
+     *     (Optional)
+     * </p>
+     */
+    private List<Metadata> metadata = new ArrayList<>();
+
+
+    /**
+     * A list of tags added to the message.
+     * <p>
+     *     (Optional)
+     * </p>
+     */
+    private List<String> tags = new ArrayList<>();
+
 
     /**
      * Initializes a new instance of the BasicMessage class
@@ -408,6 +425,61 @@ public class BulkMessage implements MessageBase {
     public void addGlobalMergeData(String field, String value) {
         this.globalMergeData.put(field, value);
     }
+
+
+    /**
+     * Gets the list of metadata items added to the message.
+     * @return {@code List<Metadata>}
+     */
+    @Override
+    public List<Metadata> getMetadata() { return this.metadata; }
+
+    /**
+     * Sets the list of metadata items added to the message.
+     * @param value {@code List<Metadata>}
+     */
+    @Override
+    public void setMetadata(List<Metadata> value) { this.metadata = value; }
+
+    /**
+     * Add a Metadata to the message
+     * @param name String
+     * @param value String
+     */
+    public void addMetadata(String name, String value) {
+        this.metadata.add(new Metadata(name, value ));
+    }
+    /**
+     * Add a Metadata to the message
+     * @param header Metadata
+     */
+    public void addMetadata(Metadata header) {
+        this.metadata.add(header);
+    }
+
+
+    /**
+     * Gets the list of metadata items added to the message.
+     * @return {@code List<Metadata>}
+     */
+    @Override
+    public List<String> getTags() { return this.tags; }
+
+    /**
+     * Sets the list of metadata items added to the message.
+     * @param value {@code List<Metadata>}
+     */
+    @Override
+    public void setTags(List<String> value) { this.tags = value; }
+
+    /**
+     * Add a Tag to the message
+     * @param value String
+     */
+    public void addTags(String value) {
+        this.tags.add(value);
+    }
+
 
     /**
      * Returns the number of recipients and subject for the message, useful for debugging.

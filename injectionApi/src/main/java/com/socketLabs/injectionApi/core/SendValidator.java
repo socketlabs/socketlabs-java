@@ -76,6 +76,9 @@ public class SendValidator {
         if (message.getCustomHeaders() != null && !message.getCustomHeaders().isEmpty())
             if (!HasValidCustomHeaders(message.getCustomHeaders())) return SendResult.MessageValidationInvalidCustomHeaders;
 
+        if (message.getMetadata() != null && !message.getMetadata().isEmpty())
+            if (!HasValidMetadata(message.getMetadata())) return SendResult.MessageValidationInvalidMetadata;
+
         return SendResult.Success;
     }
 
@@ -285,7 +288,7 @@ public class SendValidator {
     }
 
     /**
-     * Check if ICustomHeader in List are valid.
+     * Check if CustomHeader in List are valid.
      * @param customHeaders List<CustomHeaderJson> to validate
      * @return boolean result
      */
@@ -293,6 +296,19 @@ public class SendValidator {
     {
         for (CustomHeader c : customHeaders) {
             if (!c.isValid()) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Check if Metadata in List are valid.
+     * @param metadata List<Metadata> to validate
+     * @return boolean result
+     */
+    private boolean HasValidMetadata(List<Metadata> metadata)
+    {
+        for (Metadata m : metadata) {
+            if (!m.isValid()) return false;
         }
         return true;
     }
