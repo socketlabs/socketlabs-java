@@ -196,9 +196,9 @@ public class InjectionRequestFactory{
     }
 
     /**
-     * Converts a list of Attachment objects to a List of AttachmentJson objects.
-     * @param baseAttachments list of Attachment objects
-     * @return List<AttachmentJson>
+     * Converts a list of Metadata objects to a List of MetadataJson objects.
+     * @param baseMetadata list of Metadata objects
+     * @return List<MetadataJson>
      */
     private List<MetadataJson> populateMetadata(List<Metadata> baseMetadata) {
         if (baseMetadata == null) {
