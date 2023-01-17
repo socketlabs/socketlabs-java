@@ -207,7 +207,7 @@ public class InjectionRequestFactory{
         List<MetadataJson> metadataJson = new ArrayList<>();
 
         for (com.socketLabs.injectionApi.message.Metadata baseMetadataItem: baseMetadata) {
-            metadataJson.add(new MetadataJson(baseMetadataItem.getName(), baseMetadataItem.getValue()));
+            metadataJson.add(new MetadataJson(baseMetadataItem.getKey(), baseMetadataItem.getValue()));
         }
         return metadataJson;
     }
