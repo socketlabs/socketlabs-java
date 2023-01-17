@@ -8,7 +8,7 @@ def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
 def computeVersion() {
     def baseVersion = "1.4.0"
-    def release = false
+    def release = true
     if (release)
         return "${baseVersion}"
     else
@@ -19,17 +19,17 @@ version = computeVersion()
 sourceCompatibility = 1.8
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 compileJava {
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
 }
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '5.6.2'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.11.0'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.11.0'
-    compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
-    compile 'com.squareup.okhttp3:okhttp:4.7.2'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.14.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+    compile group: 'com.google.guava', name: 'guava', version: '31.1-jre'
+    compile 'com.squareup.okhttp3:okhttp:4.10.0'
 }
 jar {
     manifest {
