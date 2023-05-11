@@ -2,7 +2,7 @@ package com.socketLabs.injectionApi.core.enums;
 /**
  *  A code describing the result of an attempt to parse an Api key.
  */
-public enum AddressJson {
+public enum ApiKeyParseResultCode {
 	    /// <summary>
         /// No result could be produced.
         /// </summary>
