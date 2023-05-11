@@ -3,10 +3,13 @@ package com.socketLabs.injectionApi.core;
 import com.socketLabs.injectionApi.core.*;
 
 /**
- * SocketLabsClient is a wrapper for the SocketLabs Injection API that makes it easy to send messages and parse responses.
+ * Contains the method for parsing the Api Key.
  */
 public class ApiKeyParser {
-
+    
+        /**
+         * Method for parsing the Api Key.
+         */
         public ApiKeyParseResult Parse(String wholeApiKey)
         {
             var key = new ApiKey();
