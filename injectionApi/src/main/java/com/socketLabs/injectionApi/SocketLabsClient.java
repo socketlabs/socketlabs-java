@@ -83,6 +83,16 @@ public class SocketLabsClient implements SocketLabsClientAPI {
             return result;
 
         HttpRequest request = buildHttpRequest(this.proxy);
+
+        ApiKeyParser parser = new ApiKeyParser();
+
+        var parseResult = parser.Parse(this.apiKey);
+
+        if (parseResult != null && parseResult.getResultCode() == ApiKeyParseResultCode.Success)
+        {
+            request.setHeader("Authorization", "Bearer " + this.apiKey);
+        }
+
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
         RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
         Response response = retryHandler.send();
@@ -105,6 +115,16 @@ public class SocketLabsClient implements SocketLabsClientAPI {
             return result;
 
         HttpRequest request = buildHttpRequest(this.proxy);
+
+        ApiKeyParser parser = new ApiKeyParser();
+
+        var parseResult = parser.Parse(this.apiKey);
+
+        if (parseResult != null && parseResult.getResultCode() == ApiKeyParseResultCode.Success)
+        {
+            request.setHeader("Authorization", "Bearer " + this.apiKey);
+        }
+
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
 
         RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
@@ -131,6 +151,16 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         }
 
         HttpRequest request = buildHttpRequest(this.proxy);
+
+        ApiKeyParser parser = new ApiKeyParser();
+
+        var parseResult = parser.Parse(this.apiKey);
+
+        if (parseResult != null && parseResult.getResultCode() == ApiKeyParseResultCode.Success)
+        {
+            request.setHeader("Authorization", "Bearer " + this.apiKey);
+        }
+
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
 
         RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
@@ -164,6 +194,16 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         }
 
         HttpRequest request = buildHttpRequest(this.proxy);
+
+        ApiKeyParser parser = new ApiKeyParser();
+
+        var parseResult = parser.Parse(this.apiKey);
+
+        if (parseResult != null && parseResult.getResultCode() == ApiKeyParseResultCode.Success)
+        {
+            request.setHeader("Authorization", "Bearer " + this.apiKey);
+        }
+        
         request.setBody(new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message));
 
         RetryHandler retryHandler = new RetryHandler(request, this.endPointUrl, new RetrySettings(this.numberOfRetries));
