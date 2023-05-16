@@ -6,7 +6,9 @@ package com.socketLabs.injectionApi.core;
 public class ApiKeyParser {
     
         /**
-         * Method for parsing the Api Key.
+         * Parse the API key to determine what kind of key was provided.
+         * @param wholeApiKey String
+         * @return A ApiKeyParseResult with the parsing results
          */
         public ApiKeyParseResult Parse(String wholeApiKey)
         {

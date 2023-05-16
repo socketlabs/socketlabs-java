@@ -7,8 +7,8 @@ plugins {
 def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
 def computeVersion() {
-    def baseVersion = "1.4.0"
-    def release = true
+    def baseVersion = "1.4.1"
+    def release = false
     if (release)
         return "${baseVersion}"
     else
@@ -30,6 +30,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
     compile group: 'com.google.guava', name: 'guava', version: '31.1-jre'
     compile 'com.squareup.okhttp3:okhttp:4.10.0'
+
 }
 jar {
     manifest {
