@@ -84,11 +84,10 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         HttpRequest request = buildHttpRequest(this.proxy);
 
-        ApiKeyParser parser = new ApiKeyParser();
+        ApiKeyParser keyParser = new ApiKeyParser();
+        ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
 
-        var parseResult = parser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult.getResultCode() == ApiKeyParseResultCode.Success)
+        if (parseResult != null && parseResult == ApiKeyParseResult.Success)
         {
             request.setHeader("Authorization", "Bearer " + this.apiKey);
         }
@@ -116,11 +115,10 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         HttpRequest request = buildHttpRequest(this.proxy);
 
-        ApiKeyParser parser = new ApiKeyParser();
+        ApiKeyParser keyParser = new ApiKeyParser();
+        ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
 
-        var parseResult = parser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult.getResultCode() == ApiKeyParseResultCode.Success)
+        if (parseResult != null && parseResult == ApiKeyParseResult.Success)
         {
             request.setHeader("Authorization", "Bearer " + this.apiKey);
         }
@@ -152,11 +150,10 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         HttpRequest request = buildHttpRequest(this.proxy);
 
-        ApiKeyParser parser = new ApiKeyParser();
+        ApiKeyParser keyParser = new ApiKeyParser();
+        ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
 
-        var parseResult = parser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult.getResultCode() == ApiKeyParseResultCode.Success)
+        if (parseResult != null && parseResult == ApiKeyParseResult.Success)
         {
             request.setHeader("Authorization", "Bearer " + this.apiKey);
         }
@@ -195,11 +192,10 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         HttpRequest request = buildHttpRequest(this.proxy);
 
-        ApiKeyParser parser = new ApiKeyParser();
+        ApiKeyParser keyParser = new ApiKeyParser();
+        ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
 
-        var parseResult = parser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult.getResultCode() == ApiKeyParseResultCode.Success)
+        if (parseResult != null && parseResult == ApiKeyParseResult.Success)
         {
             request.setHeader("Authorization", "Bearer " + this.apiKey);
         }

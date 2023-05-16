@@ -123,6 +123,17 @@ uploadArchives {
                             role 'Developer'
                         }
                     }
+                    developer {
+                        id 'mike.boshuyzen'
+                        name 'Mike Boshuyzen'
+                        organization {
+                            name 'socketlabs'
+                            url 'https://github.com/socketlabs'
+                        }
+                        roles {
+                            role 'Developer'
+                        }
+                    }
                 }
                 contributors {
                     contributor {
