@@ -23,7 +23,7 @@
       <id>david-schrenker</id>
       <name>David Schrenker</name>
       <email>david.schrenker@socketlabs.com</email>
-      <organization>org.apache.maven.model.Organization@314ac3a</organization>
+      <organization>org.apache.maven.model.Organization@244c668a</organization>
       <roles>
         <role>Developer</role>
       </roles>
@@ -31,7 +31,7 @@
     <developer>
       <id>rbrazuk</id>
       <name>Ross Brazuk</name>
-      <organization>org.apache.maven.model.Organization@55772dbf</organization>
+      <organization>org.apache.maven.model.Organization@4562f21b</organization>
       <roles>
         <role>Developer</role>
       </roles>
@@ -39,7 +39,7 @@
     <developer>
       <id>mike.boshuyzen</id>
       <name>Mike Boshuyzen</name>
-      <organization>org.apache.maven.model.Organization@136963b6</organization>
+      <organization>org.apache.maven.model.Organization@79e734cd</organization>
       <roles>
         <role>Developer</role>
       </roles>
@@ -48,7 +48,7 @@
   <contributors>
     <contributor>
       <name>Ryan Lydzinski</name>
-      <organization>org.apache.maven.model.Organization@67a8c327</organization>
+      <organization>org.apache.maven.model.Organization@40439e4c</organization>
       <roles>
         <role>Intern</role>
       </roles>
