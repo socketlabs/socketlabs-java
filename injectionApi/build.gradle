@@ -7,8 +7,8 @@ plugins {
 def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
 def computeVersion() {
-    def baseVersion = "1.4.1"
-    def release = false
+    def baseVersion = "1.4.2"
+    def release = true
     if (release)
         return "${baseVersion}"
     else
@@ -65,8 +65,13 @@ uploadArchives {
             beforeDeployment {
                 MavenDeployment deployment -> signing.signPom(deployment)
             }
-            repository(url: "file:///projects/build/repo")
-            snapshotRepository(url: "file:///projects/build/repo/snapshot")
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
 
             pom.project {
                 groupId "${baseGroupId}"
