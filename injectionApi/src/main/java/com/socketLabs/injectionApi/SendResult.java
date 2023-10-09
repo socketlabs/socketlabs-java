@@ -79,7 +79,9 @@ public enum SendResult {
     /** SDK Validation Error: Expected messageType of basic or bulk */
     MessageValidationInvalidCustomHeaders,
     /** SDK Validation Error: Message contains invalid metadata */
-    MessageValidationInvalidMetadata;
+    MessageValidationInvalidMetadata,
+    /** Metadata and tags exceed 12.5KB */
+    MetadataOrTagsAreTooLarge;
 
     /**
      * Convert a String into a SendResult enum

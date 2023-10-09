@@ -189,6 +189,9 @@ public class SendResponse {
             case InvalidTemplateId:
                 return "An invalid TemplateId was found in the message";
 
+            case MetadataOrTagsAreTooLarge:
+                return "Metadata and tags exceed 12.5KB";
+
             case TemplateHasNoContent:
                 return "The specified TemplateId has no content for the message";
 
