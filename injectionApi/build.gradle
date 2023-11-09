@@ -7,7 +7,7 @@ plugins {
 def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
 def computeVersion() {
-    def baseVersion = "1.4.2"
+    def baseVersion = "1.4.4"
     def release = true
     if (release)
         return "${baseVersion}"
