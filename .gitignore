@@ -32,3 +32,16 @@ proguard/
 build/
 bin/
 gradle.properties
+/.vs/VSWorkspaceState.json
+/.vs/socketlabs-java/v17/TestStore/0/testlog.manifest
+/.vs/socketlabs-java/v17/TestStore/0/000.testlog
+/.vs/socketlabs-java/v17/TestStore/0
+/.vs/socketlabs-java/v17/.suo
+/.vs/socketlabs-java/v17
+/.vs/socketlabs-java/FileContentIndex/read.lock
+/.vs/socketlabs-java/FileContentIndex/ef65df61-58c3-4809-877e-1a74a50b04c7.vsidx
+/.vs/socketlabs-java/FileContentIndex/48b5b17b-b96e-40bb-b2b8-c0ea41589ac7.vsidx
+/.vs/socketlabs-java/FileContentIndex/269ac744-ce5b-47d6-93ab-6719ed06796b.vsidx
+/.vs/socketlabs-java/FileContentIndex/1393436c-32a5-4a38-a2bb-d05cfa884457.vsidx
+/.vs/socketlabs-java/FileContentIndex
+/.vs/slnx.sqlite

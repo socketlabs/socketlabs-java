@@ -46,7 +46,7 @@ repositories {
 <dependency>
   <groupId>com.socketlabs</groupId>
   <artifactId>injectionApi</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.4</version>
 </dependency>
 ```
 
@@ -54,11 +54,11 @@ repositories {
 
 You can just drop the jar file in.
 
-[injectionApi-1.4.0.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.4.0/injectionApi-1.4.0.jar)
+[injectionApi-1.4.4.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.4.4/injectionApi-1.4.4.jar)
 
-[injectionApi-1.4.0-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.4.0/injectionApi-1.4.0-sources.jar)
+[injectionApi-1.4.4-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.4.4/injectionApi-1.4.4-sources.jar)
 
-[injectionApi-1.4.0-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.4.0/injectionApi-1.4.0-javadoc.jar)
+[injectionApi-1.4.4-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.4.4/injectionApi-1.4.4-javadoc.jar)
 
 Alternately, you can simply [clone this repository](https://github.com/socketlabs/socketlabs-java.git) directly to include the source code in your project.
 
@@ -232,6 +232,7 @@ For more information about AMP please see [AMP Project](https://amp.dev/document
 
 <a name="version"></a>
 # Version
+* 1.4.4 - Added MetadataOrTagsAreTooLarge error messsage
 * 1.4.0 - Adding Metadata and Tags
 * 1.2.1 - Adding optional retry logic for Http requests. If configured, the request will retry when certain 500 errors occur (500, 502, 503, 504)
 * 1.1.1 - Adding request timeout value on the client for Http requests

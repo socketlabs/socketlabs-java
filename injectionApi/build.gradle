@@ -7,7 +7,7 @@ plugins {
 def baseGroupId = "com.socketlabs"
 def baseArtifactId = 'injectionApi'
 def computeVersion() {
-    def baseVersion = "1.4.0"
+    def baseVersion = "1.4.4"
     def release = true
     if (release)
         return "${baseVersion}"
@@ -28,8 +28,9 @@ compileJava {
 dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.14.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
-    compile group: 'com.google.guava', name: 'guava', version: '31.1-jre'
+    compile group: 'com.google.guava', name: 'guava', version: '32.1.3-jre'
     compile 'com.squareup.okhttp3:okhttp:4.10.0'
+
 }
 jar {
     manifest {
@@ -65,7 +66,7 @@ uploadArchives {
                 MavenDeployment deployment -> signing.signPom(deployment)
             }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                 authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
             snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
@@ -115,6 +116,17 @@ uploadArchives {
                     developer {
                         id 'rbrazuk'
                         name 'Ross Brazuk'
+                        organization {
+                            name 'socketlabs'
+                            url 'https://github.com/socketlabs'
+                        }
+                        roles {
+                            role 'Developer'
+                        }
+                    }
+                    developer {
+                        id 'mike.boshuyzen'
+                        name 'Mike Boshuyzen'
                         organization {
                             name 'socketlabs'
                             url 'https://github.com/socketlabs'
