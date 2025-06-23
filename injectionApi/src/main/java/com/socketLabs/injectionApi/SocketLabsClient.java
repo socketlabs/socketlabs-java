@@ -486,16 +486,12 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         cm.setDefaultMaxPerRoute(20);
         cm.setValidateAfterInactivity(10000);
 
-        List<Header> headers = getDefaultHeaders();
-        headers.add(new BasicHeader(HttpHeaders.AUTHORIZATION, "Bearer " + this.apiKey));
-
         return HttpClients.custom()
-                .setDefaultHeaders(headers)
                 .setConnectionManager(cm)
                 .setDefaultRequestConfig(getDefaultRequestConfig())
                 .build();
-
     }
+
     private CloseableHttpAsyncClient buildHttpAsyncClient() throws Exception {
 
         final ConnectingIOReactor ioReactor = new DefaultConnectingIOReactor();
@@ -503,19 +499,13 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         cm.setMaxTotal(200);
         cm.setDefaultMaxPerRoute(20);
 
-        List<Header> headers = getDefaultHeaders();
-        headers.add(new BasicHeader(HttpHeaders.AUTHORIZATION, "Bearer " + this.apiKey));
-
         return HttpAsyncClients.custom()
-                .setDefaultHeaders(headers)
                 .setConnectionManager(cm)
                 .setDefaultRequestConfig(getDefaultRequestConfig())
                 .build();
-
     }
 
     private RequestConfig getDefaultRequestConfig() {
-
         return RequestConfig.custom()
                 .setConnectTimeout(this.requestTimeout)
                 .setConnectionRequestTimeout(this.requestTimeout)
@@ -524,10 +514,15 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     }
 
     private HttpPost getHttpPost(String body) throws UnsupportedEncodingException {
-
         HttpPost httpPost = new HttpPost(this.endPointUrl);
         StringEntity entity = new StringEntity(body);
         httpPost.setEntity(entity);
+
+        List<Header> headers = getDefaultHeaders();
+        for (Header header : headers) {
+            httpPost.addHeader(header);
+        }
+        httpPost.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, "Bearer " + this.apiKey));
 
         if (this.proxy != null) {
             InetSocketAddress address = (InetSocketAddress) this.proxy.address();
