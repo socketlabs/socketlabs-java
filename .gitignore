@@ -29,7 +29,6 @@ proguard/
 .gradletasknamecache
 .gradle
 .gradle/
-examples/gradle/wrapper/*
 gradle.properties
 
 build/
