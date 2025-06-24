@@ -8,9 +8,10 @@ plugins {
 def baseTitle ="SocketLabs Java"
 def baseGroupId = "com.socketlabs"
 def baseArtifactId = "injectionApi"
+
 static def computeVersion() {
     def baseVersion = "2.0.1"
-    def release = true
+    def release = false
     if (release)
         return "${baseVersion}"
     else
@@ -71,17 +72,21 @@ artifacts {
     archives sourceJar
     archives packageJavadoc
 }
+
+def mavenReleaseUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/"
+def mavenSnapshotUrl = "https://central.sonatype.com/repository/maven-snapshots/"
+
 uploadArchives {
     repositories {
         mavenDeployer {
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            repository(url: mavenReleaseUrl) {
                 authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+            snapshotRepository(url: mavenSnapshotUrl) {
                 authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
-
+        
             pom.project {
                 groupId "${baseGroupId}"
                 artifactId "${baseArtifactId}"
