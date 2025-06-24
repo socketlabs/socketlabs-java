@@ -9,8 +9,8 @@ def baseTitle ="SocketLabs Java"
 def baseGroupId = "com.socketlabs"
 def baseArtifactId = "injectionApi"
 static def computeVersion() {
-    def baseVersion = "1.4.4"
-    def release = false
+    def baseVersion = "2.0.1"
+    def release = true
     if (release)
         return "${baseVersion}"
     else
@@ -147,7 +147,7 @@ uploadArchives {
                 }
                 contributors {
                     contributor {
-                        name 'Ryan Kadzinski'
+                        name 'Ryan Lydzinski'
                         organization {
                             name 'socketlabs'
                             url 'https://github.com/socketlabs'

@@ -65,8 +65,12 @@ public class SocketLabsClient implements SocketLabsClientAPI {
      */
     public void  setNumberOfRetries(int value) { this.numberOfRetries = value; }
 
-    private final String VERSION = "1.4.4";
-    private final String userAgent  = String.format("SocketLabs-java/%s(%s)", VERSION, Package.getPackage("java.util").getImplementationVersion());
+    private final String VERSION = "2.0.1";
+    private final String JAVA_LANG_VERSION = Package.getPackage("java.lang").getImplementationVersion();
+    private final String JAVA_UTIL_VERSION = Package.getPackage("java.util").getImplementationVersion();
+    private final String JAVA_VERSION = (JAVA_UTIL_VERSION != null) ?JAVA_UTIL_VERSION : JAVA_LANG_VERSION;
+
+    private final String userAgent  = String.format("SocketLabs-java/%s(%s)", VERSION, JAVA_VERSION);
 
     private List<Header> getDefaultHeaders() {
         List<Header> headers = Lists.newArrayList(new BasicHeader(HttpHeaders.USER_AGENT, this.userAgent));
