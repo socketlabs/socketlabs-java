@@ -29,9 +29,11 @@ proguard/
 .gradletasknamecache
 .gradle
 .gradle/
+examples/gradle/wrapper/*
+gradle.properties
+
 build/
 bin/
-gradle.properties
 /.vs/VSWorkspaceState.json
 /.vs/socketlabs-java/v17/TestStore/0/testlog.manifest
 /.vs/socketlabs-java/v17/TestStore/0/000.testlog
