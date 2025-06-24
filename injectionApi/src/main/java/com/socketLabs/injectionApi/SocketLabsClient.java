@@ -39,6 +39,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
     private final int serverId;
     private final String apiKey;
+    private boolean useBearerAuth = false;
     private String endPointUrl = "https://inject.socketlabs.com/api/v1/email";
     private Proxy proxy;
     private int requestTimeout = 100;
@@ -112,13 +113,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         ApiKeyParser keyParser = new ApiKeyParser();
         ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult != ApiKeyParseResult.Success)
-        {
-            SendResponse errorResponse = new SendResponse();
-            errorResponse.setResult(SendResult.AuthenticationValidationFailed);
-            return errorResponse;
-        }
+        this.useBearerAuth =  (parseResult == ApiKeyParseResult.Success);
 
         String body = new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message);
         HttpPost httpPost = getHttpPost(body);
@@ -147,13 +142,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         ApiKeyParser keyParser = new ApiKeyParser();
         ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult != ApiKeyParseResult.Success)
-        {
-            SendResponse errorResponse = new SendResponse();
-            errorResponse.setResult(SendResult.AuthenticationValidationFailed);
-            return errorResponse;
-        }
+        this.useBearerAuth =  (parseResult == ApiKeyParseResult.Success);
 
         String body = new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message);
         HttpPost httpPost = getHttpPost(body);
@@ -181,13 +170,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         ApiKeyParser keyParser = new ApiKeyParser();
         ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult != ApiKeyParseResult.Success)
-        {
-            SendResponse errorResponse = new SendResponse();
-            errorResponse.setResult(SendResult.AuthenticationValidationFailed);
-            return errorResponse;
-        }
+        this.useBearerAuth =  (parseResult == ApiKeyParseResult.Success);
 
         String body = new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message);
         HttpPost httpPost = getHttpPost(body);
@@ -217,13 +200,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         ApiKeyParser keyParser = new ApiKeyParser();
         ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult != ApiKeyParseResult.Success)
-        {
-            SendResponse errorResponse = new SendResponse();
-            errorResponse.setResult(SendResult.AuthenticationValidationFailed);
-            return errorResponse;
-        }
+        this.useBearerAuth =  (parseResult == ApiKeyParseResult.Success);
 
         String body = new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message);
         HttpPost httpPost = getHttpPost(body);
@@ -254,13 +231,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         ApiKeyParser keyParser = new ApiKeyParser();
         ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult != ApiKeyParseResult.Success)
-        {
-            SendResponse errorResponse = new SendResponse();
-            errorResponse.setResult(SendResult.AuthenticationValidationFailed);
-            callback.onResponse(errorResponse);
-        }
+        this.useBearerAuth =  (parseResult == ApiKeyParseResult.Success);
 
         String body = new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message);
         HttpPost httpPost = getHttpPost(body);
@@ -294,12 +265,12 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     /**
      * Asynchronously sends a basic email message and returns the response from the Injection API.
      * @param message A BasicMessage object to be sent.
-     * @param callback A SendAsyncCallback to handle error and response from the Injection API.
      * @param httpAsyncClient A CloseableHttpAsyncClient instance to use when making http calls.
+     * @param callback A SendAsyncCallback to handle error and response from the Injection API.
      * @throws Exception exception
      */
     @Override
-    public void sendAsync(BasicMessage message, final SendAsyncCallback callback, CloseableHttpAsyncClient httpAsyncClient) throws Exception {
+    public void sendAsync(BasicMessage message, CloseableHttpAsyncClient httpAsyncClient, final SendAsyncCallback callback) throws Exception {
 
         SendResponse result = Validate(message);
         if (result.getResult() != SendResult.Success) {
@@ -309,13 +280,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         ApiKeyParser keyParser = new ApiKeyParser();
         ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult != ApiKeyParseResult.Success)
-        {
-            SendResponse errorResponse = new SendResponse();
-            errorResponse.setResult(SendResult.AuthenticationValidationFailed);
-            callback.onResponse(errorResponse);
-        }
+        this.useBearerAuth =  (parseResult == ApiKeyParseResult.Success);
 
         String body = new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message);
         HttpPost httpPost = getHttpPost(body);
@@ -363,13 +328,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         ApiKeyParser keyParser = new ApiKeyParser();
         ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult != ApiKeyParseResult.Success)
-        {
-            SendResponse errorResponse = new SendResponse();
-            errorResponse.setResult(SendResult.AuthenticationValidationFailed);
-            callback.onResponse(errorResponse);
-        }
+        this.useBearerAuth =  (parseResult == ApiKeyParseResult.Success);
 
         String body = new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message);
         HttpPost httpPost = getHttpPost(body);
@@ -403,12 +362,12 @@ public class SocketLabsClient implements SocketLabsClientAPI {
     /**
      * Asynchronously sends a bulk email message and returns the response from the Injection API.
      * @param message A BulkMessage object to be sent.
-     * @param callback A SendAsyncCallback to handle error and response from the Injection API.
      * @param httpAsyncClient A CloseableHttpAsyncClient instance to use when making http calls.
+     * @param callback A SendAsyncCallback to handle error and response from the Injection API.
      * @throws Exception exception
      */
     @Override
-    public void sendAsync(BulkMessage message, final SendAsyncCallback callback, CloseableHttpAsyncClient httpAsyncClient) throws Exception {
+    public void sendAsync(BulkMessage message, CloseableHttpAsyncClient httpAsyncClient, final SendAsyncCallback callback) throws Exception {
 
         SendResponse result = Validate(message);
         if (result.getResult() != SendResult.Success) {
@@ -418,13 +377,7 @@ public class SocketLabsClient implements SocketLabsClientAPI {
 
         ApiKeyParser keyParser = new ApiKeyParser();
         ApiKeyParseResult parseResult = keyParser.Parse(this.apiKey);
-
-        if (parseResult != null && parseResult != ApiKeyParseResult.Success)
-        {
-            SendResponse errorResponse = new SendResponse();
-            errorResponse.setResult(SendResult.AuthenticationValidationFailed);
-            callback.onResponse(errorResponse);
-        }
+        this.useBearerAuth =  (parseResult == ApiKeyParseResult.Success);
 
         String body = new InjectionRequestFactory(this.serverId, this.apiKey).GenerateRequest(message);
         HttpPost httpPost = getHttpPost(body);
@@ -522,7 +475,9 @@ public class SocketLabsClient implements SocketLabsClientAPI {
         for (Header header : headers) {
             httpPost.addHeader(header);
         }
-        httpPost.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, "Bearer " + this.apiKey));
+        if(this.useBearerAuth) {
+            httpPost.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, "Bearer " + this.apiKey));
+        }
 
         if (this.proxy != null) {
             InetSocketAddress address = (InetSocketAddress) this.proxy.address();

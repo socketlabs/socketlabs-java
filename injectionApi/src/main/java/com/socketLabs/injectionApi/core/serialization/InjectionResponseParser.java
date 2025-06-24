@@ -2,10 +2,10 @@ package com.socketLabs.injectionApi.core.serialization;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socketLabs.injectionApi.*;
-import okhttp3.Response;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 
@@ -20,40 +20,13 @@ public class InjectionResponseParser {
      * @return A SendResponse from the Injection Api response
      * @throws IOException in case of a network error.
      */
-    public SendResponse Parse(Response response) throws IOException {
-
-        ObjectMapper mapper = new ObjectMapper();
-        InjectionResponseDto injectionResponse = mapper.readValue(response.body().string(), InjectionResponseDto.class);
-
-        SendResult resultEnum = DetermineSendResult(injectionResponse, response.networkResponse().code());
-        SendResponse newResponse = new SendResponse(resultEnum);
-        newResponse.setTransactionReceipt(injectionResponse.getTransactionReceipt());
-
-        if (resultEnum == SendResult.Warning && (injectionResponse.getMessageResults() != null && injectionResponse.getMessageResults().size() > 0))
-        {
-            SendResult r = SendResult.fromString(injectionResponse.getMessageResults().get(0).getErrorCode());
-            newResponse.setResult(r);
-        }
-
-        if (injectionResponse.getMessageResults() != null && injectionResponse.getMessageResults().size() > 0)
-            newResponse.setAddressResults(injectionResponse.getMessageResults().get(0).getAddressResults());
-
-        return newResponse;
-
-    }
-
-    /**
-     * Parse the response from theInjection Api into SendResponse
-     * @param response The response from the Injection Api request
-     * @return A SendResponse from the Injection Api response
-     * @throws IOException in case of a network error.
-     */
     public SendResponse Parse(HttpResponse response) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
         HttpEntity body = response.getEntity();
+        String responseBody = EntityUtils.toString(body, "UTF-8");
 
-        InjectionResponseDto injectionResponse = mapper.readValue(body.toString(), InjectionResponseDto.class);
+        InjectionResponseDto injectionResponse = mapper.readValue(responseBody, InjectionResponseDto.class);
 
         SendResult resultEnum = DetermineSendResult(injectionResponse, response.getStatusLine().getStatusCode());
         SendResponse newResponse = new SendResponse(resultEnum);
@@ -82,8 +55,9 @@ public class InjectionResponseParser {
 
         ObjectMapper mapper = new ObjectMapper();
         HttpEntity body = response.getEntity();
+        String responseBody = EntityUtils.toString(body, "UTF-8");
 
-        InjectionResponseDto injectionResponse = mapper.readValue(body.toString(), InjectionResponseDto.class);
+        InjectionResponseDto injectionResponse = mapper.readValue(responseBody, InjectionResponseDto.class);
 
         SendResult resultEnum = DetermineSendResult(injectionResponse, response.getStatusLine().getStatusCode());
         SendResponse newResponse = new SendResponse(resultEnum);

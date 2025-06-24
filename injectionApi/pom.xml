@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.socketlabs</groupId>
   <artifactId>injectionApi</artifactId>
-  <version>1.4.4</version>
+  <version>1.4.4-SNAPSHOT</version>
   <name>socketlabs-java</name>
   <description>SocketLabs Email Delivery Java library</description>
   <url>https://github.com/socketlabs/socketlabs-java/</url>
@@ -23,7 +23,7 @@
       <id>david-schrenker</id>
       <name>David Schrenker</name>
       <email>david.schrenker@socketlabs.com</email>
-      <organization>org.apache.maven.model.Organization@307e0a0</organization>
+      <organization>org.apache.maven.model.Organization@285256ed</organization>
       <roles>
         <role>Developer</role>
       </roles>
@@ -31,7 +31,7 @@
     <developer>
       <id>rbrazuk</id>
       <name>Ross Brazuk</name>
-      <organization>org.apache.maven.model.Organization@130cfb2a</organization>
+      <organization>org.apache.maven.model.Organization@666e7d2e</organization>
       <roles>
         <role>Developer</role>
       </roles>
@@ -39,7 +39,7 @@
     <developer>
       <id>mike.boshuyzen</id>
       <name>Mike Boshuyzen</name>
-      <organization>org.apache.maven.model.Organization@77d9d0c4</organization>
+      <organization>org.apache.maven.model.Organization@50ebbdca</organization>
       <roles>
         <role>Developer</role>
       </roles>
@@ -48,7 +48,7 @@
   <contributors>
     <contributor>
       <name>Ryan Kadzinski</name>
-      <organization>org.apache.maven.model.Organization@3473fdcc</organization>
+      <organization>org.apache.maven.model.Organization@7213a2d0</organization>
       <roles>
         <role>Intern</role>
       </roles>
