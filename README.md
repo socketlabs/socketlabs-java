@@ -31,7 +31,7 @@ Add the following to your build.gradle file in the root of your project.
 ...
 dependencies {
   ...
-  compile group: 'com.socketlabs', name: 'injectionApi', version: '1.4.0'
+  compile group: 'com.socketlabs', name: 'injectionApi', version: '2.0.1'
 }
 
 repositories {
@@ -46,7 +46,7 @@ repositories {
 <dependency>
   <groupId>com.socketlabs</groupId>
   <artifactId>injectionApi</artifactId>
-  <version>1.4.4</version>
+  <version>2.0.1</version>
 </dependency>
 ```
 
@@ -54,11 +54,11 @@ repositories {
 
 You can just drop the jar file in.
 
-[injectionApi-1.4.4.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.4.4/injectionApi-1.4.4.jar)
+[injectionApi-2.0.1.jar](https://github.com/socketlabs/socketlabs-java/releases/download/2.0.1/injectionApi-2.0.1.jar)
 
-[injectionApi-1.4.4-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.4.4/injectionApi-1.4.4-sources.jar)
+[injectionApi-2.0.1-sources.jar](https://github.com/socketlabs/socketlabs-java/releases/download/2.0.1/injectionApi-2.0.1-sources.jar)
 
-[injectionApi-1.4.4-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/1.4.4/injectionApi-1.4.4-javadoc.jar)
+[injectionApi-2.0.1-javadoc.jar](https://github.com/socketlabs/socketlabs-java/releases/download/2.0.1/injectionApi-2.0.1-javadoc.jar)
 
 Alternately, you can simply [clone this repository](https://github.com/socketlabs/socketlabs-java.git) directly to include the source code in your project.
 
@@ -232,6 +232,7 @@ For more information about AMP please see [AMP Project](https://amp.dev/document
 
 <a name="version"></a>
 # Version
+* 2.0.1 - Added configurable HttpClients and HttpAsyncClients to handle connection pooling.
 * 1.4.4 - Added MetadataOrTagsAreTooLarge error messsage
 * 1.4.0 - Adding Metadata and Tags
 * 1.2.1 - Adding optional retry logic for Http requests. If configured, the request will retry when certain 500 errors occur (500, 502, 503, 504)
