@@ -11,12 +11,13 @@ def baseArtifactId = "injectionApi"
 
 static def computeVersion() {
     def baseVersion = "2.0.1"
-    def release = false
+    def release = true
     if (release)
         return "${baseVersion}"
     else
         return "${baseVersion}-SNAPSHOT"
 }
+
 group "${baseGroupId}"
 version = computeVersion()
 
@@ -50,7 +51,6 @@ jar {
     }
 }
 
-
 signing {
     required { gradle.taskGraph.hasTask("uploadArchives") }
     sign configurations.archives
@@ -73,20 +73,21 @@ artifacts {
     archives packageJavadoc
 }
 
-def mavenReleaseUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/"
-def mavenSnapshotUrl = "https://central.sonatype.com/repository/maven-snapshots/"
+def mavenReleaseUrl = "file://projects/build/repo/release"
+def mavenSnapshotUrl = "file://projects/build/repo/snapshot"
+
+// def mavenReleaseUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/"
+// def mavenSnapshotUrl = "https://central.sonatype.com/repository/maven-snapshots/"
 
 uploadArchives {
     repositories {
         mavenDeployer {
 
-            repository(url: mavenReleaseUrl) {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            beforeDeployment {
+                MavenDeployment deployment -> signing.signPom(deployment)
             }
-            snapshotRepository(url: mavenSnapshotUrl) {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
-        
+            repository(url: "file:///projects/build/repo/release")
+
             pom.project {
                 groupId "${baseGroupId}"
                 artifactId "${baseArtifactId}"
@@ -95,6 +96,7 @@ uploadArchives {
                 packaging 'jar'
                 description 'SocketLabs Email Delivery Java library'
                 url 'https://github.com/socketlabs/socketlabs-java/'
+
                 organization {
                     name 'com.socketlabs'
                     url 'https://github.com/socketlabs'
