@@ -1,11 +1,12 @@
 package com.socketLabs.injectionApi.core;
-
 import com.socketLabs.injectionApi.RetrySettings;
 
-import com.socketLabs.injectionApi.core.serialization.InjectionResponseParser;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.concurrent.FutureCallback;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -14,38 +15,34 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class RetryHandler {
 
-    private HttpRequest httpRequest;
-    private String endPointUrl;
-    private RetrySettings retrySettings;
+    private final RetrySettings retrySettings;
     private int attempts = 0;
 
-    private Set<Integer> ErrorStatusCodes = new HashSet<>(Arrays.asList(500, 502, 503, 504));
-    private Set<Class< ? extends Exception>> Exceptions = new HashSet<Class< ? extends Exception>>(Arrays.asList(
+    private final Set<Integer> ErrorStatusCodes = new HashSet<>(Arrays.asList(500, 502, 503, 504));
+    private final Set<Class< ? extends Exception>> Exceptions = new HashSet<Class< ? extends Exception>>(Arrays.asList(
             SocketTimeoutException.class,
             InterruptedIOException.class
             ));
 
-    /// <summary>
-    /// Creates a new instance of the <c>RetryHandler</c>.
-    /// </summary>
-    /// <param name="request">A <c>HttpRequest</c> instance</param>
-    /// <param name="endpointUrl">The SocketLabs Injection API endpoint Url</param>
-    /// <param name="settings">A <c>RetrySettings</c> instance</param>
-    public RetryHandler(HttpRequest request, String endpointUrl, RetrySettings settings){
-        httpRequest = request;
-        endPointUrl = endpointUrl;
-        retrySettings = settings;
+    /**
+     *
+     * Creates a new instance of the RetryHandler.
+     * @param settings A RetrySettings instance.
+     */
+    public RetryHandler(RetrySettings settings){
+        this.retrySettings = settings;
     }
 
-    public Response send() throws IOException, InterruptedException {
+
+    public CloseableHttpResponse send(CloseableHttpClient httpClient, HttpPost httpPost) throws IOException, InterruptedException {
 
         if (retrySettings.getMaximumNumberOfRetries() == 0) {
-            Response response =  httpRequest.SendRequest();
-            return response;
+            return httpClient.execute(httpPost);
         }
 
         do {
@@ -53,10 +50,9 @@ public class RetryHandler {
             Duration waitInterval = retrySettings.getNextWaitInterval(attempts);
 
             try{
-
-                Response response = httpRequest.SendRequest();
-                if (ErrorStatusCodes.contains(response.networkResponse().code()))
-                    throw new IOException("Received Http Status Code : " + response.networkResponse().code());
+                CloseableHttpResponse response = httpClient.execute(httpPost);
+                if (ErrorStatusCodes.contains(response.getStatusLine().getStatusCode()))
+                    throw new IOException("Received Http Status Code : " + response.getStatusLine().getStatusCode());
                 return response;
 
             }
@@ -83,66 +79,80 @@ public class RetryHandler {
 
     }
 
-    public void sendAsync (final Callback callback) throws IOException, InterruptedException{
+    public void sendAsync (CloseableHttpAsyncClient httpAsyncClient, HttpPost httpPost, final FutureCallback<HttpResponse> callback) throws IOException, InterruptedException{
 
-        InjectionResponseParser parser = new InjectionResponseParser();
         Duration waitInterval = retrySettings.getNextWaitInterval(attempts);
 
-        httpRequest.SendAsyncRequest(new Callback() {
+        // Create a default CloseableHttpAsyncClient instance
+        try {
+            // Start the client
+            httpAsyncClient.start();
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            // Use a CountDownLatch to wait for the asynchronous operation to complete
+            final CountDownLatch latch = new CountDownLatch(1);
 
-                if (ErrorStatusCodes.contains(response.networkResponse().code()) && attempts <= retrySettings.getMaximumNumberOfRetries()){
+            // Execute the request asynchronously with a FutureCallback
+            httpAsyncClient.execute(httpPost, new FutureCallback<HttpResponse>() {
+                @Override
+                public void completed(final HttpResponse response) {
+                    if (ErrorStatusCodes.contains(response.getStatusLine().getStatusCode()) && attempts <= retrySettings.getMaximumNumberOfRetries()){
+                        attempts++;
 
-                    attempts++;
-
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
-                        sendAsync(callback);
+                        try {
+                            TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
+                            sendAsync(httpAsyncClient, httpPost, callback);
+                        }
+                        catch (IOException | InterruptedException ioException) {
+                            callback.failed(ioException);
+                        }
                     }
-                    catch (InterruptedException interruptedException) {
-                        interruptedException.printStackTrace();
-                    }
 
+                    else {
+                        callback.completed(response);
+                    }
+                    latch.countDown(); // Signal completion
                 }
 
-                else {
-                    callback.onResponse(call, response);
+                @Override
+                public void failed(final Exception exception) {
+                    if(Exceptions.contains(exception.getClass()) && attempts <= retrySettings.getMaximumNumberOfRetries()) {
+                        attempts++;
+
+                        try {
+                            TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
+                            sendAsync(httpAsyncClient, httpPost, callback);
+                        }
+                        catch (IOException | InterruptedException ioException) {
+                            callback.failed(ioException);
+                        }
+
+                    }
+                    else {
+                        attempts = retrySettings.getMaximumNumberOfRetries() + 1;
+                        callback.failed(exception);
+                    }
+                    latch.countDown(); // Signal completion even on failure
                 }
 
-            }
-
-            @Override
-            public void onFailure(Call call, IOException exception) {
-
-                if(Exceptions.contains(exception.getClass()) && attempts <= retrySettings.getMaximumNumberOfRetries()) {
-
-                    attempts++;
-
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(waitInterval.toMillis());
-                        sendAsync(callback);
-                    }
-
-                    catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-
-                    catch (InterruptedException interruptedException) {
-                        interruptedException.printStackTrace();
-                    }
-
+                @Override
+                public void cancelled() {
+                    callback.cancelled();
+                    latch.countDown(); // Signal completion on cancellation
                 }
-                else {
-                    attempts = retrySettings.getMaximumNumberOfRetries() + 1;
-                    callback.onFailure(call, exception);
-                }
+            });
 
-            }
+            // Wait for the asynchronous operation to complete
+            latch.await();
 
-        });
+        } catch (Exception exception) {
+            callback.failed(exception);
+        } finally {
+            httpAsyncClient.close();
+        }
+
+
 
     }
+
 
 }

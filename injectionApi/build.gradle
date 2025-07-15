@@ -4,40 +4,53 @@ plugins {
     id 'maven-publish'
     id 'signing'
 }
+
+def baseTitle ="SocketLabs Java"
 def baseGroupId = "com.socketlabs"
-def baseArtifactId = 'injectionApi'
-def computeVersion() {
-    def baseVersion = "1.4.4"
+def baseArtifactId = "injectionApi"
+
+static def computeVersion() {
+    def baseVersion = "2.0.1"
     def release = true
     if (release)
         return "${baseVersion}"
     else
         return "${baseVersion}-SNAPSHOT"
 }
+
 group "${baseGroupId}"
 version = computeVersion()
+
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 repositories {
     mavenCentral()
     mavenLocal()
 }
+
 compileJava {
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
 }
+
 dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.14.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
     compile group: 'com.google.guava', name: 'guava', version: '32.1.3-jre'
-    compile 'com.squareup.okhttp3:okhttp:4.10.0'
-
+    compile 'org.apache.httpcomponents:httpclient:4.5.14'
+    compile 'org.apache.httpcomponents:httpasyncclient:4.1.5'
 }
+
 jar {
     manifest {
-        attributes 'Implementation-Title': 'SocketLabs Java',
+        attributes(
+                'Implementation-Title': baseTitle,
                 'Implementation-Version': version
+        )
     }
 }
+
 signing {
     required { gradle.taskGraph.hasTask("uploadArchives") }
     sign configurations.archives
@@ -59,19 +72,21 @@ artifacts {
     archives sourceJar
     archives packageJavadoc
 }
+
+def mavenReleaseUrl = "file://projects/build/repo/release"
+def mavenSnapshotUrl = "file://projects/build/repo/snapshot"
+
+// def mavenReleaseUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/"
+// def mavenSnapshotUrl = "https://central.sonatype.com/repository/maven-snapshots/"
+
 uploadArchives {
     repositories {
         mavenDeployer {
+
             beforeDeployment {
                 MavenDeployment deployment -> signing.signPom(deployment)
             }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
+            repository(url: "file:///projects/build/repo/release")
 
             pom.project {
                 groupId "${baseGroupId}"
@@ -81,6 +96,7 @@ uploadArchives {
                 packaging 'jar'
                 description 'SocketLabs Email Delivery Java library'
                 url 'https://github.com/socketlabs/socketlabs-java/'
+
                 organization {
                     name 'com.socketlabs'
                     url 'https://github.com/socketlabs'
