@@ -1,8 +1,9 @@
-[![SocketLabs](https://static.socketlabs.com/logos/logo-dark-326x64.png)](https://www.socketlabs.com)
-# [![Twitter Follow](https://img.shields.io/twitter/follow/socketlabs.svg?style=social&label=Follow)](https://twitter.com/socketlabs) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/socketlabs/socketlabs-java/blob/master/CONTRIBUTING.md)
-<!--
+[![SocketLabs](https://static.socketlabs.com/logos/v3/logo-dark.svg)](https://www.socketlabs.com/developers)  
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/socketlabs.svg?style=social&label=Follow)](https://x.com/socketlabs) 
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md) 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![GitHub contributors](https://img.shields.io/github/contributors/socketlabs/socketlabs-java.svg)](https://github.com/socketlabs/socketlabs-java/graphs/contributors)
--->
 
 The SocketLabs Email Delivery Java library allows you to easily send email messages via the [SocketLabs Injection API](https://www.socketlabs.com/docs/inject/).  The library makes it easy to build and send any type of message supported by the API, from a simple message to a single recipient all the way to a complex bulk message sent to a group of recipients with unique merge data per recipient.
 
